@@ -56,7 +56,8 @@ def fetch_jsearch(role):
     key = os.getenv("RAPIDAPI_KEY")
     if not key:
         return []
-    params = {"query": f"{role} jobs in India", "page": "1",
+    query = role if " jobs in " in role else f"{role} jobs in India"
+    params = {"query": query, "page": "1",
               "num_pages": str(CONFIG.get("jsearch_pages", 1)),
               "country": CONFIG.get("country", "in"),
               "date_posted": CONFIG.get("posted_within", "3days")}
@@ -113,7 +114,7 @@ def fetch_jsearch(role):
                                   j.get("job_salary_currency"), j.get("job_salary_period")),
             "source": j.get("job_publisher") or "JSearch",
             "exp_months": exp.get("required_experience_in_months"),
-            "role": role,
+            "role": "" if " OR " in role else role,
         })
     return out
 
@@ -417,13 +418,18 @@ def main():
 
     roles = CONFIG.get("search_roles", [])
     state = STATE
-    # JSearch free plan is ~200 calls/month: search one role per run, taking turns.
-    turn = state.get("turn", 0) % max(1, len(roles))
+    # JSearch free plan is ~200 calls/month: one search per run. Related roles are grouped
+    # so every group (testing, frontend, backend, data, cloud, mobile) is searched every day.
+    groups = CONFIG.get("jsearch_groups") or [f"{r} jobs in India" for r in roles]
+    turn = state.get("turn", 0)
     raw = []
-    if roles:
-        log(f"JSearch: {roles[turn]}")
-        raw += fetch_jsearch(roles[turn])
-    for role in roles:
+    g = groups[turn % len(groups)]
+    log(f"JSearch: {g}")
+    raw += fetch_jsearch(g)
+    # Adzuna: a few roles per run, taking turns, to stay inside the free limits
+    n = int(CONFIG.get("adzuna_roles_per_run", 5))
+    start = (turn * n) % max(1, len(roles))
+    for role in (roles[start:] + roles[:start])[:n]:
         log(f"Adzuna: {role}")
         raw += fetch_adzuna(role)
     raw += fetch_company_boards()

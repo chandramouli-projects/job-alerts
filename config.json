@@ -141,5 +141,14 @@
       "slug": "ServiceNow",
       "name": "ServiceNow"
     }
-  ]
+  ],
+  "jsearch_groups": [
+    "QA Engineer OR Software Tester OR Automation Testing OR Manual Testing jobs in India",
+    "Frontend Developer OR React Developer OR Angular Developer OR Full Stack Developer jobs in India",
+    "Java Developer OR Python Developer OR Node.js Developer OR .NET Developer OR Backend Developer jobs in India",
+    "Data Analyst OR Data Scientist OR Data Engineer OR Business Analyst jobs in India",
+    "DevOps Engineer OR Cloud Engineer OR Support Engineer OR Cyber Security jobs in India",
+    "Android Developer OR Flutter Developer OR UI UX Designer OR Salesforce OR SAP Consultant jobs in India"
+  ],
+  "adzuna_roles_per_run": 5
 }
