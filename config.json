@@ -30,6 +30,8 @@
     "exclude_words": [
       "unpaid"
     ],
-    "max_messages_per_run": 0
+    "max_messages_per_run": 10,
+    "telegram_enabled": false,
+    "min_match": 70
   }
 }

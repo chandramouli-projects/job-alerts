@@ -333,7 +333,7 @@ def main():
                     "found": now.isoformat(timespec="seconds")})
         ok, score, hits = alert_match(job)
         job["score"] = score
-        job["description"] = re.sub(r"\s+", " ", job["description"])[:700]
+        job["description"] = job["description"].strip()[:3500]
         job.pop("exp_months", None)
         fresh.append(job)
         if ok:
@@ -351,7 +351,10 @@ def main():
                          "new": len(fresh), "alerts": len(alerts), **RUN_INFO}
     STATE_FILE.write_text(json.dumps(state, indent=1))
     alerts.sort(key=lambda j: j["score"], reverse=True)
-    if telegram_ok:
+    if not ALERTS.get("telegram_enabled", True):
+        log("Telegram alerts are turned off in Settings.")
+    elif telegram_ok:
+        alerts = [a for a in alerts if a["score"] >= int(ALERTS.get("min_match", 0))]
         send_telegram(alerts)
     else:
         sys.exit("Telegram is not set up correctly (see TELEGRAM ERROR above). Jobs were still saved.")
