@@ -24,7 +24,8 @@ import requests
 ROOT = Path(__file__).parent
 CONFIG = json.loads((ROOT / "config.json").read_text())
 ALERTS = CONFIG.get("alerts", {})
-RUN_INFO = {}   # what each source answered, saved in data/state.json for troubleshooting
+RUN_INFO = {}
+STATE = json.loads((ROOT / "data" / "state.json").read_text()) if (ROOT / "data" / "state.json").exists() else {}   # what each source answered, saved in data/state.json for troubleshooting
 JOBS_FILE = ROOT / "docs" / "jobs.json"
 STATE_FILE = ROOT / "data" / "state.json"
 
@@ -48,6 +49,9 @@ def log(*a):
 
 
 # ---------------------------------------------------------------- sources
+JSEARCH_PATHS = ["/search", "/search-v2", "/job-search", "/v2/search", "/search-jobs", "/jobs/search"]
+
+
 def fetch_jsearch(role):
     key = os.getenv("RAPIDAPI_KEY")
     if not key:
@@ -56,21 +60,35 @@ def fetch_jsearch(role):
               "num_pages": str(CONFIG.get("jsearch_pages", 1)),
               "country": CONFIG.get("country", "in"),
               "date_posted": CONFIG.get("posted_within", "3days")}
-    try:
-        r = requests.get("https://jsearch.p.rapidapi.com/search",
-                         headers={"X-RapidAPI-Key": key, "X-RapidAPI-Host": "jsearch.p.rapidapi.com"},
-                         params=params, timeout=40)
-        RUN_INFO["jsearch"] = {"role": role, "http": r.status_code,
-                               "note": (r.text[:300] if r.status_code != 200 else "")}
-        r.raise_for_status()
+    headers = {"X-RapidAPI-Key": key, "X-RapidAPI-Host": "jsearch.p.rapidapi.com"}
+    known = STATE.get("jsearch_path")
+    paths = [known] + [p for p in JSEARCH_PATHS if p != known] if known else JSEARCH_PATHS
+    RUN_INFO["jsearch"] = {"role": role, "tried": []}
+    items = None
+    for path in paths:
+        try:
+            r = requests.get("https://jsearch.p.rapidapi.com" + path, headers=headers, params=params, timeout=40)
+        except Exception as e:
+            RUN_INFO["jsearch"]["error"] = str(e)[:200]
+            return []
+        RUN_INFO["jsearch"]["tried"].append(f"{path}:{r.status_code}")
+        if r.status_code == 404 and "does not exist" in r.text:
+            continue
+        if r.status_code != 200:
+            RUN_INFO["jsearch"]["note"] = r.text[:300]
+            log(f"  JSearch {path} answered {r.status_code}: {r.text[:200]}")
+            return []
+        STATE["jsearch_path"] = path
         body = r.json()
-        items = body.get("data") or []
-        RUN_INFO["jsearch"]["results"] = len(items)
+        data = body.get("data")
+        items = data.get("jobs") if isinstance(data, dict) else data
+        items = items or []
+        RUN_INFO["jsearch"].update({"path": path, "results": len(items)})
         if not items:
             RUN_INFO["jsearch"]["note"] = json.dumps({k: v for k, v in body.items() if k != "data"})[:300]
-    except Exception as e:
-        log(f"  JSearch failed for '{role}': {e}")
-        RUN_INFO.setdefault("jsearch", {})["error"] = str(e)[:300]
+        break
+    if items is None:
+        log("  JSearch: no search endpoint found")
         return []
     out = []
     for j in items:
@@ -284,7 +302,7 @@ def main():
         sys.exit(0)
 
     roles = CONFIG.get("search_roles", [])
-    state = json.loads(STATE_FILE.read_text()) if STATE_FILE.exists() else {}
+    state = STATE
     # JSearch free plan is ~200 calls/month: search one role per run, taking turns.
     turn = state.get("turn", 0) % max(1, len(roles))
     raw = []
