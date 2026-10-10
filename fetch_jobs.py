@@ -122,7 +122,8 @@ def fetch_jsearch(role):
 AGGREGATORS = ("linkedin", "naukri", "indeed", "glassdoor", "foundit", "monster", "shine", "ziprecruiter",
                "simplyhired", "talent.com", "jooble", "adzuna", "instahyre", "cutshort", "wellfound",
                "iimjobs", "hirist", "apna", "workindia", "timesjobs", "freshersworld", "internshala", "bebee",
-               "jobrapido", "careerjet", "whatjobs", "expertini", "learn4good", "dice", "built in")
+               "jobrapido", "careerjet", "whatjobs", "expertini", "learn4good", "dice", "built in",
+               "recruit.net", "jooble", "trabajo", "jobsora", "talentify", "jobleads", "glints", "kitjob")
 
 
 def apply_links(j):

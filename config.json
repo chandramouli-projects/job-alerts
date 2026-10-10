@@ -53,21 +53,6 @@
   "company_boards": [
     {
       "ats": "greenhouse",
-      "slug": "phonepe",
-      "name": "PhonePe"
-    },
-    {
-      "ats": "greenhouse",
-      "slug": "postman",
-      "name": "Postman"
-    },
-    {
-      "ats": "greenhouse",
-      "slug": "browserstack",
-      "name": "BrowserStack"
-    },
-    {
-      "ats": "greenhouse",
       "slug": "databricks",
       "name": "Databricks"
     },
@@ -105,16 +90,6 @@
       "ats": "lever",
       "slug": "zeta",
       "name": "Zeta"
-    },
-    {
-      "ats": "lever",
-      "slug": "upstox",
-      "name": "Upstox"
-    },
-    {
-      "ats": "lever",
-      "slug": "jupiter",
-      "name": "Jupiter"
     },
     {
       "ats": "ashby",
