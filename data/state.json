@@ -1,19 +1,42 @@
 {
- "turn": 4,
+ "turn": 5,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-10T18:58:22+00:00",
-  "fetched": 10,
-  "new": 10,
-  "alerts": 10,
+  "at": "2026-10-10T19:43:11+00:00",
+  "fetched": 72,
+  "new": 64,
+  "alerts": 64,
   "jsearch": {
-   "role": "Full Stack Developer",
+   "role": "QA Engineer OR Software Tester OR Automation Testing OR Manual Testing jobs in India",
    "tried": [
-    "/search:404",
     "/search-v2:200"
    ],
    "path": "/search-v2",
    "results": 10
+  },
+  "company_boards": {
+   "ok": [
+    "Databricks:10",
+    "Stripe:9",
+    "Rubrik:7",
+    "Groww:0",
+    "Druva:3",
+    "CRED:0",
+    "Meesho:0",
+    "Zeta:0",
+    "Sarvam AI:0",
+    "Freshworks:2",
+    "Visa:0",
+    "Bosch:19",
+    "ServiceNow:12"
+   ],
+   "failed": [
+    "PhonePe:404 Client Error: Not Found for url: https://boards-api.gree",
+    "Postman:404 Client Error: Not Found for url: https://boards-api.gree",
+    "BrowserStack:404 Client Error: Not Found for url: https://boards-api.gree",
+    "Upstox:404 Client Error: Not Found for url: https://api.lever.co/v0",
+    "Jupiter:404 Client Error: Not Found for url: https://api.lever.co/v0"
+   ]
   }
  },
  "jsearch_path": "/search-v2"
