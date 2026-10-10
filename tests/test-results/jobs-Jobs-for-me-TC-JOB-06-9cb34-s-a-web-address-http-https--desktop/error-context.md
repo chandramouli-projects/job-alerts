@@ -1,0 +1,165 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e3]:
+    - generic [ref=e4]: Udyogam Vetuku
+    - generic [ref=e5]:
+      - generic [ref=e6]: Test User
+      - generic [ref=e7]: TU
+      - button "Log out" [ref=e8] [cursor=pointer]:
+        - img [ref=e9] [cursor=pointer]
+        - text: Log out
+  - text: ✓ ✓ ✓ Close
+  - generic [ref=e11]:
+    - complementary [ref=e12]:
+      - button "Jobs" [ref=e13] [cursor=pointer]:
+        - img [ref=e14] [cursor=pointer]
+        - text: Jobs
+      - button "My jobs" [ref=e17] [cursor=pointer]:
+        - img [ref=e18] [cursor=pointer]
+        - text: My jobs
+      - button "Profile" [ref=e20] [cursor=pointer]:
+        - img [ref=e21] [cursor=pointer]
+        - text: Profile
+    - main [ref=e24]:
+      - generic [ref=e25]:
+        - heading "Hi Test" [level=1] [ref=e26]
+        - generic [ref=e27]: Updated 1h ago
+      - generic [ref=e28]:
+        - textbox "Search" [ref=e29]
+        - button "Search" [ref=e30] [cursor=pointer]
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - generic [ref=e33]: Show
+          - combobox "Show" [ref=e34]:
+            - option "Jobs for me" [selected]
+            - option "All jobs"
+        - generic [ref=e35]:
+          - generic [ref=e36]: Job role
+          - combobox "Job role" [ref=e37]:
+            - option "All roles" [selected]
+            - option "Software Engineer"
+            - option "Frontend Developer"
+            - option "Backend Developer"
+            - option "Full Stack Developer"
+            - option "Java Developer"
+            - option "Python Developer"
+            - option "React Developer"
+            - option ".NET Developer"
+            - option "Data Analyst"
+            - option "Data Scientist"
+            - option "DevOps Engineer"
+            - option "QA / Testing"
+            - option "Android Developer"
+            - option "UI UX Designer"
+        - generic [ref=e38]:
+          - generic [ref=e39]: Experience
+          - combobox "Experience" [ref=e40]:
+            - option "Any experience" [selected]
+            - option "Fresher"
+            - option "1 year"
+            - option "2 years"
+            - option "3 years"
+            - option "4 years"
+            - option "5 years"
+            - option "6–8 years"
+            - option "9+ years"
+        - generic [ref=e41]:
+          - generic [ref=e42]: City
+          - combobox "City" [ref=e43]:
+            - option "All India" [selected]
+            - option "Bangalore"
+            - option "Hyderabad"
+            - option "Pune"
+            - option "Remote"
+        - generic [ref=e44]:
+          - generic [ref=e45]: Posted
+          - combobox "Posted" [ref=e46]:
+            - option "Last 24 hours"
+            - option "Last 3 days"
+            - option "Last 7 days" [selected]
+            - option "Last 3 weeks"
+        - generic [ref=e47]:
+          - generic [ref=e48]: Salary
+          - combobox "Salary" [ref=e49]:
+            - option "Any salary" [selected]
+            - option "3 LPA and above"
+            - option "5 LPA and above"
+            - option "8 LPA and above"
+            - option "12 LPA and above"
+            - option "20 LPA and above"
+        - generic [ref=e50]:
+          - generic [ref=e51]: Company
+          - combobox "Company" [ref=e52]:
+            - option "All companies" [selected]
+            - option "<b>Evil</b>"
+            - option "Acme"
+            - option "Beta"
+            - option "Delta"
+            - option "Epsilon"
+            - option "Eta"
+            - option "Gamma"
+            - option "Theta"
+            - option "Zeta"
+        - generic [ref=e53]:
+          - generic [ref=e54]: Posted on
+          - combobox "Posted on" [ref=e55]:
+            - option "Any website" [selected]
+            - option "LinkedIn"
+        - generic [ref=e56]:
+          - generic [ref=e57]: Job type
+          - combobox "Job type" [ref=e58]:
+            - option "Any type" [selected]
+            - option "Full-time"
+        - generic [ref=e59]:
+          - generic [ref=e60]: Sort by
+          - combobox "Sort by" [ref=e61]:
+            - option "Best fit" [selected]
+            - option "Newest first"
+        - generic [ref=e63] [cursor=pointer]:
+          - checkbox "Remote only" [ref=e64]
+          - text: Remote only
+      - generic [ref=e66]:
+        - generic [ref=e67]: "2"
+        - text: jobs for you
+      - generic [ref=e68]:
+        - article [ref=e69] [cursor=pointer]:
+          - generic [ref=e70] [cursor=pointer]:
+            - generic [ref=e71] [cursor=pointer]: A
+            - generic [ref=e72] [cursor=pointer]:
+              - heading "QA Automation Engineer" [level=3] [ref=e73] [cursor=pointer]
+              - generic [ref=e74] [cursor=pointer]: Acme
+              - generic [ref=e75] [cursor=pointer]: Hyderabad, Telangana
+            - generic [ref=e77] [cursor=pointer]: Great fit
+          - generic [ref=e78] [cursor=pointer]:
+            - generic [ref=e79] [cursor=pointer]: 2–4 yrs
+            - generic [ref=e80] [cursor=pointer]: ₹6–9 LPA
+            - generic [ref=e81] [cursor=pointer]: Full-time
+            - generic [ref=e82] [cursor=pointer]: selenium
+          - generic [ref=e83] [cursor=pointer]:
+            - generic [ref=e84] [cursor=pointer]: LinkedIn · 1 day ago
+            - button "Save job" [ref=e85] [cursor=pointer]:
+              - img [ref=e86] [cursor=pointer]
+            - link "Apply" [ref=e88] [cursor=pointer]:
+              - /url: https://jobs.example.com/qa-hyd
+        - article [ref=e89] [cursor=pointer]:
+          - generic [ref=e90] [cursor=pointer]:
+            - generic [ref=e91] [cursor=pointer]: <
+            - generic [ref=e92] [cursor=pointer]:
+              - heading "<img src=x onerror=\"window.__xss=1\">QA Tester" [level=3] [ref=e93] [cursor=pointer]
+              - generic [ref=e94] [cursor=pointer]: <b>Evil</b>
+              - generic [ref=e95] [cursor=pointer]: Hyderabad
+            - generic [ref=e97] [cursor=pointer]: Good fit
+          - generic [ref=e98] [cursor=pointer]:
+            - generic [ref=e99] [cursor=pointer]: Not stated
+            - generic [ref=e100] [cursor=pointer]: Full-time
+          - generic [ref=e101] [cursor=pointer]:
+            - generic [ref=e102] [cursor=pointer]: LinkedIn · 1 day ago
+            - button "Save job" [ref=e103] [cursor=pointer]:
+              - img [ref=e104] [cursor=pointer]
+            - link "Apply" [ref=e106] [cursor=pointer]:
+              - /url: javascript:window.__xss2=1
+  - text: 1 2 3
+  - status
+```

@@ -1,0 +1,52 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: Udyogam Vetuku
+      - generic [ref=e6]:
+        - heading "Every job for you, in one place." [level=1] [ref=e7]
+        - list [ref=e8]:
+          - listitem [ref=e9]: ✓ Jobs from LinkedIn, Naukri, Indeed, Glassdoor and company sites
+          - listitem [ref=e10]: ✓ Only roles that fit your experience
+          - listitem [ref=e11]: ✓ Apply on the original page, track every application
+    - generic [ref=e14]:
+      - heading "Welcome back" [level=2] [ref=e15]
+      - paragraph [ref=e16]: Log in to see the jobs picked for you.
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - generic [ref=e19]: Email
+          - textbox "Email" [ref=e20]: t-u-1791673755324-581003@example.com
+        - generic [ref=e21]:
+          - generic [ref=e22]: Password
+          - generic [ref=e23]:
+            - textbox "Password" [ref=e24]
+            - button "Show password" [disabled] [ref=e25]:
+              - img [ref=e26]
+        - button "Forgot password?" [ref=e30] [cursor=pointer]
+        - button "Log in" [ref=e32] [cursor=pointer]
+      - paragraph [ref=e33]:
+        - text: New here?
+        - button "Create account" [ref=e34] [cursor=pointer]
+      - paragraph [ref=e35]
+  - text: Close
+  - dialog "Reset password" [ref=e36]:
+    - generic [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]: Udyogam Vetuku
+        - generic [ref=e40]:
+          - heading "Forgot your password?" [level=3] [ref=e41]
+          - list [ref=e42]:
+            - listitem [ref=e43]: ✓ Enter your email
+            - listitem [ref=e44]: ✓ Verify the PIN
+            - listitem [ref=e45]: ✓ Set a new password
+      - generic [ref=e46]:
+        - button "Close" [ref=e47] [cursor=pointer]: ×
+        - generic [ref=e48]:
+          - img [ref=e50]
+          - heading "Password updated" [level=2] [ref=e52]
+          - paragraph [ref=e53]: You can now log in with your new password.
+          - button "Back to login" [active] [ref=e54] [cursor=pointer]
+  - status
+```

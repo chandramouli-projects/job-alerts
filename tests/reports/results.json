@@ -1,0 +1,3551 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\kanch\\job-alerts\\tests\\playwright.config.js",
+    "rootDir": "C:/Users/kanch/job-alerts/tests/specs",
+    "forbidOnly": true,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "reports/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/kanch/job-alerts/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/kanch/job-alerts/tests/specs",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/kanch/job-alerts/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "phone",
+        "name": "phone",
+        "testDir": "C:/Users/kanch/job-alerts/tests/specs",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node start-server.mjs 8091",
+      "url": "http://127.0.0.1:8091/api/ping",
+      "reuseExistingServer": false,
+      "timeout": 20000
+    }
+  },
+  "suites": [
+    {
+      "title": "api.spec.js",
+      "file": "api.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Accounts API",
+          "file": "api.spec.js",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-API-01 server answers ping",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 36,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:45.746Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-2cf975c0662c14e0a727",
+              "file": "api.spec.js",
+              "line": 8,
+              "column": 3
+            },
+            {
+              "title": "TC-API-02 sign up needs name, valid email and 6+ character password",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 27,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:45.799Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-5b00dcfda3fea032dd65",
+              "file": "api.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "TC-API-03 the same email cannot sign up twice, in any letter case",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 56,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:45.846Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-6a28bf26f432f7899f15",
+              "file": "api.spec.js",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "TC-API-04 log in works with any letter case of the email",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 89,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:45.915Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-bb1f59257aa7cb9eb85b",
+              "file": "api.spec.js",
+              "line": 53,
+              "column": 3
+            },
+            {
+              "title": "TC-API-05 wrong password is refused with the same message as an unknown email",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 99,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:46.012Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-45c97e9f7f575b8f46f3",
+              "file": "api.spec.js",
+              "line": 66,
+              "column": 3
+            },
+            {
+              "title": "TC-API-06 after 5 wrong passwords, log in is blocked for a minute (even with the right password)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 283,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:46.122Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-da43baec240f7e9aead8",
+              "file": "api.spec.js",
+              "line": 86,
+              "column": 3
+            },
+            {
+              "title": "TC-API-07 profile needs a valid session",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:46.419Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-22664cc516033a7f7cd5",
+              "file": "api.spec.js",
+              "line": 104,
+              "column": 3
+            },
+            {
+              "title": "TC-API-08 saved profile comes back the same",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 57,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:46.449Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-c741c0e76de005accf2d",
+              "file": "api.spec.js",
+              "line": 112,
+              "column": 3
+            },
+            {
+              "title": "TC-API-09 log out ends the session",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 68,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:46.514Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-61baf9924670a5766ca3",
+              "file": "api.spec.js",
+              "line": 137,
+              "column": 3
+            },
+            {
+              "title": "TC-API-10 change password: old one must be right, then only the new one works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 371,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:46.604Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-e5a471fbe66657982384",
+              "file": "api.spec.js",
+              "line": 149,
+              "column": 3
+            },
+            {
+              "title": "TC-API-11 delete account removes login and data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 106,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:46.993Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-9e251679ce888b0e2e1f",
+              "file": "api.spec.js",
+              "line": 187,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Forgot password API",
+          "file": "api.spec.js",
+          "line": 209,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-API-13 PIN is 6 digits; a new PIN cannot be asked again within 15 seconds",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 59,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:47.113Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-b5acedef8e630aa81216",
+              "file": "api.spec.js",
+              "line": 210,
+              "column": 3
+            },
+            {
+              "title": "TC-API-14 wrong PIN: 5 tries, then the PIN is cancelled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 81,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:47.182Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-ff189cfd4759ddc0faa5",
+              "file": "api.spec.js",
+              "line": 227,
+              "column": 3
+            },
+            {
+              "title": "TC-API-15 reset with the right PIN changes the password and logs out other sessions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 182,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:47.274Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-b907310603c764a3a938",
+              "file": "api.spec.js",
+              "line": 256,
+              "column": 3
+            },
+            {
+              "title": "TC-API-16 reset refuses a short new password",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 62,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:47.467Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-ccfc46383d5a603d3106",
+              "file": "api.spec.js",
+              "line": 298,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Server safety",
+          "file": "api.spec.js",
+          "line": 318,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-SEC-01 broken JSON body gets a 400, not a crash",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 28,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m500\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m500\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js:134:24",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js",
+                          "column": 24,
+                          "line": 134
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 132 |\u001b[39m   test(\u001b[32m\"TC-SEC-01 broken JSON body gets a 400, not a crash\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\n \u001b[90m 133 |\u001b[39m     \u001b[36mconst\u001b[39m r \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/login\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m { \u001b[32m\"Content-Type\"\u001b[39m\u001b[33m:\u001b[39m \u001b[32m\"application/json\"\u001b[39m }\u001b[33m,\u001b[39m data\u001b[33m:\u001b[39m \u001b[33mBuffer\u001b[39m\u001b[33m.\u001b[39m\u001b[36mfrom\u001b[39m(\u001b[32m\"{not json\"\u001b[39m) })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 134 |\u001b[39m     expect(r\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m400\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 135 |\u001b[39m     expect((\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m\"/api/ping\"\u001b[39m))\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m   \u001b[90m// server still up\u001b[39m\n \u001b[90m 136 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 137 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js",
+                            "column": 24,
+                            "line": 134
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m500\u001b[39m\n\n  132 |   test(\"TC-SEC-01 broken JSON body gets a 400, not a crash\", async ({ request }) => {\n  133 |     const r = await request.post(\"/api/login\", { headers: { \"Content-Type\": \"application/json\" }, data: Buffer.from(\"{not json\") });\n> 134 |     expect(r.status()).toBe(400);\n      |                        ^\n  135 |     expect((await request.get(\"/api/ping\")).status()).toBe(200);   // server still up\n  136 |   });\n  137 |\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js:134:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:47.541Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\api-Server-safety-TC-SEC-0-aa95f-body-gets-a-400-not-a-crash-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js",
+                        "column": 24,
+                        "line": 134
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-a65e8b6688f7b097edca",
+              "file": "api.spec.js",
+              "line": 319,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-02 the accounts file cannot be downloaded",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 70,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:49.599Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-bf32e476110c7e4c7d4a",
+              "file": "api.spec.js",
+              "line": 331,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-03 the .env file with API keys cannot be downloaded",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:49.696Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-f2163430fa2895129260",
+              "file": "api.spec.js",
+              "line": 339,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-04 sessions are not shared: one user cannot read another's data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 132,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:49.729Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-c3ab6a1e522f90e3567d",
+              "file": "api.spec.js",
+              "line": 344,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-05 a very large profile save is refused",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 188,
+                      "error": {
+                        "message": "Error: server dropped the connection instead of answering\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m",
+                        "stack": "Error: server dropped the connection instead of answering\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js:160:73",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js",
+                          "column": 73,
+                          "line": 160
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 158 |\u001b[39m     \u001b[36mconst\u001b[39m big \u001b[33m=\u001b[39m { profile\u001b[33m:\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m\"x\"\u001b[39m }\u001b[33m,\u001b[39m blob\u001b[33m:\u001b[39m \u001b[32m\"x\"\u001b[39m\u001b[33m.\u001b[39mrepeat(\u001b[35m6\u001b[39m_000_000) }\u001b[33m;\u001b[39m\n \u001b[90m 159 |\u001b[39m     \u001b[36mconst\u001b[39m r \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mput(\u001b[32m\"/api/user\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(a\u001b[33m.\u001b[39mtoken)\u001b[33m,\u001b[39m data\u001b[33m:\u001b[39m big })\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(() \u001b[33m=>\u001b[39m \u001b[36mnull\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 160 |\u001b[39m     expect(r\u001b[33m,\u001b[39m \u001b[32m\"server dropped the connection instead of answering\"\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 161 |\u001b[39m     expect(r\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m413\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 162 |\u001b[39m     expect((\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m\"/api/ping\"\u001b[39m))\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 163 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js",
+                            "column": 73,
+                            "line": 160
+                          },
+                          "message": "Error: server dropped the connection instead of answering\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n\n  158 |     const big = { profile: { name: \"x\" }, blob: \"x\".repeat(6_000_000) };\n  159 |     const r = await request.put(\"/api/user\", { headers: auth(a.token), data: big }).catch(() => null);\n> 160 |     expect(r, \"server dropped the connection instead of answering\").not.toBeNull();\n      |                                                                         ^\n  161 |     expect(r.status()).toBe(413);\n  162 |     expect((await request.get(\"/api/ping\")).status()).toBe(200);\n  163 |   });\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js:160:73"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:49.877Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\api-Server-safety-TC-SEC-0-01a2d-rge-profile-save-is-refused-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js",
+                        "column": 73,
+                        "line": 160
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-715222bf60750d26e054",
+              "file": "api.spec.js",
+              "line": 362,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-06 live search without API keys says so instead of failing silently",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 42,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:52.148Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-638338b75324fadd6414",
+              "file": "api.spec.js",
+              "line": 380,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-07 live search refuses an empty or 1-letter query",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 18,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:52.209Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8747e39b871de0524be5-24c8298b6d50c9864050",
+              "file": "api.spec.js",
+              "line": 387,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "auth.spec.js",
+      "file": "auth.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sign up and log in",
+          "file": "auth.spec.js",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-AUTH-01 first visit shows the log in form @phone",
+              "ok": true,
+              "tags": [
+                "phone"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2304,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:52.263Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-b1931f02a18ec9a9a83f",
+              "file": "auth.spec.js",
+              "line": 10,
+              "column": 3
+            },
+            {
+              "title": "TC-AUTH-02 sign up with valid details opens the job questions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2280,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:55.923Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-76c915e27073782c437f",
+              "file": "auth.spec.js",
+              "line": 18,
+              "column": 3
+            },
+            {
+              "title": "TC-AUTH-03 sign up shows a clear message for each wrong field",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2935,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:08:58.239Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-3725a0934e6d693d4ad9",
+              "file": "auth.spec.js",
+              "line": 31,
+              "column": 3
+            },
+            {
+              "title": "TC-AUTH-04 sign up with an email that already has an account is refused",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2160,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:09:01.206Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-14ee8a4fe527dd127975",
+              "file": "auth.spec.js",
+              "line": 51,
+              "column": 3
+            },
+            {
+              "title": "TC-AUTH-05 wrong password shows an error and stays on log in",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1879,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:09:03.406Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-a0ea7ea675800dde3026",
+              "file": "auth.spec.js",
+              "line": 64,
+              "column": 3
+            },
+            {
+              "title": "TC-AUTH-06 right password logs in; a new user goes to the job questions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1480,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:09:05.319Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-a7f9712eb9a469d7f67b",
+              "file": "auth.spec.js",
+              "line": 73,
+              "column": 3
+            },
+            {
+              "title": "TC-AUTH-07 the session survives a page reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1538,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:09:06.838Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-8b47bd2d8a5c7f558155",
+              "file": "auth.spec.js",
+              "line": 81,
+              "column": 3
+            },
+            {
+              "title": "TC-AUTH-08 log in and sign up boxes are exactly the same size and place",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1233,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:09:08.397Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-548f5d4f27b45bf56186",
+              "file": "auth.spec.js",
+              "line": 92,
+              "column": 3
+            },
+            {
+              "title": "TC-AUTH-09 log out returns to log in and the old session no longer works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2202,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:09:09.650Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-2e6d6fde69a302452477",
+              "file": "auth.spec.js",
+              "line": 102,
+              "column": 3
+            },
+            {
+              "title": "TC-AUTH-01 first visit shows the log in form @phone",
+              "ok": true,
+              "tags": [
+                "phone"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "phone",
+                  "projectName": "phone",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3160,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:18:32.520Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-e9ccefd6d7b6489f3cb9",
+              "file": "auth.spec.js",
+              "line": 10,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Password field",
+          "file": "auth.spec.js",
+          "line": 120,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-AUTH-10 eye button is off while empty, shows and hides the password @phone",
+              "ok": true,
+              "tags": [
+                "phone"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2890,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:09:11.876Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-11659825d5ea80f4b63a",
+              "file": "auth.spec.js",
+              "line": 121,
+              "column": 3
+            },
+            {
+              "title": "TC-AUTH-10 eye button is off while empty, shows and hides the password @phone",
+              "ok": true,
+              "tags": [
+                "phone"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "phone",
+                  "projectName": "phone",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2365,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:18:37.272Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-7f6b12744808a53bf72d",
+              "file": "auth.spec.js",
+              "line": 121,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Forgot password",
+          "file": "auth.spec.js",
+          "line": 138,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-FP-01 full journey: email, PIN, new password, then log in with it",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js",
+                        "line": 118,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 139877,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-fp=\"4\"]')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-fp=\"4\"]')\u001b[22m\n\u001b[2m    6 × locator resolved to <div hidden=\"\" data-fp=\"4\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-fp=\"4\"]')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-fp=\"4\"]')\u001b[22m\n\u001b[2m    6 × locator resolved to <div hidden=\"\" data-fp=\"4\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js:130:49",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js",
+                          "column": 49,
+                          "line": 130
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 128 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m\"#fpNew2\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"Brand#New1\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 129 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"#fpSave\"\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 130 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-fp=\"4\"]'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 131 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"#fpDone\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 132 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#fpModal\"\u001b[39m))\u001b[33m.\u001b[39mtoBeHidden()\u001b[33m;\u001b[39m\n \u001b[90m 133 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#lEmail\"\u001b[39m))\u001b[33m.\u001b[39mtoHaveValue(a\u001b[33m.\u001b[39memail)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js",
+                            "column": 49,
+                            "line": 130
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-fp=\"4\"]')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-fp=\"4\"]')\u001b[22m\n\u001b[2m    6 × locator resolved to <div hidden=\"\" data-fp=\"4\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n\n\n  128 |     await page.fill(\"#fpNew2\", \"Brand#New1\");\n  129 |     await page.click(\"#fpSave\");\n> 130 |     await expect(page.locator('[data-fp=\"4\"]')).toBeVisible();\n      |                                                 ^\n  131 |     await page.click(\"#fpDone\");\n  132 |     await expect(page.locator(\"#fpModal\")).toBeHidden();\n  133 |     await expect(page.locator(\"#lEmail\")).toHaveValue(a.email);\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js:130:49"
+                        },
+                        {
+                          "message": "\u001b[31mTearing down \"context\" exceeded the test timeout of 90000ms.\u001b[39m"
+                        },
+                        {
+                          "message": "Error: browserContext.close: Target page, context or browser has been closed"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:09:14.794Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js",
+                            "line": 118,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-89c06-assword-then-log-in-with-it-desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-89c06-assword-then-log-in-with-it-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-89c06-assword-then-log-in-with-it-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js",
+                        "column": 49,
+                        "line": 130
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-584da7e07b52d190b5b3",
+              "file": "auth.spec.js",
+              "line": 145,
+              "column": 3
+            },
+            {
+              "title": "TC-FP-02 Continue is off until the email looks valid",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 29273,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:12:30.388Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-5c42e1e12b282745174f",
+              "file": "auth.spec.js",
+              "line": 169,
+              "column": 3
+            },
+            {
+              "title": "TC-FP-03 wrong PIN shows tries left and does not move on",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12721,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:13:01.362Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-b39dc5d9653b439db30c",
+              "file": "auth.spec.js",
+              "line": 179,
+              "column": 3
+            },
+            {
+              "title": "TC-FP-04 the two new passwords must match",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 61552,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "message": "\u001b[31mTearing down \"context\" exceeded the test timeout of 30000ms.\u001b[39m"
+                        },
+                        {
+                          "message": "Error: apiRequestContext._wrapApiCall: Test ended."
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:13:14.156Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-540cc-wo-new-passwords-must-match-desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-540cc-wo-new-passwords-must-match-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-540cc-wo-new-passwords-must-match-desktop\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-92eb7086f67049731c69",
+              "file": "auth.spec.js",
+              "line": 192,
+              "column": 3
+            },
+            {
+              "title": "TC-FP-05 clicking outside does not close it; Esc and × do @phone",
+              "ok": true,
+              "tags": [
+                "phone"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6712,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:14:44.459Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-e8b54e69620404f71075",
+              "file": "auth.spec.js",
+              "line": 206,
+              "column": 3
+            },
+            {
+              "title": "TC-FP-06 the pop-up keeps one size on every step and blurs the page behind",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9084,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:14:52.026Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-62689a823dc8cc88e363",
+              "file": "auth.spec.js",
+              "line": 218,
+              "column": 3
+            },
+            {
+              "title": "TC-FP-05 clicking outside does not close it; Esc and × do @phone",
+              "ok": true,
+              "tags": [
+                "phone"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "phone",
+                  "projectName": "phone",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1501,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:18:39.672Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-44ab91bcb988b3a9a054",
+              "file": "auth.spec.js",
+              "line": 206,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jobs.spec.js",
+      "file": "jobs.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Jobs for me",
+          "file": "jobs.spec.js",
+          "line": 26,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-JOB-01 shows only jobs that fit role, experience, city and date",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1218,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:01.179Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-542c9438d7e97ed38611",
+              "file": "jobs.spec.js",
+              "line": 27,
+              "column": 3
+            },
+            {
+              "title": "TC-JOB-02 the best fit comes first and is labelled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1342,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:02.430Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-a1ab9e246c15e9225812",
+              "file": "jobs.spec.js",
+              "line": 36,
+              "column": 3
+            },
+            {
+              "title": "TC-JOB-03 Remote as the only city shows remote jobs",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1692,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:03.806Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-cf04bb0aa6762e6e1e54",
+              "file": "jobs.spec.js",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "TC-JOB-04 'Java Developer' does not match a JavaScript job",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1389,
+                      "error": {
+                        "message": "Error: JavaScript is a different skill from Java\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"JavaScript Developer\"\u001b[39m\nReceived array:     \u001b[31m[\"Java Developer\", \u001b[7m\"JavaScript Developer\"\u001b[27m]\u001b[39m",
+                        "stack": "Error: JavaScript is a different skill from Java\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"JavaScript Developer\"\u001b[39m\nReceived array:     \u001b[31m[\"Java Developer\", \u001b[7m\"JavaScript Developer\"\u001b[27m]\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:47:69",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                          "column": 69,
+                          "line": 47
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 45 |\u001b[39m     \u001b[36mconst\u001b[39m titles \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m jobTitles(page)\u001b[33m;\u001b[39m\n \u001b[90m 46 |\u001b[39m     expect(titles)\u001b[33m.\u001b[39mtoContain(\u001b[32m\"Java Developer\"\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 47 |\u001b[39m     expect(titles\u001b[33m,\u001b[39m \u001b[32m\"JavaScript is a different skill from Java\"\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(\u001b[32m\"JavaScript Developer\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 48 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 49 |\u001b[39m\n \u001b[90m 50 |\u001b[39m   test(\u001b[32m\"TC-JOB-05 text from job sites is shown as text, never run as code\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page\u001b[33m,\u001b[39m request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                            "column": 69,
+                            "line": 47
+                          },
+                          "message": "Error: JavaScript is a different skill from Java\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"JavaScript Developer\"\u001b[39m\nReceived array:     \u001b[31m[\"Java Developer\", \u001b[7m\"JavaScript Developer\"\u001b[27m]\u001b[39m\n\n  45 |     const titles = await jobTitles(page);\n  46 |     expect(titles).toContain(\"Java Developer\");\n> 47 |     expect(titles, \"JavaScript is a different skill from Java\").not.toContain(\"JavaScript Developer\");\n     |                                                                     ^\n  48 |   });\n  49 |\n  50 |   test(\"TC-JOB-05 text from job sites is shown as text, never run as code\", async ({ page, request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:47:69"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:05.532Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Jobs-for-me-TC-JOB-04-1caa9--not-match-a-JavaScript-job-desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Jobs-for-me-TC-JOB-04-1caa9--not-match-a-JavaScript-job-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Jobs-for-me-TC-JOB-04-1caa9--not-match-a-JavaScript-job-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                        "column": 69,
+                        "line": 47
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-9faa84f8ff643a9f895c",
+              "file": "jobs.spec.js",
+              "line": 55,
+              "column": 3
+            },
+            {
+              "title": "TC-JOB-05 text from job sites is shown as text, never run as code",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2074,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:10.587Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-3bf7487d9662e55a3d8b",
+              "file": "jobs.spec.js",
+              "line": 69,
+              "column": 3
+            },
+            {
+              "title": "TC-JOB-06 an Apply link is always a web address (http/https)",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1237,
+                      "error": {
+                        "message": "Error: javascript: links must never reach the page\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^https?:\\/\\//\u001b[39m\nReceived string:  \u001b[31m\"javascript:window.__xss2=1\"\u001b[39m",
+                        "stack": "Error: javascript: links must never reach the page\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^https?:\\/\\//\u001b[39m\nReceived string:  \u001b[31m\"javascript:window.__xss2=1\"\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:60:85",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                          "column": 85,
+                          "line": 60
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 58 |\u001b[39m     \u001b[36mawait\u001b[39m start(page\u001b[33m,\u001b[39m request)\u001b[33m;\u001b[39m\n \u001b[90m 59 |\u001b[39m     \u001b[36mconst\u001b[39m hrefs \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#main a.apply\"\u001b[39m)\u001b[33m.\u001b[39mevaluateAll(a \u001b[33m=>\u001b[39m a\u001b[33m.\u001b[39mmap(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mgetAttribute(\u001b[32m\"href\"\u001b[39m)))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 60 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m h \u001b[36mof\u001b[39m hrefs) expect(h\u001b[33m,\u001b[39m \u001b[32m\"javascript: links must never reach the page\"\u001b[39m)\u001b[33m.\u001b[39mtoMatch(\u001b[35m/^https?:\\/\\//\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 61 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 62 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 63 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                            "column": 85,
+                            "line": 60
+                          },
+                          "message": "Error: javascript: links must never reach the page\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^https?:\\/\\//\u001b[39m\nReceived string:  \u001b[31m\"javascript:window.__xss2=1\"\u001b[39m\n\n  58 |     await start(page, request);\n  59 |     const hrefs = await page.locator(\"#main a.apply\").evaluateAll(a => a.map(x => x.getAttribute(\"href\")));\n> 60 |     for (const h of hrefs) expect(h, \"javascript: links must never reach the page\").toMatch(/^https?:\\/\\//);\n     |                                                                                     ^\n  61 |   });\n  62 | });\n  63 |\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:60:85"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:13.224Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Jobs-for-me-TC-JOB-06-9cb34-s-a-web-address-http-https--desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Jobs-for-me-TC-JOB-06-9cb34-s-a-web-address-http-https--desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Jobs-for-me-TC-JOB-06-9cb34-s-a-web-address-http-https--desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                        "column": 85,
+                        "line": 60
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-7d5a1f5db1717459d643",
+              "file": "jobs.spec.js",
+              "line": 80,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Filters",
+          "file": "jobs.spec.js",
+          "line": 89,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-FLT-01 'All jobs' shows every job from the last 7 days",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1912,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:17.445Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-5d91f466b4c53cb891bb",
+              "file": "jobs.spec.js",
+              "line": 90,
+              "column": 3
+            },
+            {
+              "title": "TC-FLT-02 'Last 3 weeks' brings back the older job",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1328,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:19.773Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-00a611544b0ac845b2d0",
+              "file": "jobs.spec.js",
+              "line": 100,
+              "column": 3
+            },
+            {
+              "title": "TC-FLT-03 a City filter wins over the saved city",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1194,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:21.138Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-172c4e09f14a5e4faead",
+              "file": "jobs.spec.js",
+              "line": 109,
+              "column": 3
+            },
+            {
+              "title": "TC-FLT-04 Remote only",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1384,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:22.355Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-4cee9ec37fbef60bdcc6",
+              "file": "jobs.spec.js",
+              "line": 117,
+              "column": 3
+            },
+            {
+              "title": "TC-FLT-05 salary 12 LPA and above",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1386,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:23.761Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-52b4bda48ff50d818807",
+              "file": "jobs.spec.js",
+              "line": 126,
+              "column": 3
+            },
+            {
+              "title": "TC-FLT-06 experience filter (3 years) hides senior AND intern jobs, like Jobs for me",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1637,
+                      "error": {
+                        "message": "Error: an internship is not for someone with 3 years\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"QA Intern\"\u001b[39m\nReceived array:     \u001b[31m[\"QA Automation Engineer\", \"<img src=x onerror=\\\"window.__xss=1\\\">QA Tester\", \"QA Engineer\", \u001b[7m\"QA Intern\"\u001b[27m, \"Remote QA Tester\", \"Java Developer\", \"JavaScript Developer\"]\u001b[39m",
+                        "stack": "Error: an internship is not for someone with 3 years\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"QA Intern\"\u001b[39m\nReceived array:     \u001b[31m[\"QA Automation Engineer\", \"<img src=x onerror=\\\"window.__xss=1\\\">QA Tester\", \"QA Engineer\", \u001b[7m\"QA Intern\"\u001b[27m, \"Remote QA Tester\", \"Java Developer\", \"JavaScript Developer\"]\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:106:73",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                          "column": 73,
+                          "line": 106
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 104 |\u001b[39m     \u001b[36mconst\u001b[39m titles \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m jobTitles(page)\u001b[33m;\u001b[39m\n \u001b[90m 105 |\u001b[39m     expect(titles)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(\u001b[32m\"Senior QA Engineer\"\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 106 |\u001b[39m     expect(titles\u001b[33m,\u001b[39m \u001b[32m\"an internship is not for someone with 3 years\"\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(\u001b[32m\"QA Intern\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 107 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 108 |\u001b[39m\n \u001b[90m 109 |\u001b[39m   test(\u001b[32m\"TC-FLT-07 Clear filters puts everything back\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page\u001b[33m,\u001b[39m request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                            "column": 73,
+                            "line": 106
+                          },
+                          "message": "Error: an internship is not for someone with 3 years\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"QA Intern\"\u001b[39m\nReceived array:     \u001b[31m[\"QA Automation Engineer\", \"<img src=x onerror=\\\"window.__xss=1\\\">QA Tester\", \"QA Engineer\", \u001b[7m\"QA Intern\"\u001b[27m, \"Remote QA Tester\", \"Java Developer\", \"JavaScript Developer\"]\u001b[39m\n\n  104 |     const titles = await jobTitles(page);\n  105 |     expect(titles).not.toContain(\"Senior QA Engineer\");\n> 106 |     expect(titles, \"an internship is not for someone with 3 years\").not.toContain(\"QA Intern\");\n      |                                                                         ^\n  107 |   });\n  108 |\n  109 |   test(\"TC-FLT-07 Clear filters puts everything back\", async ({ page, request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:106:73"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:25.174Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Filters-TC-FLT-06-exp-c8073-ntern-jobs-like-Jobs-for-me-desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Filters-TC-FLT-06-exp-c8073-ntern-jobs-like-Jobs-for-me-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Filters-TC-FLT-06-exp-c8073-ntern-jobs-like-Jobs-for-me-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                        "column": 73,
+                        "line": 106
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-779e7149d0255e24c5a2",
+              "file": "jobs.spec.js",
+              "line": 135,
+              "column": 3
+            },
+            {
+              "title": "TC-FLT-07 Clear filters puts everything back",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3117,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:30.590Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-82db09b225f95f8c4373",
+              "file": "jobs.spec.js",
+              "line": 146,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Search and live search",
+          "file": "jobs.spec.js",
+          "line": 157,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-LIVE-01 opening the app fetches fresh jobs for my role and city",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1319,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Expect \"poll toBeGreaterThan\"",
+                          "duration": 2
+                        }
+                      ],
+                      "startTime": "2026-10-10T23:15:35.339Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-89e2524b931c23f05584",
+              "file": "jobs.spec.js",
+              "line": 167,
+              "column": 3
+            },
+            {
+              "title": "TC-LIVE-02 searching any role shows the jobs found for it",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1315,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:36.681Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-09f9431c436818863817",
+              "file": "jobs.spec.js",
+              "line": 178,
+              "column": 3
+            },
+            {
+              "title": "TC-LIVE-03 the same search twice asks the job sites only once",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2129,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:38.029Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-8170cd5ba9f3f2c50a5e",
+              "file": "jobs.spec.js",
+              "line": 193,
+              "column": 3
+            },
+            {
+              "title": "TC-LIVE-04 a search with no results says so",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1369,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:15:40.187Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-0783a5813fee9027281d",
+              "file": "jobs.spec.js",
+              "line": 205,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "myjobs.spec.js",
+      "file": "myjobs.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-MY-01 saving a job puts it in My jobs > Saved, and it is kept on the server",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2600,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:15:41.636Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8021bd4115f1ed31fe7-4de94ec4b7aec717a117",
+          "file": "myjobs.spec.js",
+          "line": 21,
+          "column": 1
+        },
+        {
+          "title": "TC-MY-02 Apply -> 'Did you apply?' -> Yes: the job moves to Applied and leaves the feed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                    "line": 30,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3955,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:15:44.265Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "line": 30,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8021bd4115f1ed31fe7-efa96238a006fc8425b4",
+          "file": "myjobs.spec.js",
+          "line": 37,
+          "column": 1
+        },
+        {
+          "title": "TC-MY-03 'Not yet' keeps the job in the feed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                    "line": 49,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3652,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:15:48.241Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "line": 49,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8021bd4115f1ed31fe7-efc15c31cde522bcbca3",
+          "file": "myjobs.spec.js",
+          "line": 58,
+          "column": 1
+        },
+        {
+          "title": "TC-MY-04 an applied job can be moved to Interview / Offer / Closed or undone",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6901,
+                  "error": {
+                    "message": "Error: there should be a way to record an interview\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#sheet').getByRole('button', { name: /Interview/ })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - there should be a way to record an interview with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#sheet').getByRole('button', { name: /Interview/ })\u001b[22m\n",
+                    "stack": "Error: there should be a way to record an interview\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#sheet').getByRole('button', { name: /Interview/ })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - there should be a way to record an interview with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#sheet').getByRole('button', { name: /Interview/ })\u001b[22m\n\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:69:114",
+                    "location": {
+                      "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                      "column": 114,
+                      "line": 69
+                    },
+                    "snippet": "\u001b[0m \u001b[90m 67 |\u001b[39m   \u001b[36mconst\u001b[39m sheet \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#sheet\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 68 |\u001b[39m   \u001b[36mawait\u001b[39m expect(sheet)\u001b[33m.\u001b[39mtoHaveClass(\u001b[35m/open/\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 69 |\u001b[39m   \u001b[36mawait\u001b[39m expect(sheet\u001b[33m.\u001b[39mgetByRole(\u001b[32m\"button\"\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[35m/Interview/\u001b[39m })\u001b[33m,\u001b[39m \u001b[32m\"there should be a way to record an interview\"\u001b[39m)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 70 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 71 |\u001b[39m\n \u001b[90m 72 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m\"Account and data safety\"\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "column": 114,
+                        "line": 69
+                      },
+                      "message": "Error: there should be a way to record an interview\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#sheet').getByRole('button', { name: /Interview/ })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - there should be a way to record an interview with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#sheet').getByRole('button', { name: /Interview/ })\u001b[22m\n\n\n  67 |   const sheet = page.locator(\"#sheet\");\n  68 |   await expect(sheet).toHaveClass(/open/);\n> 69 |   await expect(sheet.getByRole(\"button\", { name: /Interview/ }), \"there should be a way to record an interview\").toBeVisible();\n     |                                                                                                                  ^\n  70 | });\n  71 |\n  72 | test.describe(\"Account and data safety\", () => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:69:114"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:15:51.913Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-TC-MY-04-an-applied-68edd-view-Offer-Closed-or-undone-desktop\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-TC-MY-04-an-applied-68edd-view-Offer-Closed-or-undone-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-TC-MY-04-an-applied-68edd-view-Offer-Closed-or-undone-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                    "column": 114,
+                    "line": 69
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e8021bd4115f1ed31fe7-98b7a014978ac204c4f2",
+          "file": "myjobs.spec.js",
+          "line": 72,
+          "column": 1
+        }
+      ],
+      "suites": [
+        {
+          "title": "Account and data safety",
+          "file": "myjobs.spec.js",
+          "line": 102,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-SEC-10 anyone who knows an email can reset that account's password",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 192,
+                      "error": {
+                        "message": "Error: the PIN should go to the owner (email/SMS), not to whoever asks\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m",
+                        "stack": "Error: the PIN should go to the owner (email/SMS), not to whoever asks\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:77:95",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                          "column": 95,
+                          "line": 77
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 75 |\u001b[39m     \u001b[36mconst\u001b[39m { pin } \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m (\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/forgot\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m victim\u001b[33m.\u001b[39memail } }))\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 76 |\u001b[39m     \u001b[36mconst\u001b[39m r \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/reset\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m victim\u001b[33m.\u001b[39memail\u001b[33m,\u001b[39m pin\u001b[33m,\u001b[39m password\u001b[33m:\u001b[39m \u001b[32m\"Hacked#1\"\u001b[39m } })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     expect(r\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m\"the PIN should go to the owner (email/SMS), not to whoever asks\"\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m\n \u001b[90m 80 |\u001b[39m   test(\u001b[32m\"TC-SEC-11 'Forgot password' does not reveal which emails have accounts\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                            "column": 95,
+                            "line": 77
+                          },
+                          "message": "Error: the PIN should go to the owner (email/SMS), not to whoever asks\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n\n  75 |     const { pin } = await (await request.post(\"/api/forgot\", { data: { email: victim.email } })).json();\n  76 |     const r = await request.post(\"/api/reset\", { data: { email: victim.email, pin, password: \"Hacked#1\" } });\n> 77 |     expect(r.status(), \"the PIN should go to the owner (email/SMS), not to whoever asks\").not.toBe(200);\n     |                                                                                               ^\n  78 |   });\n  79 |\n  80 |   test(\"TC-SEC-11 'Forgot password' does not reveal which emails have accounts\", async ({ request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:77:95"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:16:01.705Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-7cfbf-set-that-account-s-password-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "column": 95,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "e8021bd4115f1ed31fe7-606036580c132388b550",
+              "file": "myjobs.spec.js",
+              "line": 103,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-11 'Forgot password' does not reveal which emails have accounts",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 164,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:84:30",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                          "column": 30,
+                          "line": 84
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 82 |\u001b[39m     \u001b[36mconst\u001b[39m known \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/forgot\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m a\u001b[33m.\u001b[39memail } })\u001b[33m;\u001b[39m\n \u001b[90m 83 |\u001b[39m     \u001b[36mconst\u001b[39m unknown \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/forgot\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m \u001b[32m\"nobody-\"\u001b[39m \u001b[33m+\u001b[39m \u001b[33mDate\u001b[39m\u001b[33m.\u001b[39mnow() \u001b[33m+\u001b[39m \u001b[32m\"@example.com\"\u001b[39m } })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 84 |\u001b[39m     expect(unknown\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(known\u001b[33m.\u001b[39mstatus())\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 85 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 86 |\u001b[39m\n \u001b[90m 87 |\u001b[39m   test(\u001b[32m\"TC-SEC-12 changing the password logs out the other devices\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                            "column": 30,
+                            "line": 84
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n\n  82 |     const known = await request.post(\"/api/forgot\", { data: { email: a.email } });\n  83 |     const unknown = await request.post(\"/api/forgot\", { data: { email: \"nobody-\" + Date.now() + \"@example.com\" } });\n> 84 |     expect(unknown.status()).toBe(known.status());\n     |                              ^\n  85 |   });\n  86 |\n  87 |   test(\"TC-SEC-12 changing the password logs out the other devices\", async ({ request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:84:30"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:16:04.301Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-85bc0--which-emails-have-accounts-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "column": 30,
+                        "line": 84
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "e8021bd4115f1ed31fe7-8b17717bdc12d9c592c5",
+              "file": "myjobs.spec.js",
+              "line": 123,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-12 changing the password logs out the other devices",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 301,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m200\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m200\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:91:81",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                          "column": 81,
+                          "line": 91
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 89 |\u001b[39m     \u001b[36mconst\u001b[39m other \u001b[33m=\u001b[39m (\u001b[36mawait\u001b[39m (\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/login\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m a\u001b[33m.\u001b[39memail\u001b[33m,\u001b[39m password\u001b[33m:\u001b[39m \u001b[33mPASSWORD\u001b[39m } }))\u001b[33m.\u001b[39mjson())\u001b[33m.\u001b[39mtoken\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/password\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(a\u001b[33m.\u001b[39mtoken)\u001b[33m,\u001b[39m data\u001b[33m:\u001b[39m { old\u001b[33m:\u001b[39m \u001b[33mPASSWORD\u001b[39m\u001b[33m,\u001b[39m \u001b[36mnew\u001b[39m\u001b[33m:\u001b[39m \u001b[32m\"Changed#1\"\u001b[39m } })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 91 |\u001b[39m     expect((\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m\"/api/user\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(other) }))\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m401\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 92 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 93 |\u001b[39m\n \u001b[90m 94 |\u001b[39m   test(\u001b[32m\"TC-SEC-13 deleting the account asks for the password\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                            "column": 81,
+                            "line": 91
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m200\u001b[39m\n\n  89 |     const other = (await (await request.post(\"/api/login\", { data: { email: a.email, password: PASSWORD } })).json()).token;\n  90 |     await request.post(\"/api/password\", { headers: auth(a.token), data: { old: PASSWORD, new: \"Changed#1\" } });\n> 91 |     expect((await request.get(\"/api/user\", { headers: auth(other) })).status()).toBe(401);\n     |                                                                                 ^\n  92 |   });\n  93 |\n  94 |   test(\"TC-SEC-13 deleting the account asks for the password\", async ({ request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:91:81"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:16:06.679Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-d45ec--logs-out-the-other-devices-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "column": 81,
+                        "line": 91
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "e8021bd4115f1ed31fe7-10a675b6b97e8cee64c4",
+              "file": "myjobs.spec.js",
+              "line": 139,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-13 deleting the account asks for the password",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 136,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:96:90",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                          "column": 90,
+                          "line": 96
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 94 |\u001b[39m   test(\u001b[32m\"TC-SEC-13 deleting the account asks for the password\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\n \u001b[90m 95 |\u001b[39m     \u001b[36mconst\u001b[39m a \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m signupApi(request)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m     expect((\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mdelete\u001b[39m(\u001b[32m\"/api/user\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(a\u001b[33m.\u001b[39mtoken) }))\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 98 |\u001b[39m\n \u001b[90m 99 |\u001b[39m   test(\u001b[32m\"TC-SEC-14 log out leaves no personal data in the browser\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page\u001b[33m,\u001b[39m request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                            "column": 90,
+                            "line": 96
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n\n  94 |   test(\"TC-SEC-13 deleting the account asks for the password\", async ({ request }) => {\n  95 |     const a = await signupApi(request);\n> 96 |     expect((await request.delete(\"/api/user\", { headers: auth(a.token) })).status()).not.toBe(200);\n     |                                                                                          ^\n  97 |   });\n  98 |\n  99 |   test(\"TC-SEC-14 log out leaves no personal data in the browser\", async ({ page, request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:96:90"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:16:09.305Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-1c414-count-asks-for-the-password-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "column": 90,
+                        "line": 96
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "e8021bd4115f1ed31fe7-b4bda8224b87d78e8e24",
+              "file": "myjobs.spec.js",
+              "line": 160,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-14 log out leaves no personal data in the browser",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 3606,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"uv.user.t-u-1791674173278-287070@example.com\",\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"uv.user.t-u-1791674173278-287070@example.com\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:104:18",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                          "column": 18,
+                          "line": 104
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 102 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#loginView\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m left \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mevaluate(() \u001b[33m=>\u001b[39m \u001b[33mObject\u001b[39m\u001b[33m.\u001b[39mkeys(localStorage)\u001b[33m.\u001b[39mfilter(k \u001b[33m=>\u001b[39m k\u001b[33m.\u001b[39mstartsWith(\u001b[32m\"uv.user.\"\u001b[39m)))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 |\u001b[39m     expect(left)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 105 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m\n \u001b[90m 107 |\u001b[39m   test(\u001b[32m\"TC-SEC-15 the GitHub key is not copied to the server\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page\u001b[33m,\u001b[39m request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                            "column": 18,
+                            "line": 104
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"uv.user.t-u-1791674173278-287070@example.com\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  102 |     await expect(page.locator(\"#loginView\")).toBeVisible();\n  103 |     const left = await page.evaluate(() => Object.keys(localStorage).filter(k => k.startsWith(\"uv.user.\")));\n> 104 |     expect(left).toEqual([]);\n      |                  ^\n  105 |   });\n  106 |\n  107 |   test(\"TC-SEC-15 the GitHub key is not copied to the server\", async ({ page, request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:104:18"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:16:11.613Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-050d7-ersonal-data-in-the-browser-desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-050d7-ersonal-data-in-the-browser-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-050d7-ersonal-data-in-the-browser-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "column": 18,
+                        "line": 104
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "e8021bd4115f1ed31fe7-c1a084bb2ac2aca32fd6",
+              "file": "myjobs.spec.js",
+              "line": 168,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-15 the GitHub key is not copied to the server",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 3096,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"github_pat_TESTSECRET\"\u001b[39m\nReceived string:        \u001b[31m\"{\\\"name\\\":\\\"Test User\\\",\\\"user\\\":{\\\"profile\\\":{\\\"name\\\":\\\"Test User\\\",\\\"email\\\":\\\"t-u-1791674180615-417383@example.com\\\",\\\"phone\\\":\\\"\\\",\\\"headline\\\":\\\"\\\",\\\"location\\\":\\\"\\\",\\\"about\\\":\\\"\\\",\\\"currentCompany\\\":\\\"\\\",\\\"currentCtc\\\":\\\"\\\",\\\"expectedCtc\\\":\\\"\\\",\\\"notice\\\":\\\"\\\",\\\"education\\\":\\\"\\\",\\\"linkedin\\\":\\\"\\\",\\\"github\\\":\\\"\\\",\\\"portfolio\\\":\\\"\\\",\\\"resume\\\":\\\"\\\"},\\\"prefs\\\":{\\\"roles\\\":[\\\"QA / Testing\\\"],\\\"custom\\\":\\\"\\\",\\\"exp\\\":3,\\\"cities\\\":[\\\"Hyderabad\\\"],\\\"skills\\\":[],\\\"customSkills\\\":\\\"\\\"},\\\"jobs\\\":{},\\\"manual\\\":[],\\\"hidden\\\":{},\\\"settings\\\":{\\\"theme\\\":\\\"light\\\",\\\"days\\\":7,\\\"hideApplied\\\":true,\\\"telegram\\\":false,\\\"minMatch\\\":70,\\\"ghToken\\\":\\\"\u001b[7mgithub_pat_TESTSECRET\u001b[27m\\\",\\\"ghRepo\\\":\\\"chandramouli-projects/job-alerts\\\"},\\\"onboarded\\\":true,\\\"createdAt\\\":1791674181315,\\\"lastSeen\\\":0,\\\"thisVisit\\\":1791674181315}}\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"github_pat_TESTSECRET\"\u001b[39m\nReceived string:        \u001b[31m\"{\\\"name\\\":\\\"Test User\\\",\\\"user\\\":{\\\"profile\\\":{\\\"name\\\":\\\"Test User\\\",\\\"email\\\":\\\"t-u-1791674180615-417383@example.com\\\",\\\"phone\\\":\\\"\\\",\\\"headline\\\":\\\"\\\",\\\"location\\\":\\\"\\\",\\\"about\\\":\\\"\\\",\\\"currentCompany\\\":\\\"\\\",\\\"currentCtc\\\":\\\"\\\",\\\"expectedCtc\\\":\\\"\\\",\\\"notice\\\":\\\"\\\",\\\"education\\\":\\\"\\\",\\\"linkedin\\\":\\\"\\\",\\\"github\\\":\\\"\\\",\\\"portfolio\\\":\\\"\\\",\\\"resume\\\":\\\"\\\"},\\\"prefs\\\":{\\\"roles\\\":[\\\"QA / Testing\\\"],\\\"custom\\\":\\\"\\\",\\\"exp\\\":3,\\\"cities\\\":[\\\"Hyderabad\\\"],\\\"skills\\\":[],\\\"customSkills\\\":\\\"\\\"},\\\"jobs\\\":{},\\\"manual\\\":[],\\\"hidden\\\":{},\\\"settings\\\":{\\\"theme\\\":\\\"light\\\",\\\"days\\\":7,\\\"hideApplied\\\":true,\\\"telegram\\\":false,\\\"minMatch\\\":70,\\\"ghToken\\\":\\\"\u001b[7mgithub_pat_TESTSECRET\u001b[27m\\\",\\\"ghRepo\\\":\\\"chandramouli-projects/job-alerts\\\"},\\\"onboarded\\\":true,\\\"createdAt\\\":1791674181315,\\\"lastSeen\\\":0,\\\"thisVisit\\\":1791674181315}}\"\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:113:24",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                          "column": 24,
+                          "line": 113
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 111 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m800\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 112 |\u001b[39m     \u001b[36mconst\u001b[39m stored \u001b[33m=\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(\u001b[36mawait\u001b[39m (\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m\"/api/user\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(a\u001b[33m.\u001b[39mtoken) }))\u001b[33m.\u001b[39mjson())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 113 |\u001b[39m     expect(stored)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(\u001b[32m\"github_pat_TESTSECRET\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 114 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 115 |\u001b[39m\n \u001b[90m 116 |\u001b[39m   test(\u001b[32m\"TC-SEC-16 a broken jobs file still shows the log in page\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                            "column": 24,
+                            "line": 113
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"github_pat_TESTSECRET\"\u001b[39m\nReceived string:        \u001b[31m\"{\\\"name\\\":\\\"Test User\\\",\\\"user\\\":{\\\"profile\\\":{\\\"name\\\":\\\"Test User\\\",\\\"email\\\":\\\"t-u-1791674180615-417383@example.com\\\",\\\"phone\\\":\\\"\\\",\\\"headline\\\":\\\"\\\",\\\"location\\\":\\\"\\\",\\\"about\\\":\\\"\\\",\\\"currentCompany\\\":\\\"\\\",\\\"currentCtc\\\":\\\"\\\",\\\"expectedCtc\\\":\\\"\\\",\\\"notice\\\":\\\"\\\",\\\"education\\\":\\\"\\\",\\\"linkedin\\\":\\\"\\\",\\\"github\\\":\\\"\\\",\\\"portfolio\\\":\\\"\\\",\\\"resume\\\":\\\"\\\"},\\\"prefs\\\":{\\\"roles\\\":[\\\"QA / Testing\\\"],\\\"custom\\\":\\\"\\\",\\\"exp\\\":3,\\\"cities\\\":[\\\"Hyderabad\\\"],\\\"skills\\\":[],\\\"customSkills\\\":\\\"\\\"},\\\"jobs\\\":{},\\\"manual\\\":[],\\\"hidden\\\":{},\\\"settings\\\":{\\\"theme\\\":\\\"light\\\",\\\"days\\\":7,\\\"hideApplied\\\":true,\\\"telegram\\\":false,\\\"minMatch\\\":70,\\\"ghToken\\\":\\\"\u001b[7mgithub_pat_TESTSECRET\u001b[27m\\\",\\\"ghRepo\\\":\\\"chandramouli-projects/job-alerts\\\"},\\\"onboarded\\\":true,\\\"createdAt\\\":1791674181315,\\\"lastSeen\\\":0,\\\"thisVisit\\\":1791674181315}}\"\u001b[39m\n\n  111 |     await page.waitForTimeout(800);\n  112 |     const stored = JSON.stringify(await (await request.get(\"/api/user\", { headers: auth(a.token) })).json());\n> 113 |     expect(stored).not.toContain(\"github_pat_TESTSECRET\");\n      |                        ^\n  114 |   });\n  115 |\n  116 |   test(\"TC-SEC-16 a broken jobs file still shows the log in page\", async ({ page }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:113:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:16:19.280Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-4fab7-is-not-copied-to-the-server-desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-4fab7-is-not-copied-to-the-server-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-4fab7-is-not-copied-to-the-server-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "column": 24,
+                        "line": 113
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "e8021bd4115f1ed31fe7-6e802c7ee3ef0243e0fb",
+              "file": "myjobs.spec.js",
+              "line": 178,
+              "column": 3
+            },
+            {
+              "title": "TC-SEC-16 a broken jobs file still shows the log in page",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 6763,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#loginView')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#loginView')\u001b[22m\n\u001b[2m    8 × locator resolved to <div id=\"loginView\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#loginView')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#loginView')\u001b[22m\n\u001b[2m    8 × locator resolved to <div id=\"loginView\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:119:46",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                          "column": 46,
+                          "line": 119
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 117 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mroute(\u001b[32m\"**/jobs.json*\"\u001b[39m\u001b[33m,\u001b[39m r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mfulfill({ json\u001b[33m:\u001b[39m {} }))\u001b[33m;\u001b[39m\n \u001b[90m 118 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m\"/\"\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 119 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#loginView\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 120 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 121 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 122 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                            "column": 46,
+                            "line": 119
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#loginView')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#loginView')\u001b[22m\n\u001b[2m    8 × locator resolved to <div id=\"loginView\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n\n\n  117 |     await page.route(\"**/jobs.json*\", r => r.fulfill({ json: {} }));\n  118 |     await page.goto(\"/\");\n> 119 |     await expect(page.locator(\"#loginView\")).toBeVisible();\n      |                                              ^\n  120 |   });\n  121 | });\n  122 |\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:119:46"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T23:16:25.804Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-ae0ef-still-shows-the-log-in-page-desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-ae0ef-still-shows-the-log-in-page-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-Account-and-data-sa-ae0ef-still-shows-the-log-in-page-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "column": 46,
+                        "line": 119
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "e8021bd4115f1ed31fe7-a8da3e2cc79662a3646e",
+              "file": "myjobs.spec.js",
+              "line": 199,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "onboarding.spec.js",
+      "file": "onboarding.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-OB-01 Show my jobs stays off until role, experience and city are chosen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 32768,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js",
+                        "column": 105,
+                        "line": 10
+                      },
+                      "message": "Error: page.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#ob h1')\u001b[22m\n\u001b[2m    - locator resolved to <h1>Tell us the job you want</h1>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   8 | const pickAndClose = async (page, k, v) => {\n   9 |   await pick(page, k, v);\n> 10 |   if (await page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"))) await page.click(\"#ob h1\");\n     |                                                                                                         ^\n  11 | };\n  12 | const isOpen = (page, k) => page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"));\n  13 | const chips = (page, k) => page.locator(`.pk[data-pk=\"${k}\"] .pk-chip`).allTextContents();\n    at pickAndClose (C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:10:105)\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:28:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:16:36.035Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-01-Show-m-8a672-erience-and-city-are-chosen-desktop\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-01-Show-m-8a672-erience-and-city-are-chosen-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-01-Show-m-8a672-erience-and-city-are-chosen-desktop\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "289937b78f21fd60af7e-6915fb205dd6bf0a7821",
+          "file": "onboarding.spec.js",
+          "line": 21,
+          "column": 1
+        },
+        {
+          "title": "TC-OB-02 experience list closes as soon as one is picked",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3442,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:17:21.354Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "289937b78f21fd60af7e-c791b65138331fc91f7b",
+          "file": "onboarding.spec.js",
+          "line": 36,
+          "column": 1
+        },
+        {
+          "title": "TC-OB-03 role list closes as soon as a role is picked (owner's rule)",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1792,
+                  "error": {
+                    "message": "Error: the role list should close after picking\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m",
+                    "stack": "Error: the role list should close after picking\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:42:82",
+                    "location": {
+                      "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js",
+                      "column": 82,
+                      "line": 42
+                    },
+                    "snippet": "\u001b[0m \u001b[90m 40 |\u001b[39m   \u001b[36mawait\u001b[39m open(page\u001b[33m,\u001b[39m \u001b[32m\"role\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 41 |\u001b[39m   \u001b[36mawait\u001b[39m pick(page\u001b[33m,\u001b[39m \u001b[32m\"role\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"QA / Testing\"\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 42 |\u001b[39m   expect(\u001b[36mawait\u001b[39m isOpen(page\u001b[33m,\u001b[39m \u001b[32m\"role\"\u001b[39m)\u001b[33m,\u001b[39m \u001b[32m\"the role list should close after picking\"\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mfalse\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 43 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 44 |\u001b[39m\n \u001b[90m 45 |\u001b[39m test(\u001b[32m\"TC-OB-04 the next list can be opened straight away while one is open\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js",
+                        "column": 82,
+                        "line": 42
+                      },
+                      "message": "Error: the role list should close after picking\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n\n  40 |   await open(page, \"role\");\n  41 |   await pick(page, \"role\", \"QA / Testing\");\n> 42 |   expect(await isOpen(page, \"role\"), \"the role list should close after picking\").toBe(false);\n     |                                                                                  ^\n  43 | });\n  44 |\n  45 | test(\"TC-OB-04 the next list can be opened straight away while one is open\", async ({ page }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:42:82"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:17:26.801Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-03-role-l-6f618-ole-is-picked-owner-s-rule--desktop\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-03-role-l-6f618-ole-is-picked-owner-s-rule--desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-03-role-l-6f618-ole-is-picked-owner-s-rule--desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js",
+                    "column": 82,
+                    "line": 42
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "289937b78f21fd60af7e-aa0be41cc178b54230f8",
+          "file": "onboarding.spec.js",
+          "line": 44,
+          "column": 1
+        },
+        {
+          "title": "TC-OB-04 the next list can be opened straight away while one is open",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 15282,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js",
+                        "column": 32,
+                        "line": 5
+                      },
+                      "message": "Error: page.click: Test timeout of 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-pkopen=\"city\"]')\u001b[22m\n\u001b[2m    - locator resolved to <div tabindex=\"0\" role=\"button\" class=\"pk-field\" data-pkopen=\"city\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\"q-city\">…</div>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button type=\"button\" role=\"option\" class=\"pk-opt\" data-pkval=\"role\" aria-selected=\"false\" data-v=\".NET Developer\">…</button> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button type=\"button\" role=\"option\" class=\"pk-opt\" data-pkval=\"role\" aria-selected=\"false\" data-v=\".NET Developer\">…</button> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    24 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button type=\"button\" role=\"option\" class=\"pk-opt\" data-pkval=\"role\" aria-selected=\"false\" data-v=\".NET Developer\">…</button> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  3 | import { signupApi, useFixtures, openLoggedIn } from \"./helpers.js\";\n  4 |\n> 5 | const open = (page, k) => page.click(`[data-pkopen=\"${k}\"]`);\n    |                                ^\n  6 | const pick = (page, k, v) => page.click(`.pk-opt[data-pkval=\"${k}\"][data-v=\"${v}\"]`);\n  7 | // a list that stays open covers the next field, so close it the way a person must: click outside\n  8 | const pickAndClose = async (page, k, v) => {\n    at open (C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:5:32)\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:48:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:17:32.235Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-04-the-ne-4995c-ight-away-while-one-is-open-desktop\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-04-the-ne-4995c-ight-away-while-one-is-open-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-04-the-ne-4995c-ight-away-while-one-is-open-desktop\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "289937b78f21fd60af7e-acc220dfee86ef25ddf3",
+          "file": "onboarding.spec.js",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "TC-OB-05 'Anywhere in India' replaces the picked cities, and a city replaces it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3134,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:17:51.762Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "289937b78f21fd60af7e-85ddd1138bfb5de15cf0",
+          "file": "onboarding.spec.js",
+          "line": 60,
+          "column": 1
+        },
+        {
+          "title": "TC-OB-06 a role that is not in the list can be added by typing it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1479,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:17:57.581Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "289937b78f21fd60af7e-e2efe74d51e839721844",
+          "file": "onboarding.spec.js",
+          "line": 70,
+          "column": 1
+        },
+        {
+          "title": "TC-OB-07 answers are saved on the server: after reload the jobs page opens, not the questions",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30359,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js",
+                        "column": 105,
+                        "line": 10
+                      },
+                      "message": "Error: page.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#ob h1')\u001b[22m\n\u001b[2m    - locator resolved to <h1>Tell us the job you want</h1>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Anywhere in India</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Anywhere in India</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    53 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span>Anywhere in India</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   8 | const pickAndClose = async (page, k, v) => {\n   9 |   await pick(page, k, v);\n> 10 |   if (await page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"))) await page.click(\"#ob h1\");\n     |                                                                                                         ^\n  11 | };\n  12 | const isOpen = (page, k) => page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"));\n  13 | const chips = (page, k) => page.locator(`.pk[data-pk=\"${k}\"] .pk-chip`).allTextContents();\n    at pickAndClose (C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:10:105)\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:72:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T23:17:59.090Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-07-answer-d4405-age-opens-not-the-questions-desktop\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-07-answer-d4405-age-opens-not-the-questions-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\onboarding-TC-OB-07-answer-d4405-age-opens-not-the-questions-desktop\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "289937b78f21fd60af7e-8ca95c0b7cb9d58bba85",
+          "file": "onboarding.spec.js",
+          "line": 78,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-10T23:08:41.742Z",
+    "duration": 600400.491,
+    "expected": 57,
+    "skipped": 0,
+    "unexpected": 19,
+    "flaky": 0
+  }
+}

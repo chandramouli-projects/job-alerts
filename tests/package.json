@@ -1,0 +1,12 @@
+{
+  "name": "job-portal-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report reports/html"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.0"
+  }
+}
