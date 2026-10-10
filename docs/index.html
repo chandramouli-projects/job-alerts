@@ -121,6 +121,12 @@ textarea.inp{min-height:96px;resize:vertical}
 .fpanel .fend input{width:18px;height:18px;accent-color:var(--accent);margin:0}
 .fpanel .fend .clear{margin-left:auto;background:none;border:0;color:var(--accent);font-weight:700;padding:0}
 .ftoggle{display:none}
+.searchbar.one{grid-template-columns:1fr auto}
+@media (max-width:560px){.searchbar.one{grid-template-columns:1fr auto}.searchbar.one .btn{grid-column:auto}}
+.match.newb{background:var(--applied);color:#fff}
+.pipe.five{grid-template-columns:repeat(5,1fr)}
+@media (max-width:560px){.pipe.five{grid-template-columns:repeat(3,1fr)}.pipe.five b{font-size:1.35rem}.pipe.five button{padding:10px}}
+.inp[readonly]{opacity:.7}
 @media (max-width:700px){.fpanel{grid-template-columns:1fr 1fr}.ftoggle{display:inline-flex}.fpanel.collapsed{display:none}}
 .resbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 2px 12px;color:var(--muted);font-size:.9rem}
 .resbar select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 10px;font-size:.88rem}
@@ -366,9 +372,10 @@ let session=LS.get("uv.session",null);
 let U=null;            // current user's data
 let data={jobs:[]};
 let view="jobs", shown=PAGE;
-let F={q:"",where:"",forYou:true,days:7,role:"",exp:"",city:"",type:"",source:"",remote:false,salary:false,company:"",sort:"match"};
+let F={q:"",forYou:true,days:7,role:"",exp:"",city:"",type:"",source:"",company:"",minSal:"",remote:false,sort:"match"};
+let prevSeen=0;
 let filtersOpen=false;
-let trackStage="applied";
+let trackStage="saved";
 
 function blankUser(name,email,phone){return{
   profile:{name,email,phone,headline:"",location:"",about:"",currentCompany:"",currentCtc:"",expectedCtc:"",notice:"",education:"",linkedin:"",github:"",portfolio:"",resume:""},
@@ -495,52 +502,55 @@ function toggleSave(id){const t=track(id);t.saved=!t.saved;if(t.saved&&!t.snap)t
 function tracked(){return Object.entries(U.jobs).map(([id,t])=>({...(findJob(id)||t.snap||{id,title:"Job no longer listed",company:""}),id,_t:t})).filter(j=>j.title);}
 
 /* ===================================================== filtering */
-function resetFilters(){F={q:"",where:"",forYou:true,days:U.settings.days||7,role:"",exp:"",city:"",type:"",source:"",remote:false,salary:false,company:"",sort:"match"};shown=PAGE;}
+function resetFilters(){F={q:"",forYou:true,days:7,role:"",exp:"",city:"",type:"",source:"",company:"",minSal:"",remote:false,sort:"match"};shown=PAGE;}
+function salaryLpa(j){const m=String(j.salary||"").match(/([\d.]+)(?:\s*[–-]\s*([\d.]+))?\s*LPA/i);return m?parseFloat(m[2]||m[1]):null;}
+const isNew=j=>prevSeen>0&&new Date(j.found)>prevSeen;
 function feed(){
-  const p=U.prefs,q=F.q.toLowerCase().trim(),where=F.where.toLowerCase().trim();
-  const out=[];
+  const p=U.prefs,q=F.q.toLowerCase().trim(),out=[];
   for(const j of allJobs()){
     if(U.hidden[j.id])continue;
-    const t=U.jobs[j.id];if(U.settings.hideApplied&&t?.stage)continue;
-    if((Date.now()-new Date(when(j)))/864e5>F.days&&!j.manual)continue;
+    if(U.jobs[j.id]?.stage)continue;
+    if(!j.manual&&(Date.now()-new Date(when(j)))/864e5>F.days)continue;
     if(F.company&&j.company!==F.company)continue;
-    if(q&&!q.split(/[,\s]+/).filter(Boolean).every(w=>[j.title,j.company,(j.tech||[]).join(" "),j.description].join(" ").toLowerCase().includes(w)))continue;
-    if(where&&!((j.location||"")+" "+(j.city_norm||"")+(j.remote?" remote":"")).toLowerCase().includes(where))continue;
+    if(q&&!q.split(/[,\s]+/).filter(Boolean).every(w=>[j.title,j.company,j.location,(j.tech||[]).join(" "),j.description].join(" ").toLowerCase().includes(w)))continue;
     if(F.remote&&!j.remote)continue;
-    if(F.salary&&!j.salary)continue;
     if(F.type&&(j.type||"Not stated")!==F.type)continue;
-    if(F.source&&j.source!==F.source)continue;
+    if(F.source&&(j.direct?"Company site":j.source)!==F.source)continue;
     if(F.city&&(j.city_norm||"India")!==F.city)continue;
     if(F.role&&!(ROLES[F.role]||[F.role.toLowerCase()]).some(k=>j.title.toLowerCase().includes(k)))continue;
     if(F.exp!==""){const x=+F.exp;if(j.exp_min!=null&&(j.exp_min>x+1||(j.exp_max!=null&&j.exp_max<x-2)))continue;if(x<5&&SENIOR.test(j.title))continue;}
+    if(F.minSal!==""){const s=salaryLpa(j);if(s==null||s<+F.minSal)continue;}
     const ev=evaluate(j,p);
     if(F.forYou&&!ev.ok)continue;
     out.push({...j,_e:ev});
   }
-  out.sort((a,b)=>F.sort==="new"?new Date(when(b))-new Date(when(a)):(b._e.score-a._e.score)||(new Date(when(b))-new Date(when(a))));
+  out.sort((a,b)=>F.sort==="new"?new Date(when(b))-new Date(when(a)):(isNew(b)-isNew(a))||(b._e.score-a._e.score)||(new Date(when(b))-new Date(when(a))));
   return out;
 }
-function activeFilterCount(){return [F.role,F.exp,F.city,F.type,F.source].filter(v=>v!=="").length+F.remote+F.salary+(F.days!==(U.settings.days||7))+(!F.forYou);}
+function activeFilterCount(){return [F.role,F.exp,F.city,F.type,F.source,F.company,F.minSal].filter(v=>v!=="").length+F.remote+(F.days!==7)+(!F.forYou);}
+const fitLabel=e=>!e.ok?"":e.score>=80?"Great fit":"Good fit";
 
 /* ===================================================== shell */
-const NAV=[["jobs","Find jobs",ICON.jobs],["saved","Saved",ICON.saved],["track","Applications",ICON.track],["companies","Companies",ICON.cos],["profile","Profile",ICON.me],["settings","Settings",ICON.set]];
-function openShell(){$("auth").hidden=true;$("ob").hidden=true;$("shell").hidden=false;go(view);}
+const NAV=[["jobs","Jobs",ICON.jobs],["mine","My jobs",ICON.saved],["profile","Profile",ICON.me]];
+function markVisit(){if(!U.thisVisit||Date.now()-U.thisVisit>30*60e3){U.lastSeen=U.thisVisit||0;U.thisVisit=Date.now();saveUser();}prevSeen=U.lastSeen||0;}
+function openShell(){markVisit();$("auth").hidden=true;$("ob").hidden=true;$("shell").hidden=false;go(view);}
 function go(v){view=v;shown=PAGE;renderNav();render();window.scrollTo(0,0);}
+function myCount(){return Object.values(U.jobs).filter(t=>t.saved||t.stage).length;}
 function renderNav(){
-  const counts={saved:Object.values(U.jobs).filter(t=>t.saved).length,track:Object.values(U.jobs).filter(t=>t.stage&&t.stage!=="saved").length};
-  $("side").innerHTML=`<div class="brand">Udyogam Vetuku</div>`+NAV.map(([k,l,i])=>`<button class="nav" data-go="${k}" aria-current="${view===k?"page":"false"}">${i}${l}${counts[k]?`<span class="n">${counts[k]}</span>`:""}</button>`).join("")+
+  const n=myCount();
+  $("side").innerHTML=`<div class="brand">Udyogam Vetuku</div>`+NAV.map(([k,l,i])=>`<button class="nav" data-go="${k}" aria-current="${view===k?"page":"false"}">${i}${l}${k==="mine"&&n?`<span class="n">${n}</span>`:""}</button>`).join("")+
     `<div class="me-mini"><span class="avatar">${initials(U.profile.name)}</span><div><b>${esc(U.profile.name)}</b><small>${esc(U.profile.email)}</small></div></div>`;
-  $("bottom").innerHTML=[["jobs","Jobs",ICON.jobs],["saved","Saved",ICON.saved],["track","Applied",ICON.track],["companies","Companies",ICON.cos],["profile","Me",ICON.me]].map(([k,l,i])=>`<button data-go="${k}" aria-current="${(view===k||(k==="profile"&&view==="settings"))?"page":"false"}">${i}${l}</button>`).join("");
+  $("bottom").innerHTML=NAV.map(([k,l,i])=>`<button data-go="${k}" aria-current="${view===k?"page":"false"}">${i}${l}</button>`).join("");
 }
-function render(){({jobs:renderJobs,saved:renderSaved,track:renderTrack,companies:renderCompanies,profile:renderProfile,settings:renderSettings})[view]();}
+function render(){({jobs:renderJobs,mine:renderMine,profile:renderProfile})[view]();}
 function topbar(title,extra=""){return `<div class="topbar"><h1>${title}</h1>${extra}</div>`;}
 
 /* ---------- job card ---------- */
 function jobCard(j,opt={}){
-  const t=U.jobs[j.id],e=j._e||evaluate(j,U.prefs),st=t?.stage?STAGES.find(s=>s[0]===t.stage):null;
+  const t=U.jobs[j.id],e=j._e||evaluate(j,U.prefs),st=t?.stage?STAGES.find(s=>s[0]===t.stage):null,fl=fitLabel(e);
   return `<article class="job" data-open="${esc(j.id)}" style="--s:${st?st[2]:"var(--line)"}" tabindex="0">
     <div class="top">${logo(j)}<div><h3>${esc(j.title)}</h3><div class="co">${esc(j.company)}</div><div class="meta">${esc(j.location||"India")}${j.remote?" · Remote":""}</div></div>
-    ${e.ok?`<span class="match ${e.score>=75?"hi":""}">${e.score}% match</span>`:""}</div>
+    <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">${isNew(j)&&!opt.noNew?`<span class="match newb">New</span>`:""}${fl?`<span class="match ${fl==="Great fit"?"hi":""}">${fl}</span>`:""}</div></div>
     <div class="facts"><span class="${e.ok&&j.exp_min!=null?"good":""}">${esc(expRange(j))}</span>${j.salary?`<span>${esc(j.salary)}</span>`:""}${j.type?`<span>${esc(j.type)}</span>`:""}${(e.hits||[]).slice(0,4).map(h=>`<span class="good">${esc(h)}</span>`).join("")}</div>
     <div class="foot"><span class="when">${j.manual?"Added by you":`${j.direct?`<b style="color:var(--accent)">Company site</b>`:esc(j.source)} · ${ago(when(j))}`}</span>
       ${st&&opt.showStage!==false?`<span class="status-pill" style="color:${st[2]}">${st[1]}</span>`:""}
@@ -549,113 +559,85 @@ function jobCard(j,opt={}){
   </article>`;
 }
 
-/* ---------- Find jobs ---------- */
+/* ---------- Jobs ---------- */
 function renderJobs(){
-  const jobs=feed(),n=activeFilterCount();
-  const uniq=f=>[...new Set(allJobs().map(f).filter(Boolean))].sort();
+  const jobs=feed(),n=activeFilterCount(),fresh=jobs.filter(isNew).length;
+  const uniq=f=>[...new Set(allJobs().map(f).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
   const sel=(id,label,val,opts,def=opts[0][0])=>`<div><label for="${id}">${label}</label><select id="${id}" data-fsel="${id.slice(2)}" class="${String(val)!==String(def)?"on":""}">${opts.map(([v,l])=>`<option value="${esc(v)}" ${String(v)===String(val)?"selected":""}>${esc(l)}</option>`).join("")}</select></div>`;
-  $("main").innerHTML=topbar(`Hi ${esc(U.profile.name.split(" ")[0])}`,`<span class="upd" style="color:var(--muted);font-size:.82rem">${data.updated?"Jobs updated "+ago(data.updated):""}</span>`)+`
-  <form class="searchbar" id="searchForm"><input id="q" placeholder="Skill, title or company" value="${esc(F.q)}" aria-label="What"><input id="where" placeholder="City or remote" value="${esc(F.where)}" aria-label="Where"><button class="btn" type="submit">Search</button></form>
+  $("main").innerHTML=topbar(`Hi ${esc(U.profile.name.split(" ")[0])}`,`<span style="color:var(--muted);font-size:.82rem">${data.updated?"Updated "+ago(data.updated):""}</span>`)+`
+  <form class="searchbar one" id="searchForm"><input id="q" placeholder="Search by skill, job title or company" value="${esc(F.q)}" aria-label="Search"><button class="btn" type="submit">Search</button></form>
   <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
     <button class="btn ghost sm ftoggle" data-ftoggle>${ICON.filter}&nbsp;${filtersOpen?"Hide filters":"Filters"}${n?" ("+n+")":""}</button>
-    ${F.company?`<button class="chip" data-clearco aria-pressed="true">${esc(F.company)}<span class="x">✕</span></button>`:""}
   </div>
   <div class="fpanel ${filtersOpen?"":"collapsed"}" id="fpanel">
     ${sel("f_forYou","Show",F.forYou?"1":"0",[["1","Jobs for me"],["0","All jobs"]])}
     ${sel("f_role","Job role",F.role,[["","All roles"],...Object.keys(ROLES).map(r=>[r,r])])}
     ${sel("f_exp","Experience",F.exp,[["","Any experience"],...EXP.map(([v,l])=>[v,l])])}
     ${sel("f_city","City",F.city,[["","All India"],...uniq(j=>j.city_norm||"India").map(c=>[c,c])])}
-    ${sel("f_days","Posted",F.days,[[1,"Last 24 hours"],[3,"Last 3 days"],[7,"Last 7 days"],[21,"Last 3 weeks"]],U.settings.days||7)}
+    ${sel("f_days","Posted",F.days,[[1,"Last 24 hours"],[3,"Last 3 days"],[7,"Last 7 days"],[21,"Last 3 weeks"]],7)}
+    ${sel("f_minSal","Salary",F.minSal,[["","Any salary"],["3","3 LPA and above"],["5","5 LPA and above"],["8","8 LPA and above"],["12","12 LPA and above"],["20","20 LPA and above"]])}
+    ${sel("f_company","Company",F.company,[["","All companies"],...uniq(j=>j.company).map(c=>[c,c])])}
+    ${sel("f_source","Posted on",F.source,[["","Any website"],...uniq(j=>j.direct?"Company site":j.source).map(t=>[t,t])])}
     ${sel("f_type","Job type",F.type,[["","Any type"],...uniq(j=>j.type||"Not stated").map(t=>[t,t])])}
-    ${sel("f_source","Posted on",F.source,[["","Any website"],...uniq(j=>j.source).map(t=>[t,t])])}
-    ${sel("f_sort","Sort by",F.sort,[["match","Best match"],["new","Newest first"]])}
-    <div class="fend"><label><input type="checkbox" data-fchk="remote" ${F.remote?"checked":""}>Remote only</label><label><input type="checkbox" data-fchk="salary" ${F.salary?"checked":""}>Salary shown</label>${n?`<button class="clear" data-fclear>Clear filters</button>`:""}</div>
+    ${sel("f_sort","Sort by",F.sort,[["match","Best fit"],["new","Newest first"]])}
+    <div class="fend"><label><input type="checkbox" data-fchk="remote" ${F.remote?"checked":""}>Remote only</label>${n?`<button class="clear" data-fclear>Clear filters</button>`:""}</div>
   </div>
-  <div class="resbar"><span><b style="color:var(--ink)">${jobs.length}</b> job${jobs.length===1?"":"s"}${F.forYou?" for you":""}</span><button class="btn ghost sm" data-addjob>+ Add job</button></div>
+  <div class="resbar"><span><b style="color:var(--ink)">${jobs.length}</b> job${jobs.length===1?"":"s"}${F.forYou?" for you":""}${fresh?` · <b style="color:var(--accent)">${fresh} new</b> since your last visit`:""}</span></div>
   ${jobs.length?`<div class="list">${jobs.slice(0,shown).map(j=>jobCard(j)).join("")}</div>${jobs.length>shown?`<button class="btn ghost more" data-more>Show ${Math.min(PAGE,jobs.length-shown)} more</button>`:""}`
-   :`<div class="empty"><h3>No jobs match right now</h3>${F.forYou?"Jobs for your roles, experience and cities appear here. New jobs arrive 6 times a day.<br>Try a longer date range or set Show to All jobs.":"Try clearing filters or a longer date range."}<br>
-     ${n?`<button class="btn ghost sm" data-fclear>Clear filters</button> `:""}<button class="btn ghost sm" data-editprefs>Edit preferences</button></div>`}`;
-  $("searchForm").onsubmit=e=>{e.preventDefault();F.q=$("q").value;F.where=$("where").value;shown=PAGE;renderJobs();};
+   :`<div class="empty"><h3>No jobs match right now</h3>${F.forYou?"Jobs that fit your role, experience and cities appear here. New jobs arrive 6 times a day.<br>Try a longer Posted range, or set Show to All jobs.":"Try clearing filters or a longer Posted range."}<br>
+     ${n?`<button class="btn ghost sm" data-fclear>Clear filters</button> `:""}<button class="btn ghost sm" data-editprefs>Edit my job details</button></div>`}`;
+  $("searchForm").onsubmit=e=>{e.preventDefault();F.q=$("q").value;shown=PAGE;renderJobs();};
   document.querySelectorAll("[data-fsel]").forEach(el=>el.onchange=()=>{const k=el.dataset.fsel,v=el.value;
     if(k==="forYou")F.forYou=v==="1";else if(k==="days")F.days=+v;else F[k]=v;shown=PAGE;renderJobs();});
   document.querySelectorAll("[data-fchk]").forEach(el=>el.onchange=()=>{F[el.dataset.fchk]=el.checked;shown=PAGE;renderJobs();});
 }
 
-/* ---------- Saved ---------- */
-function renderSaved(){
-  const jobs=tracked().filter(j=>j._t.saved).sort((a,b)=>new Date(when(b))-new Date(when(a)));
-  $("main").innerHTML=topbar("Saved jobs")+(jobs.length?`<div class="list">${jobs.map(j=>jobCard(j)).join("")}</div>`:`<div class="empty"><h3>No saved jobs</h3>Tap the bookmark on any job to keep it here.<br><button class="btn ghost sm" data-go="jobs">Find jobs</button></div>`);
+/* ---------- My jobs: saved + applications ---------- */
+function renderMine(){
+  const all=tracked();
+  const groups={saved:all.filter(j=>j._t.saved&&(!j._t.stage||j._t.stage==="saved"))};
+  STAGES.slice(1).forEach(([k])=>groups[k]=all.filter(j=>j._t.stage===k));
+  const jobs=(groups[trackStage]||[]).sort((a,b)=>(b._t.history.at(-1)?.at||0)-(a._t.history.at(-1)?.at||0));
+  const due=groups.applied.filter(j=>j._t.appliedAt&&Date.now()-j._t.appliedAt>7*864e5).length;
+  const empty={saved:"Tap the bookmark on any job to keep it here.",applied:"When you apply to a job, mark it as applied and it shows up here.",interview:"Move an application here from its details when you get an interview.",offer:"Offers you get show up here.",rejected:"Applications that closed show up here."};
+  $("main").innerHTML=topbar("My jobs",`<button class="btn ghost sm" data-addjob>+ Add a job</button>`)+`
+  <div class="pipe five">${STAGES.map(([k,l,c])=>`<button data-stage-tab="${k}" aria-pressed="${trackStage===k}" style="--c:${c}"><b>${groups[k].length}</b><small>${l}</small></button>`).join("")}</div>
+  ${due&&trackStage==="applied"?`<div class="card" style="background:var(--accent-soft);border-color:transparent"><b>${due} application${due>1?"s":""} waiting over a week.</b> A short follow-up message to the recruiter often helps.</div>`:""}
+  ${jobs.length?`<div class="list">${jobs.map(j=>jobCard(j,{showStage:false,noNew:true})).join("")}</div>`:`<div class="empty"><h3>Nothing here yet</h3>${empty[trackStage]}${trackStage==="saved"?`<br><button class="btn ghost sm" data-go="jobs">Find jobs</button>`:""}</div>`}`;
 }
 
-/* ---------- Applications ---------- */
-function renderTrack(){
-  const all=tracked().filter(j=>j._t.stage&&j._t.stage!=="saved");
-  const cnt=Object.fromEntries(STAGES.map(s=>[s[0],all.filter(j=>j._t.stage===s[0]).length]));
-  const jobs=all.filter(j=>j._t.stage===trackStage).sort((a,b)=>(b._t.history.at(-1)?.at||0)-(a._t.history.at(-1)?.at||0));
-  const due=all.filter(j=>j._t.stage==="applied"&&j._t.appliedAt&&Date.now()-j._t.appliedAt>7*864e5).length;
-  $("main").innerHTML=topbar("My applications")+`
-  <div class="pipe">${STAGES.slice(1).map(([k,l,c])=>`<button data-stage-tab="${k}" aria-pressed="${trackStage===k}" style="--c:${c}"><b>${cnt[k]}</b><small>${l}</small></button>`).join("")}</div>
-  ${due?`<div class="card" style="background:var(--accent-soft);border-color:transparent"><b>${due} application${due>1?"s":""} waiting over a week.</b> A short follow-up message to the recruiter often helps.</div>`:""}
-  ${jobs.length?`<div class="list">${jobs.map(j=>jobCard(j,{showStage:false})).join("")}</div>`:`<div class="empty"><h3>Nothing in ${STAGES.find(s=>s[0]===trackStage)[1]}</h3>${trackStage==="applied"?"After you apply to a job, mark it as applied and it shows up here.":"Move a job here from its detail page."}</div>`}`;
-}
-
-/* ---------- Companies ---------- */
-function renderCompanies(){
-  const by={};
-  for(const j of allJobs()){const e=evaluate(j,U.prefs);const c=by[j.company]||(by[j.company]={n:0,fit:0,j,cities:new Set(),src:new Set()});c.n++;if(e.ok)c.fit++;c.cities.add(j.city_norm||"India");c.src.add(j.source);}
-  const cos=Object.entries(by).filter(([c])=>c).sort((a,b)=>b[1].fit-a[1].fit||b[1].n-a[1].n);
-  $("main").innerHTML=topbar("Companies hiring",`<span class="topbar upd">${cos.length} companies</span>`)+
-  (cos.length?`<div class="cos">${cos.map(([c,v])=>`<button class="cocard" data-company="${esc(c)}">${logo(v.j)}<span><b>${esc(c)}</b><small>${v.n} job${v.n>1?"s":""}${v.fit?` · ${v.fit} for you`:""}<br>${esc([...v.cities].slice(0,3).join(", "))}</small></span></button>`).join("")}</div>`:`<div class="empty"><h3>No companies yet</h3>Companies appear as jobs come in.</div>`);
-}
-
-/* ---------- Profile ---------- */
-const PF=[["name","Full name"],["email","Email","email"],["phone","Mobile number","tel"],["location","Current city"],["headline","Headline","text","Java Developer with 2 years in Spring Boot"],["currentCompany","Current company"],["currentCtc","Current CTC","text","e.g. 6 LPA"],["expectedCtc","Expected CTC","text","e.g. 9 LPA"],["notice","Notice period","text","e.g. 30 days"],["education","Highest education","text","B.Tech CSE, 2022"],["linkedin","LinkedIn URL","url"],["github","GitHub URL","url"],["portfolio","Portfolio URL","url"],["resume","Resume link (Google Drive etc.)","url"]];
-function completeness(){const keys=["name","email","phone","location","headline","about","education","linkedin","resume","expectedCtc","notice"];const f=keys.filter(k=>String(U.profile[k]||"").trim()).length+(U.prefs.skills.length?1:0);return Math.round(100*f/(keys.length+1));}
+/* ---------- Profile + settings ---------- */
+const PF=[["name","Full name"],["email","Email","email"],["phone","Mobile number","tel"],["linkedin","LinkedIn URL","url"],["resume","Resume link (Google Drive etc.)","url"],["expectedCtc","Expected salary","text","e.g. 8 LPA"],["notice","Notice period","text","e.g. 30 days / Immediate"]];
+function completeness(){const f=PF.filter(([k])=>String(U.profile[k]||"").trim()).length;return Math.round(100*f/PF.length);}
+const isOwner=()=>U.settings.owner||location.hash.includes("owner");
 function renderProfile(){
-  const P=U.profile,p=U.prefs,pc=completeness();
+  const P=U.profile,p=U.prefs,S=U.settings,pc=completeness();
   const roles=[...p.roles,...splitList(p.custom)],skills=mySkills(p);
-  $("main").innerHTML=topbar("My profile",`<button class="btn ghost sm" data-go="settings">Settings</button>`)+`
-  <div class="card"><div class="phead"><span class="avatar">${initials(P.name)}</span><div><h2>${esc(P.name)}</h2><div class="meta">${esc(P.headline||"Add a headline so you remember how to pitch yourself")}</div></div></div>
-    <div class="meter"><i style="width:${pc}%"></i></div><small class="meta">Profile ${pc}% complete${pc<100?" · fill the rest to copy details faster when applying":""}</small></div>
-  <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 style="margin:0">Job preferences</h3><button class="btn ghost sm" data-editprefs>Edit</button></div>
-    <div class="kv"><div><small>Roles</small><b>${esc(roles.join(", ")||"—")}</b></div><div><small>Experience</small><b>${esc(EXP.find(e=>e[0]===p.exp)?.[1]||"—")}</b></div>
+  if(location.hash.includes("owner")&&!S.owner){S.owner=true;saveUser();}
+  $("main").innerHTML=topbar("Profile")+`
+  <div class="card"><div class="phead"><span class="avatar">${initials(P.name)}</span><div><h2>${esc(P.name)}</h2><div class="meta">${esc(P.email)}</div></div></div>
+    <div class="meter"><i style="width:${pc}%"></i></div><small class="meta">Profile ${pc}% complete${pc<100?" · filled details can be copied in one tap when you apply":""}</small></div>
+  <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 style="margin:0">My job details</h3><button class="btn ghost sm" data-editprefs>Edit</button></div>
+    <div class="kv"><div><small>Role</small><b>${esc(roles.join(", ")||"—")}</b></div><div><small>Experience</small><b>${esc(EXP.find(e=>e[0]===p.exp)?.[1]||"—")}</b></div>
     <div><small>Cities</small><b>${esc(p.cities.join(", ")||"—")}</b></div><div><small>Skills</small><b>${esc(skills.join(", ")||"—")}</b></div></div></div>
   <form class="card form-card" id="profileForm"><h3>Personal details</h3>
-    <div class="grid2">${PF.map(([k,l,type="text",ph=""])=>`<div class="row"><label class="lbl" for="pf_${k}">${l}</label><input class="inp" id="pf_${k}" data-pf="${k}" type="${type}" value="${esc(P[k])}" placeholder="${esc(ph)}"></div>`).join("")}</div>
-    <div class="row"><label class="lbl" for="pf_about">About me</label><textarea class="inp" id="pf_about" data-pf="about" placeholder="2–4 lines about your work. Handy to paste into application forms.">${esc(P.about)}</textarea></div>
-    <div class="actions"><button class="btn" type="submit">Save profile</button></div></form>`;
-  $("profileForm").onsubmit=e=>{e.preventDefault();document.querySelectorAll("[data-pf]").forEach(el=>U.profile[el.dataset.pf]=el.value.trim());
-    if(!U.profile.name){toast("Name can't be empty.");return;}
-    if(U.profile.email!==session.email){U.profile.email=session.email;toast("Login email can't be changed here.");}
-    accounts[session.email].name=U.profile.name;LS.set("uv.accounts",accounts);saveUser();renderNav();renderProfile();toast("Profile saved");};
-}
-
-/* ---------- Settings ---------- */
-function renderSettings(){
-  const S=U.settings;
-  $("main").innerHTML=topbar("Settings",`<button class="btn ghost sm" data-go="profile">Profile</button>`)+`
-  <div class="card"><h3>Appearance</h3>
-    <div class="set-row"><div><b>Theme</b><small>Light, dark, or follow your device</small></div><div class="seg">${["system","light","dark"].map(t=>`<button data-theme-set="${t}" aria-pressed="${S.theme===t}">${t[0].toUpperCase()+t.slice(1)}</button>`).join("")}</div></div></div>
-  <div class="card"><h3>Job feed</h3>
-    <div class="set-row"><div><b>Job preferences</b><small>Roles, experience, cities and skills</small></div><button class="btn ghost sm" data-editprefs>Edit</button></div>
-    <div class="set-row"><div><b>Default date range</b><small>How far back the feed looks</small></div><select class="sel" id="setDays" style="width:auto">${[[1,"24 hours"],[3,"3 days"],[7,"7 days"],[21,"3 weeks"]].map(([d,l])=>`<option value="${d}" ${S.days===d?"selected":""}>${l}</option>`).join("")}</select></div>
-    <div class="set-row"><div><b>Hide jobs I applied to</b><small>Keep the feed for new jobs only</small></div><label class="toggle"><input type="checkbox" id="setHide" ${S.hideApplied?"checked":""}><span></span></label></div></div>
-  <div class="card"><h3>Telegram alerts</h3>
-    <div class="set-row"><div><b>Send new jobs to Telegram</b><small>Only jobs that match your preferences</small></div><label class="toggle"><input type="checkbox" id="setTg" ${S.telegram?"checked":""}><span></span></label></div>
-    <div class="set-row"><div><b>Minimum match</b><small>Only alert for jobs at or above this</small></div><select class="sel" id="setMin" style="width:auto">${[50,60,70,80,90].map(v=>`<option value="${v}" ${S.minMatch===v?"selected":""}>${v}%</option>`).join("")}</select></div>
-    <div class="set-row"><div><b>Owner connection</b><small>${S.ghToken?"Connected. Your preferences decide your Telegram alerts.":"Only for the site owner: lets your preferences decide Telegram alerts."}</small></div><button class="btn ghost sm" data-gh>${S.ghToken?"Change":"Connect"}</button></div>
-    <div class="err" id="syncMsg" style="color:var(--muted)"></div></div>
-  <div class="card"><h3>Account</h3>
-    <div class="set-row"><div><b>Change password</b><small>${esc(session.email)}</small></div><button class="btn ghost sm" data-pw>Change</button></div>
-    <div class="set-row"><div><b>Back up my data</b><small>Download profile, saved jobs and applications</small></div><button class="btn ghost sm" data-export>Download</button></div>
-    <div class="set-row"><div><b>Restore from backup</b><small>Load a backup file on a new device</small></div><label class="btn ghost sm" style="cursor:pointer">Choose file<input type="file" id="importFile" accept="application/json" hidden></label></div>
+    <div class="grid2">${PF.map(([k,l,type="text",ph=""])=>`<div class="row"><label class="lbl" for="pf_${k}">${l}</label><input class="inp" id="pf_${k}" data-pf="${k}" type="${type}" value="${esc(P[k])}" placeholder="${esc(ph)}" ${k==="email"?"readonly":""}></div>`).join("")}</div>
+    <div class="actions"><button class="btn" type="submit">Save details</button></div></form>
+  <div class="card"><h3>Settings</h3>
+    <div class="set-row"><div><b>Theme</b><small>Light, dark, or follow your device</small></div><div class="seg">${["system","light","dark"].map(t=>`<button data-theme-set="${t}" aria-pressed="${S.theme===t}">${t==="system"?"Auto":t[0].toUpperCase()+t.slice(1)}</button>`).join("")}</div></div>
+    <div class="set-row"><div><b>Change password</b></div><button class="btn ghost sm" data-pw>Change</button></div>
+    <div class="set-row"><div><b>Use on another device</b><small>Download a backup here, restore it there</small></div><span style="display:flex;gap:6px"><button class="btn ghost sm" data-export>Backup</button><label class="btn ghost sm" style="cursor:pointer">Restore<input type="file" id="importFile" accept="application/json" hidden></label></span></div>
     <div class="set-row"><div><b>Log out</b></div><button class="btn ghost sm" data-logout>Log out</button></div>
-    <div class="set-row"><div><b>Delete account</b><small>Removes your account and data from this device</small></div><button class="btn danger sm" data-delacc>Delete</button></div></div>`;
-  $("setDays").onchange=e=>{S.days=+e.target.value;F.days=S.days;saveUser();toast("Saved");};
-  $("setHide").onchange=e=>{S.hideApplied=e.target.checked;saveUser();toast("Saved");};
-  $("setTg").onchange=e=>{S.telegram=e.target.checked;saveUser();syncPrefs();};
-  $("setMin").onchange=e=>{S.minMatch=+e.target.value;saveUser();syncPrefs();};
+    <div class="set-row"><div><b>Delete account</b><small>Removes your account and data from this device</small></div><button class="btn danger sm" data-delacc>Delete</button></div></div>
+  ${isOwner()?`<div class="card"><h3>Telegram alerts (site owner)</h3>
+    <div class="set-row"><div><b>Send my matching jobs to Telegram</b></div><label class="toggle"><input type="checkbox" id="setTg" ${S.telegram?"checked":""}><span></span></label></div>
+    <div class="set-row"><div><b>Connection key</b><small>${S.ghToken?"Connected":"Not connected"}</small></div><button class="btn ghost sm" data-gh>${S.ghToken?"Change":"Connect"}</button></div>
+    <div class="err" id="syncMsg" style="color:var(--muted)"></div></div>`:""}`;
+  $("profileForm").onsubmit=e=>{e.preventDefault();document.querySelectorAll("[data-pf]").forEach(el=>{if(el.dataset.pf!=="email")U.profile[el.dataset.pf]=el.value.trim();});
+    if(!U.profile.name){toast("Name can't be empty.");return;}
+    accounts[session.email].name=U.profile.name;LS.set("uv.accounts",accounts);saveUser();renderNav();renderProfile();toast("Details saved");};
   $("importFile").onchange=importData;
+  $("setTg")?.addEventListener("change",e=>{S.telegram=e.target.checked;saveUser();syncPrefs();});
 }
 
 /* ===================================================== job detail sheet */
@@ -675,8 +657,8 @@ function openJob(id){
     <div class="kv" style="margin-bottom:12px">
       <div><small>Experience</small><b>${esc(expRange(j))}</b></div><div><small>Salary</small><b>${esc(j.salary||"Not disclosed")}</b></div>
       <div><small>Job type</small><b>${esc(j.type||"Not stated")}</b></div><div><small>Posted</small><b>${j.manual?"Added by you":`${esc(j.source)} · ${ago(when(j))}`}</b></div></div>
-    <div class="card"><h3>${e.ok?`${e.score}% match for you`:"Why it's not in your feed"}</h3><ul class="why">${e.why.map(([ok,w])=>`<li class="${ok?"ok":""}">${ok===false?"✕ ":ok?"✓ ":"• "}${esc(w)}</li>`).join("")}</ul></div>
-    <div class="card"><h3>Track this job</h3><div class="stages">${STAGES.map(([k,l,c])=>`<button data-setstage="${k}" data-id="${esc(id)}" aria-pressed="${stage===k}" style="color:${c}"><i class="dot" style="background:${c}"></i><span style="color:var(--ink)">${l}</span></button>`).join("")}</div>
+    <div class="card"><h3>${e.ok?`${fitLabel(e)} for you`:"Why it's not in your feed"}</h3><ul class="why">${e.why.map(([ok,w])=>`<li class="${ok?"ok":""}">${ok===false?"✕ ":ok?"✓ ":"• "}${esc(w)}</li>`).join("")}</ul></div>
+    <div class="card"><h3>Track this job</h3><div class="stages">${STAGES.map(([k,l,c])=>`<button data-setstage="${k}" data-id="${esc(id)}" aria-pressed="${k==="saved"?(!!t?.saved&&!stage):stage===k}" style="color:${c}"><i class="dot" style="background:${c}"></i><span style="color:var(--ink)">${l}</span></button>`).join("")}</div>
       ${t?.history?.length?`<ul class="tl">${t.history.slice().reverse().map(h=>{const s=STAGES.find(x=>x[0]===h.stage);return `<li><i class="dot" style="background:${s[2]}"></i>${s[1]} · ${fmtDate(h.at)}</li>`}).join("")}</ul>`:""}
       <div style="margin-top:12px"><label class="lbl" for="notes">My notes</label><textarea class="inp" id="notes" data-id="${esc(id)}" placeholder="Recruiter name, interview date, questions asked…">${esc(t?.notes||"")}</textarea></div></div>
     ${(j.tech||[]).length?`<div class="card"><h3>Skills mentioned</h3><div class="facts" style="margin:0">${j.tech.map(s=>`<span class="${e.hits.includes(s)?"good":"t"}">${esc(s)}</span>`).join("")}</div></div>`:""}
@@ -689,7 +671,7 @@ function openJob(id){
   $("notes")?.addEventListener("change",ev=>{track(id).notes=ev.target.value;if(!U.jobs[id].snap)U.jobs[id].snap=j;saveUser();toast("Notes saved");});
 }
 function quickCopy(){
-  const P=U.profile,items=[["Name",P.name],["Email",P.email],["Phone",P.phone],["LinkedIn",P.linkedin],["GitHub",P.github],["Resume",P.resume],["Expected CTC",P.expectedCtc],["Notice period",P.notice],["About me",P.about]].filter(x=>x[1]);
+  const P=U.profile,items=[["Name",P.name],["Email",P.email],["Phone",P.phone],["LinkedIn",P.linkedin],["Resume link",P.resume],["Expected salary",P.expectedCtc],["Notice period",P.notice]].filter(x=>x[1]);
   return `<div class="card"><h3>Quick copy for the application form</h3>${items.length?`<div style="display:flex;flex-wrap:wrap;gap:6px">${items.map(([l,v])=>`<button class="btn ghost sm" data-copy="${esc(v)}">${l}</button>`).join("")}</div>`:`<p class="meta" style="margin:0">Fill your profile to copy details here in one tap. <button class="btn ghost sm" data-go="profile">Open profile</button></p>`}</div>`;
 }
 async function copy(text){try{await navigator.clipboard.writeText(text);toast("Copied");}catch(e){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");toast("Copied");}catch(_){toast("Couldn't copy. Long-press to copy instead.");}ta.remove();}}
@@ -740,7 +722,7 @@ function exportData(){
 }
 function importData(e){
   const f=e.target.files[0];if(!f)return;const r=new FileReader();
-  r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.user?.profile)throw 0;const tok=U.settings.ghToken;U={...d.user,settings:{...d.user.settings,ghToken:tok}};U.profile.email=session.email;saveUser();applyTheme();toast("Backup restored");go("profile");}catch(_){toast("That file isn't a valid backup.");}};
+  r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.user?.profile)throw 0;const tok=U.settings.ghToken;U={...d.user,settings:{...d.user.settings,ghToken:tok}};U.profile.email=session.email;saveUser();applyTheme();toast("Backup restored");go("jobs");}catch(_){toast("That file isn't a valid backup.");}};
   r.readAsText(f);
 }
 
@@ -748,29 +730,28 @@ function importData(e){
 document.addEventListener("click",async e=>{
   const t=e.target.closest("button,a,[data-open]");if(!t||$("shell").hidden)return;
   const d=t.dataset;
-  if(d.apply){const id=d.apply;if(!U.jobs[id]?.stage||U.jobs[id].stage==="saved")setTimeout(()=>{if(confirm("Did you apply to this job? Tap OK to add it to Applications.")){setStage(id,"applied");renderNav();render();if($("sheet").classList.contains("open"))openJob(id);toast("Added to Applications");}},900);return;}
-  if(d.save){e.stopPropagation();const s=toggleSave(d.save);t.setAttribute("aria-pressed",s);toast(s?"Saved":"Removed from saved");renderNav();if(view==="saved")renderSaved();return;}
+  if(d.apply){const id=d.apply;if(!U.jobs[id]?.stage||U.jobs[id].stage==="saved")setTimeout(()=>{if(confirm("Did you apply to this job? Tap OK to add it to My jobs.")){setStage(id,"applied");renderNav();render();if($("sheet").classList.contains("open"))openJob(id);toast("Added to My jobs → Applied");}},900);return;}
+  if(d.save){e.stopPropagation();const s=toggleSave(d.save);t.setAttribute("aria-pressed",s);toast(s?"Saved to My jobs":"Removed from saved");renderNav();if(view==="mine")renderMine();return;}
   if(d.copy!==undefined){copy(d.copy);return;}
   if(d.go){closeSheet();go(d.go);return;}
   if(d.open){openJob(d.open);return;}
-  if(d.company!==undefined){closeSheet();resetFilters();F.forYou=false;F.company=d.company;go("jobs");return;}
-  if("clearco" in d){F.company="";renderJobs();return;}
+  if(d.company!==undefined){closeSheet();resetFilters();F.forYou=false;F.company=d.company;filtersOpen=true;go("jobs");return;}
   if("more" in d){shown+=PAGE;renderJobs();return;}
-  if("fclear" in d){const q=F.q,w=F.where;resetFilters();F.q=q;F.where=w;renderJobs();return;}
+  if("fclear" in d){const q=F.q;resetFilters();F.q=q;renderJobs();return;}
   if("ftoggle" in d){filtersOpen=!filtersOpen;renderJobs();return;}
   if("addjob" in d){openAddJob();return;}
   if("addsave" in d){const url=$("aUrl").value.trim(),title=$("aTitle").value.trim(),co=$("aCo").value.trim();
     if(!/^https?:\/\//.test(url)||!title||!co){$("aErr").textContent="Add the job link, title and company.";return;}
     const j={id:"m"+Date.now().toString(36),manual:true,title,company:co,location:$("aLoc").value.trim(),salary:$("aSal").value.trim(),description:$("aDesc").value.trim(),url,source:"Added by you",found:new Date().toISOString(),posted:new Date().toISOString(),tech:[],exp_min:null,exp_max:null,remote:/remote/i.test($("aLoc").value)};
-    U.manual.unshift(j);setStage(j.id,"saved");track(j.id).saved=true;saveUser();closeSheet();renderNav();render();toast("Job added to Saved");return;}
+    U.manual.unshift(j);track(j.id).saved=true;track(j.id).snap=j;saveUser();closeSheet();trackStage="saved";renderNav();render();toast("Job added to My jobs");return;}
   if(d.delmanual){if(!confirm("Delete this job and its notes?"))return;U.manual=U.manual.filter(j=>j.id!==d.delmanual);delete U.jobs[d.delmanual];saveUser();closeSheet();renderNav();render();toast("Job deleted");return;}
   if(d.hide){U.hidden[d.hide]=1;saveUser();closeSheet();render();toast("Hidden from your feed");return;}
-  if(d.setstage){setStage(d.id,d.setstage);if(d.setstage!=="saved")track(d.id);renderNav();render();openJob(d.id);toast("Moved to "+STAGES.find(s=>s[0]===d.setstage)[1]);return;}
-  if(d.stageTab){trackStage=d.stageTab;renderTrack();return;}
+  if(d.setstage){if(d.setstage==="saved"){const tt=track(d.id);tt.saved=true;tt.stage=null;if(!tt.snap)tt.snap=findJob(d.id);saveUser();}else setStage(d.id,d.setstage);renderNav();render();openJob(d.id);toast("Moved to "+STAGES.find(s=>s[0]===d.setstage)[1]);return;}
+  if(d.stageTab){trackStage=d.stageTab;renderMine();return;}
   if("editprefs" in d){closeSheet();startOnboarding();return;}
-  if(d.themeSet){U.settings.theme=d.themeSet;saveUser();applyTheme();renderSettings();return;}
+  if(d.themeSet){U.settings.theme=d.themeSet;saveUser();applyTheme();renderProfile();return;}
   if("gh" in d){openGh();return;}
-  if("ghsave" in d){U.settings.ghToken=$("ghTok").value.trim();U.settings.ghRepo=$("ghRepo").value.trim()||"chandramouli-projects/job-alerts";saveUser();closeSheet();renderSettings();syncPrefs();return;}
+  if("ghsave" in d){U.settings.ghToken=$("ghTok").value.trim();U.settings.ghRepo=$("ghRepo").value.trim()||"chandramouli-projects/job-alerts";saveUser();closeSheet();renderProfile();syncPrefs();return;}
   if("export" in d){exportData();return;}
   if("logout" in d){logout();return;}
   if("pw" in d){
