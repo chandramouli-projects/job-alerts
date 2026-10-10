@@ -112,6 +112,16 @@ textarea.inp{min-height:96px;resize:vertical}
 .chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 13px;font-size:.88rem;font-weight:600;white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .chip .x{margin-left:4px;opacity:.7}
+.fpanel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.fpanel label{font-size:.76rem;font-weight:700;color:var(--muted);display:block}
+.fpanel select{display:block;width:100%;margin-top:4px;padding:10px 32px 10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%235D6B72' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 12px center;-webkit-appearance:none;appearance:none;font-weight:600;font-size:.9rem;color:var(--ink)}
+.fpanel select.on{border-color:var(--accent);background-color:var(--accent-soft);color:var(--accent)}
+.fpanel .fend{grid-column:1/-1;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:2px}
+.fpanel .fend label{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink);font-weight:600;cursor:pointer}
+.fpanel .fend input{width:18px;height:18px;accent-color:var(--accent);margin:0}
+.fpanel .fend .clear{margin-left:auto;background:none;border:0;color:var(--accent);font-weight:700;padding:0}
+.ftoggle{display:none}
+@media (max-width:700px){.fpanel{grid-template-columns:1fr 1fr}.ftoggle{display:inline-flex}.fpanel.collapsed{display:none}}
 .resbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 2px 12px;color:var(--muted);font-size:.9rem}
 .resbar select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 10px;font-size:.88rem}
 .list{display:flex;flex-direction:column;gap:10px}
@@ -356,7 +366,8 @@ let session=LS.get("uv.session",null);
 let U=null;            // current user's data
 let data={jobs:[]};
 let view="jobs", shown=PAGE;
-let F={q:"",where:"",forYou:true,days:7,roles:[],exp:null,cities:[],types:[],sources:[],remote:false,salary:false,company:"",sort:"match"};
+let F={q:"",where:"",forYou:true,days:7,role:"",exp:"",city:"",type:"",source:"",remote:false,salary:false,company:"",sort:"match"};
+let filtersOpen=false;
 let trackStage="applied";
 
 function blankUser(name,email,phone){return{
@@ -484,7 +495,7 @@ function toggleSave(id){const t=track(id);t.saved=!t.saved;if(t.saved&&!t.snap)t
 function tracked(){return Object.entries(U.jobs).map(([id,t])=>({...(findJob(id)||t.snap||{id,title:"Job no longer listed",company:""}),id,_t:t})).filter(j=>j.title);}
 
 /* ===================================================== filtering */
-function resetFilters(){F={q:"",where:"",forYou:true,days:U.settings.days||7,roles:[],exp:null,cities:[],types:[],sources:[],remote:false,salary:false,company:"",sort:"match"};shown=PAGE;}
+function resetFilters(){F={q:"",where:"",forYou:true,days:U.settings.days||7,role:"",exp:"",city:"",type:"",source:"",remote:false,salary:false,company:"",sort:"match"};shown=PAGE;}
 function feed(){
   const p=U.prefs,q=F.q.toLowerCase().trim(),where=F.where.toLowerCase().trim();
   const out=[];
@@ -497,11 +508,11 @@ function feed(){
     if(where&&!((j.location||"")+" "+(j.city_norm||"")+(j.remote?" remote":"")).toLowerCase().includes(where))continue;
     if(F.remote&&!j.remote)continue;
     if(F.salary&&!j.salary)continue;
-    if(F.types.length&&!F.types.includes(j.type||"Not stated"))continue;
-    if(F.sources.length&&!F.sources.includes(j.source))continue;
-    if(F.cities.length&&!F.cities.includes(j.city_norm||"India"))continue;
-    if(F.roles.length&&!F.roles.some(r=>(ROLES[r]||[r.toLowerCase()]).some(k=>j.title.toLowerCase().includes(k))))continue;
-    if(F.exp!=null&&j.exp_min!=null&&(j.exp_min>F.exp+1||(j.exp_max!=null&&j.exp_max<F.exp-2)))continue;
+    if(F.type&&(j.type||"Not stated")!==F.type)continue;
+    if(F.source&&j.source!==F.source)continue;
+    if(F.city&&(j.city_norm||"India")!==F.city)continue;
+    if(F.role&&!(ROLES[F.role]||[F.role.toLowerCase()]).some(k=>j.title.toLowerCase().includes(k)))continue;
+    if(F.exp!==""){const x=+F.exp;if(j.exp_min!=null&&(j.exp_min>x+1||(j.exp_max!=null&&j.exp_max<x-2)))continue;if(x<5&&SENIOR.test(j.title))continue;}
     const ev=evaluate(j,p);
     if(F.forYou&&!ev.ok)continue;
     out.push({...j,_e:ev});
@@ -509,7 +520,7 @@ function feed(){
   out.sort((a,b)=>F.sort==="new"?new Date(when(b))-new Date(when(a)):(b._e.score-a._e.score)||(new Date(when(b))-new Date(when(a))));
   return out;
 }
-function activeFilterCount(){return F.roles.length+F.cities.length+F.types.length+F.sources.length+(F.exp!=null)+F.remote+F.salary+(!!F.company);}
+function activeFilterCount(){return [F.role,F.exp,F.city,F.type,F.source].filter(v=>v!=="").length+F.remote+F.salary+(F.days!==(U.settings.days||7))+(!F.forYou);}
 
 /* ===================================================== shell */
 const NAV=[["jobs","Find jobs",ICON.jobs],["saved","Saved",ICON.saved],["track","Applications",ICON.track],["companies","Companies",ICON.cos],["profile","Profile",ICON.me],["settings","Settings",ICON.set]];
@@ -540,27 +551,34 @@ function jobCard(j,opt={}){
 
 /* ---------- Find jobs ---------- */
 function renderJobs(){
-  const jobs=feed(),n=activeFilterCount(),p=U.prefs;
-  const roleText=[...p.roles,...splitList(p.custom)].slice(0,2).join(", ")+([...p.roles,...splitList(p.custom)].length>2?"…":"");
-  const days=[[1,"24 hours"],[3,"3 days"],[7,"7 days"],[21,"3 weeks"]];
-  $("main").innerHTML=topbar(`Hi ${esc(U.profile.name.split(" ")[0])}`,`<span class="topbar upd">${data.updated?"Jobs updated "+ago(data.updated):""}</span>`)+`
+  const jobs=feed(),n=activeFilterCount();
+  const uniq=f=>[...new Set(allJobs().map(f).filter(Boolean))].sort();
+  const sel=(id,label,val,opts,def=opts[0][0])=>`<div><label for="${id}">${label}</label><select id="${id}" data-fsel="${id.slice(2)}" class="${String(val)!==String(def)?"on":""}">${opts.map(([v,l])=>`<option value="${esc(v)}" ${String(v)===String(val)?"selected":""}>${esc(l)}</option>`).join("")}</select></div>`;
+  $("main").innerHTML=topbar(`Hi ${esc(U.profile.name.split(" ")[0])}`,`<span class="upd" style="color:var(--muted);font-size:.82rem">${data.updated?"Jobs updated "+ago(data.updated):""}</span>`)+`
   <form class="searchbar" id="searchForm"><input id="q" placeholder="Skill, title or company" value="${esc(F.q)}" aria-label="What"><input id="where" placeholder="City or remote" value="${esc(F.where)}" aria-label="Where"><button class="btn" type="submit">Search</button></form>
-  <div class="chips">
-    <button class="chip" data-fy="1" aria-pressed="${F.forYou}">For you · ${esc(roleText)}</button>
-    <button class="chip" data-fy="0" aria-pressed="${!F.forYou}">All jobs</button>
-    <button class="chip" data-filters aria-pressed="${n>0}">${ICON.filter} Filters${n?" ("+n+")":""}</button>
-    ${days.map(([d,l])=>`<button class="chip" data-days="${d}" aria-pressed="${F.days===d}">${l}</button>`).join("")}
-    <button class="chip" data-quick="remote" aria-pressed="${F.remote}">Remote</button>
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+    <button class="btn ghost sm ftoggle" data-ftoggle>${ICON.filter}&nbsp;${filtersOpen?"Hide filters":"Filters"}${n?" ("+n+")":""}</button>
     ${F.company?`<button class="chip" data-clearco aria-pressed="true">${esc(F.company)}<span class="x">✕</span></button>`:""}
   </div>
-  <div class="resbar"><span><b style="color:var(--ink)">${jobs.length}</b> job${jobs.length===1?"":"s"}${F.forYou?" for you":""}</span>
-    <span><select id="sort" aria-label="Sort"><option value="match" ${F.sort==="match"?"selected":""}>Best match</option><option value="new" ${F.sort==="new"?"selected":""}>Newest</option></select>
-    <button class="btn ghost sm" data-addjob>+ Add job</button></span></div>
+  <div class="fpanel ${filtersOpen?"":"collapsed"}" id="fpanel">
+    ${sel("f_forYou","Show",F.forYou?"1":"0",[["1","Jobs for me"],["0","All jobs"]])}
+    ${sel("f_role","Job role",F.role,[["","All roles"],...Object.keys(ROLES).map(r=>[r,r])])}
+    ${sel("f_exp","Experience",F.exp,[["","Any experience"],...EXP.map(([v,l])=>[v,l])])}
+    ${sel("f_city","City",F.city,[["","All India"],...uniq(j=>j.city_norm||"India").map(c=>[c,c])])}
+    ${sel("f_days","Posted",F.days,[[1,"Last 24 hours"],[3,"Last 3 days"],[7,"Last 7 days"],[21,"Last 3 weeks"]],U.settings.days||7)}
+    ${sel("f_type","Job type",F.type,[["","Any type"],...uniq(j=>j.type||"Not stated").map(t=>[t,t])])}
+    ${sel("f_source","Posted on",F.source,[["","Any website"],...uniq(j=>j.source).map(t=>[t,t])])}
+    ${sel("f_sort","Sort by",F.sort,[["match","Best match"],["new","Newest first"]])}
+    <div class="fend"><label><input type="checkbox" data-fchk="remote" ${F.remote?"checked":""}>Remote only</label><label><input type="checkbox" data-fchk="salary" ${F.salary?"checked":""}>Salary shown</label>${n?`<button class="clear" data-fclear>Clear filters</button>`:""}</div>
+  </div>
+  <div class="resbar"><span><b style="color:var(--ink)">${jobs.length}</b> job${jobs.length===1?"":"s"}${F.forYou?" for you":""}</span><button class="btn ghost sm" data-addjob>+ Add job</button></div>
   ${jobs.length?`<div class="list">${jobs.slice(0,shown).map(j=>jobCard(j)).join("")}</div>${jobs.length>shown?`<button class="btn ghost more" data-more>Show ${Math.min(PAGE,jobs.length-shown)} more</button>`:""}`
-   :`<div class="empty"><h3>No jobs match right now</h3>${F.forYou?"Jobs for your roles, experience and cities will appear here. New jobs arrive 6 times a day.<br>Try a longer date range, add more cities, or see all jobs.":"Try clearing filters or a longer date range."}<br>
-     <button class="btn ghost sm" data-fy="0">See all jobs</button> <button class="btn ghost sm" data-editprefs>Edit preferences</button></div>`}`;
+   :`<div class="empty"><h3>No jobs match right now</h3>${F.forYou?"Jobs for your roles, experience and cities appear here. New jobs arrive 6 times a day.<br>Try a longer date range or set Show to All jobs.":"Try clearing filters or a longer date range."}<br>
+     ${n?`<button class="btn ghost sm" data-fclear>Clear filters</button> `:""}<button class="btn ghost sm" data-editprefs>Edit preferences</button></div>`}`;
   $("searchForm").onsubmit=e=>{e.preventDefault();F.q=$("q").value;F.where=$("where").value;shown=PAGE;renderJobs();};
-  $("sort").onchange=e=>{F.sort=e.target.value;renderJobs();};
+  document.querySelectorAll("[data-fsel]").forEach(el=>el.onchange=()=>{const k=el.dataset.fsel,v=el.value;
+    if(k==="forYou")F.forYou=v==="1";else if(k==="days")F.days=+v;else F[k]=v;shown=PAGE;renderJobs();});
+  document.querySelectorAll("[data-fchk]").forEach(el=>el.onchange=()=>{F[el.dataset.fchk]=el.checked;shown=PAGE;renderJobs();});
 }
 
 /* ---------- Saved ---------- */
@@ -675,20 +693,6 @@ function quickCopy(){
 }
 async function copy(text){try{await navigator.clipboard.writeText(text);toast("Copied");}catch(e){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");toast("Copied");}catch(_){toast("Couldn't copy. Long-press to copy instead.");}ta.remove();}}
 
-/* ---------- filters sheet ---------- */
-function openFilters(){
-  const uniq=f=>[...new Set(allJobs().map(f).filter(Boolean))].sort();
-  const group=(title,key,opts)=>`<div class="filter-group"><h3>${title}</h3><div class="choices">${opts.map(o=>`<button class="choice" data-f="${key}" data-v="${esc(o)}" aria-pressed="${F[key].includes(o)}">${esc(o)}</button>`).join("")}</div></div>`;
-  openSheet("Filters",`
-    ${group("Job role","roles",Object.keys(ROLES))}
-    <div class="filter-group"><h3>Experience</h3><div class="choices">${EXP.map(([v,l])=>`<button class="choice" data-fexp="${v}" aria-pressed="${F.exp===v}">${l}</button>`).join("")}</div></div>
-    ${group("City","cities",uniq(j=>j.city_norm||"India"))}
-    ${group("Job type","types",uniq(j=>j.type||"Not stated"))}
-    ${group("Posted on","sources",uniq(j=>j.source))}
-    <div class="filter-group"><h3>More</h3><div class="choices"><button class="choice" data-fb="remote" aria-pressed="${F.remote}">Remote only</button><button class="choice" data-fb="salary" aria-pressed="${F.salary}">Salary shown</button></div></div>`,
-    `<button class="btn ghost" data-fclear>Clear all</button><button class="btn" data-fapply>Show jobs</button>`);
-}
-
 /* ---------- add job manually ---------- */
 function openAddJob(){
   openSheet("Add a job",`<p class="meta" style="margin-top:0">Found a job somewhere else? Add it here to track it with the rest.</p>
@@ -751,16 +755,9 @@ document.addEventListener("click",async e=>{
   if(d.open){openJob(d.open);return;}
   if(d.company!==undefined){closeSheet();resetFilters();F.forYou=false;F.company=d.company;go("jobs");return;}
   if("clearco" in d){F.company="";renderJobs();return;}
-  if(d.fy!==undefined){F.forYou=d.fy==="1";shown=PAGE;renderJobs();return;}
-  if(d.days){F.days=+d.days;shown=PAGE;renderJobs();return;}
-  if(d.quick){F[d.quick]=!F[d.quick];renderJobs();return;}
   if("more" in d){shown+=PAGE;renderJobs();return;}
-  if("filters" in d){openFilters();return;}
-  if(d.f){const k=d.f,v=d.v;F[k]=F[k].includes(v)?F[k].filter(x=>x!==v):[...F[k],v];t.setAttribute("aria-pressed",F[k].includes(v));return;}
-  if(d.fexp!==undefined){const v=+d.fexp;F.exp=F.exp===v?null:v;document.querySelectorAll("[data-fexp]").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.fexp===F.exp));return;}
-  if(d.fb){F[d.fb]=!F[d.fb];t.setAttribute("aria-pressed",F[d.fb]);return;}
-  if("fclear" in d){const fy=F.forYou;resetFilters();F.forYou=fy;closeSheet();renderJobs();return;}
-  if("fapply" in d){shown=PAGE;closeSheet();renderJobs();return;}
+  if("fclear" in d){const q=F.q,w=F.where;resetFilters();F.q=q;F.where=w;renderJobs();return;}
+  if("ftoggle" in d){filtersOpen=!filtersOpen;renderJobs();return;}
   if("addjob" in d){openAddJob();return;}
   if("addsave" in d){const url=$("aUrl").value.trim(),title=$("aTitle").value.trim(),co=$("aCo").value.trim();
     if(!/^https?:\/\//.test(url)||!title||!co){$("aErr").textContent="Add the job link, title and company.";return;}
