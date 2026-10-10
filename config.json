@@ -33,5 +33,97 @@
     "max_messages_per_run": 10,
     "telegram_enabled": false,
     "min_match": 70
-  }
+  },
+  "company_boards": [
+    {
+      "ats": "greenhouse",
+      "slug": "phonepe",
+      "name": "PhonePe"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "postman",
+      "name": "Postman"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "browserstack",
+      "name": "BrowserStack"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "databricks",
+      "name": "Databricks"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "stripe",
+      "name": "Stripe"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "rubrik",
+      "name": "Rubrik"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "groww",
+      "name": "Groww"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "druva",
+      "name": "Druva"
+    },
+    {
+      "ats": "lever",
+      "slug": "cred",
+      "name": "CRED"
+    },
+    {
+      "ats": "lever",
+      "slug": "meesho",
+      "name": "Meesho"
+    },
+    {
+      "ats": "lever",
+      "slug": "zeta",
+      "name": "Zeta"
+    },
+    {
+      "ats": "lever",
+      "slug": "upstox",
+      "name": "Upstox"
+    },
+    {
+      "ats": "lever",
+      "slug": "jupiter",
+      "name": "Jupiter"
+    },
+    {
+      "ats": "ashby",
+      "slug": "sarvam",
+      "name": "Sarvam AI"
+    },
+    {
+      "ats": "smartrecruiters",
+      "slug": "Freshworks",
+      "name": "Freshworks"
+    },
+    {
+      "ats": "smartrecruiters",
+      "slug": "Visa",
+      "name": "Visa"
+    },
+    {
+      "ats": "smartrecruiters",
+      "slug": "BoschGroup",
+      "name": "Bosch"
+    },
+    {
+      "ats": "smartrecruiters",
+      "slug": "ServiceNow",
+      "name": "ServiceNow"
+    }
+  ]
 }

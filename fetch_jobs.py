@@ -93,6 +93,7 @@ def fetch_jsearch(role):
     out = []
     for j in items:
         exp = j.get("job_required_experience") or {}
+        links = apply_links(j)
         out.append({
             "title": j.get("job_title") or "",
             "company": j.get("employer_name") or "",
@@ -103,7 +104,9 @@ def fetch_jsearch(role):
             "remote": bool(j.get("job_is_remote")),
             "type": (j.get("job_employment_type") or "").replace("FULLTIME", "Full-time")
                     .replace("PARTTIME", "Part-time").replace("CONTRACTOR", "Contract").replace("INTERN", "Internship"),
-            "url": j.get("job_apply_link") or j.get("job_google_link") or "",
+            "url": links[0]["url"] if links else (j.get("job_apply_link") or j.get("job_google_link") or ""),
+            "direct": bool(links and links[0]["direct"]),
+            "apply_links": links[:5],
             "description": j.get("job_description") or "",
             "posted": j.get("job_posted_at_datetime_utc") or "",
             "salary": salary_text(j.get("job_min_salary"), j.get("job_max_salary"),
@@ -112,6 +115,119 @@ def fetch_jsearch(role):
             "exp_months": exp.get("required_experience_in_months"),
             "role": role,
         })
+    return out
+
+
+AGGREGATORS = ("linkedin", "naukri", "indeed", "glassdoor", "foundit", "monster", "shine", "ziprecruiter",
+               "simplyhired", "talent.com", "jooble", "adzuna", "instahyre", "cutshort", "wellfound",
+               "iimjobs", "hirist", "apna", "workindia", "timesjobs", "freshersworld", "internshala", "bebee",
+               "jobrapido", "careerjet", "whatjobs", "expertini", "learn4good", "dice", "built in")
+
+
+def apply_links(j):
+    """All the places this job can be applied to, company's own site first."""
+    seen, out = set(), []
+    opts = j.get("apply_options") or []
+    if j.get("job_apply_link"):
+        opts = [{"publisher": j.get("job_publisher"), "apply_link": j["job_apply_link"],
+                 "is_direct": j.get("job_apply_is_direct")}] + opts
+    for o in opts:
+        url = o.get("apply_link") or ""
+        if not url.startswith("http") or url in seen:
+            continue
+        seen.add(url)
+        site = o.get("publisher") or re.sub(r"^www\.", "", url.split("/")[2])
+        is_agg = any(a in (site + url).lower() for a in AGGREGATORS)
+        out.append({"site": site, "url": url, "direct": bool(o.get("is_direct")) or not is_agg})
+    out.sort(key=lambda x: not x["direct"])
+    return out
+
+
+# ---------------------------------------------------------------- company career pages
+INDIA_WORDS = ("india", "bangalore", "bengaluru", "hyderabad", "chennai", "pune", "mumbai", "delhi", "noida",
+               "gurgaon", "gurugram", "kolkata", "ahmedabad", "kochi", "coimbatore", "remote - in", "remote, in")
+
+
+def role_words():
+    words = set()
+    for r in CONFIG.get("search_roles", []):
+        r = r.lower().replace("developer", "").replace("engineer", "").strip()
+        if r:
+            words.add(r)
+    return words or {"engineer", "developer"}
+
+
+def board_job(company, title, loc, url, desc, posted, remote=False):
+    return {"title": title, "company": company, "logo": "", "company_site": "", "city": loc.split(",")[0].strip(),
+            "location": loc or "India", "remote": remote or "remote" in loc.lower(), "type": "",
+            "url": url, "direct": True, "apply_links": [{"site": f"{company} careers", "url": url, "direct": True}],
+            "description": re.sub("<[^>]+>", " ", html.unescape(desc or "")), "posted": posted,
+            "salary": "", "source": f"{company} careers", "exp_months": None, "role": ""}
+
+
+def fetch_company_boards():
+    """Public job boards that companies host on Greenhouse, Lever, Ashby or SmartRecruiters.
+    No key needed. Companies that don't answer are skipped and listed in data/state.json."""
+    boards = CONFIG.get("company_boards", [])
+    days = DAYS_MAP.get(CONFIG.get("posted_within", "3days"), 3) + 4
+    since = datetime.now(timezone.utc) - timedelta(days=days)
+    words = role_words()
+    out, ok, failed = [], [], []
+    for b in boards:
+        ats, slug, name = b.get("ats"), b.get("slug"), b.get("name") or b.get("slug")
+        try:
+            jobs = []
+            if ats == "greenhouse":
+                r = requests.get(f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true", timeout=30)
+                r.raise_for_status()
+                for j in r.json().get("jobs", []):
+                    jobs.append(board_job(name, j.get("title", ""), (j.get("location") or {}).get("name", ""),
+                                          j.get("absolute_url", ""), j.get("content", ""), j.get("updated_at", "")))
+            elif ats == "lever":
+                r = requests.get(f"https://api.lever.co/v0/postings/{slug}?mode=json", timeout=30)
+                r.raise_for_status()
+                for j in r.json():
+                    c = j.get("categories") or {}
+                    ts = j.get("createdAt")
+                    jobs.append(board_job(name, j.get("text", ""), c.get("location", "") or "",
+                                          j.get("hostedUrl", ""), j.get("descriptionPlain", ""),
+                                          datetime.fromtimestamp(ts / 1000, timezone.utc).isoformat() if ts else "",
+                                          (j.get("workplaceType") or "") == "remote"))
+            elif ats == "ashby":
+                r = requests.get(f"https://api.ashbyhq.com/posting-api/job-board/{slug}", timeout=30)
+                r.raise_for_status()
+                for j in r.json().get("jobs", []):
+                    jobs.append(board_job(name, j.get("title", ""), j.get("location", "") or "",
+                                          j.get("jobUrl", ""), j.get("descriptionPlain", ""),
+                                          j.get("publishedAt", ""), bool(j.get("isRemote"))))
+            elif ats == "smartrecruiters":
+                r = requests.get(f"https://api.smartrecruiters.com/v1/companies/{slug}/postings?country=in&limit=100", timeout=30)
+                r.raise_for_status()
+                for j in r.json().get("content", []):
+                    loc = j.get("location") or {}
+                    jobs.append(board_job(name, j.get("name", ""), ", ".join(x for x in [loc.get("city"), "India"] if x),
+                                          f"https://jobs.smartrecruiters.com/{slug}/{j.get('id')}", "",
+                                          j.get("releasedDate", ""), bool(loc.get("remote"))))
+            else:
+                continue
+            kept = 0
+            for j in jobs:
+                if not any(w in j["location"].lower() for w in INDIA_WORDS):
+                    continue
+                if not any(w in j["title"].lower() for w in words):
+                    continue
+                try:
+                    if j["posted"] and datetime.fromisoformat(j["posted"].replace("Z", "+00:00")) < since:
+                        continue
+                except ValueError:
+                    pass
+                out.append(j)
+                kept += 1
+            ok.append(f"{name}:{kept}")
+        except Exception as e:
+            failed.append(f"{name}:{str(e)[:60]}")
+    RUN_INFO["company_boards"] = {"ok": ok, "failed": failed}
+    log(f"Company career pages: {len(out)} India jobs from {len(ok)} companies ({len(failed)} skipped)")
     return out
 
 
@@ -143,6 +259,7 @@ def fetch_adzuna(role):
             "remote": "remote" in (loc + desc).lower(),
             "type": {"full_time": "Full-time", "part_time": "Part-time"}.get(j.get("contract_time") or "", ""),
             "url": j.get("redirect_url") or "",
+            "direct": False, "apply_links": [{"site": "Adzuna", "url": j.get("redirect_url") or "", "direct": False}],
             "description": desc,
             "posted": j.get("created") or "",
             "salary": salary_text(j.get("salary_min"), j.get("salary_max"), "INR", "YEAR"),
@@ -264,7 +381,7 @@ def send_telegram(jobs):
         lines.append(f"📢 Posted on {e(j['source'])}")
         body = {"chat_id": chat, "text": "\n".join(lines), "parse_mode": "HTML",
                 "disable_web_page_preview": True,
-                "reply_markup": {"inline_keyboard": [[{"text": "Apply ➜", "url": j["url"]}]]}}
+                "reply_markup": {"inline_keyboard": [[{"text": "Apply on company site ➜" if j.get("direct") else f"Apply on {j['source']} ➜", "url": j["url"]}]]}}
         try:
             r = requests.post(api, json=body, timeout=20)
             if r.status_code == 401:
@@ -297,9 +414,6 @@ def telegram_hello(state):
 
 # ---------------------------------------------------------------- main
 def main():
-    if not any(os.getenv(k) for k in ("RAPIDAPI_KEY", "ADZUNA_APP_ID")):
-        log("No job API key set (RAPIDAPI_KEY or ADZUNA_APP_ID). Nothing to fetch.")
-        sys.exit(0)
 
     roles = CONFIG.get("search_roles", [])
     state = STATE
@@ -312,6 +426,7 @@ def main():
     for role in roles:
         log(f"Adzuna: {role}")
         raw += fetch_adzuna(role)
+    raw += fetch_company_boards()
     state["turn"] = turn + 1
     telegram_ok = telegram_hello(state)
 
@@ -327,6 +442,8 @@ def main():
         if k in known or k in batch:
             continue
         batch.add(k)
+        if not job.get("role"):
+            job["role"] = next((r for r in roles if any(w in job["title"].lower() for w in r.lower().replace("developer", "").replace("engineer", "").split())), "")
         lo, hi = required_years(job)
         job.update({"id": k, "exp_min": lo, "exp_max": hi, "city_norm": find_city(job),
                     "tech": find_tech(f"{job['title']} {job['description']}"),

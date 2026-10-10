@@ -542,7 +542,7 @@ function jobCard(j,opt={}){
     <div class="top">${logo(j)}<div><h3>${esc(j.title)}</h3><div class="co">${esc(j.company)}</div><div class="meta">${esc(j.location||"India")}${j.remote?" · Remote":""}</div></div>
     ${e.ok?`<span class="match ${e.score>=75?"hi":""}">${e.score}% match</span>`:""}</div>
     <div class="facts"><span class="${e.ok&&j.exp_min!=null?"good":""}">${esc(expRange(j))}</span>${j.salary?`<span>${esc(j.salary)}</span>`:""}${j.type?`<span>${esc(j.type)}</span>`:""}${(e.hits||[]).slice(0,4).map(h=>`<span class="good">${esc(h)}</span>`).join("")}</div>
-    <div class="foot"><span class="when">${j.manual?"Added by you":`${esc(j.source)} · ${ago(when(j))}`}</span>
+    <div class="foot"><span class="when">${j.manual?"Added by you":`${j.direct?`<b style="color:var(--accent)">Company site</b>`:esc(j.source)} · ${ago(when(j))}`}</span>
       ${st&&opt.showStage!==false?`<span class="status-pill" style="color:${st[2]}">${st[1]}</span>`:""}
       <button class="icon-btn" data-save="${esc(j.id)}" aria-pressed="${!!t?.saved}" aria-label="Save job">${ICON.bookmark}</button>
       <a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">Apply</a></div>
@@ -681,10 +681,11 @@ function openJob(id){
       <div style="margin-top:12px"><label class="lbl" for="notes">My notes</label><textarea class="inp" id="notes" data-id="${esc(id)}" placeholder="Recruiter name, interview date, questions asked…">${esc(t?.notes||"")}</textarea></div></div>
     ${(j.tech||[]).length?`<div class="card"><h3>Skills mentioned</h3><div class="facts" style="margin:0">${j.tech.map(s=>`<span class="${e.hits.includes(s)?"good":"t"}">${esc(s)}</span>`).join("")}</div></div>`:""}
     ${j.description?`<div class="card"><h3>About the job</h3><div class="desc">${esc(j.description)}${j.description.length>=3400?"…":""}</div></div>`:""}
+    ${(j.apply_links||[]).length>1?`<div class="card"><h3>Where you can apply</h3><div class="list" style="gap:8px">${j.apply_links.map(l=>`<a class="cocard" style="grid-template-columns:1fr auto;text-decoration:none;color:var(--ink)" href="${esc(l.url)}" target="_blank" rel="noopener" data-apply="${esc(id)}"><span><b>${esc(l.site)}</b><small>${l.direct?"Company's own page":"Job website"}</small></span><span class="match ${l.direct?"hi":""}">${l.direct?"Direct":"Apply"}</span></a>`).join("")}</div></div>`:""}
     ${quickCopy()}
     ${similar.length?`<div class="card"><h3>Similar jobs for you</h3><div class="list">${similar.map(s=>`<button class="cocard" data-open="${esc(s.id)}" style="width:100%">${logo(s)}<span><b>${esc(s.title)}</b><small>${esc(s.company)} · ${esc(s.city_norm||s.location||"")}</small></span></button>`).join("")}</div></div>`:""}
     <div style="display:flex;gap:8px;flex-wrap:wrap">${j.manual?`<button class="btn danger sm" data-delmanual="${esc(id)}">Delete this job</button>`:`<button class="btn ghost sm" data-hide="${esc(id)}">Not interested</button>`}</div>`,
-  `<button class="icon-btn" data-save="${esc(id)}" aria-pressed="${!!t?.saved}" aria-label="Save job" style="width:50px;height:auto">${ICON.bookmark}</button><a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(id)}">Apply on ${esc(j.manual?"job site":j.source)}</a>`);
+  `<button class="icon-btn" data-save="${esc(id)}" aria-pressed="${!!t?.saved}" aria-label="Save job" style="width:50px;height:auto">${ICON.bookmark}</button><a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(id)}">${j.manual?"Apply on job site":j.direct?"Apply on company site":"Apply on "+esc(j.source)}</a>`);
   $("notes")?.addEventListener("change",ev=>{track(id).notes=ev.target.value;if(!U.jobs[id].snap)U.jobs[id].snap=j;saveUser();toast("Notes saved");});
 }
 function quickCopy(){
