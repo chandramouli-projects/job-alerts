@@ -3,7 +3,12 @@ name: Find my jobs
 on:
   schedule:
     - cron: "30 1,4,7,10,13,16 * * *"   # 7 AM, 10 AM, 1 PM, 4 PM, 7 PM, 10 PM IST
-  workflow_dispatch: {}                 # "Run workflow" button for a manual run
+  workflow_dispatch:                    # "Run workflow" button; optional search text
+    inputs:
+      query:
+        description: "Search for (e.g. QA Testing jobs in Hyderabad). Leave empty for the normal search."
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -28,6 +33,7 @@ jobs:
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SEARCH_QUERY: ${{ github.event.inputs.query }}
         run: python fetch_jobs.py
       - name: Save results
         if: always()

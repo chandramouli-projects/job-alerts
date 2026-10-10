@@ -423,7 +423,9 @@ def main():
     groups = CONFIG.get("jsearch_groups") or [f"{r} jobs in India" for r in roles]
     turn = state.get("turn", 0)
     raw = []
-    g = groups[turn % len(groups)]
+    g = os.getenv("SEARCH_QUERY", "").strip() or groups[turn % len(groups)]
+    if os.getenv("SEARCH_QUERY", "").strip() and " jobs in " not in g:
+        g = f"{g} jobs in India"
     log(f"JSearch: {g}")
     raw += fetch_jsearch(g)
     # Adzuna: a few roles per run, taking turns, to stay inside the free limits
