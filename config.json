@@ -19,7 +19,6 @@
   "posted_within": "3days",
   "jsearch_pages": 1,
   "keep_jobs_days": 21,
-
   "alerts": {
     "experience_years": null,
     "roles": [],
@@ -28,7 +27,9 @@
     "include_remote": true,
     "experience_tolerance_years": 1,
     "min_skill_matches": 1,
-    "exclude_words": ["unpaid"],
-    "max_messages_per_run": 10
+    "exclude_words": [
+      "unpaid"
+    ],
+    "max_messages_per_run": 0
   }
 }
