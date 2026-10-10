@@ -24,6 +24,7 @@ import requests
 ROOT = Path(__file__).parent
 CONFIG = json.loads((ROOT / "config.json").read_text())
 ALERTS = CONFIG.get("alerts", {})
+RUN_INFO = {}   # what each source answered, saved in data/state.json for troubleshooting
 JOBS_FILE = ROOT / "docs" / "jobs.json"
 STATE_FILE = ROOT / "data" / "state.json"
 
@@ -59,10 +60,17 @@ def fetch_jsearch(role):
         r = requests.get("https://jsearch.p.rapidapi.com/search",
                          headers={"X-RapidAPI-Key": key, "X-RapidAPI-Host": "jsearch.p.rapidapi.com"},
                          params=params, timeout=40)
+        RUN_INFO["jsearch"] = {"role": role, "http": r.status_code,
+                               "note": (r.text[:300] if r.status_code != 200 else "")}
         r.raise_for_status()
-        items = r.json().get("data") or []
+        body = r.json()
+        items = body.get("data") or []
+        RUN_INFO["jsearch"]["results"] = len(items)
+        if not items:
+            RUN_INFO["jsearch"]["note"] = json.dumps({k: v for k, v in body.items() if k != "data"})[:300]
     except Exception as e:
         log(f"  JSearch failed for '{role}': {e}")
+        RUN_INFO.setdefault("jsearch", {})["error"] = str(e)[:300]
         return []
     out = []
     for j in items:
@@ -321,7 +329,9 @@ def main():
                                      "roles": roles,
                                      "my_experience": ALERTS.get("experience_years"),
                                      "jobs": all_jobs}, ensure_ascii=False, separators=(",", ":")))
-    STATE_FILE.write_text(json.dumps(state))
+    state["last_run"] = {"at": now.isoformat(timespec="seconds"), "fetched": len(raw),
+                         "new": len(fresh), "alerts": len(alerts), **RUN_INFO}
+    STATE_FILE.write_text(json.dumps(state, indent=1))
     alerts.sort(key=lambda j: j["score"], reverse=True)
     if telegram_ok:
         send_telegram(alerts)
