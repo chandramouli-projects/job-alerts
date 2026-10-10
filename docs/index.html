@@ -643,7 +643,7 @@ function renderSettings(){
   <div class="card"><h3>Telegram alerts</h3>
     <div class="set-row"><div><b>Send new jobs to Telegram</b><small>Only jobs that match your preferences</small></div><label class="toggle"><input type="checkbox" id="setTg" ${S.telegram?"checked":""}><span></span></label></div>
     <div class="set-row"><div><b>Minimum match</b><small>Only alert for jobs at or above this</small></div><select class="sel" id="setMin" style="width:auto">${[50,60,70,80,90].map(v=>`<option value="${v}" ${S.minMatch===v?"selected":""}>${v}%</option>`).join("")}</select></div>
-    <div class="set-row"><div><b>Search connection</b><small>${S.ghToken?"Connected. Your preferences control which jobs are searched and alerted.":"Connect once so your preferences control the job search and Telegram alerts."}</small></div><button class="btn ghost sm" data-gh>${S.ghToken?"Change":"Connect"}</button></div>
+    <div class="set-row"><div><b>Owner connection</b><small>${S.ghToken?"Connected. Your preferences decide your Telegram alerts.":"Only for the site owner: lets your preferences decide Telegram alerts."}</small></div><button class="btn ghost sm" data-gh>${S.ghToken?"Change":"Connect"}</button></div>
     <div class="err" id="syncMsg" style="color:var(--muted)"></div></div>
   <div class="card"><h3>Account</h3>
     <div class="set-row"><div><b>Change password</b><small>${esc(session.email)}</small></div><button class="btn ghost sm" data-pw>Change</button></div>
@@ -714,7 +714,6 @@ async function syncPrefs(silent){
     const cur=await (await fetch(api,{headers:H})).json(); if(!cur.content) throw new Error(cur.message||"no access");
     const cfg=JSON.parse(decodeURIComponent(escape(atob(cur.content.replace(/\n/g,"")))));
     const p=U.prefs,roles=[...p.roles,...splitList(p.custom)];
-    cfg.search_roles=roles.length?roles:cfg.search_roles;
     cfg.alerts=Object.assign(cfg.alerts||{},{experience_years:p.exp,roles,skills:mySkills(p),
       locations:p.cities.filter(c=>c!=="Remote"&&c!=="Anywhere in India"),include_remote:p.cities.includes("Remote")||p.cities.includes("Anywhere in India"),
       telegram_enabled:S.telegram,min_match:S.minMatch});
