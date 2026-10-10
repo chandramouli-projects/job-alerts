@@ -6,7 +6,9 @@ my alert filters to Telegram.
 Sources (each one is skipped if its key is missing):
   - JSearch (RapidAPI): Google Jobs, so LinkedIn, Indeed, Naukri, Glassdoor, company sites
   - Adzuna: India job boards
-Secrets (GitHub Actions): RAPIDAPI_KEY, ADZUNA_APP_ID, ADZUNA_APP_KEY,
+  - Jooble: India job boards (Naukri, Foundit, Shine, TimesJobs...)
+  - Company career pages on Greenhouse / Lever / Ashby / SmartRecruiters / Workday (no key)
+Secrets (GitHub Actions): RAPIDAPI_KEY, ADZUNA_APP_ID, ADZUNA_APP_KEY, JOOBLE_KEY,
                           TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 """
 import hashlib
@@ -22,6 +24,12 @@ from pathlib import Path
 import requests
 
 ROOT = Path(__file__).parent
+# On my computer, read secrets from .env (GitHub Actions passes them as env vars instead)
+if (ROOT / ".env").exists():
+    for line in (ROOT / ".env").read_text().splitlines():
+        k, sep, v = line.partition("=")
+        if sep and not k.strip().startswith("#") and v.strip():
+            os.environ.setdefault(k.strip(), v.strip().strip("\"'"))
 CONFIG = json.loads((ROOT / "config.json").read_text())
 ALERTS = CONFIG.get("alerts", {})
 RUN_INFO = {}
@@ -112,7 +120,7 @@ def fetch_jsearch(role):
             "posted": j.get("job_posted_at_datetime_utc") or "",
             "salary": salary_text(j.get("job_min_salary"), j.get("job_max_salary"),
                                   j.get("job_salary_currency"), j.get("job_salary_period")),
-            "source": j.get("job_publisher") or "JSearch",
+            "source": site_name(j.get("job_publisher") or "JSearch"),
             "exp_months": exp.get("required_experience_in_months"),
             "role": "" if " OR " in role else role,
         })
@@ -124,6 +132,19 @@ AGGREGATORS = ("linkedin", "naukri", "indeed", "glassdoor", "foundit", "monster"
                "iimjobs", "hirist", "apna", "workindia", "timesjobs", "freshersworld", "internshala", "bebee",
                "jobrapido", "careerjet", "whatjobs", "expertini", "learn4good", "dice", "built in",
                "recruit.net", "jooble", "trabajo", "jobsora", "talentify", "jobleads", "glints", "kitjob")
+
+
+SITE_NAMES = {"naukri": "Naukri", "linkedin": "LinkedIn", "indeed": "Indeed", "glassdoor": "Glassdoor",
+              "foundit": "Foundit", "monster": "Foundit", "instahyre": "Instahyre", "hirist": "Hirist",
+              "cutshort": "Cutshort", "wellfound": "Wellfound", "angel.co": "Wellfound", "internshala": "Internshala",
+              "unstop": "Unstop", "apna": "Apna", "freshersworld": "Freshersworld", "shine": "Shine",
+              "timesjobs": "TimesJobs", "iimjobs": "iimjobs"}
+
+
+def site_name(s):
+    """One name per job site, so "Naukri.com" and "naukri" show up as "Naukri" in the portal."""
+    low = (s or "").lower()
+    return next((v for k, v in SITE_NAMES.items() if k in low), s)
 
 
 def apply_links(j):
@@ -151,7 +172,8 @@ INDIA_WORDS = ("india", "bangalore", "bengaluru", "hyderabad", "chennai", "pune"
 
 
 def role_words():
-    words = set()
+    # plus common IT titles that big companies use, e.g. Accenture's "Application Developer"
+    words = {"software", "application developer", "developer", "tester", "testing", "programmer"}
     for r in CONFIG.get("search_roles", []):
         r = r.lower().replace("developer", "").replace("engineer", "").strip()
         if r:
@@ -210,6 +232,8 @@ def fetch_company_boards():
                     jobs.append(board_job(name, j.get("name", ""), ", ".join(x for x in [loc.get("city"), "India"] if x),
                                           f"https://jobs.smartrecruiters.com/{slug}/{j.get('id')}", "",
                                           j.get("releasedDate", ""), bool(loc.get("remote"))))
+            elif ats == "workday":
+                jobs = fetch_workday(name, slug, int(b.get("pages", 3)))
             else:
                 continue
             kept = 0
@@ -230,6 +254,95 @@ def fetch_company_boards():
             failed.append(f"{name}:{str(e)[:60]}")
     RUN_INFO["company_boards"] = {"ok": ok, "failed": failed}
     log(f"Company career pages: {len(out)} India jobs from {len(ok)} companies ({len(failed)} skipped)")
+    return out
+
+
+def workday_india(facets, param=None):
+    """Workday's own "India" filter for this company (its name differs per company), or None."""
+    for f in facets or []:
+        p = f.get("facetParameter") or param
+        if (f.get("descriptor") or "").strip().lower() == "india" and p and f.get("id"):
+            return {p: [f["id"]]}
+        found = workday_india(f.get("values"), p)
+        if found:
+            return found
+    return None
+
+
+def workday_posted(text):
+    """"Posted Today" / "Posted Yesterday" / "Posted 3 Days Ago" / "Posted 30+ Days Ago" -> ISO date"""
+    t = (text or "").lower()
+    m = re.search(r"(\d+)", t)
+    days = 0 if "today" in t else 1 if "yesterday" in t else int(m.group(1)) if m else 30
+    return (datetime.now(timezone.utc) - timedelta(days=days)).isoformat(timespec="seconds")
+
+
+def fetch_workday(name, slug, pages):
+    """Newest India jobs from a company's Workday careers site. slug is "host/site", e.g.
+    "accenture.wd103/AccentureCareers" from https://accenture.wd103.myworkdayjobs.com/AccentureCareers"""
+    host, site = slug.split("/", 1)
+    api = f"https://{host}.myworkdayjobs.com/wday/cxs/{host.split('.')[0]}/{site}/jobs"
+    first = requests.post(api, json={"limit": 1, "offset": 0, "searchText": "", "appliedFacets": {}}, timeout=30)
+    first.raise_for_status()
+    india = workday_india(first.json().get("facets"))
+    jobs = []
+    for page in range(pages):
+        r = requests.post(api, json={"limit": 20, "offset": page * 20, "searchText": "",
+                                     "appliedFacets": india or {}}, timeout=30)
+        r.raise_for_status()
+        items = r.json().get("jobPostings") or []
+        for j in items:
+            path = j.get("externalPath") or ""
+            # "/job/India-Bengaluru/Title_R123" -> "India Bengaluru" when the list has no city
+            loc = j.get("locationsText") or ""
+            if not loc or "locations" in loc.lower():
+                loc = path.split("/")[2].replace("-", " ") if path.count("/") >= 3 else loc
+            if india and "india" not in loc.lower():
+                loc = f"{loc}, India" if loc else "India"
+            jobs.append(board_job(name, j.get("title", ""), loc, f"https://{host}.myworkdayjobs.com/{site}{path}",
+                                  "", workday_posted(j.get("postedOn"))))
+        if len(items) < 20:
+            break
+    return jobs
+
+
+def fetch_jooble(role):
+    """Jooble collects jobs from many Indian job sites (Naukri, Foundit, Shine, TimesJobs...).
+    Free key from https://jooble.org/api/about"""
+    key = os.getenv("JOOBLE_KEY")
+    if not key:
+        return []
+    try:
+        r = requests.post(f"https://jooble.org/api/{key}", json={"keywords": role, "location": "India"}, timeout=40)
+        r.raise_for_status()
+        items = r.json().get("jobs") or []
+    except Exception as e:
+        log(f"  Jooble failed for '{role}': {e}")
+        RUN_INFO.setdefault("jooble", {})["error"] = str(e)[:200]
+        return []
+    RUN_INFO.setdefault("jooble", {})[role] = len(items)
+    out = []
+    for j in items:
+        loc = j.get("location") or "India"
+        desc = html.unescape(re.sub("<[^>]+>", " ", j.get("snippet") or ""))
+        site = site_name(j.get("source") or "Jooble")
+        out.append({
+            "title": html.unescape(re.sub("<[^>]+>", "", j.get("title") or "")).strip(),
+            "company": (j.get("company") or "").strip(),
+            "logo": "", "company_site": "",
+            "city": loc.split(",")[0].strip(),
+            "location": loc,
+            "remote": "remote" in (loc + desc).lower(),
+            "type": j.get("type") or "",
+            "url": j.get("link") or "",
+            "direct": False, "apply_links": [{"site": site, "url": j.get("link") or "", "direct": False}],
+            "description": desc,
+            "posted": j.get("updated") or "",
+            "salary": (j.get("salary") or "").strip(),
+            "source": site,
+            "exp_months": None,
+            "role": role,
+        })
     return out
 
 
@@ -435,6 +548,12 @@ def main():
     for role in (roles[start:] + roles[:start])[:n]:
         log(f"Adzuna: {role}")
         raw += fetch_adzuna(role)
+    # Jooble: same idea, its own turn through the roles
+    n = int(CONFIG.get("jooble_roles_per_run", 5))
+    start = (turn * n) % max(1, len(roles))
+    for role in (roles[start:] + roles[:start])[:n] if os.getenv("JOOBLE_KEY") else []:
+        log(f"Jooble: {role}")
+        raw += fetch_jooble(role)
     raw += fetch_company_boards()
     state["turn"] = turn + 1
     telegram_ok = telegram_hello(state)
@@ -472,6 +591,7 @@ def main():
     JOBS_FILE.write_text(json.dumps({"updated": now.isoformat(timespec="seconds"),
                                      "roles": roles,
                                      "my_experience": ALERTS.get("experience_years"),
+                                     "live_api": CONFIG.get("live_search_url", ""),
                                      "jobs": all_jobs}, ensure_ascii=False, separators=(",", ":")))
     state["last_run"] = {"at": now.isoformat(timespec="seconds"), "fetched": len(raw),
                          "new": len(fresh), "alerts": len(alerts), **RUN_INFO}

@@ -115,6 +115,42 @@
       "ats": "smartrecruiters",
       "slug": "ServiceNow",
       "name": "ServiceNow"
+    },
+    {
+      "ats": "workday",
+      "slug": "accenture.wd103/AccentureCareers",
+      "name": "Accenture",
+      "pages": 5
+    },
+    {
+      "ats": "workday",
+      "slug": "nvidia.wd5/NVIDIAExternalCareerSite",
+      "name": "NVIDIA"
+    },
+    {
+      "ats": "workday",
+      "slug": "salesforce.wd12/External_Career_Site",
+      "name": "Salesforce"
+    },
+    {
+      "ats": "workday",
+      "slug": "adobe.wd5/external_experienced",
+      "name": "Adobe"
+    },
+    {
+      "ats": "workday",
+      "slug": "intel.wd1/External",
+      "name": "Intel"
+    },
+    {
+      "ats": "workday",
+      "slug": "mastercard.wd1/CorporateCareers",
+      "name": "Mastercard"
+    },
+    {
+      "ats": "workday",
+      "slug": "pwc.wd3/Global_Experienced_Careers",
+      "name": "PwC"
     }
   ],
   "jsearch_groups": [
@@ -125,5 +161,7 @@
     "DevOps Engineer OR Cloud Engineer OR Support Engineer OR Cyber Security jobs in India",
     "Android Developer OR Flutter Developer OR UI UX Designer OR Salesforce OR SAP Consultant jobs in India"
   ],
-  "adzuna_roles_per_run": 5
+  "adzuna_roles_per_run": 5,
+  "jooble_roles_per_run": 5,
+  "live_search_url": "https://job-search.chandramouli-kancharla2001.workers.dev"
 }

@@ -5,296 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Udyogam Vetuku</title>
 <meta name="theme-color" content="#1F6F5C">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#F3F5F2;--surface:#fff;--surface2:#F8FAF8;--ink:#18242B;--muted:#5D6B72;--line:#DCE2DE;--accent:#1F6F5C;--accent-ink:#fff;--accent-soft:#DDEEE8;
-  --applied:#2F64C8;--interview:#B7791F;--offer:#1F8A4C;--rejected:#B4483F;--danger:#B4483F;
-  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11181C;--surface:#1A2328;--surface2:#151D21;--ink:#E6ECEA;--muted:#97A5AB;--line:#2B373D;--accent:#4FB394;--accent-ink:#0D1A16;--accent-soft:#1C3530;
-  --applied:#6E9BEF;--interview:#E0A64B;--offer:#52C07E;--rejected:#E07A70;--danger:#E07A70}}
-:root[data-theme="dark"]{--bg:#11181C;--surface:#1A2328;--surface2:#151D21;--ink:#E6ECEA;--muted:#97A5AB;--line:#2B373D;--accent:#4FB394;--accent-ink:#0D1A16;--accent-soft:#1C3530;
-  --applied:#6E9BEF;--interview:#E0A64B;--offer:#52C07E;--rejected:#E07A70;--danger:#E07A70}
-*,*::before,*::after{box-sizing:inherit}
-html,body{min-height:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif;margin:0;line-height:1.12}
-button,input,select,textarea{font:inherit;color:inherit}
-button{cursor:pointer}
-a{color:var(--accent)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-[hidden]{display:none!important}
-.brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;color:var(--accent);font-size:1.15rem;letter-spacing:-.01em}
-.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:700;background:var(--accent);color:var(--accent-ink)}
-.btn.ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
-.btn.danger{background:none;color:var(--danger);border:1.5px solid var(--line)}
-.btn.sm{padding:8px 13px;font-size:.88rem;border-radius:10px}
-.btn:disabled{opacity:.45;cursor:default}
-.inp,.sel,textarea.inp{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}
-textarea.inp{min-height:96px;resize:vertical}
-.lbl{display:block;font-weight:600;font-size:.88rem;margin:0 0 6px}
-.hint{color:var(--muted);font-size:.84rem;margin-top:5px}
-.err{color:var(--danger);font-size:.88rem;min-height:1.3em;margin-top:6px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media (max-width:560px){.grid2{grid-template-columns:1fr}}
-.choices{display:flex;flex-wrap:wrap;gap:8px}
-.choice{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 14px;font-weight:600;font-size:.93rem}
-.choice[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
-.toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(16px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:.9rem;opacity:0;transition:.2s;z-index:90;pointer-events:none;max-width:90vw}
-.toast.show{opacity:1;transform:translateX(-50%)}
-
-/* ---------- auth ---------- */
-.auth{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr}
-.auth-side{background:var(--accent);color:var(--accent-ink);padding:48px;display:flex;flex-direction:column;justify-content:space-between}
-.auth-side .brand{color:inherit;font-size:1.4rem}
-.auth-side h1{font-size:clamp(2.2rem,4vw,3.4rem);font-weight:800;letter-spacing:-.02em;max-width:12ch}
-.auth-side ul{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:10px;opacity:.92}
-.auth-side li::before{content:"✓  ";font-weight:700}
-.auth-main{display:flex;align-items:center;justify-content:center;padding:32px 20px}
-.auth-card{width:100%;max-width:400px}
-.auth-card h2{font-size:1.9rem;margin-bottom:6px}
-.auth-card .sub{color:var(--muted);margin:0 0 22px}
-.auth-card form>div{margin-bottom:14px}
-.auth-card .btn{width:100%;margin-top:4px}
-.switch{text-align:center;margin-top:18px;color:var(--muted)}
-.switch button{background:none;border:0;color:var(--accent);font-weight:700;padding:0}
-.mbrand{display:none;margin-bottom:24px}
-@media (max-width:820px){.auth{grid-template-columns:1fr}.auth-side{display:none}.mbrand{display:block}}
-
-/* ---------- onboarding ---------- */
-.ob{max-width:600px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:22px 18px 0}
-.progress{display:flex;gap:6px;margin:18px 0 26px}
-.progress i{flex:1;height:5px;border-radius:3px;background:var(--line)}
-.progress i.on{background:var(--accent)}
-.ob h1{font-size:clamp(1.8rem,6vw,2.4rem);margin-bottom:8px}
-.ob .sub{color:var(--muted);margin:0 0 22px}
-.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.exp-grid .choice{padding:16px 6px;text-align:center}
-.exp-grid .choice b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.5rem;line-height:1}
-.exp-grid .choice small{font-weight:500;color:var(--muted)}
-@media (max-width:420px){.exp-grid{grid-template-columns:repeat(3,1fr)}}
-.ob .field{margin-top:18px}
-.ob-foot{margin-top:auto;padding:16px 0 calc(16px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;position:sticky;bottom:0;background:var(--bg)}
-.ob-foot .btn:last-child{flex:1}
-
-/* ---------- shell ---------- */
-.shell{display:grid;grid-template-columns:232px 1fr;min-height:100vh}
-.side{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);background:var(--surface);padding:22px 14px;display:flex;flex-direction:column;gap:4px}
-.side .brand{padding:0 10px 18px}
-.nav{display:flex;align-items:center;gap:12px;border:0;background:none;border-radius:10px;padding:10px 12px;font-weight:600;color:var(--muted);text-align:left;width:100%}
-.nav svg{width:20px;height:20px;flex:none}
-.nav[aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
-.nav .n{margin-left:auto;font-size:.78rem;background:var(--line);color:var(--ink);border-radius:999px;padding:0 8px}
-.side .me-mini{margin-top:auto;display:flex;align-items:center;gap:10px;padding:10px;border-top:1px solid var(--line)}
-.avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;flex:none}
-.me-mini b{display:block;font-size:.92rem;line-height:1.2}
-.me-mini small{color:var(--muted);font-size:.8rem}
-.main{min-width:0;padding:22px 26px 100px;max-width:980px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
-.topbar h1{font-size:1.7rem}
-.topbar .upd{color:var(--muted);font-size:.82rem}
-.bottom{display:none}
-@media (max-width:860px){
-  .shell{grid-template-columns:1fr}.side{display:none}
-  .main{padding:16px 14px 100px}
-  .bottom{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
-  .bottom button{flex:1;border:0;background:none;padding:9px 2px 11px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:.72rem;font-weight:600}
-  .bottom svg{width:22px;height:22px}
-  .bottom button[aria-current="page"]{color:var(--accent)}
-}
-
-/* ---------- jobs ---------- */
-.searchbar{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:8px;margin-bottom:12px}
-.searchbar input{border:0;background:var(--surface2);border-radius:10px;padding:11px 13px;min-width:0}
-@media (max-width:560px){.searchbar{grid-template-columns:1fr 1fr}.searchbar .btn{grid-column:span 2}}
-.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:10px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 13px;font-size:.88rem;font-weight:600;white-space:nowrap}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.chip .x{margin-left:4px;opacity:.7}
-.fpanel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.fpanel label{font-size:.76rem;font-weight:700;color:var(--muted);display:block}
-.fpanel select{display:block;width:100%;margin-top:4px;padding:10px 32px 10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%235D6B72' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 12px center;-webkit-appearance:none;appearance:none;font-weight:600;font-size:.9rem;color:var(--ink)}
-.fpanel select.on{border-color:var(--accent);background-color:var(--accent-soft);color:var(--accent)}
-.fpanel .fend{grid-column:1/-1;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:2px}
-.fpanel .fend label{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink);font-weight:600;cursor:pointer}
-.fpanel .fend input{width:18px;height:18px;accent-color:var(--accent);margin:0}
-.fpanel .fend .clear{margin-left:auto;background:none;border:0;color:var(--accent);font-weight:700;padding:0}
-.ftoggle{display:none}
-.searchbar.one{grid-template-columns:1fr auto}
-@media (max-width:560px){.searchbar.one{grid-template-columns:1fr auto}.searchbar.one .btn{grid-column:auto}}
-.match.newb{background:var(--applied);color:#fff}
-.pipe.five{grid-template-columns:repeat(5,1fr)}
-@media (max-width:560px){.pipe.five{grid-template-columns:repeat(3,1fr)}.pipe.five b{font-size:1.35rem}.pipe.five button{padding:10px}}
-.inp[readonly]{opacity:.7}
-@media (max-width:700px){.fpanel{grid-template-columns:1fr 1fr}.ftoggle{display:inline-flex}.fpanel.collapsed{display:none}}
-.resbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 2px 12px;color:var(--muted);font-size:.9rem}
-.resbar select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 10px;font-size:.88rem}
-.list{display:flex;flex-direction:column;gap:10px}
-.job{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;border-left:4px solid var(--s,var(--line));transition:border-color .15s}
-.job:hover{border-color:var(--accent)}
-.job .top{display:grid;grid-template-columns:46px 1fr auto;gap:12px;align-items:start}
-.logo{width:46px;height:46px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:800;font-family:"Bricolage Grotesque",sans-serif;font-size:1.2rem;overflow:hidden;border:1px solid var(--line);flex:none}
-.logo img{width:100%;height:100%;object-fit:contain;background:#fff}
-.job h3{font-size:1.05rem;font-family:Figtree,sans-serif;font-weight:700;line-height:1.3}
-.job .co{font-weight:600;font-size:.95rem}
-.meta{color:var(--muted);font-size:.88rem}
-.match{font-weight:800;font-size:.8rem;padding:4px 9px;border-radius:999px;white-space:nowrap;background:var(--line);color:var(--ink)}
-.match.hi{background:var(--accent-soft);color:var(--accent)}
-.facts{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
-.facts span{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:2px 9px}
-.facts .t{color:var(--muted)}
-.facts .good{border-color:var(--accent);color:var(--accent)}
-.job .foot{display:flex;align-items:center;gap:8px;margin-top:12px}
-.job .foot .when{color:var(--muted);font-size:.82rem;margin-right:auto}
-.icon-btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;width:38px;height:38px;display:grid;place-items:center}
-.icon-btn svg{width:18px;height:18px}
-.icon-btn[aria-pressed="true"]{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
-.apply{background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:700;padding:9px 16px;border-radius:10px;font-size:.92rem}
-.empty{text-align:center;color:var(--muted);padding:36px 18px;border:1.5px dashed var(--line);border-radius:16px;background:var(--surface)}
-.empty h3{color:var(--ink);margin-bottom:6px;font-size:1.15rem}
-.empty .btn{margin-top:14px}
-.more{display:block;margin:14px auto 0}
-
-/* ---------- drawer / sheet ---------- */
-.scrim{position:fixed;inset:0;background:rgba(8,14,18,.5);z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
-.scrim.open{opacity:1;pointer-events:auto}
-.sheet{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--bg);z-index:60;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column}
-.sheet.open{transform:none}
-.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:calc(12px + env(safe-area-inset-top,0px)) 18px 12px;border-bottom:1px solid var(--line);background:var(--surface)}
-.sheet-head h2{font-size:1.15rem}
-.sheet-body{overflow:auto;padding:18px;flex:1}
-.sheet-foot{padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--surface);display:flex;gap:8px}
-.sheet-foot .apply,.sheet-foot .btn{flex:1;text-align:center;padding:13px}
-.x{background:none;border:0;font-size:1.7rem;line-height:1;color:var(--muted);padding:2px 8px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
-.card h3{font-size:1.02rem;margin-bottom:10px}
-.kv{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.kv div{background:var(--surface2);border-radius:10px;padding:9px 11px}
-.kv small{display:block;color:var(--muted);font-size:.76rem;font-weight:600}
-.kv b{font-weight:600;font-size:.93rem}
-.desc{white-space:pre-wrap;font-size:.94rem;line-height:1.6;color:var(--ink)}
-.why{margin:0;padding-left:18px;color:var(--muted);font-size:.92rem}
-.why li.ok{color:var(--accent)}
-.stages{display:flex;flex-wrap:wrap;gap:6px}
-.stages button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 12px;font-size:.86rem;font-weight:600;display:flex;align-items:center;gap:6px}
-.stages button[aria-pressed="true"]{border-color:currentColor}
-.dot{width:8px;height:8px;border-radius:50%;flex:none;display:inline-block}
-.tl{list-style:none;margin:10px 0 0;padding:0;font-size:.86rem;color:var(--muted)}
-.tl li{display:flex;gap:8px;align-items:center;padding:2px 0}
-.filter-group{margin-bottom:20px}
-.filter-group h3{font-size:.95rem;margin-bottom:10px}
-
-/* ---------- tracker ---------- */
-.pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
-.pipe button{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:left;border-top:4px solid var(--c)}
-.pipe button[aria-pressed="true"]{border-color:var(--c);box-shadow:inset 0 0 0 1px var(--c)}
-.pipe b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.7rem;line-height:1}
-.pipe small{color:var(--muted);font-weight:600}
-@media (max-width:480px){.pipe{grid-template-columns:repeat(2,1fr)}}
-
-/* ---------- companies ---------- */
-.cos{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
-.cocard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;grid-template-columns:46px 1fr;gap:12px;align-items:center;text-align:left}
-.cocard b{display:block;font-weight:700;line-height:1.25}
-.cocard small{color:var(--muted)}
-
-/* ---------- profile ---------- */
-.phead{display:flex;gap:16px;align-items:center;margin-bottom:14px}
-.phead .avatar{width:64px;height:64px;font-size:1.6rem}
-.phead h2{font-size:1.5rem}
-.meter{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin:8px 0 4px}
-.meter i{display:block;height:100%;background:var(--accent)}
-.form-card .row{margin-bottom:14px}
-.form-card .actions{display:flex;justify-content:flex-end;gap:8px}
-.set-row{display:flex;justify-content:space-between;align-items:center;gap:10px 14px;padding:12px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.set-row>div:first-child{flex:1 1 180px}
-.set-row:last-child{border-bottom:0}
-.set-row b{display:block;font-weight:600}
-.set-row small{color:var(--muted)}
-.toggle{position:relative;width:46px;height:28px;flex:none}
-.toggle input{opacity:0;width:100%;height:100%;margin:0;cursor:pointer;position:absolute;z-index:1}
-.toggle span{position:absolute;inset:0;background:var(--line);border-radius:999px;transition:.2s}
-.toggle span::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}
-.toggle input:checked+span{background:var(--accent)}
-.toggle input:checked+span::after{transform:translateX(18px)}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.seg button{border:0;background:var(--surface);padding:7px 12px;font-size:.86rem;font-weight:600}
-.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-.status-pill{font-size:.8rem;font-weight:700;padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
-</style>
+<!-- Styles: one file per screen, in docs/css. Order matters (base first). -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/password-field.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/login-background.css">
+<link rel="stylesheet" href="css/forgot-password.css">
+<link rel="stylesheet" href="css/onboarding.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/job-card.css">
+<link rel="stylesheet" href="css/jobs-page.css">
+<link rel="stylesheet" href="css/filters.css">
+<link rel="stylesheet" href="css/job-details.css">
+<link rel="stylesheet" href="css/my-jobs.css">
+<link rel="stylesheet" href="css/applications.css">
+<link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
 
+<div class="headwrap"><header class="apphead" id="apphead"><div class="brand"><img class="brand-logo" src="logo.png" alt="">Udyogam Vetuku</div><div class="head-r" id="headR"></div></header></div>
+
 <!-- ================= AUTH ================= -->
 <section class="auth" id="auth" hidden>
+ <div class="auth-bg" id="authBg" aria-hidden="true"></div>
+ <div class="auth-box">
   <div class="auth-side">
-    <div class="brand">Udyogam Vetuku</div>
-    <div>
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="">Udyogam Vetuku</div>
+    <div class="auth-pitch">
       <h1>Every job for you, in one place.</h1>
       <ul><li>Jobs from LinkedIn, Naukri, Indeed, Glassdoor and company sites</li><li>Only roles that fit your experience</li><li>Apply on the original page, track every application</li></ul>
     </div>
-    <small style="opacity:.75">Your personal job portal</small>
   </div>
   <div class="auth-main">
     <div class="auth-card">
-      <div class="brand mbrand">Udyogam Vetuku</div>
+      <div class="brand mbrand"><img class="brand-logo" src="logo.png" alt="">Udyogam Vetuku</div>
       <div id="loginView">
         <h2>Welcome back</h2>
-        <p class="sub">Log in to see jobs picked for you.</p>
+        <p class="sub">Log in to see the jobs picked for you.</p>
         <form id="loginForm" novalidate>
           <div><label class="lbl" for="lEmail">Email</label><input class="inp" id="lEmail" type="email" autocomplete="email" required></div>
-          <div><label class="lbl" for="lPass">Password</label><input class="inp" id="lPass" type="password" autocomplete="current-password" required></div>
+          <div><label class="lbl" for="lPass">Password</label><div class="pw"><input class="inp" id="lPass" type="password" autocomplete="current-password" required><button type="button" class="eye" data-eye="lPass" aria-label="Show password" aria-pressed="false" disabled></button></div></div>
+          <div class="forgot-row"><button type="button" class="linkbtn" id="toForgot">Forgot password?</button></div>
           <div class="err" id="lErr"></div>
           <button class="btn" type="submit">Log in</button>
         </form>
         <p class="switch">New here? <button id="toSignup">Create account</button></p>
+        <p class="auth-note" id="authNote"></p>
       </div>
       <div id="signupView" hidden>
         <h2>Create your account</h2>
-        <p class="sub">Takes a minute. Then tell us what job you want.</p>
         <form id="signupForm" novalidate>
           <div><label class="lbl" for="sName">Full name</label><input class="inp" id="sName" autocomplete="name" required></div>
           <div><label class="lbl" for="sEmail">Email</label><input class="inp" id="sEmail" type="email" autocomplete="email" required></div>
           <div><label class="lbl" for="sPhone">Mobile number</label><input class="inp" id="sPhone" type="tel" autocomplete="tel" placeholder="+91"></div>
-          <div><label class="lbl" for="sPass">Password</label><input class="inp" id="sPass" type="password" autocomplete="new-password" minlength="6" required><div class="hint">At least 6 characters.</div></div>
+          <div><label class="lbl" for="sPass">Password</label><div class="pw"><input class="inp" id="sPass" type="password" autocomplete="new-password" minlength="6" required><button type="button" class="eye" data-eye="sPass" aria-label="Show password" aria-pressed="false" disabled></button></div><div class="hint">At least 6 characters.</div></div>
           <div class="err" id="sErr"></div>
           <button class="btn" type="submit">Create account</button>
         </form>
         <p class="switch">Have an account? <button id="toLogin">Log in</button></p>
       </div>
-      <p class="hint" style="text-align:center;margin-top:22px">Your account and data are kept on this device.</p>
     </div>
   </div>
+ </div>
 </section>
 
 <!-- ================= ONBOARDING ================= -->
 <section class="ob" id="ob" hidden>
-  <div class="brand">Udyogam Vetuku</div>
-  <div class="progress" id="progress"><i></i><i></i><i></i><i></i></div>
-  <div data-step="1">
-    <h1>What job are you looking for?</h1>
-    <p class="sub">Pick one or more. Your feed shows jobs for these roles.</p>
-    <div class="choices" id="roleChoices"></div>
-    <div class="field"><label class="lbl" for="customRole">Another role</label><input class="inp" id="customRole" placeholder="e.g. SAP Consultant, Salesforce Developer"><div class="hint">Separate more than one with commas.</div></div>
+  <div class="ob-card">
+    <div class="ob-top"><h1>Tell us the job you want</h1><button type="button" class="icon-btn" id="obBack" data-tip="Close" aria-label="Close"></button></div>
+    <div class="q"><span class="lbl" id="q-role">What job are you looking for?</span><div class="pk" data-pk="role"></div></div>
+    <div class="q"><span class="lbl" id="q-exp">How much experience do you have?</span><div class="pk" data-pk="exp"></div></div>
+    <div class="q"><span class="lbl" id="q-city">Where do you want to work?</span><div class="pk" data-pk="city"></div></div>
+    <div class="q"><span class="lbl" id="q-skill">What are your skills?</span><div class="pk" data-pk="skill"></div></div>
+    <button class="btn ob-go" id="obNext">Show my jobs</button>
   </div>
-  <div data-step="2" hidden>
-    <h1>How much experience do you have?</h1>
-    <p class="sub">Jobs that ask for a lot more, or are too junior, are left out.</p>
-    <div class="exp-grid" id="expChoices"></div>
-  </div>
-  <div data-step="3" hidden>
-    <h1>Where do you want to work?</h1>
-    <p class="sub">Pick your cities. You can add remote jobs too.</p>
-    <div class="choices" id="cityChoices"></div>
-  </div>
-  <div data-step="4" hidden>
-    <h1>What are your skills?</h1>
-    <p class="sub">Jobs that mention your skills rank higher.</p>
-    <div class="choices" id="skillChoices"></div>
-    <div class="field"><label class="lbl" for="customSkills">Other skills</label><input class="inp" id="customSkills" placeholder="e.g. kafka, tableau, sap abap"></div>
-  </div>
-  <div class="ob-foot"><button class="btn ghost" id="obBack">Back</button><button class="btn" id="obNext">Next</button></div>
 </section>
 
 <!-- ================= APP SHELL ================= -->
@@ -310,460 +100,102 @@ textarea.inp{min-height:96px;resize:vertical}
   <div class="sheet-body" id="sheetBody"></div>
   <div class="sheet-foot" id="sheetFoot"></div>
 </section>
+<div class="modal" id="fpModal" role="dialog" aria-modal="true" aria-labelledby="fpTitle" hidden>
+  <div class="modal-card fp-card">
+   <div class="fp-side">
+    <div class="brand"><img class="brand-logo" src="logo.png" alt="">Udyogam Vetuku</div>
+    <div class="fp-pitch">
+      <h3>Forgot your password?</h3>
+      <ol class="fp-list"><li data-n="1">Enter your email</li><li data-n="2">Verify the PIN</li><li data-n="3">Set a new password</li></ol>
+    </div>
+   </div>
+   <div class="fp-main">
+    <button type="button" class="modal-x" id="fpX" aria-label="Close">×</button>
+    <div data-fp="1">
+      <h2 id="fpTitle">Reset password</h2>
+      <p class="sub">Enter the email linked to your account.</p>
+      <form id="fpForm1" novalidate>
+        <div><label class="lbl" for="fpEmail">Email</label><input class="inp" id="fpEmail" type="email" autocomplete="email"></div>
+        <div class="err" id="fpErr1"></div>
+        <button class="btn" id="fpGen" type="submit" disabled>Continue</button>
+      </form>
+    </div>
+    <div data-fp="2" hidden>
+      <h2>Verify PIN</h2>
+      <p class="sub fp-for"></p>
+      <div class="pin-box"><b id="fpPinShow"></b><button type="button" class="btn ghost sm" id="fpCopy">Copy</button></div>
+      <div class="fp-meta"><span>Expires in 10 minutes</span><button type="button" class="linkbtn" id="fpAgain">Resend PIN</button></div>
+      <form id="fpForm2" novalidate>
+        <div><label class="lbl" for="fpPin">Enter PIN</label><input class="inp pin-inp" id="fpPin" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••"></div>
+        <div class="err" id="fpErr2"></div>
+        <button class="btn" id="fpVerify" type="submit" disabled>Verify</button>
+      </form>
+    </div>
+    <div data-fp="3" hidden>
+      <h2>New password</h2>
+      <p class="sub fp-for"></p>
+      <form id="fpForm3" novalidate>
+        <div><label class="lbl" for="fpNew">New password</label><div class="pw"><input class="inp" id="fpNew" type="password" autocomplete="new-password" placeholder="Minimum 6 characters"><button type="button" class="eye" data-eye="fpNew" aria-label="Show password" aria-pressed="false" disabled></button></div></div>
+        <div><label class="lbl" for="fpNew2">Confirm password</label><div class="pw"><input class="inp" id="fpNew2" type="password" autocomplete="new-password"><button type="button" class="eye" data-eye="fpNew2" aria-label="Show password" aria-pressed="false" disabled></button></div></div>
+        <div class="err" id="fpErr3"></div>
+        <button class="btn" id="fpSave" type="submit" disabled>Update password</button>
+      </form>
+    </div>
+    <div data-fp="4" hidden style="text-align:center">
+      <div class="modal-ico" style="margin:0 auto 16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>Password updated</h2>
+      <p class="sub">You can now log in with your new password.</p>
+      <button class="btn" type="button" id="fpDone">Back to login</button>
+    </div>
+   </div>
+  </div>
+</div>
+<div class="modal" id="askModal" role="alertdialog" aria-modal="true" aria-labelledby="askTitle" aria-describedby="askText" hidden>
+  <div class="modal-card"><h2 id="askTitle"></h2><p class="sub" id="askText"></p>
+    <div class="ask-btns"><button type="button" class="btn ghost" id="askNo">Cancel</button><button type="button" class="btn" id="askYes">OK</button></div></div>
+</div>
+<div class="modal" id="applyModal" role="dialog" aria-modal="true" aria-labelledby="apTitle" hidden>
+  <div class="modal-card">
+    <button type="button" class="modal-x" id="apX" aria-label="Close">×</button>
+    <div id="apAsk">
+      <h2 id="apTitle">Did you apply?</h2>
+      <div class="ap-job" id="apJob"></div>
+      <div class="ask-btns"><button type="button" class="btn ghost" id="apNo">Not yet</button><button type="button" class="btn" id="apYes">Yes, I applied</button></div>
+    </div>
+    <div id="apDone" hidden style="text-align:center">
+      <div class="ok-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>Application tracked</h2>
+      <p class="sub" id="apDoneTxt"></p>
+      <div id="apStep"></div>
+      <div class="ask-btns"><button type="button" class="btn ghost" id="apBrowse">Keep browsing</button><button type="button" class="btn" id="apView">View application</button></div>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast" role="status"></div>
 
-<script>
-/* ===================================================== constants */
-const ROLES={
- "Software Engineer":["software engineer","software developer","sde","programmer","application developer"],
- "Frontend Developer":["frontend","front end","front-end","ui developer","react","angular","vue"],
- "Backend Developer":["backend","back end","back-end","node","golang","api developer"],
- "Full Stack Developer":["full stack","fullstack","full-stack","mern","mean"],
- "Java Developer":["java","spring"],
- "Python Developer":["python","django","flask"],
- "React Developer":["react"],
- ".NET Developer":[".net","dotnet","c#","asp.net"],
- "Data Analyst":["data analyst","business analyst","power bi","analytics"],
- "Data Scientist":["data scientist","machine learning","ml engineer","ai engineer"],
- "DevOps Engineer":["devops","cloud engineer","sre","site reliability"],
- "QA / Testing":["qa ","qa-","qa/","quality assurance","quality analyst","test engineer","test analyst","test lead","tester","testing","sdet","automation test","selenium"],
- "Android Developer":["android","kotlin","flutter","mobile developer"],
- "UI UX Designer":["ui/ux","ux designer","ui designer","product designer"]};
-const EXP=[[0,"Fresher"],[1,"1 year"],[2,"2 years"],[3,"3 years"],[4,"4 years"],[5,"5 years"],[7,"6–8 years"],[10,"9+ years"]];
-const CITIES=["Hyderabad","Bangalore","Chennai","Pune","Mumbai","Delhi","Noida","Gurgaon","Kolkata","Ahmedabad","Visakhapatnam","Vijayawada","Kochi","Coimbatore","Remote","Anywhere in India"];
-const SKILLS=["java","python","javascript","typescript","react","angular","node","spring boot","sql","mongodb","aws","azure","docker","kubernetes","html","css","django",".net","c#","power bi","excel","selenium","git","rest","microservices","flutter","kotlin","machine learning"];
-const STAGES=[["saved","Saved","var(--muted)"],["applied","Applied","var(--applied)"],["interview","Interview","var(--interview)"],["offer","Offer","var(--offer)"],["rejected","Closed","var(--rejected)"]];
-const SENIOR=/\b(senior|sr\.?|lead|principal|staff|architect|manager|head|director)\b/i, JUNIOR=/\b(intern|internship|trainee|fresher)\b/i;
-const PAGE=25;
-const PREVIEW=!!window.__JOBS__;
-const ICON={
- jobs:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>',
- saved:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4z"/></svg>',
- track:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg>',
- cos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V7l6-4v18M9 21h12V10l-6-3M13 11h2M13 15h2M5 9h1M5 13h1M5 17h1"/></svg>',
- me:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
- set:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
- bookmark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18l-6-4-6 4z"/></svg>',
- filter:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 5h18M6 12h12M10 19h4"/></svg>'};
-
-/* ===================================================== helpers */
-const $=id=>document.getElementById(id);
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const ago=iso=>{const t=new Date(iso);if(isNaN(t))return"";const h=Math.round((Date.now()-t)/36e5);return h<1?"just now":h<24?h+"h ago":Math.round(h/24)===1?"1 day ago":Math.round(h/24)+" days ago"};
-const fmtDate=t=>t?new Date(t).toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"}):"";
-const when=j=>j.posted||j.found;
-const initials=n=>esc((n||"?").trim().split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase());
-const logo=j=>j.logo&&!PREVIEW?`<span class="logo"><img src="${esc(j.logo)}" alt="" loading="lazy" onerror="this.parentNode.textContent='${esc((j.company||'?')[0].toUpperCase())}'"></span>`:`<span class="logo">${esc((j.company||"?")[0].toUpperCase())}</span>`;
-const splitList=s=>String(s||"").split(",").map(x=>x.trim()).filter(Boolean);
-const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
-let tt;function toast(t){const el=$("toast");el.textContent=t;el.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("show"),2000)}
-async function hashPw(pw,salt){
-  const enc=new TextEncoder();
-  try{
-    const key=await crypto.subtle.importKey("raw",enc.encode(pw),"PBKDF2",false,["deriveBits"]);
-    const bits=await crypto.subtle.deriveBits({name:"PBKDF2",salt:enc.encode(salt),iterations:120000,hash:"SHA-256"},key,256);
-    return [...new Uint8Array(bits)].map(b=>b.toString(16).padStart(2,"0")).join("");
-  }catch(e){let h=0;for(const c of salt+pw)h=(h*31+c.charCodeAt(0))|0;return "x"+h}
-}
-
-/* ===================================================== state */
-let accounts=LS.get("uv.accounts",{});
-let session=LS.get("uv.session",null);
-let U=null;            // current user's data
-let data={jobs:[]};
-let view="jobs", shown=PAGE;
-let F={q:"",forYou:true,days:7,role:"",exp:"",city:"",type:"",source:"",company:"",minSal:"",remote:false,sort:"match"};
-let prevSeen=0;
-let filtersOpen=false;
-let trackStage="saved";
-
-function blankUser(name,email,phone){return{
-  profile:{name,email,phone,headline:"",location:"",about:"",currentCompany:"",currentCtc:"",expectedCtc:"",notice:"",education:"",linkedin:"",github:"",portfolio:"",resume:""},
-  prefs:{roles:[],custom:"",exp:null,cities:[],skills:[],customSkills:""},
-  jobs:{}, manual:[], hidden:{},
-  settings:{theme:"system",days:7,hideApplied:true,telegram:false,minMatch:70,ghToken:"",ghRepo:"chandramouli-projects/job-alerts"},
-  onboarded:false, createdAt:Date.now()}}
-function saveUser(){ if(session) LS.set("uv.user."+session.email,U); }
-function applyTheme(){const t=U?.settings.theme||"system";if(t==="system")document.documentElement.removeAttribute("data-theme");else document.documentElement.dataset.theme=t;}
-
-/* ===================================================== boot */
-async function boot(){
-  try{ data = PREVIEW ? window.__JOBS__ : await (await fetch("jobs.json?t="+Date.now())).json(); }catch(e){ data={jobs:[]}; }
-  if(session && accounts[session.email]){ U=LS.get("uv.user."+session.email,null); if(U){ applyTheme(); return U.onboarded?openShell():startOnboarding(); } }
-  showAuth("login");
-}
-function showAuth(mode){
-  $("shell").hidden=true;$("ob").hidden=true;$("auth").hidden=false;
-  $("loginView").hidden=mode!=="login";$("signupView").hidden=mode!=="signup";
-  if(mode==="signup"||!Object.keys(accounts).length){$("loginView").hidden=true;$("signupView").hidden=false;}
-}
-$("toSignup").onclick=()=>showAuth("signup");
-$("toLogin").onclick=()=>{$("loginView").hidden=false;$("signupView").hidden=true;};
-$("signupForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const name=$("sName").value.trim(),email=$("sEmail").value.trim().toLowerCase(),phone=$("sPhone").value.trim(),pw=$("sPass").value;
-  if(!name)return $("sErr").textContent="Enter your full name.";
-  if(!/^\S+@\S+\.\S+$/.test(email))return $("sErr").textContent="Enter a valid email.";
-  if(pw.length<6)return $("sErr").textContent="Password needs at least 6 characters.";
-  if(accounts[email])return $("sErr").textContent="An account with this email already exists. Log in instead.";
-  const salt=crypto.getRandomValues?[...crypto.getRandomValues(new Uint8Array(12))].map(b=>b.toString(16)).join(""):String(Math.random());
-  accounts[email]={name,salt,hash:await hashPw(pw,salt),createdAt:Date.now()};
-  LS.set("uv.accounts",accounts);
-  U=blankUser(name,email,phone); session={email}; LS.set("uv.session",session); saveUser();
-  startOnboarding();
-});
-$("loginForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const email=$("lEmail").value.trim().toLowerCase(),pw=$("lPass").value,a=accounts[email];
-  if(!a||a.hash!==await hashPw(pw,a.salt))return $("lErr").textContent="Email or password is wrong.";
-  session={email}; LS.set("uv.session",session); view="jobs";
-  U=LS.get("uv.user."+email,null)||blankUser(a.name,email,""); applyTheme();
-  U.onboarded?openShell():startOnboarding();
-});
-function logout(){LS.del("uv.session");session=null;U=null;closeSheet();$("lPass").value="";showAuth("login");$("loginView").hidden=false;$("signupView").hidden=true;}
-
-/* ===================================================== onboarding */
-let step=1, draft;
-function startOnboarding(){
-  draft=JSON.parse(JSON.stringify(U.prefs));
-  $("roleChoices").innerHTML=Object.keys(ROLES).map(r=>`<button class="choice" data-role="${esc(r)}" aria-pressed="${draft.roles.includes(r)}">${esc(r)}</button>`).join("");
-  $("expChoices").innerHTML=EXP.map(([v,l])=>`<button class="choice" data-exp="${v}" aria-pressed="${draft.exp===v}"><b>${v===7?"6–8":v===10?"9+":v}</b><small>${l}</small></button>`).join("");
-  $("cityChoices").innerHTML=CITIES.map(c=>`<button class="choice" data-city="${esc(c)}" aria-pressed="${draft.cities.includes(c)}">${esc(c)}</button>`).join("");
-  $("skillChoices").innerHTML=SKILLS.map(s=>`<button class="choice" data-skill="${esc(s)}" aria-pressed="${draft.skills.includes(s)}">${esc(s)}</button>`).join("");
-  $("customRole").value=draft.custom||"";$("customSkills").value=draft.customSkills||"";
-  step=1;$("auth").hidden=true;$("shell").hidden=true;$("ob").hidden=false;obStep();window.scrollTo(0,0);
-}
-function obStep(){
-  document.querySelectorAll("[data-step]").forEach(s=>s.hidden=+s.dataset.step!==step);
-  [...$("progress").children].forEach((b,i)=>b.classList.toggle("on",i<step));
-  $("obBack").textContent=step===1?(U.onboarded?"Cancel":"Log out"):"Back";
-  $("obNext").textContent=step===4?"Show my jobs":"Next";obValidate();
-}
-function obValidate(){$("obNext").disabled=!(step===1?(draft.roles.length||$("customRole").value.trim()):step===2?draft.exp!==null:step===3?draft.cities.length:true);}
-$("ob").addEventListener("click",e=>{
-  const b=e.target.closest("button");if(!b)return;
-  const tog=(arr,v)=>arr.includes(v)?arr.filter(x=>x!==v):[...arr,v];
-  if(b.dataset.role){draft.roles=tog(draft.roles,b.dataset.role);b.setAttribute("aria-pressed",draft.roles.includes(b.dataset.role));}
-  else if(b.dataset.exp!==undefined){draft.exp=+b.dataset.exp;document.querySelectorAll("[data-exp]").forEach(x=>x.setAttribute("aria-pressed",x===b));}
-  else if(b.dataset.city){const c=b.dataset.city;draft.cities=c==="Anywhere in India"?(draft.cities.includes(c)?[]:[c]):tog(draft.cities.filter(x=>x!=="Anywhere in India"),c);document.querySelectorAll("[data-city]").forEach(x=>x.setAttribute("aria-pressed",draft.cities.includes(x.dataset.city)));}
-  else if(b.dataset.skill){draft.skills=tog(draft.skills,b.dataset.skill);b.setAttribute("aria-pressed",draft.skills.includes(b.dataset.skill));}
-  else if(b.id==="obNext"){
-    if(step<4){step++;obStep();window.scrollTo(0,0);return;}
-    draft.custom=$("customRole").value.trim();draft.customSkills=$("customSkills").value.trim();
-    U.prefs=draft;const first=!U.onboarded;U.onboarded=true;saveUser();resetFilters();openShell();
-    toast(first?"Welcome! Here are jobs picked for you.":"Preferences saved");syncPrefs(true);return;
-  }else if(b.id==="obBack"){if(step>1){step--;obStep();}else if(U.onboarded)openShell();else logout();return;}
-  obValidate();
-});
-$("customRole").addEventListener("input",obValidate);
-
-/* ===================================================== matching */
-function roleKeywords(p){const k=[];p.roles.forEach(r=>k.push(...(ROLES[r]||[r.toLowerCase()])));splitList(p.custom).forEach(r=>k.push(r.toLowerCase()));return k;}
-function mySkills(p){return [...p.skills,...splitList(p.customSkills).map(s=>s.toLowerCase())];}
-function evaluate(j,p){
-  const title=(j.title||"").toLowerCase(),text=(title+" "+(j.tech||[]).join(" ")+" "+(j.description||"")).toLowerCase();
-  const why=[];let score=0,ok=true;
-  const kw=roleKeywords(p),roleHit=kw.find(k=>title.includes(k));
-  if(roleHit){score+=40;why.push([true,`Title matches your role (“${roleHit}”)`]);}else{ok=false;why.push([false,"Not one of your roles"]);}
-  const my=p.exp;
-  if(my!=null){
-    if(my<5&&SENIOR.test(j.title)){ok=false;why.push([false,"Senior level role"]);}
-    else if(my>=2&&JUNIOR.test(j.title)){ok=false;why.push([false,"Junior / internship role"]);}
-    else if(j.exp_min!=null){
-      if(j.exp_min>my+1||(j.exp_max!=null&&j.exp_max<my-2)){ok=false;why.push([false,`Needs ${expRange(j)}, you have ${expLabel(my)}`]);}
-      else{score+=25;why.push([true,`Needs ${expRange(j)}, fits your ${expLabel(my)}`]);}
-    }else{score+=12;why.push([null,"Experience not mentioned"]);}
-  }
-  const any=p.cities.includes("Anywhere in India"),wantRemote=p.cities.includes("Remote");
-  const loc=((j.location||"")+" "+(j.city_norm||"")).toLowerCase();
-  const cityHit=p.cities.find(c=>c!=="Remote"&&c!=="Anywhere in India"&&(loc.includes(c.toLowerCase())||(c==="Bangalore"&&loc.includes("bengaluru"))||(c==="Gurgaon"&&loc.includes("gurugram"))));
-  if(cityHit){score+=20;why.push([true,`In ${cityHit}`]);}
-  else if(wantRemote&&j.remote){score+=20;why.push([true,"Remote job"]);}
-  else if(any){score+=15;why.push([true,"In India"]);}
-  else{ok=false;why.push([false,"Not in your cities"]);}
-  const sk=mySkills(p),hits=sk.filter(s=>new RegExp("(^|[^a-z0-9])"+s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"($|[^a-z0-9])").test(text));
-  if(sk.length){score+=Math.round(15*Math.min(1,hits.length/Math.min(sk.length,4)));if(hits.length)why.push([true,`Mentions your skills: ${hits.join(", ")}`]);}else score+=10;
-  return {ok,score:Math.min(100,score),why,hits};
-}
-const expLabel=v=>v===0?"fresher level":v===7?"6–8 years":v===10?"9+ years":v+" year"+(v===1?"":"s");
-const expRange=j=>j.exp_min==null?"Not stated":`${j.exp_min}${j.exp_max?"–"+j.exp_max:"+"} yrs`;
-
-/* ===================================================== job store */
-function allJobs(){return [...U.manual,...data.jobs];}
-function findJob(id){return allJobs().find(j=>j.id===id);}
-function track(id){return U.jobs[id]||(U.jobs[id]={stage:null,saved:false,notes:"",history:[]});}
-function setStage(id,stage){
-  const t=track(id);if(t.stage===stage)return;
-  t.stage=stage;t.history.push({stage,at:Date.now()});if(stage==="applied"&&!t.appliedAt)t.appliedAt=Date.now();
-  if(!t.snap){const j=findJob(id);if(j)t.snap=j;}  // keep job details even after it leaves the feed
-  saveUser();
-}
-function toggleSave(id){const t=track(id);t.saved=!t.saved;if(t.saved&&!t.snap)t.snap=findJob(id);saveUser();return t.saved;}
-function tracked(){return Object.entries(U.jobs).map(([id,t])=>({...(findJob(id)||t.snap||{id,title:"Job no longer listed",company:""}),id,_t:t})).filter(j=>j.title);}
-
-/* ===================================================== filtering */
-function resetFilters(){F={q:"",forYou:true,days:7,role:"",exp:"",city:"",type:"",source:"",company:"",minSal:"",remote:false,sort:"match"};shown=PAGE;}
-function salaryLpa(j){const m=String(j.salary||"").match(/([\d.]+)(?:\s*[–-]\s*([\d.]+))?\s*LPA/i);return m?parseFloat(m[2]||m[1]):null;}
-const isNew=j=>prevSeen>0&&new Date(j.found)>prevSeen;
-function feed(){
-  const p=U.prefs,q=F.q.toLowerCase().trim(),out=[];
-  for(const j of allJobs()){
-    if(U.hidden[j.id])continue;
-    if(U.jobs[j.id]?.stage)continue;
-    if(!j.manual&&(Date.now()-new Date(when(j)))/864e5>F.days)continue;
-    if(F.company&&j.company!==F.company)continue;
-    if(q&&!q.split(/[,\s]+/).filter(Boolean).every(w=>[j.title,j.company,j.location,(j.tech||[]).join(" "),j.description].join(" ").toLowerCase().includes(w)))continue;
-    if(F.remote&&!j.remote)continue;
-    if(F.type&&(j.type||"Not stated")!==F.type)continue;
-    if(F.source&&(j.direct?"Company site":j.source)!==F.source)continue;
-    if(F.city&&(j.city_norm||"India")!==F.city)continue;
-    if(F.role&&!(ROLES[F.role]||[F.role.toLowerCase()]).some(k=>j.title.toLowerCase().includes(k)))continue;
-    if(F.exp!==""){const x=+F.exp;if(j.exp_min!=null&&(j.exp_min>x+1||(j.exp_max!=null&&j.exp_max<x-2)))continue;if(x<5&&SENIOR.test(j.title))continue;}
-    if(F.minSal!==""){const s=salaryLpa(j);if(s==null||s<+F.minSal)continue;}
-    const ev=evaluate(j,p);
-    if(F.forYou&&!ev.ok)continue;
-    out.push({...j,_e:ev});
-  }
-  out.sort((a,b)=>F.sort==="new"?new Date(when(b))-new Date(when(a)):(isNew(b)-isNew(a))||(b._e.score-a._e.score)||(new Date(when(b))-new Date(when(a))));
-  return out;
-}
-function activeFilterCount(){return [F.role,F.exp,F.city,F.type,F.source,F.company,F.minSal].filter(v=>v!=="").length+F.remote+(F.days!==7)+(!F.forYou);}
-const fitLabel=e=>!e.ok?"":e.score>=80?"Great fit":"Good fit";
-
-/* ===================================================== shell */
-const NAV=[["jobs","Jobs",ICON.jobs],["mine","My jobs",ICON.saved],["profile","Profile",ICON.me]];
-function markVisit(){if(!U.thisVisit||Date.now()-U.thisVisit>30*60e3){U.lastSeen=U.thisVisit||0;U.thisVisit=Date.now();saveUser();}prevSeen=U.lastSeen||0;}
-function openShell(){markVisit();$("auth").hidden=true;$("ob").hidden=true;$("shell").hidden=false;go(view);}
-function go(v){view=v;shown=PAGE;renderNav();render();window.scrollTo(0,0);}
-function myCount(){return Object.values(U.jobs).filter(t=>t.saved||t.stage).length;}
-function renderNav(){
-  const n=myCount();
-  $("side").innerHTML=`<div class="brand">Udyogam Vetuku</div>`+NAV.map(([k,l,i])=>`<button class="nav" data-go="${k}" aria-current="${view===k?"page":"false"}">${i}${l}${k==="mine"&&n?`<span class="n">${n}</span>`:""}</button>`).join("")+
-    `<div class="me-mini"><span class="avatar">${initials(U.profile.name)}</span><div><b>${esc(U.profile.name)}</b><small>${esc(U.profile.email)}</small></div></div>`;
-  $("bottom").innerHTML=NAV.map(([k,l,i])=>`<button data-go="${k}" aria-current="${view===k?"page":"false"}">${i}${l}</button>`).join("");
-}
-function render(){({jobs:renderJobs,mine:renderMine,profile:renderProfile})[view]();}
-function topbar(title,extra=""){return `<div class="topbar"><h1>${title}</h1>${extra}</div>`;}
-
-/* ---------- job card ---------- */
-function jobCard(j,opt={}){
-  const t=U.jobs[j.id],e=j._e||evaluate(j,U.prefs),st=t?.stage?STAGES.find(s=>s[0]===t.stage):null,fl=fitLabel(e);
-  return `<article class="job" data-open="${esc(j.id)}" style="--s:${st?st[2]:"var(--line)"}" tabindex="0">
-    <div class="top">${logo(j)}<div><h3>${esc(j.title)}</h3><div class="co">${esc(j.company)}</div><div class="meta">${esc(j.location||"India")}${j.remote?" · Remote":""}</div></div>
-    <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">${isNew(j)&&!opt.noNew?`<span class="match newb">New</span>`:""}${fl?`<span class="match ${fl==="Great fit"?"hi":""}">${fl}</span>`:""}</div></div>
-    <div class="facts"><span class="${e.ok&&j.exp_min!=null?"good":""}">${esc(expRange(j))}</span>${j.salary?`<span>${esc(j.salary)}</span>`:""}${j.type?`<span>${esc(j.type)}</span>`:""}${(e.hits||[]).slice(0,4).map(h=>`<span class="good">${esc(h)}</span>`).join("")}</div>
-    <div class="foot"><span class="when">${j.manual?"Added by you":`${j.direct?`<b style="color:var(--accent)">Company site</b>`:esc(j.source)} · ${ago(when(j))}`}</span>
-      ${st&&opt.showStage!==false?`<span class="status-pill" style="color:${st[2]}">${st[1]}</span>`:""}
-      <button class="icon-btn" data-save="${esc(j.id)}" aria-pressed="${!!t?.saved}" aria-label="Save job">${ICON.bookmark}</button>
-      <a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">Apply</a></div>
-  </article>`;
-}
-
-/* ---------- Jobs ---------- */
-function renderJobs(){
-  const jobs=feed(),n=activeFilterCount(),fresh=jobs.filter(isNew).length;
-  const uniq=f=>[...new Set(allJobs().map(f).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
-  const sel=(id,label,val,opts,def=opts[0][0])=>`<div><label for="${id}">${label}</label><select id="${id}" data-fsel="${id.slice(2)}" class="${String(val)!==String(def)?"on":""}">${opts.map(([v,l])=>`<option value="${esc(v)}" ${String(v)===String(val)?"selected":""}>${esc(l)}</option>`).join("")}</select></div>`;
-  $("main").innerHTML=topbar(`Hi ${esc(U.profile.name.split(" ")[0])}`,`<span style="color:var(--muted);font-size:.82rem">${data.updated?"Updated "+ago(data.updated):""}</span>`)+`
-  <form class="searchbar one" id="searchForm"><input id="q" placeholder="Search by skill, job title or company" value="${esc(F.q)}" aria-label="Search"><button class="btn" type="submit">Search</button></form>
-  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
-    <button class="btn ghost sm ftoggle" data-ftoggle>${ICON.filter}&nbsp;${filtersOpen?"Hide filters":"Filters"}${n?" ("+n+")":""}</button>
-  </div>
-  <div class="fpanel ${filtersOpen?"":"collapsed"}" id="fpanel">
-    ${sel("f_forYou","Show",F.forYou?"1":"0",[["1","Jobs for me"],["0","All jobs"]])}
-    ${sel("f_role","Job role",F.role,[["","All roles"],...Object.keys(ROLES).map(r=>[r,r])])}
-    ${sel("f_exp","Experience",F.exp,[["","Any experience"],...EXP.map(([v,l])=>[v,l])])}
-    ${sel("f_city","City",F.city,[["","All India"],...uniq(j=>j.city_norm||"India").map(c=>[c,c])])}
-    ${sel("f_days","Posted",F.days,[[1,"Last 24 hours"],[3,"Last 3 days"],[7,"Last 7 days"],[21,"Last 3 weeks"]],7)}
-    ${sel("f_minSal","Salary",F.minSal,[["","Any salary"],["3","3 LPA and above"],["5","5 LPA and above"],["8","8 LPA and above"],["12","12 LPA and above"],["20","20 LPA and above"]])}
-    ${sel("f_company","Company",F.company,[["","All companies"],...uniq(j=>j.company).map(c=>[c,c])])}
-    ${sel("f_source","Posted on",F.source,[["","Any website"],...uniq(j=>j.direct?"Company site":j.source).map(t=>[t,t])])}
-    ${sel("f_type","Job type",F.type,[["","Any type"],...uniq(j=>j.type||"Not stated").map(t=>[t,t])])}
-    ${sel("f_sort","Sort by",F.sort,[["match","Best fit"],["new","Newest first"]])}
-    <div class="fend"><label><input type="checkbox" data-fchk="remote" ${F.remote?"checked":""}>Remote only</label>${n?`<button class="clear" data-fclear>Clear filters</button>`:""}</div>
-  </div>
-  <div class="resbar"><span><b style="color:var(--ink)">${jobs.length}</b> job${jobs.length===1?"":"s"}${F.forYou?" for you":""}${fresh?` · <b style="color:var(--accent)">${fresh} new</b> since your last visit`:""}</span></div>
-  ${jobs.length?`<div class="list">${jobs.slice(0,shown).map(j=>jobCard(j)).join("")}</div>${jobs.length>shown?`<button class="btn ghost more" data-more>Show ${Math.min(PAGE,jobs.length-shown)} more</button>`:""}`
-   :`<div class="empty"><h3>No jobs match right now</h3>${F.forYou?"Jobs that fit your role, experience and cities appear here. New jobs arrive 6 times a day.<br>Try a longer Posted range, or set Show to All jobs.":"Try clearing filters or a longer Posted range."}<br>
-     ${n?`<button class="btn ghost sm" data-fclear>Clear filters</button> `:""}<button class="btn ghost sm" data-editprefs>Edit my job details</button></div>`}`;
-  $("searchForm").onsubmit=e=>{e.preventDefault();F.q=$("q").value;shown=PAGE;renderJobs();};
-  document.querySelectorAll("[data-fsel]").forEach(el=>el.onchange=()=>{const k=el.dataset.fsel,v=el.value;
-    if(k==="forYou")F.forYou=v==="1";else if(k==="days")F.days=+v;else F[k]=v;shown=PAGE;renderJobs();});
-  document.querySelectorAll("[data-fchk]").forEach(el=>el.onchange=()=>{F[el.dataset.fchk]=el.checked;shown=PAGE;renderJobs();});
-}
-
-/* ---------- My jobs: saved + applications ---------- */
-function renderMine(){
-  const all=tracked();
-  const groups={saved:all.filter(j=>j._t.saved&&(!j._t.stage||j._t.stage==="saved"))};
-  STAGES.slice(1).forEach(([k])=>groups[k]=all.filter(j=>j._t.stage===k));
-  const jobs=(groups[trackStage]||[]).sort((a,b)=>(b._t.history.at(-1)?.at||0)-(a._t.history.at(-1)?.at||0));
-  const due=groups.applied.filter(j=>j._t.appliedAt&&Date.now()-j._t.appliedAt>7*864e5).length;
-  const empty={saved:"Tap the bookmark on any job to keep it here.",applied:"When you apply to a job, mark it as applied and it shows up here.",interview:"Move an application here from its details when you get an interview.",offer:"Offers you get show up here.",rejected:"Applications that closed show up here."};
-  $("main").innerHTML=topbar("My jobs",`<button class="btn ghost sm" data-addjob>+ Add a job</button>`)+`
-  <div class="pipe five">${STAGES.map(([k,l,c])=>`<button data-stage-tab="${k}" aria-pressed="${trackStage===k}" style="--c:${c}"><b>${groups[k].length}</b><small>${l}</small></button>`).join("")}</div>
-  ${due&&trackStage==="applied"?`<div class="card" style="background:var(--accent-soft);border-color:transparent"><b>${due} application${due>1?"s":""} waiting over a week.</b> A short follow-up message to the recruiter often helps.</div>`:""}
-  ${jobs.length?`<div class="list">${jobs.map(j=>jobCard(j,{showStage:false,noNew:true})).join("")}</div>`:`<div class="empty"><h3>Nothing here yet</h3>${empty[trackStage]}${trackStage==="saved"?`<br><button class="btn ghost sm" data-go="jobs">Find jobs</button>`:""}</div>`}`;
-}
-
-/* ---------- Profile + settings ---------- */
-const PF=[["name","Full name"],["email","Email","email"],["phone","Mobile number","tel"],["linkedin","LinkedIn URL","url"],["resume","Resume link (Google Drive etc.)","url"],["expectedCtc","Expected salary","text","e.g. 8 LPA"],["notice","Notice period","text","e.g. 30 days / Immediate"]];
-function completeness(){const f=PF.filter(([k])=>String(U.profile[k]||"").trim()).length;return Math.round(100*f/PF.length);}
-const isOwner=()=>U.settings.owner||location.hash.includes("owner");
-function renderProfile(){
-  const P=U.profile,p=U.prefs,S=U.settings,pc=completeness();
-  const roles=[...p.roles,...splitList(p.custom)],skills=mySkills(p);
-  if(location.hash.includes("owner")&&!S.owner){S.owner=true;saveUser();}
-  $("main").innerHTML=topbar("Profile")+`
-  <div class="card"><div class="phead"><span class="avatar">${initials(P.name)}</span><div><h2>${esc(P.name)}</h2><div class="meta">${esc(P.email)}</div></div></div>
-    <div class="meter"><i style="width:${pc}%"></i></div><small class="meta">Profile ${pc}% complete${pc<100?" · filled details can be copied in one tap when you apply":""}</small></div>
-  <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 style="margin:0">My job details</h3><button class="btn ghost sm" data-editprefs>Edit</button></div>
-    <div class="kv"><div><small>Role</small><b>${esc(roles.join(", ")||"—")}</b></div><div><small>Experience</small><b>${esc(EXP.find(e=>e[0]===p.exp)?.[1]||"—")}</b></div>
-    <div><small>Cities</small><b>${esc(p.cities.join(", ")||"—")}</b></div><div><small>Skills</small><b>${esc(skills.join(", ")||"—")}</b></div></div></div>
-  <form class="card form-card" id="profileForm"><h3>Personal details</h3>
-    <div class="grid2">${PF.map(([k,l,type="text",ph=""])=>`<div class="row"><label class="lbl" for="pf_${k}">${l}</label><input class="inp" id="pf_${k}" data-pf="${k}" type="${type}" value="${esc(P[k])}" placeholder="${esc(ph)}" ${k==="email"?"readonly":""}></div>`).join("")}</div>
-    <div class="actions"><button class="btn" type="submit">Save details</button></div></form>
-  <div class="card"><h3>Settings</h3>
-    <div class="set-row"><div><b>Theme</b><small>Light, dark, or follow your device</small></div><div class="seg">${["system","light","dark"].map(t=>`<button data-theme-set="${t}" aria-pressed="${S.theme===t}">${t==="system"?"Auto":t[0].toUpperCase()+t.slice(1)}</button>`).join("")}</div></div>
-    <div class="set-row"><div><b>Change password</b></div><button class="btn ghost sm" data-pw>Change</button></div>
-    <div class="set-row"><div><b>Use on another device</b><small>Download a backup here, restore it there</small></div><span style="display:flex;gap:6px"><button class="btn ghost sm" data-export>Backup</button><label class="btn ghost sm" style="cursor:pointer">Restore<input type="file" id="importFile" accept="application/json" hidden></label></span></div>
-    <div class="set-row"><div><b>Log out</b></div><button class="btn ghost sm" data-logout>Log out</button></div>
-    <div class="set-row"><div><b>Delete account</b><small>Removes your account and data from this device</small></div><button class="btn danger sm" data-delacc>Delete</button></div></div>
-  ${isOwner()?`<div class="card"><h3>Telegram alerts (site owner)</h3>
-    <div class="set-row"><div><b>Send my matching jobs to Telegram</b></div><label class="toggle"><input type="checkbox" id="setTg" ${S.telegram?"checked":""}><span></span></label></div>
-    <div class="set-row"><div><b>Connection key</b><small>${S.ghToken?"Connected":"Not connected"}</small></div><button class="btn ghost sm" data-gh>${S.ghToken?"Change":"Connect"}</button></div>
-    <div class="err" id="syncMsg" style="color:var(--muted)"></div></div>`:""}`;
-  $("profileForm").onsubmit=e=>{e.preventDefault();document.querySelectorAll("[data-pf]").forEach(el=>{if(el.dataset.pf!=="email")U.profile[el.dataset.pf]=el.value.trim();});
-    if(!U.profile.name){toast("Name can't be empty.");return;}
-    accounts[session.email].name=U.profile.name;LS.set("uv.accounts",accounts);saveUser();renderNav();renderProfile();toast("Details saved");};
-  $("importFile").onchange=importData;
-  $("setTg")?.addEventListener("change",e=>{S.telegram=e.target.checked;saveUser();syncPrefs();});
-}
-
-/* ===================================================== job detail sheet */
-function openSheet(title,body,foot=""){$("sheetTitle").textContent=title;$("sheetBody").innerHTML=body;$("sheetFoot").innerHTML=foot;$("sheetFoot").hidden=!foot;$("sheet").classList.add("open");$("scrim").classList.add("open");$("sheetBody").scrollTop=0;}
-function closeSheet(){$("sheet").classList.remove("open");$("scrim").classList.remove("open");}
-$("sheetX").onclick=closeSheet;$("scrim").onclick=closeSheet;
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet();if(e.key==="Enter"&&e.target.dataset?.open)openJob(e.target.dataset.open);});
-
-function openJob(id){
-  const j=findJob(id)||U.jobs[id]?.snap;if(!j)return;
-  const t=U.jobs[id],e=evaluate(j,U.prefs),stage=t?.stage;
-  const similar=allJobs().filter(x=>x.id!==id&&!U.hidden[x.id]&&evaluate(x,U.prefs).ok&&(x.role===j.role||x.company===j.company)).slice(0,3);
-  openSheet("Job details",`
-    <div style="display:flex;gap:14px;align-items:center;margin-bottom:12px">${logo(j)}<div><h2 style="font-size:1.35rem">${esc(j.title)}</h2>
-      <button class="co" data-company="${esc(j.company)}" style="background:none;border:0;padding:0;font-weight:700;color:var(--accent)">${esc(j.company)}</button>
-      <div class="meta">${esc(j.location||"India")}${j.remote?" · Remote":""}</div></div></div>
-    <div class="kv" style="margin-bottom:12px">
-      <div><small>Experience</small><b>${esc(expRange(j))}</b></div><div><small>Salary</small><b>${esc(j.salary||"Not disclosed")}</b></div>
-      <div><small>Job type</small><b>${esc(j.type||"Not stated")}</b></div><div><small>Posted</small><b>${j.manual?"Added by you":`${esc(j.source)} · ${ago(when(j))}`}</b></div></div>
-    <div class="card"><h3>${e.ok?`${fitLabel(e)} for you`:"Why it's not in your feed"}</h3><ul class="why">${e.why.map(([ok,w])=>`<li class="${ok?"ok":""}">${ok===false?"✕ ":ok?"✓ ":"• "}${esc(w)}</li>`).join("")}</ul></div>
-    <div class="card"><h3>Track this job</h3><div class="stages">${STAGES.map(([k,l,c])=>`<button data-setstage="${k}" data-id="${esc(id)}" aria-pressed="${k==="saved"?(!!t?.saved&&!stage):stage===k}" style="color:${c}"><i class="dot" style="background:${c}"></i><span style="color:var(--ink)">${l}</span></button>`).join("")}</div>
-      ${t?.history?.length?`<ul class="tl">${t.history.slice().reverse().map(h=>{const s=STAGES.find(x=>x[0]===h.stage);return `<li><i class="dot" style="background:${s[2]}"></i>${s[1]} · ${fmtDate(h.at)}</li>`}).join("")}</ul>`:""}
-      <div style="margin-top:12px"><label class="lbl" for="notes">My notes</label><textarea class="inp" id="notes" data-id="${esc(id)}" placeholder="Recruiter name, interview date, questions asked…">${esc(t?.notes||"")}</textarea></div></div>
-    ${(j.tech||[]).length?`<div class="card"><h3>Skills mentioned</h3><div class="facts" style="margin:0">${j.tech.map(s=>`<span class="${e.hits.includes(s)?"good":"t"}">${esc(s)}</span>`).join("")}</div></div>`:""}
-    ${j.description?`<div class="card"><h3>About the job</h3><div class="desc">${esc(j.description)}${j.description.length>=3400?"…":""}</div></div>`:""}
-    ${(j.apply_links||[]).length>1?`<div class="card"><h3>Where you can apply</h3><div class="list" style="gap:8px">${j.apply_links.map(l=>`<a class="cocard" style="grid-template-columns:1fr auto;text-decoration:none;color:var(--ink)" href="${esc(l.url)}" target="_blank" rel="noopener" data-apply="${esc(id)}"><span><b>${esc(l.site)}</b><small>${l.direct?"Company's own page":"Job website"}</small></span><span class="match ${l.direct?"hi":""}">${l.direct?"Direct":"Apply"}</span></a>`).join("")}</div></div>`:""}
-    ${quickCopy()}
-    ${similar.length?`<div class="card"><h3>Similar jobs for you</h3><div class="list">${similar.map(s=>`<button class="cocard" data-open="${esc(s.id)}" style="width:100%">${logo(s)}<span><b>${esc(s.title)}</b><small>${esc(s.company)} · ${esc(s.city_norm||s.location||"")}</small></span></button>`).join("")}</div></div>`:""}
-    <div style="display:flex;gap:8px;flex-wrap:wrap">${j.manual?`<button class="btn danger sm" data-delmanual="${esc(id)}">Delete this job</button>`:`<button class="btn ghost sm" data-hide="${esc(id)}">Not interested</button>`}</div>`,
-  `<button class="icon-btn" data-save="${esc(id)}" aria-pressed="${!!t?.saved}" aria-label="Save job" style="width:50px;height:auto">${ICON.bookmark}</button><a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(id)}">${j.manual?"Apply on job site":j.direct?"Apply on company site":"Apply on "+esc(j.source)}</a>`);
-  $("notes")?.addEventListener("change",ev=>{track(id).notes=ev.target.value;if(!U.jobs[id].snap)U.jobs[id].snap=j;saveUser();toast("Notes saved");});
-}
-function quickCopy(){
-  const P=U.profile,items=[["Name",P.name],["Email",P.email],["Phone",P.phone],["LinkedIn",P.linkedin],["Resume link",P.resume],["Expected salary",P.expectedCtc],["Notice period",P.notice]].filter(x=>x[1]);
-  return `<div class="card"><h3>Quick copy for the application form</h3>${items.length?`<div style="display:flex;flex-wrap:wrap;gap:6px">${items.map(([l,v])=>`<button class="btn ghost sm" data-copy="${esc(v)}">${l}</button>`).join("")}</div>`:`<p class="meta" style="margin:0">Fill your profile to copy details here in one tap. <button class="btn ghost sm" data-go="profile">Open profile</button></p>`}</div>`;
-}
-async function copy(text){try{await navigator.clipboard.writeText(text);toast("Copied");}catch(e){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");toast("Copied");}catch(_){toast("Couldn't copy. Long-press to copy instead.");}ta.remove();}}
-
-/* ---------- add job manually ---------- */
-function openAddJob(){
-  openSheet("Add a job",`<p class="meta" style="margin-top:0">Found a job somewhere else? Add it here to track it with the rest.</p>
-    <form id="addForm"><div class="row" style="margin-bottom:12px"><label class="lbl" for="aUrl">Job link</label><input class="inp" id="aUrl" type="url" placeholder="https://" required></div>
-    <div class="grid2"><div><label class="lbl" for="aTitle">Job title</label><input class="inp" id="aTitle" required></div><div><label class="lbl" for="aCo">Company</label><input class="inp" id="aCo" required></div>
-    <div><label class="lbl" for="aLoc">Location</label><input class="inp" id="aLoc"></div><div><label class="lbl" for="aSal">Salary</label><input class="inp" id="aSal" placeholder="e.g. 8 LPA"></div></div>
-    <div style="margin-top:12px"><label class="lbl" for="aDesc">Job description</label><textarea class="inp" id="aDesc" placeholder="Paste the description (optional)"></textarea></div><div class="err" id="aErr"></div></form>`,
-    `<button class="btn" data-addsave style="flex:1">Add job</button>`);
-}
-
-/* ===================================================== sync preferences to the job search (GitHub) */
-async function syncPrefs(silent){
-  const S=U.settings,msg=$("syncMsg");
-  if(PREVIEW||!S.ghToken){ if(!silent&&msg) msg.textContent=PREVIEW?"Saved here. Connects to the job search on your live site.":"Saved. Connect the search to apply this to Telegram alerts."; return; }
-  if(msg) msg.textContent="Updating your job search…";
-  const api=`https://api.github.com/repos/${S.ghRepo}/contents/config.json`,H={Authorization:"Bearer "+S.ghToken,Accept:"application/vnd.github+json"};
-  try{
-    const cur=await (await fetch(api,{headers:H})).json(); if(!cur.content) throw new Error(cur.message||"no access");
-    const cfg=JSON.parse(decodeURIComponent(escape(atob(cur.content.replace(/\n/g,"")))));
-    const p=U.prefs,roles=[...p.roles,...splitList(p.custom)];
-    cfg.alerts=Object.assign(cfg.alerts||{},{experience_years:p.exp,roles,skills:mySkills(p),
-      locations:p.cities.filter(c=>c!=="Remote"&&c!=="Anywhere in India"),include_remote:p.cities.includes("Remote")||p.cities.includes("Anywhere in India"),
-      telegram_enabled:S.telegram,min_match:S.minMatch});
-    const body=JSON.stringify(cfg,null,2);
-    const r=await fetch(api,{method:"PUT",headers:H,body:JSON.stringify({message:"Update preferences from app",content:btoa(unescape(encodeURIComponent(body))),sha:cur.sha})});
-    if(!r.ok) throw new Error((await r.json()).message);
-    if(msg) msg.textContent="Job search updated. Takes effect from the next search.";
-    if(!silent) toast("Job search updated");
-  }catch(e){ if(msg) msg.textContent="Couldn't update the job search: "+e.message+". Check the connection key."; }
-}
-function openGh(){
-  openSheet("Connect job search",`<p class="meta" style="margin-top:0">This lets the app tell the job search which roles to look for and which jobs to send to Telegram. Do it once on each device.</p>
-    <div class="card"><h3>Make a key</h3><ol class="why" style="color:var(--ink)"><li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a></li><li>Repository access: only <b>job-alerts</b></li><li>Permissions: <b>Contents → Read and write</b> (nothing else)</li><li>Expiration: 1 year. Generate and copy the key.</li></ol></div>
-    <label class="lbl" for="ghTok">Paste the key</label><input class="inp" id="ghTok" placeholder="github_pat_…" value="${esc(U.settings.ghToken)}">
-    <div style="margin-top:12px"><label class="lbl" for="ghRepo">Repository</label><input class="inp" id="ghRepo" value="${esc(U.settings.ghRepo)}"></div>
-    <p class="hint">The key is stored only on this device.</p>`,
-    `<button class="btn" data-ghsave style="flex:1">Connect</button>`);
-}
-
-/* ===================================================== backup */
-function exportData(){
-  const blob=new Blob([JSON.stringify({version:1,account:{email:session.email,name:accounts[session.email].name},user:{...U,settings:{...U.settings,ghToken:""}}},null,1)],{type:"application/json"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="udyogam-vetuku-backup.json";document.body.appendChild(a);a.click();a.remove();toast("Backup downloaded");
-}
-function importData(e){
-  const f=e.target.files[0];if(!f)return;const r=new FileReader();
-  r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.user?.profile)throw 0;const tok=U.settings.ghToken;U={...d.user,settings:{...d.user.settings,ghToken:tok}};U.profile.email=session.email;saveUser();applyTheme();toast("Backup restored");go("jobs");}catch(_){toast("That file isn't a valid backup.");}};
-  r.readAsText(f);
-}
-
-/* ===================================================== global events */
-document.addEventListener("click",async e=>{
-  const t=e.target.closest("button,a,[data-open]");if(!t||$("shell").hidden)return;
-  const d=t.dataset;
-  if(d.apply){const id=d.apply;if(!U.jobs[id]?.stage||U.jobs[id].stage==="saved")setTimeout(()=>{if(confirm("Did you apply to this job? Tap OK to add it to My jobs.")){setStage(id,"applied");renderNav();render();if($("sheet").classList.contains("open"))openJob(id);toast("Added to My jobs → Applied");}},900);return;}
-  if(d.save){e.stopPropagation();const s=toggleSave(d.save);t.setAttribute("aria-pressed",s);toast(s?"Saved to My jobs":"Removed from saved");renderNav();if(view==="mine")renderMine();return;}
-  if(d.copy!==undefined){copy(d.copy);return;}
-  if(d.go){closeSheet();go(d.go);return;}
-  if(d.open){openJob(d.open);return;}
-  if(d.company!==undefined){closeSheet();resetFilters();F.forYou=false;F.company=d.company;filtersOpen=true;go("jobs");return;}
-  if("more" in d){shown+=PAGE;renderJobs();return;}
-  if("fclear" in d){const q=F.q;resetFilters();F.q=q;renderJobs();return;}
-  if("ftoggle" in d){filtersOpen=!filtersOpen;renderJobs();return;}
-  if("addjob" in d){openAddJob();return;}
-  if("addsave" in d){const url=$("aUrl").value.trim(),title=$("aTitle").value.trim(),co=$("aCo").value.trim();
-    if(!/^https?:\/\//.test(url)||!title||!co){$("aErr").textContent="Add the job link, title and company.";return;}
-    const j={id:"m"+Date.now().toString(36),manual:true,title,company:co,location:$("aLoc").value.trim(),salary:$("aSal").value.trim(),description:$("aDesc").value.trim(),url,source:"Added by you",found:new Date().toISOString(),posted:new Date().toISOString(),tech:[],exp_min:null,exp_max:null,remote:/remote/i.test($("aLoc").value)};
-    U.manual.unshift(j);track(j.id).saved=true;track(j.id).snap=j;saveUser();closeSheet();trackStage="saved";renderNav();render();toast("Job added to My jobs");return;}
-  if(d.delmanual){if(!confirm("Delete this job and its notes?"))return;U.manual=U.manual.filter(j=>j.id!==d.delmanual);delete U.jobs[d.delmanual];saveUser();closeSheet();renderNav();render();toast("Job deleted");return;}
-  if(d.hide){U.hidden[d.hide]=1;saveUser();closeSheet();render();toast("Hidden from your feed");return;}
-  if(d.setstage){if(d.setstage==="saved"){const tt=track(d.id);tt.saved=true;tt.stage=null;if(!tt.snap)tt.snap=findJob(d.id);saveUser();}else setStage(d.id,d.setstage);renderNav();render();openJob(d.id);toast("Moved to "+STAGES.find(s=>s[0]===d.setstage)[1]);return;}
-  if(d.stageTab){trackStage=d.stageTab;renderMine();return;}
-  if("editprefs" in d){closeSheet();startOnboarding();return;}
-  if(d.themeSet){U.settings.theme=d.themeSet;saveUser();applyTheme();renderProfile();return;}
-  if("gh" in d){openGh();return;}
-  if("ghsave" in d){U.settings.ghToken=$("ghTok").value.trim();U.settings.ghRepo=$("ghRepo").value.trim()||"chandramouli-projects/job-alerts";saveUser();closeSheet();renderProfile();syncPrefs();return;}
-  if("export" in d){exportData();return;}
-  if("logout" in d){logout();return;}
-  if("pw" in d){
-    openSheet("Change password",`<div style="margin-bottom:12px"><label class="lbl" for="pwOld">Current password</label><input class="inp" id="pwOld" type="password" autocomplete="current-password"></div>
-      <div><label class="lbl" for="pwNew">New password</label><input class="inp" id="pwNew" type="password" autocomplete="new-password"><div class="hint">At least 6 characters.</div></div><div class="err" id="pwErr"></div>`,`<button class="btn" data-pwsave style="flex:1">Change password</button>`);return;}
-  if("pwsave" in d){const a=accounts[session.email];if(a.hash!==await hashPw($("pwOld").value,a.salt)){$("pwErr").textContent="Current password is wrong.";return;}
-    const nw=$("pwNew").value;if(nw.length<6){$("pwErr").textContent="New password needs at least 6 characters.";return;}
-    a.hash=await hashPw(nw,a.salt);LS.set("uv.accounts",accounts);closeSheet();toast("Password changed");return;}
-  if("delacc" in d){if(!confirm("Delete your account and all your data on this device? This can't be undone."))return;
-    LS.del("uv.user."+session.email);delete accounts[session.email];LS.set("uv.accounts",accounts);logout();toast("Account deleted");return;}
-});
-boot();
-</script>
+<!-- Scripts: one file per screen, in docs/js. Order matters (constants first, app.js last). -->
+<script src="js/constants.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/state.js"></script>
+<script src="js/header.js"></script>
+<script src="js/password-field.js"></script>
+<script src="js/login.js"></script>
+<script src="js/login-background.js"></script>
+<script src="js/forgot-password.js"></script>
+<script src="js/onboarding.js"></script>
+<script src="js/matching.js"></script>
+<script src="js/job-store.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/job-card.js"></script>
+<script src="js/jobs-page.js"></script>
+<script src="js/my-jobs-page.js"></script>
+<script src="js/profile-page.js"></script>
+<script src="js/job-details.js"></script>
+<script src="js/add-job.js"></script>
+<script src="js/github-sync.js"></script>
+<script src="js/backup.js"></script>
+<script src="js/applications.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

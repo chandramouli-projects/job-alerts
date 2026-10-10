@@ -1,0 +1,10 @@
+/* My jobs page: Saved / Applied tabs */
+.pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.pipe button{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:left;border-top:4px solid var(--c)}
+.pipe button[aria-pressed="true"]{border-color:var(--c);box-shadow:inset 0 0 0 1px var(--c)}
+.pipe b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.7rem;line-height:1}
+.pipe small{color:var(--muted);font-weight:600}
+@media (max-width:480px){.pipe{grid-template-columns:repeat(2,1fr)}}
+.pipe.five{grid-template-columns:repeat(5,1fr)}
+.pipe.two{grid-template-columns:repeat(2,minmax(0,220px))}
+@media (max-width:560px){.pipe.five{grid-template-columns:repeat(3,1fr)}.pipe.five b{font-size:1.35rem}.pipe.five button{padding:10px}}

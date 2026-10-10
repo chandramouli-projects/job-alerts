@@ -1,0 +1,11 @@
+/* Filters panel on the Jobs page */
+.fpanel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.fpanel label{font-size:.76rem;font-weight:700;color:var(--muted);display:block}
+.fpanel select{display:block;width:100%;margin-top:4px;padding:10px 32px 10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%235D6B72' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 12px center;-webkit-appearance:none;appearance:none;font-weight:600;font-size:.9rem;color:var(--ink)}
+.fpanel select.on{border-color:var(--accent);background-color:var(--accent-soft);color:var(--accent)}
+.fpanel .fend{grid-column:1/-1;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:2px}
+.fpanel .fend label{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink);font-weight:600;cursor:pointer}
+.fpanel .fend input{width:18px;height:18px;accent-color:var(--accent);margin:0}
+.fpanel .fend .clear{margin-left:auto;background:none;border:0;color:var(--accent);font-weight:700;padding:0}
+.ftoggle{display:none}
+@media (max-width:700px){.fpanel{grid-template-columns:1fr 1fr}.ftoggle{display:inline-flex}.fpanel.collapsed{display:none}}
