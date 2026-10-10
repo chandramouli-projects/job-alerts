@@ -1,0 +1,34 @@
+{
+  "search_roles": [
+    "Software Engineer",
+    "Frontend Developer",
+    "Backend Developer",
+    "Full Stack Developer",
+    "Java Developer",
+    "Python Developer",
+    "React Developer",
+    ".NET Developer",
+    "Data Analyst",
+    "Data Scientist",
+    "DevOps Engineer",
+    "QA Engineer",
+    "Android Developer",
+    "UI UX Designer"
+  ],
+  "country": "in",
+  "posted_within": "3days",
+  "jsearch_pages": 1,
+  "keep_jobs_days": 21,
+
+  "alerts": {
+    "experience_years": null,
+    "roles": [],
+    "skills": [],
+    "locations": [],
+    "include_remote": true,
+    "experience_tolerance_years": 1,
+    "min_skill_matches": 1,
+    "exclude_words": ["unpaid"],
+    "max_messages_per_run": 10
+  }
+}
