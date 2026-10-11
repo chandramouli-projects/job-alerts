@@ -1,13 +1,13 @@
 {
- "turn": 7,
+ "turn": 8,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-11T14:18:28+00:00",
-  "fetched": 122,
-  "new": 11,
-  "alerts": 11,
+  "at": "2026-10-11T20:27:23+00:00",
+  "fetched": 139,
+  "new": 12,
+  "alerts": 12,
   "jsearch": {
-   "role": "QA Engineer OR Software Tester OR Automation Testing OR Manual Testing jobs in India",
+   "role": "Frontend Developer OR React Developer OR Angular Developer OR Full Stack Developer jobs in India",
    "tried": [
     "/search-v2:200"
    ],
@@ -27,15 +27,15 @@
     "Sarvam AI:0",
     "Freshworks:2",
     "Visa:0",
-    "Bosch:27",
+    "Bosch:24",
     "ServiceNow:13",
-    "Accenture:3",
-    "NVIDIA:2",
+    "Accenture:21",
+    "NVIDIA:3",
     "Salesforce:17",
     "Adobe:2",
     "Intel:0",
     "Mastercard:5",
-    "PwC:9"
+    "PwC:10"
    ],
    "failed": []
   }
