@@ -1,22 +1,23 @@
 {
- "turn": 5,
+ "turn": 6,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-10T19:43:11+00:00",
-  "fetched": 72,
-  "new": 64,
-  "alerts": 64,
+  "at": "2026-10-11T07:29:35+00:00",
+  "fetched": 106,
+  "new": 43,
+  "alerts": 43,
   "jsearch": {
-   "role": "QA Engineer OR Software Tester OR Automation Testing OR Manual Testing jobs in India",
+   "role": "Android Developer OR Flutter Developer OR UI UX Designer OR Salesforce OR SAP Consultant jobs in India",
    "tried": [
     "/search-v2:200"
    ],
    "path": "/search-v2",
-   "results": 10
+   "results": 0,
+   "note": "{\"status\": \"OK\", \"request_id\": \"9d27412e-a341-4090-8c9e-7723e7b6ccb9\", \"parameters\": {\"query\": \"Android Developer OR Flutter Developer OR UI UX Designer OR Salesforce OR SAP Consultant jobs in India\", \"num_pages\": 1, \"date_posted\": \"3days\", \"country\": \"in\", \"language\": \"en\"}}"
   },
   "company_boards": {
    "ok": [
-    "Databricks:10",
+    "Databricks:8",
     "Stripe:9",
     "Rubrik:7",
     "Groww:0",
@@ -27,16 +28,17 @@
     "Sarvam AI:0",
     "Freshworks:2",
     "Visa:0",
-    "Bosch:19",
-    "ServiceNow:12"
+    "Bosch:27",
+    "ServiceNow:13",
+    "Accenture:3",
+    "NVIDIA:2",
+    "Salesforce:17",
+    "Adobe:1",
+    "Intel:0",
+    "Mastercard:5",
+    "PwC:9"
    ],
-   "failed": [
-    "PhonePe:404 Client Error: Not Found for url: https://boards-api.gree",
-    "Postman:404 Client Error: Not Found for url: https://boards-api.gree",
-    "BrowserStack:404 Client Error: Not Found for url: https://boards-api.gree",
-    "Upstox:404 Client Error: Not Found for url: https://api.lever.co/v0",
-    "Jupiter:404 Client Error: Not Found for url: https://api.lever.co/v0"
-   ]
+   "failed": []
   }
  },
  "jsearch_path": "/search-v2"
