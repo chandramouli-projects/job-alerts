@@ -1,23 +1,22 @@
 {
- "turn": 6,
+ "turn": 7,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-11T07:29:35+00:00",
-  "fetched": 106,
-  "new": 43,
-  "alerts": 43,
+  "at": "2026-10-11T14:18:28+00:00",
+  "fetched": 122,
+  "new": 11,
+  "alerts": 11,
   "jsearch": {
-   "role": "Android Developer OR Flutter Developer OR UI UX Designer OR Salesforce OR SAP Consultant jobs in India",
+   "role": "QA Engineer OR Software Tester OR Automation Testing OR Manual Testing jobs in India",
    "tried": [
     "/search-v2:200"
    ],
    "path": "/search-v2",
-   "results": 0,
-   "note": "{\"status\": \"OK\", \"request_id\": \"9d27412e-a341-4090-8c9e-7723e7b6ccb9\", \"parameters\": {\"query\": \"Android Developer OR Flutter Developer OR UI UX Designer OR Salesforce OR SAP Consultant jobs in India\", \"num_pages\": 1, \"date_posted\": \"3days\", \"country\": \"in\", \"language\": \"en\"}}"
+   "results": 10
   },
   "company_boards": {
    "ok": [
-    "Databricks:8",
+    "Databricks:13",
     "Stripe:9",
     "Rubrik:7",
     "Groww:0",
@@ -33,7 +32,7 @@
     "Accenture:3",
     "NVIDIA:2",
     "Salesforce:17",
-    "Adobe:1",
+    "Adobe:2",
     "Intel:0",
     "Mastercard:5",
     "PwC:9"
