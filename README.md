@@ -162,6 +162,10 @@ Senior / Lead / Manager titles are not sent when your experience is under 5 year
   your search (role, city, experience) on that site. Freshers see the student sites first.
 - **Companies**: every company hiring right now, with job counts. Tap one to see its jobs.
 - **My applications**: jobs you applied to, with status (Applied, Interview, Offer, Closed).
+- **Resume**: on the Profile page (or "Fill from my resume" when you set up), upload your resume as
+  PDF or Word (.docx), up to 2 MB. The app reads the skills in it and you choose which to add, so
+  "Jobs for me" fits you better. Your resume is read on your own device; the file is kept with your
+  account (or only in that browser when the site runs without the accounts server).
 
 ## Free plan limits
 JSearch free plan allows about 200 searches a month. This setup does one search per run (a group of related roles,

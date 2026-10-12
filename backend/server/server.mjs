@@ -58,6 +58,8 @@ globalThis.caches = { default: {
 const database = openDatabase({ file: DB_FILE, legacyFile: process.env.DB_FILE ? null : join(ROOT, "data", "users.json") });
 const db = database.load();
 const saveDb = () => database.save(db);
+const RESUME_TYPES = { ".pdf": "application/pdf", ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document", ".txt": "text/plain; charset=utf-8" };
+const RESUME_MAX = 2 * 1024 * 1024;
 const hash = (pw, salt) => scryptSync(pw, salt, 32).toString("hex");
 function checkPw(a, pw) {
   const h = Buffer.from(hash(pw, a.salt), "hex");
@@ -148,7 +150,23 @@ async function api(req, path) {
     saveDb();
     return [200, { ok: true }];
   }
+  if (path === "resume" && req.method === "PUT") {
+    // the app sends { name, type, data: base64 }; the file comes back from GET /api/resume
+    const name = String(body.name || "").trim().slice(0, 120), type = RESUME_TYPES[extname(name).toLowerCase()];
+    const data = Buffer.from(String(body.data || ""), "base64");
+    if (!type) return [400, { error: "Upload a PDF or Word (.docx) file." }];
+    if (!data.length) return [400, { error: "This file is empty." }];
+    if (data.length > RESUME_MAX) return [413, { error: "The resume can be up to 2 MB." }];
+    const at = Date.now();
+    database.resume.put(email, { name, type, data, at });
+    return [200, { name, type, size: data.length, at }];
+  }
+  if (path === "resume" && req.method === "DELETE") {
+    database.resume.remove(email);
+    return [200, { ok: true }];
+  }
   if (path === "user" && req.method === "DELETE") {
+    database.resume.remove(email);
     delete db.accounts[email]; delete db.users[email]; delete db.mail[email];
     for (const [t, s] of Object.entries(db.sessions)) if (s.email === email) delete db.sessions[t];
     saveDb();
@@ -192,6 +210,14 @@ function readBody(req) {
 createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
   try {
+    if (url.pathname === "/api/resume" && req.method === "GET") {   // the file itself, only to its owner
+      const email = sessionEmail(req), r = email && database.resume.get(email);
+      if (!r) { res.writeHead(email ? 404 : 401, { "Content-Type": "application/json; charset=utf-8" }).end(JSON.stringify({ error: email ? "No resume uploaded." : "Please log in again." })); return; }
+      res.writeHead(200, { "Content-Type": r.file_type, "Content-Length": r.data.length, "Cache-Control": "no-store",
+        "Content-Disposition": `inline; filename*=UTF-8''${encodeURIComponent(r.file_name)}`, "X-Content-Type-Options": "nosniff" });
+      res.end(Buffer.from(r.data));
+      return;
+    }
     if (url.pathname.startsWith("/api/")) {
       const [status, out] = await api(req, url.pathname.slice(5));
       res.writeHead(status, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });

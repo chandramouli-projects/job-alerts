@@ -139,3 +139,14 @@ CREATE TABLE IF NOT EXISTS mail_events (
   subject  TEXT,
   other    TEXT
 );
+
+-- Each person's uploaded resume (PDF or Word), one per account. Kept out of the tables above because
+-- the server rewrites those on every save; this one is written only on upload and remove.
+CREATE TABLE IF NOT EXISTS resumes (
+  email        TEXT PRIMARY KEY REFERENCES accounts(email),
+  file_name    TEXT NOT NULL,
+  file_type    TEXT NOT NULL,   -- application/pdf, ...wordprocessingml.document or text/plain
+  size         INTEGER,         -- bytes
+  data         BLOB NOT NULL,
+  uploaded_at  INTEGER
+);

@@ -39,7 +39,7 @@ function startOnboarding(){
   Object.keys(PK).forEach(k=>{pkEl(k).innerHTML=`<div class="pk-field" role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="q-${k}" data-pkopen="${k}"><span class="pk-chips"></span></div>
     <div class="pk-pop" hidden>${PK[k].find?`<input class="pk-search" placeholder="${PK[k].find}" aria-label="${PK[k].find}" data-pksearch="${k}">`:""}<div class="pk-list" role="listbox" aria-labelledby="q-${k}" ${k==="exp"?"":`aria-multiselectable="true"`}></div></div>`;pkField(k);});
   $("obBack").innerHTML=CLOSE;$("obBack").hidden=!U.onboarded;renderHead();
-  $("auth").hidden=true;$("shell").hidden=true;$("ob").hidden=false;obValidate();window.scrollTo(0,0);
+  $("auth").hidden=true;$("shell").hidden=true;$("ob").hidden=false;resumeErr="";renderObResume();obValidate();window.scrollTo(0,0);
 }
 function obValidate(){$("obNext").disabled=!(draft.roles.length&&draft.exp!==null&&draft.cities.length);}
 function pkPick(k,v){

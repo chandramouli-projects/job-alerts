@@ -85,6 +85,13 @@ for a static portal, and sends matching ones to Telegram.
   on screen**, because there is no email service. `/api/reset` takes PIN + new password (10 min,
   5 tries) and logs out other sessions. The user chose this on purpose; it isn't real identity
   proof, since anyone who knows an email can reset it. Sending the PIN by email is the upgrade.
+- Resume (Profile card + "Fill from my resume" in setup; `components/resume-upload.js`): PDF, .docx or
+  .txt up to 2 MB. Read in the browser (`services/resume-reader.js`: pdf.js 3.11.174 from cdnjs with
+  SRI, loaded only for PDFs; .docx unzipped with `DecompressionStream`), skills found with
+  `RESUME_SKILLS` in `constants.js`, and the person picks which to add. The file goes to the
+  `resumes` table (`PUT/GET/DELETE /api/resume`, written one row at a time, not through `saveDb()`)
+  or, with no server, to IndexedDB (`services/resume-store.js`). Only `{name,type,size,at}` is in
+  `U.profile.resumeFile`. Tests: `tests/specs/resume.spec.js`.
 - `pip install requests`, copy `.env.example` to `.env`, then `python backend/collector/fetch_jobs.py`.
   The script reads `.env` itself. `.env` is gitignored, so never commit it.
 - A local run spends JSearch quota, moves `turn` forward, and rewrites `frontend/data/jobs.json` and

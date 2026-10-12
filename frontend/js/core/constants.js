@@ -17,6 +17,28 @@ const ROLES={
 const EXP=[[0,"Fresher"],[1,"1 year"],[2,"2 years"],[3,"3 years"],[4,"4 years"],[5,"5 years"],[7,"6–8 years"],[10,"9+ years"]];
 const CITIES=["Hyderabad","Bangalore","Chennai","Pune","Mumbai","Delhi","Noida","Gurgaon","Kolkata","Ahmedabad","Visakhapatnam","Vijayawada","Kochi","Coimbatore","Remote","Anywhere in India"];
 const SKILLS=["java","python","javascript","typescript","react","angular","node","spring boot","sql","mongodb","aws","azure","docker","kubernetes","html","css","django",".net","c#","power bi","excel","selenium","git","rest","microservices","flutter","kotlin","machine learning"];
+/* Skills read from a resume: [name saved in the profile, words that mean it]. Only clear words:
+   "go" or "spring" alone are everyday words, so they need "golang" or "spring boot". */
+const RESUME_SKILLS=[["java",["java","core java","j2ee"]],["python",["python"]],["javascript",["javascript","es6"]],["typescript",["typescript"]],
+ ["c#",["c#","csharp"]],["c++",["c++","cpp"]],["golang",["golang","go lang"]],["kotlin",["kotlin"]],["swift",["swift ui","swiftui","ios swift"]],["php",["php"]],
+ ["ruby",["ruby","ruby on rails"]],["scala",["scala"]],["rust",["rust lang","rustlang"]],["r",["r programming","rstudio"]],["sql",["sql","pl/sql","t-sql"]],["shell scripting",["shell scripting","bash"]],
+ ["html",["html","html5"]],["css",["css","css3"]],["react",["react","react.js"]],["angular",["angular","angularjs"]],["vue",["vue","vue.js"]],["next.js",["next.js","nextjs"]],
+ ["redux",["redux"]],["tailwind",["tailwind","tailwindcss"]],["bootstrap",["bootstrap"]],["jquery",["jquery"]],
+ ["node",["node","node.js"]],["express",["express.js","expressjs"]],["spring boot",["spring boot","springboot"]],["spring",["spring framework","spring mvc"]],["hibernate",["hibernate","jpa"]],
+ ["django",["django"]],["flask",["flask"]],["fastapi",["fastapi"]],[".net",[".net","dotnet",".net core"]],["asp.net",["asp.net"]],["laravel",["laravel"]],
+ ["graphql",["graphql"]],["rest",["rest api","rest apis","restful","rest services"]],["microservices",["microservices","micro services"]],["kafka",["kafka"]],["rabbitmq",["rabbitmq"]],
+ ["mysql",["mysql"]],["postgresql",["postgresql","postgres"]],["mongodb",["mongodb","mongo db"]],["oracle",["oracle db","oracle database","oracle sql"]],["redis",["redis"]],["elasticsearch",["elasticsearch","elastic search"]],
+ ["excel",["excel","ms excel","advanced excel"]],["power bi",["power bi","powerbi"]],["tableau",["tableau"]],["pandas",["pandas"]],["numpy",["numpy"]],
+ ["machine learning",["machine learning"]],["deep learning",["deep learning"]],["nlp",["nlp","natural language processing"]],["tensorflow",["tensorflow"]],["pytorch",["pytorch"]],
+ ["data science",["data science"]],["spark",["spark","pyspark"]],["hadoop",["hadoop"]],["airflow",["airflow"]],["snowflake",["snowflake"]],["etl",["etl"]],
+ ["aws",["aws","amazon web services"]],["azure",["azure"]],["gcp",["gcp","google cloud"]],["docker",["docker"]],["kubernetes",["kubernetes","k8s"]],["jenkins",["jenkins"]],
+ ["terraform",["terraform"]],["ansible",["ansible"]],["linux",["linux","unix"]],["git",["git","github","gitlab","bitbucket"]],["ci/cd",["ci/cd","ci cd","cicd"]],
+ ["selenium",["selenium","selenium webdriver"]],["cypress",["cypress"]],["playwright",["playwright"]],["appium",["appium"]],["jmeter",["jmeter"]],["postman",["postman"]],
+ ["testng",["testng"]],["junit",["junit"]],["cucumber",["cucumber","bdd"]],["rest assured",["rest assured","restassured"]],["manual testing",["manual testing"]],
+ ["automation testing",["automation testing","test automation"]],["api testing",["api testing"]],["jira",["jira"]],
+ ["android",["android"]],["ios",["ios"]],["flutter",["flutter"]],["react native",["react native"]],
+ ["figma",["figma"]],["adobe xd",["adobe xd"]],["photoshop",["photoshop"]],["ui/ux",["ui/ux","ux design","ui design"]],
+ ["sap",["sap"]],["salesforce",["salesforce"]],["agile",["agile"]],["scrum",["scrum"]]];
 const STAGES=[["saved","Saved","var(--muted)"],["applied","Applied","var(--applied)"],["viewed","Viewed","var(--applied)"],["shortlisted","Shortlisted","var(--interview)"],["interview","Interview","var(--interview)"],["offer","Offer","var(--offer)"],["rejected","Not selected","var(--rejected)"]];
 const SENIOR=/\b(senior|sr\.?|lead|principal|staff|architect|manager|head|director)\b/i, JUNIOR=/\b(intern|internship|trainee|fresher)\b/i;
 const PAGE=25;
@@ -30,6 +52,8 @@ const ICON={
  me:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
  set:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
  bookmark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18l-6-4-6 4z"/></svg>',
+ upload:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>',
+ file:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>',
  filter:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 5h18M6 12h12M10 19h4"/></svg>'};
 const LOGOUT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>';
 const CLOSE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';

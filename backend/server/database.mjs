@@ -5,6 +5,7 @@ The database: SQLite tables (see database/schema.sql) behind the same simple obj
   db.users[email]    = everything the app saves for a person (profile, prefs, settings, jobs, hidden, ...)
   db.mail[email]     = Gmail status tracking ({ seen, jobs, lastRun, error })
 openDatabase() reads the tables into that object; save() writes it back in one transaction.
+Resumes (files) are not in that object: resume.get / put / remove read and write one row at a time.
 There are only a few people, so save() rewrites every row; simple, and obviously right.
 The first time, accounts from the old data/users.json are imported and that file moves to database/backups/.
 SQLite comes with Node.js (node:sqlite), so there is nothing to install.
@@ -167,5 +168,13 @@ export function openDatabase({ file, legacyFile }) {
     console.log(`Imported ${Object.keys(old.accounts || {}).length} account(s) from ${legacyFile} into the database.`);
   }
 
-  return { load, save, close: () => sql.close() };
+  /* ---------------------------------------------------------------- resumes (read and written one at a time) */
+  const resume = {
+    get: email => sql.prepare("SELECT * FROM resumes WHERE email = ?").get(email),
+    put: (email, r) => sql.prepare("INSERT OR REPLACE INTO resumes (email, file_name, file_type, size, data, uploaded_at) VALUES (?, ?, ?, ?, ?, ?)")
+      .run(email, r.name, r.type, r.data.length, r.data, r.at),
+    remove: email => sql.prepare("DELETE FROM resumes WHERE email = ?").run(email),
+  };
+
+  return { load, save, resume, close: () => sql.close() };
 }

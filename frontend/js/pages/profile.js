@@ -1,6 +1,7 @@
 /* Profile page: details, settings, change password, delete account */
 const PF=[["name","Full name"],["email","Email","email"],["phone","Mobile number","tel"],["linkedin","LinkedIn URL","url"],["resume","Resume link (Google Drive etc.)","url"],["expectedCtc","Expected salary","text","e.g. 8 LPA"],["notice","Notice period","text","e.g. 30 days / Immediate"]];
-function completeness(){const f=PF.filter(([k])=>String(U.profile[k]||"").trim()).length;return Math.round(100*f/PF.length);}
+// an uploaded resume counts as the resume link
+function completeness(){const f=PF.filter(([k])=>String(U.profile[k]||"").trim()||(k==="resume"&&U.profile.resumeFile)).length;return Math.round(100*f/PF.length);}
 const isOwner=()=>U.settings.owner||location.hash.includes("owner");
 function renderProfile(){
   const P=U.profile,p=U.prefs,S=U.settings,pc=completeness();
@@ -12,6 +13,7 @@ function renderProfile(){
   <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 style="margin:0">My job details</h3><button class="btn ghost sm" data-editprefs>Edit</button></div>
     <div class="kv"><div><small>Role</small><b>${esc(roles.join(", ")||"—")}</b></div><div><small>Experience</small><b>${esc(EXP.find(e=>e[0]===p.exp)?.[1]||"—")}</b></div>
     <div><small>Cities</small><b>${esc(p.cities.join(", ")||"—")}</b></div><div><small>Skills</small><b>${esc(skills.join(", ")||"—")}</b></div></div></div>
+  ${resumeCard()}
   <form class="card form-card" id="profileForm"><h3>Personal details</h3>
     <div class="grid2">${PF.map(([k,l,type="text",ph=""])=>`<div class="row"><label class="lbl" for="pf_${k}">${l}</label><input class="inp" id="pf_${k}" data-pf="${k}" type="${type}" value="${esc(P[k])}" placeholder="${esc(ph)}" ${k==="email"?"readonly":""}></div>`).join("")}</div>
     <div class="actions"><button class="btn" type="submit">Save details</button></div></form>
@@ -44,6 +46,6 @@ onAppClick(async(d,t,e)=>{
     const nw=$("pwNew").value;if(nw.length<6){$("pwErr").textContent="New password needs at least 6 characters.";return;}
     a.hash=await hashPw(nw,a.salt);LS.set("uv.accounts",accounts);closeSheet();toast("Password changed");return;}
   if("delacc" in d){if(!await ask("Delete your account?","All your data will be removed. This can't be undone.","Delete account",true))return;
-    if(SERVER){try{await api("user",null,"DELETE");}catch(err){toast(err.message);return;}}
+    if(SERVER){try{await api("user",null,"DELETE");}catch(err){toast(err.message);return;}}else{try{await dropResume();}catch(err){}}
     LS.del("uv.user."+session.email);delete accounts[session.email];LS.set("uv.accounts",accounts);logout();toast("Account deleted");return;}
 });

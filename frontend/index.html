@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="css/pages/my-jobs.css">
 <link rel="stylesheet" href="css/components/applications.css">
 <link rel="stylesheet" href="css/pages/profile.css">
+<link rel="stylesheet" href="css/components/resume-upload.css">
 <link rel="stylesheet" href="css/components/rail.css">
 </head>
 <body>
@@ -84,7 +85,7 @@
     <div class="q"><span class="lbl" id="q-role">What job are you looking for?</span><div class="pk" data-pk="role"></div></div>
     <div class="q"><span class="lbl" id="q-exp">How much experience do you have?</span><div class="pk" data-pk="exp"></div></div>
     <div class="q"><span class="lbl" id="q-city">Where do you want to work?</span><div class="pk" data-pk="city"></div></div>
-    <div class="q"><span class="lbl" id="q-skill">What are your skills?</span><div class="pk" data-pk="skill"></div></div>
+    <div class="q"><span class="lbl" id="q-skill">What are your skills?</span><div class="pk" data-pk="skill"></div><div id="obResume"></div></div>
     <button class="btn ob-go" id="obNext">Show my jobs</button>
   </div>
 </section>
@@ -189,6 +190,8 @@
 <script src="js/pages/onboarding.js"></script>
 <script src="js/services/matching.js"></script>
 <script src="js/services/job-store.js"></script>
+<script src="js/services/resume-reader.js"></script>
+<script src="js/services/resume-store.js"></script>
 <script src="js/components/filters.js"></script>
 <script src="js/components/layout.js"></script>
 <script src="js/components/job-card.js"></script>
@@ -196,6 +199,7 @@
 <script src="js/pages/saved.js"></script>
 <script src="js/pages/my-jobs.js"></script>
 <script src="js/pages/profile.js"></script>
+<script src="js/components/resume-upload.js"></script>
 <script src="js/components/job-details.js"></script>
 <script src="js/services/github-sync.js"></script>
 <script src="js/services/backup.js"></script>
