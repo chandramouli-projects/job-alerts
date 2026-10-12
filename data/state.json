@@ -1,13 +1,13 @@
 {
- "turn": 8,
+ "turn": 9,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-11T20:27:23+00:00",
-  "fetched": 139,
-  "new": 12,
-  "alerts": 12,
+  "at": "2026-10-12T07:37:45+00:00",
+  "fetched": 123,
+  "new": 18,
+  "alerts": 18,
   "jsearch": {
-   "role": "Frontend Developer OR React Developer OR Angular Developer OR Full Stack Developer jobs in India",
+   "role": "Java Developer OR Python Developer OR Node.js Developer OR .NET Developer OR Backend Developer jobs in India",
    "tried": [
     "/search-v2:200"
    ],
@@ -27,17 +27,18 @@
     "Sarvam AI:0",
     "Freshworks:2",
     "Visa:0",
-    "Bosch:24",
-    "ServiceNow:13",
-    "Accenture:21",
-    "NVIDIA:3",
-    "Salesforce:17",
+    "Bosch:23",
+    "ServiceNow:14",
+    "NVIDIA:6",
+    "Salesforce:16",
     "Adobe:2",
     "Intel:0",
-    "Mastercard:5",
-    "PwC:10"
+    "Mastercard:9",
+    "PwC:9"
    ],
-   "failed": []
+   "failed": [
+    "Accenture:500 Server Error: Internal Server Error for url: https://acc"
+   ]
   }
  },
  "jsearch_path": "/search-v2"
