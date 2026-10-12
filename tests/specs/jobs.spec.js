@@ -127,7 +127,7 @@ test.describe("Search and live search", () => {
   test("TC-LIVE-02 searching any role shows the jobs found for it", async ({ page, request }) => {
     await start(page, request, QA_HYD, NURSE);
     await page.fill("#q", "Nurse jobs in Chennai");
-    await page.click("#searchForm button");
+    await page.click("#searchForm button[type=submit]");
     await expect(page.locator("#main .job h3", { hasText: "Staff Nurse" })).toBeVisible();
     expect(calls).toContainEqual({ q: "Nurse", where: "Chennai" });
   });
@@ -136,7 +136,7 @@ test.describe("Search and live search", () => {
     await start(page, request, QA_HYD, NURSE);
     for (let i = 0; i < 2; i++) {
       await page.fill("#q", "Nurse jobs in Chennai");
-      await page.click("#searchForm button");
+      await page.click("#searchForm button[type=submit]");
       await page.waitForTimeout(300);
     }
     expect(calls.filter(c => c.q === "Nurse")).toHaveLength(1);
@@ -145,7 +145,7 @@ test.describe("Search and live search", () => {
   test("TC-LIVE-04 a search with no results says so", async ({ page, request }) => {
     await start(page, request);
     await page.fill("#q", "Zookeeper jobs in Leh");
-    await page.click("#searchForm button");
+    await page.click("#searchForm button[type=submit]");
     await expect(page.locator(".empty h3")).toHaveText("No jobs match right now");
   });
 });
@@ -180,5 +180,31 @@ test.describe("Filter button and picked filters", () => {
     await page.click(".resbar .fclear-all");
     await expect(page.locator(".resbar .fchip")).toHaveCount(0);
     await expect(page.locator(".fbtn .fbadge")).toHaveCount(0);
+  });
+});
+
+test.describe("Smarter matching", () => {
+  test("TC-SMART-01 job details name the skills the job asks for that my profile doesn't have", async ({ page, request }) => {
+    await start(page, request);   // my skills: selenium; the job mentions selenium and java
+    await page.click('[data-open="qa-hyd"]');
+    await expect(page.locator("#sheet .miss")).toHaveText("Your skills don't have: java");
+    await expect(page.locator("#sheet .facts .good")).toHaveText(["selenium"]);
+  });
+
+  test("TC-SMART-02 jobs like the ones I saved go up, jobs like the ones I hid go down", async ({ page, request }) => {
+    calls = await useFixtures(page);
+    const a = await signupApi(request);
+    const user = blankUser(a.email, QA_HYD);
+    user.jobs = { "java-pune": { saved: true, stage: null, notes: "", history: [] } };
+    user.hidden = { "js-dev": 1 };
+    await saveUser(request, a.token, user);
+    await openLoggedIn(page, a);
+    await expect(page.locator(".resbar")).toBeVisible();
+    const score = job => page.evaluate(j => tasteScore(j, taste()), job);
+    expect(await score({ title: "Java Engineer", company: "Other", tech: ["spring"] })).toBeGreaterThan(0);
+    expect(await score({ title: "JavaScript Developer", company: "Theta", tech: [] })).toBeLessThan(0);
+    expect(await score({ title: "Nurse", company: "Hospital", tech: [] })).toBe(0);
+    await page.click('[data-open="qa-hyd"]');   // it mentions java, like the saved Java job
+    await expect(page.locator("#sheet .why")).toContainText("Like jobs you saved or applied to");
   });
 });

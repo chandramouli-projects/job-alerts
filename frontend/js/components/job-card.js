@@ -8,7 +8,7 @@ function jobCard(j,opt={}){
     <div class="foot"><span class="when">${j.manual?"Added by you":`${j.direct?`<b style="color:var(--accent)">Company site</b>`:esc(j.source)} · ${ago(when(j))}`}</span>
       ${st&&opt.showStage!==false?`<span class="status-pill" style="color:${st[2]}">${st[1]}</span>`:""}
       <button class="icon-btn" data-save="${esc(j.id)}" aria-pressed="${!!t?.saved}" aria-label="Save job">${ICON.bookmark}</button>
-      <a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">View job</a></div>
+      <a class="apply" href="${esc(safeUrl(j.url))}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">View job</a></div>
   </article>`;
 }
 

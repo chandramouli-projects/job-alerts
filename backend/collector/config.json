@@ -151,6 +151,106 @@
       "ats": "workday",
       "slug": "pwc.wd3/Global_Experienced_Careers",
       "name": "PwC"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "mongodb",
+      "name": "MongoDB"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "okta",
+      "name": "Okta"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "twilio",
+      "name": "Twilio"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "zscaler",
+      "name": "Zscaler"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "coinbase",
+      "name": "Coinbase"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "airbnb",
+      "name": "Airbnb"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "purestorage",
+      "name": "Pure Storage"
+    },
+    {
+      "ats": "greenhouse",
+      "slug": "commvault",
+      "name": "Commvault"
+    },
+    {
+      "ats": "lever",
+      "slug": "fampay",
+      "name": "FamPay"
+    },
+    {
+      "ats": "workday",
+      "slug": "citi.wd5/2",
+      "name": "Citi"
+    },
+    {
+      "ats": "workday",
+      "slug": "statestreet.wd1/Global",
+      "name": "State Street"
+    },
+    {
+      "ats": "workday",
+      "slug": "autodesk.wd1/Ext",
+      "name": "Autodesk"
+    },
+    {
+      "ats": "workday",
+      "slug": "fis.wd5/SearchJobs",
+      "name": "FIS"
+    },
+    {
+      "ats": "workday",
+      "slug": "amat.wd1/External",
+      "name": "Applied Materials"
+    },
+    {
+      "ats": "workday",
+      "slug": "workday.wd5/Workday",
+      "name": "Workday"
+    },
+    {
+      "ats": "workday",
+      "slug": "hp.wd5/ExternalCareerSite",
+      "name": "HP"
+    },
+    {
+      "ats": "workday",
+      "slug": "micron.wd1/External",
+      "name": "Micron"
+    },
+    {
+      "ats": "workday",
+      "slug": "paypal.wd1/jobs",
+      "name": "PayPal"
+    },
+    {
+      "ats": "workday",
+      "slug": "pfizer.wd1/PfizerCareers",
+      "name": "Pfizer"
+    },
+    {
+      "ats": "workday",
+      "slug": "kla.wd1/Search",
+      "name": "KLA"
     }
   ],
   "jsearch_groups": [

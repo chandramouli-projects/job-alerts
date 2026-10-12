@@ -37,6 +37,10 @@ for a static portal, and sends matching ones to Telegram.
     `core/constants` first, `core/app.js` (calls `boot()`) last. CSS order matters too (`base/` first).
   - Button clicks after login: each screen file registers its own with `onAppClick((d, t, e) => …)`
     (from `helpers.js`); `d` is the clicked button's `data-*`.
+  - Matching (`services/matching.js`): roles and skills match whole words with `hasWord()` ("java"
+    is not in "javascript", "react" is in "reactjs"). `taste()` learns from saved / applied (+) and
+    hidden (−) jobs; it only changes the "Best fit" order, never the match %. Links on the page go
+    through `safeUrl()` (http/https only); `cleanJob()` drops jobs with no such link.
   - URLs: `js/router.js` gives every screen its own link (`/login`, `/signup`, `/forgot-password`,
     `/setup`, `/jobs`, `/saved`, `/my-jobs`, `/profile`, `/job?id=…`). It wraps the screen functions
     (`showAuth`, `go`, `openJob`, `closeSheet`, `openForgot`…) instead of editing them; a new screen

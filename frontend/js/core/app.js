@@ -1,7 +1,8 @@
 /* Start: load jobs, check the server, then open login, onboarding or the app. Loaded last. */
 async function boot(){
   try{ data = PREVIEW ? window.__JOBS__ : await (await fetch("data/jobs.json?t="+Date.now())).json(); }catch(e){ data={jobs:[]}; }
-  data.jobs.forEach(cleanJob);
+  if(!data||typeof data!=="object")data={};
+  data.jobs=(Array.isArray(data.jobs)?data.jobs:[]).map(cleanJob).filter(j=>j&&j.url);   // a broken jobs file still opens the app
   // Only backend/server/server.mjs answers {"ok":true}; some hosts (Cloudflare Pages) answer any unknown link with the home page
   if(!PREVIEW){try{SERVER=(await (await fetch("api/ping")).json()).ok===true;}catch(e){}}
   if(SERVER){

@@ -11,7 +11,7 @@ every search, so no restart after editing .env.
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { existsSync, readFileSync } from "node:fs";
-import { extname, join, normalize } from "node:path";
+import { extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { networkInterfaces } from "node:os";
 import { randomBytes, randomInt, scryptSync, timingSafeEqual } from "node:crypto";
@@ -82,7 +82,11 @@ const fails = new Map();     // email -> recent wrong passwords, to slow down gu
 const resets = new Map();    // email -> reset PIN from "Forgot password", 10 minutes, 5 tries
 
 async function api(req, path) {
-  const body = req.method === "GET" ? {} : JSON.parse(await readBody(req) || "{}");
+  let body = {};
+  if (req.method !== "GET") {
+    try { body = JSON.parse(await readBody(req) || "{}") || {}; }
+    catch (e) { return e.status === 413 ? [413, { error: "This is too big to save." }] : [400, { error: "The request was not valid." }]; }
+  }
   if (path === "ping") return [200, { ok: true }];
   if (path === "signup") {
     const email = String(body.email || "").trim().toLowerCase(), name = String(body.name || "").trim();
@@ -176,9 +180,11 @@ async function api(req, path) {
 
 function readBody(req) {
   return new Promise((ok, fail) => {
-    let s = "";
-    req.on("data", c => { s += c; if (s.length > 5e6) { fail(new Error("too big")); req.destroy(); } });
-    req.on("end", () => ok(s));
+    // a body over 5 MB is read to the end but thrown away, so the app still gets a 413 answer
+    let s = "", big = false;
+    req.on("data", c => { if (big) return; s += c; if (s.length > 5e6) { big = true; s = ""; } });
+    req.on("end", () => big ? fail(Object.assign(new Error("too big"), { status: 413 })) : ok(s));
+    req.on("error", fail);
   });
 }
 
@@ -200,9 +206,11 @@ createServer(async (req, res) => {
       return;
     }
     // App links like /jobs or /my-jobs have no file: they all get the app page, and js/router.js shows the screen
+    // hidden files (.env, .git, ...) are never served, not even as the app page
+    if (/\/\./.test(decodeURIComponent(url.pathname))) { res.writeHead(404).end("Not found"); return; }
     const page = url.pathname === "/" || !extname(url.pathname) ? "/index.html" : url.pathname;
     const path = normalize(join(FRONTEND, decodeURIComponent(page)));
-    if (!path.startsWith(FRONTEND)) { res.writeHead(403).end(); return; }
+    if (!path.startsWith(FRONTEND + sep)) { res.writeHead(403).end(); return; }
     let body = await readFile(path);
     if (url.pathname === "/data/jobs.json") {   // live search goes to this same server
       const data = JSON.parse(body);

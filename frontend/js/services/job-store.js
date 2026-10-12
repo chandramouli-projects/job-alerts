@@ -18,7 +18,7 @@ async function liveSearch(what,where=""){
     for(const j of r.jobs||[]){
       const have=byId.get(j.id)||j;
       if(j.related)have.searches=[...new Set([...(have.searches||[]),tag])];
-      if(have===j){byId.set(j.id,j);data.jobs.push(cleanJob(j));}
+      if(have===j&&cleanJob(j).url){byId.set(j.id,j);data.jobs.push(j);}
     }
   }catch(e){liveDone.delete(key);}
   liveBusy--;

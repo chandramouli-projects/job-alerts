@@ -11,8 +11,13 @@ function fixText(v){
   if(typeof v!=="string"||!/[ÂÃâ][\u0080-\u00bf€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ]/.test(v))return v;
   try{return new TextDecoder("utf-8",{fatal:true}).decode(Uint8Array.from([...v],c=>{const n=c.charCodeAt(0);if(n<256)return n;if(CP1252[c])return CP1252[c];throw 0;}));}catch(e){return v;}
 }
-const cleanJob=j=>{if(j)["title","company","location","description","type"].forEach(k=>{j[k]=fixText(j[k]);});return j;};
+const cleanJob=j=>{if(j){["title","company","location","description","type"].forEach(k=>{j[k]=fixText(j[k]);});
+  // only http(s) links reach the page; a job with none left has no url and is not listed
+  j.apply_links=(j.apply_links||[]).filter(l=>safeUrl(l.url)!=="#");j.url=safeUrl(j.url)!=="#"?j.url:j.apply_links[0]?.url||"";}return j;};
 const normQuery=s=>String(s||"").toLowerCase().replace(/[^a-z0-9+#.]+/g," ").trim();   // "QA  Engineer!" -> "qa engineer"
+const safeUrl=u=>/^https?:\/\//i.test(String(u||"").trim())?String(u).trim():"#";   // never a javascript: link
+// whole word: "java" is not in "javascript", but "react" is in "reactjs" and "qa " is in "qa engineer"
+const hasWord=(text,w)=>new RegExp("(^|[^a-z0-9])"+w.trim().replace(/[-/]$/,"").replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(js)?($|[^a-z0-9])").test(text);
 const splitList=s=>String(s||"").split(",").map(x=>x.trim()).filter(Boolean);
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 let tt;function toast(t,kind){const el=$("toast");el.innerHTML=(kind==="ok"?'<i class="tk">✓</i>':"")+esc(t);el.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("show"),2000)}

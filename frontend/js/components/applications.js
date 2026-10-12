@@ -29,7 +29,7 @@ function statusPage(j){
   const where=(url.match(/^https?:\/\/([^/]+)/)?.[1]||"")+" "+(j.source||""),hit=STATUS_PAGES.find(([k])=>where.toLowerCase().includes(k));
   return hit?{site:hit[1],url:hit[2]}:null;
 }
-const statusLink=(j,cls="btn ghost sm")=>{const p=statusPage(j);return p?`<a class="${cls}" href="${esc(p.url)}" target="_blank" rel="noopener">Check status on ${esc(p.site)} ↗</a>`:"";};
+const statusLink=(j,cls="btn ghost sm")=>{const p=statusPage(j);return p?`<a class="${cls}" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener">Check status on ${esc(p.site)} ↗</a>`:"";};
 function appCard(j){
   const t=j._t,ap=t.appliedAt||stageDate(t,"applied"),m=lastMail(t);
   const quiet=t.stage==="applied"&&ap&&Date.now()-ap>7*864e5;

@@ -46,7 +46,9 @@ function pkPick(k,v){
   if(k==="exp"){draft.exp=+v;pkField(k);pkClose();return;}
   const l=PK[k].list;let a=draft[l].includes(v)?draft[l].filter(x=>x!==v):[...draft[l],v];
   if(k==="city"&&a.includes(v))a=v==="Anywhere in India"?[v]:a.filter(x=>x!=="Anywhere in India");
-  draft[l]=a;pkField(k);pkList(k);
+  draft[l]=a;pkField(k);
+  if(k==="role"){pkClose();return;}   // owner's rule: the role list closes as soon as a role is picked
+  pkList(k);
 }
 $("ob").addEventListener("click",e=>{
   const t=e.target.closest("button,[data-pkopen]"),d=t?.dataset||{};

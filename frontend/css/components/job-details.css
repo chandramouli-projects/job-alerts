@@ -12,6 +12,8 @@
 .desc{white-space:pre-wrap;font-size:.94rem;line-height:1.6;color:var(--ink)}
 .why{margin:0;padding-left:18px;color:var(--muted);font-size:.92rem}
 .why li.ok{color:var(--accent)}
+.miss{margin:10px 0 0;font-size:.88rem;color:var(--muted)}
+.miss b{color:var(--ink);font-weight:600}
 .stages{display:flex;flex-wrap:wrap;gap:6px}
 .stages button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 12px;font-size:.86rem;font-weight:600;display:flex;align-items:center;gap:6px}
 .stages button[aria-pressed="true"]{border-color:currentColor}

@@ -3,7 +3,7 @@ function resetFilters(){F={q:"",forYou:true,days:7,role:"",exp:"",city:"",type:"
 function salaryLpa(j){const m=String(j.salary||"").match(/([\d.]+)(?:\s*[–-]\s*([\d.]+))?\s*LPA/i);return m?parseFloat(m[2]||m[1]):null;}
 const isNew=j=>prevSeen>0&&new Date(j.found)>prevSeen;
 function feed(){
-  const S=searchParts(F.q.toLowerCase()),q=S.what,qTag=normQuery(q),where=S.where.replace("bengaluru","bangalore"),out=[],applied=appliedKeys();
+  const S=searchParts(F.q.toLowerCase()),q=S.what,qTag=normQuery(q),where=S.where.replace("bengaluru","bangalore"),out=[],applied=appliedKeys(),tw=taste();
   // A Role / City / Remote filter picked here wins over the saved answers for "Jobs for me"
   const p={...U.prefs,...(F.role?{roles:[F.role],custom:""}:{}),...(F.remote||F.city==="Remote"?{cities:["Remote"]}:F.city?{cities:[F.city==="India"?"Anywhere in India":F.city]}:{})};
   for(const j of allJobs()){
@@ -19,15 +19,15 @@ function feed(){
     if(F.type&&(j.type||"Not stated")!==F.type)continue;
     if(F.source&&(j.direct?"Company site":j.source)!==F.source)continue;
     if(F.city&&(j.city_norm||"India")!==F.city)continue;
-    if(F.role&&!(ROLES[F.role]||[F.role.toLowerCase()]).some(k=>j.title.toLowerCase().includes(k)))continue;
-    if(F.exp!==""){const x=+F.exp;if(j.exp_min!=null&&(j.exp_min>x+1||(j.exp_max!=null&&j.exp_max<x-2)))continue;if(x<5&&SENIOR.test(j.title))continue;}
+    if(F.role&&!(ROLES[F.role]||[F.role.toLowerCase()]).some(k=>hasWord(j.title.toLowerCase(),k)))continue;
+    if(F.exp!==""){const x=+F.exp;if(j.exp_min!=null&&(j.exp_min>x+1||(j.exp_max!=null&&j.exp_max<x-2)))continue;if(x<5&&SENIOR.test(j.title))continue;if(x>=2&&JUNIOR.test(j.title))continue;}
     if(F.minSal!==""){const s=salaryLpa(j);if(s==null||s<+F.minSal)continue;}
     const ev=evaluate(j,p);
     if(F.forYou&&!q&&!ev.ok)continue;   // a search shows every match, not only my roles
-    out.push({...j,_e:ev,_rel:!exact});
+    out.push({...j,_e:ev,_rel:!exact,_t:tasteScore(j,tw)});
   }
   // exact matches first, then related ones
-  out.sort((a,b)=>(a._rel-b._rel)||(F.sort==="new"?new Date(when(b))-new Date(when(a)):(isNew(b)-isNew(a))||(b._e.score-a._e.score)||(new Date(when(b))-new Date(when(a)))));
+  out.sort((a,b)=>(a._rel-b._rel)||(F.sort==="new"?new Date(when(b))-new Date(when(a)):(isNew(b)-isNew(a))||(b._e.score+b._t-a._e.score-a._t)||(new Date(when(b))-new Date(when(a)))));
   return out;
 }
 // What the person picked, as removable chips next to the job count: [key, label]
