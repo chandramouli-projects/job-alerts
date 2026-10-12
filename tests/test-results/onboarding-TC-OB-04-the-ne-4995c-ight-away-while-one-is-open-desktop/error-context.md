@@ -1,0 +1,71 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - banner [ref=e3]:
+    - generic [ref=e4]: Udyogam Vetuku
+    - generic [ref=e5]:
+      - generic [ref=e6]: Test User
+      - generic [ref=e7]: TU
+      - button "Log out" [ref=e8] [cursor=pointer]:
+        - img [ref=e9] [cursor=pointer]
+        - text: Log out
+  - text: ✓ ✓ ✓
+  - generic [ref=e12]:
+    - generic [ref=e13]:
+      - heading "Tell us the job you want" [level=1] [ref=e14]
+      - text: Close
+    - generic [ref=e15]:
+      - generic [ref=e16]: What job are you looking for?
+      - generic [ref=e17]:
+        - button "What job are you looking for?" [expanded] [ref=e18] [cursor=pointer]:
+          - generic [ref=e20] [cursor=pointer]: Choose roles
+        - generic [ref=e21]:
+          - textbox "Search or add a role" [active] [ref=e22]
+          - listbox "What job are you looking for?" [ref=e23]:
+            - option "QA / Testing 7 jobs" [ref=e24] [cursor=pointer]:
+              - generic [ref=e26] [cursor=pointer]: QA / Testing
+              - generic [ref=e27] [cursor=pointer]: 7 jobs
+            - option "Java Developer 2 jobs" [ref=e28] [cursor=pointer]:
+              - generic [ref=e30] [cursor=pointer]: Java Developer
+              - generic [ref=e31] [cursor=pointer]: 2 jobs
+            - option ".NET Developer" [ref=e32] [cursor=pointer]:
+              - generic [ref=e34] [cursor=pointer]: .NET Developer
+            - option "Android Developer" [ref=e35] [cursor=pointer]:
+              - generic [ref=e37] [cursor=pointer]: Android Developer
+            - option "Backend Developer" [ref=e38] [cursor=pointer]:
+              - generic [ref=e40] [cursor=pointer]: Backend Developer
+            - option "Data Analyst" [ref=e41] [cursor=pointer]:
+              - generic [ref=e43] [cursor=pointer]: Data Analyst
+            - option "Data Scientist" [ref=e44] [cursor=pointer]:
+              - generic [ref=e46] [cursor=pointer]: Data Scientist
+            - option "DevOps Engineer" [ref=e47] [cursor=pointer]:
+              - generic [ref=e49] [cursor=pointer]: DevOps Engineer
+            - option "Frontend Developer" [ref=e50] [cursor=pointer]:
+              - generic [ref=e52] [cursor=pointer]: Frontend Developer
+            - option "Full Stack Developer" [ref=e53] [cursor=pointer]:
+              - generic [ref=e55] [cursor=pointer]: Full Stack Developer
+            - option "Python Developer" [ref=e56] [cursor=pointer]:
+              - generic [ref=e58] [cursor=pointer]: Python Developer
+            - option "React Developer" [ref=e59] [cursor=pointer]:
+              - generic [ref=e61] [cursor=pointer]: React Developer
+            - option "Software Engineer" [ref=e62] [cursor=pointer]:
+              - generic [ref=e64] [cursor=pointer]: Software Engineer
+            - option "UI UX Designer" [ref=e65] [cursor=pointer]:
+              - generic [ref=e67] [cursor=pointer]: UI UX Designer
+    - generic [ref=e68]:
+      - generic [ref=e69]: How much experience do you have?
+      - button "How much experience do you have?" [ref=e71] [cursor=pointer]:
+        - generic [ref=e73] [cursor=pointer]: Choose experience
+    - generic [ref=e74]:
+      - generic [ref=e75]: Where do you want to work?
+      - button "Where do you want to work?" [ref=e77] [cursor=pointer]:
+        - generic [ref=e79] [cursor=pointer]: Choose cities
+    - generic [ref=e80]:
+      - generic [ref=e81]: What are your skills?
+      - button "What are your skills?" [ref=e83] [cursor=pointer]:
+        - generic [ref=e85] [cursor=pointer]: Choose skills
+    - button "Show my jobs" [disabled] [ref=e86]
+  - text: 1 2 3
+  - status
+```

@@ -1,0 +1,171 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e3]:
+    - generic [ref=e4]: Udyogam Vetuku
+    - generic [ref=e5]:
+      - generic [ref=e6]: Test User
+      - generic [ref=e7]: TU
+      - button "Log out" [ref=e8] [cursor=pointer]:
+        - img [ref=e9] [cursor=pointer]
+        - text: Log out
+  - text: ✓ ✓ ✓ Close
+  - generic [ref=e11]:
+    - complementary [ref=e12]:
+      - button "Jobs" [ref=e13] [cursor=pointer]:
+        - img [ref=e14] [cursor=pointer]
+        - text: Jobs
+      - button "Saved jobs" [ref=e17] [cursor=pointer]:
+        - img [ref=e18] [cursor=pointer]
+        - text: Saved jobs
+      - button "My jobs" [ref=e20] [cursor=pointer]:
+        - img [ref=e21] [cursor=pointer]
+        - text: My jobs
+      - button "Profile" [ref=e24] [cursor=pointer]:
+        - img [ref=e25] [cursor=pointer]
+        - text: Profile
+    - main [ref=e28]:
+      - generic [ref=e29]:
+        - heading "Hi Test" [level=1] [ref=e30]
+        - generic [ref=e31]: Updated 1h ago
+      - generic [ref=e32]:
+        - textbox "Search" [ref=e33]
+        - button "Filters" [expanded] [ref=e34] [cursor=pointer]:
+          - img [ref=e35] [cursor=pointer]
+          - text: Filters
+        - button "Search" [ref=e37] [cursor=pointer]
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: Show
+          - combobox "Show" [ref=e41]:
+            - option "Jobs for me" [selected]
+            - option "All jobs"
+        - generic [ref=e42]:
+          - generic [ref=e43]: Job role
+          - combobox "Job role" [ref=e44]:
+            - option "All roles" [selected]
+            - option "Software Engineer"
+            - option "Frontend Developer"
+            - option "Backend Developer"
+            - option "Full Stack Developer"
+            - option "Java Developer"
+            - option "Python Developer"
+            - option "React Developer"
+            - option ".NET Developer"
+            - option "Data Analyst"
+            - option "Data Scientist"
+            - option "DevOps Engineer"
+            - option "QA / Testing"
+            - option "Android Developer"
+            - option "UI UX Designer"
+        - generic [ref=e45]:
+          - generic [ref=e46]: Experience
+          - combobox "Experience" [ref=e47]:
+            - option "Any experience" [selected]
+            - option "Fresher"
+            - option "1 year"
+            - option "2 years"
+            - option "3 years"
+            - option "4 years"
+            - option "5 years"
+            - option "6–8 years"
+            - option "9+ years"
+        - generic [ref=e48]:
+          - generic [ref=e49]: City
+          - combobox "City" [ref=e50]:
+            - option "All India" [selected]
+            - option "Bangalore"
+            - option "Hyderabad"
+            - option "Pune"
+            - option "Remote"
+        - generic [ref=e51]:
+          - generic [ref=e52]: Posted
+          - combobox "Posted" [ref=e53]:
+            - option "Last 24 hours"
+            - option "Last 3 days"
+            - option "Last 7 days" [selected]
+            - option "Last 3 weeks"
+        - generic [ref=e54]:
+          - generic [ref=e55]: Salary
+          - combobox "Salary" [ref=e56]:
+            - option "Any salary" [selected]
+            - option "3 LPA and above"
+            - option "5 LPA and above"
+            - option "8 LPA and above"
+            - option "12 LPA and above"
+            - option "20 LPA and above"
+        - generic [ref=e57]:
+          - generic [ref=e58]: Company
+          - combobox "Company" [ref=e59]:
+            - option "All companies" [selected]
+            - option "<b>Evil</b>"
+            - option "Acme"
+            - option "Beta"
+            - option "Delta"
+            - option "Epsilon"
+            - option "Eta"
+            - option "Gamma"
+            - option "Theta"
+            - option "Zeta"
+        - generic [ref=e60]:
+          - generic [ref=e61]: Posted on
+          - combobox "Posted on" [ref=e62]:
+            - option "Any website" [selected]
+            - option "LinkedIn"
+        - generic [ref=e63]:
+          - generic [ref=e64]: Job type
+          - combobox "Job type" [ref=e65]:
+            - option "Any type" [selected]
+            - option "Full-time"
+        - generic [ref=e66]:
+          - generic [ref=e67]: Sort by
+          - combobox "Sort by" [ref=e68]:
+            - option "Best fit" [selected]
+            - option "Newest first"
+        - generic [ref=e70] [cursor=pointer]:
+          - checkbox "Remote only" [ref=e71]
+          - text: Remote only
+      - generic [ref=e73]:
+        - generic [ref=e74]: "2"
+        - text: jobs for you
+      - generic [ref=e75]:
+        - article [ref=e76] [cursor=pointer]:
+          - generic [ref=e77] [cursor=pointer]:
+            - generic [ref=e78] [cursor=pointer]: A
+            - generic [ref=e79] [cursor=pointer]:
+              - heading "QA Automation Engineer" [level=3] [ref=e80] [cursor=pointer]
+              - generic [ref=e81] [cursor=pointer]: Acme
+              - generic [ref=e82] [cursor=pointer]: Hyderabad, Telangana
+            - generic [ref=e84] [cursor=pointer]: Great fit
+          - generic [ref=e85] [cursor=pointer]:
+            - generic [ref=e86] [cursor=pointer]: 2–4 yrs
+            - generic [ref=e87] [cursor=pointer]: ₹6–9 LPA
+            - generic [ref=e88] [cursor=pointer]: Full-time
+            - generic [ref=e89] [cursor=pointer]: selenium
+          - generic [ref=e90] [cursor=pointer]:
+            - generic [ref=e91] [cursor=pointer]: LinkedIn · 1 day ago
+            - button "Save job" [ref=e92] [cursor=pointer]:
+              - img [ref=e93] [cursor=pointer]
+            - link "View job" [ref=e95] [cursor=pointer]:
+              - /url: https://jobs.example.com/qa-hyd
+        - article [ref=e96] [cursor=pointer]:
+          - generic [ref=e97] [cursor=pointer]:
+            - generic [ref=e98] [cursor=pointer]: <
+            - generic [ref=e99] [cursor=pointer]:
+              - heading "<img src=x onerror=\"window.__xss=1\">QA Tester" [level=3] [ref=e100] [cursor=pointer]
+              - generic [ref=e101] [cursor=pointer]: <b>Evil</b>
+              - generic [ref=e102] [cursor=pointer]: Hyderabad
+            - generic [ref=e104] [cursor=pointer]: Good fit
+          - generic [ref=e105] [cursor=pointer]:
+            - generic [ref=e106] [cursor=pointer]: Not stated
+            - generic [ref=e107] [cursor=pointer]: Full-time
+          - generic [ref=e108] [cursor=pointer]:
+            - generic [ref=e109] [cursor=pointer]: LinkedIn · 1 day ago
+            - button "Save job" [ref=e110] [cursor=pointer]:
+              - img [ref=e111] [cursor=pointer]
+            - link "View job" [ref=e113] [cursor=pointer]:
+              - /url: javascript:window.__xss2=1
+  - text: 1 2 3
+  - status
+```

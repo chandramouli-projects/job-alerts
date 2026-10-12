@@ -30,7 +30,7 @@ export function fixtureJobs() {
   ];
 }
 
-// Serve the fixture instead of docs/jobs.json, and fake the live search so no API quota is used
+// Serve the fixture instead of frontend/data/jobs.json, and fake the live search so no API quota is used
 export async function useFixtures(page, { live = {} } = {}) {
   const calls = [];
   await page.route("**/jobs.json*", r => r.fulfill({ json: { updated: iso(3600e3), roles: [], live_api: "http://127.0.0.1:8091", jobs: fixtureJobs() } }));

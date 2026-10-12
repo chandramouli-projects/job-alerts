@@ -1,4 +1,4 @@
-// Stands in for track_mail.py in the tests: prints the events a test wrote to .tmp/mail-events.json
+// Stands in for backend/mail/track_mail.py in the tests: prints the events a test wrote to .tmp/mail-events.json
 import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 const f = fileURLToPath(new URL(".tmp/mail-events.json", import.meta.url));

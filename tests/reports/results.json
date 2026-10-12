@@ -114,12 +114,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 36,
+                      "duration": 444,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:45.746Z",
+                      "startTime": "2026-10-12T12:07:15.688Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -148,12 +148,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 27,
+                      "duration": 31,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:45.799Z",
+                      "startTime": "2026-10-12T12:07:16.155Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -182,12 +182,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 56,
+                      "duration": 78,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:45.846Z",
+                      "startTime": "2026-10-12T12:07:16.200Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -216,12 +216,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 89,
+                      "duration": 107,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:45.915Z",
+                      "startTime": "2026-10-12T12:07:16.289Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -250,12 +250,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 99,
+                      "duration": 97,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:46.012Z",
+                      "startTime": "2026-10-12T12:07:16.403Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -284,12 +284,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 283,
+                      "duration": 248,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:46.122Z",
+                      "startTime": "2026-10-12T12:07:16.508Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -318,12 +318,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 12,
+                      "duration": 11,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:46.419Z",
+                      "startTime": "2026-10-12T12:07:16.769Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -352,12 +352,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 57,
+                      "duration": 83,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:46.449Z",
+                      "startTime": "2026-10-12T12:07:16.789Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -386,12 +386,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 68,
+                      "duration": 63,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:46.514Z",
+                      "startTime": "2026-10-12T12:07:16.881Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -420,12 +420,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 371,
+                      "duration": 333,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:46.604Z",
+                      "startTime": "2026-10-12T12:07:16.953Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -454,12 +454,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 106,
+                      "duration": 105,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:46.993Z",
+                      "startTime": "2026-10-12T12:07:17.296Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -496,12 +496,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 59,
+                      "duration": 64,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:47.113Z",
+                      "startTime": "2026-10-12T12:07:17.412Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -530,12 +530,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 81,
+                      "duration": 75,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:47.182Z",
+                      "startTime": "2026-10-12T12:07:17.487Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -564,12 +564,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 182,
+                      "duration": 160,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:47.274Z",
+                      "startTime": "2026-10-12T12:07:17.571Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -598,12 +598,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 62,
+                      "duration": 63,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:47.467Z",
+                      "startTime": "2026-10-12T12:07:17.741Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -640,7 +640,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 28,
+                      "duration": 25,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m500\u001b[39m",
                         "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m500\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js:134:24",
@@ -664,7 +664,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:47.541Z",
+                      "startTime": "2026-10-12T12:07:17.813Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -704,12 +704,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 70,
+                      "duration": 44,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:49.599Z",
+                      "startTime": "2026-10-12T12:07:18.567Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -724,7 +724,7 @@
             },
             {
               "title": "TC-SEC-03 the .env file with API keys cannot be downloaded",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -737,18 +737,48 @@
                     {
                       "workerIndex": 1,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 14,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 20,
+                      "error": {
+                        "message": "Error: /../.env\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m",
+                        "stack": "Error: /../.env\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js:146:96",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js",
+                          "column": 96,
+                          "line": 146
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 144 |\u001b[39m\n \u001b[90m 145 |\u001b[39m   test(\u001b[32m\"TC-SEC-03 the .env file with API keys cannot be downloaded\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 146 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m p \u001b[36mof\u001b[39m [\u001b[32m\"/../.env\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"/..%2f.env\"\u001b[39m]) expect((\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(p))\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m p)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 147 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 148 |\u001b[39m\n \u001b[90m 149 |\u001b[39m   test(\u001b[32m\"TC-SEC-04 sessions are not shared: one user cannot read another's data\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js",
+                            "column": 96,
+                            "line": 146
+                          },
+                          "message": "Error: /../.env\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n\n  144 |\n  145 |   test(\"TC-SEC-03 the .env file with API keys cannot be downloaded\", async ({ request }) => {\n> 146 |     for (const p of [\"/../.env\", \"/..%2f.env\"]) expect((await request.get(p)).status(), p).not.toBe(200);\n      |                                                                                                ^\n  147 |   });\n  148 |\n  149 |   test(\"TC-SEC-04 sessions are not shared: one user cannot read another's data\", async ({ request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js:146:96"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:49.696Z",
+                      "startTime": "2026-10-12T12:07:18.629Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\api-Server-safety-TC-SEC-0-b66b9-I-keys-cannot-be-downloaded-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js",
+                        "column": 96,
+                        "line": 146
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "8747e39b871de0524be5-f2163430fa2895129260",
@@ -769,15 +799,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 1,
+                      "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 132,
+                      "duration": 143,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:49.729Z",
+                      "startTime": "2026-10-12T12:07:19.330Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -803,10 +833,10 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 1,
+                      "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 188,
+                      "duration": 177,
                       "error": {
                         "message": "Error: server dropped the connection instead of answering\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m",
                         "stack": "Error: server dropped the connection instead of answering\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\api.spec.js:160:73",
@@ -830,7 +860,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:49.877Z",
+                      "startTime": "2026-10-12T12:07:19.494Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -867,15 +897,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 42,
+                      "duration": 40,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:52.148Z",
+                      "startTime": "2026-10-12T12:07:20.417Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -901,15 +931,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 18,
+                      "duration": 19,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:52.209Z",
+                      "startTime": "2026-10-12T12:07:20.472Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -954,15 +984,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2304,
+                      "duration": 1497,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:52.263Z",
+                      "startTime": "2026-10-12T12:07:20.524Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -988,15 +1018,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2280,
+                      "duration": 1589,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:55.923Z",
+                      "startTime": "2026-10-12T12:07:22.672Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1022,15 +1052,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2935,
+                      "duration": 1825,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:08:58.239Z",
+                      "startTime": "2026-10-12T12:07:24.282Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1056,15 +1086,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2160,
+                      "duration": 1511,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:09:01.206Z",
+                      "startTime": "2026-10-12T12:07:26.121Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1090,15 +1120,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1879,
+                      "duration": 1599,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:09:03.406Z",
+                      "startTime": "2026-10-12T12:07:27.653Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1124,15 +1154,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1480,
+                      "duration": 1572,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:09:05.319Z",
+                      "startTime": "2026-10-12T12:07:29.274Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1158,15 +1188,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1538,
+                      "duration": 1636,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:09:06.838Z",
+                      "startTime": "2026-10-12T12:07:30.869Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1192,15 +1222,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1233,
+                      "duration": 1388,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:09:08.397Z",
+                      "startTime": "2026-10-12T12:07:32.526Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1226,15 +1256,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2202,
+                      "duration": 1545,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:09:09.650Z",
+                      "startTime": "2026-10-12T12:07:33.936Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1262,15 +1292,15 @@
                   "projectName": "phone",
                   "results": [
                     {
-                      "workerIndex": 19,
+                      "workerIndex": 20,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3160,
+                      "duration": 1209,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:18:32.520Z",
+                      "startTime": "2026-10-12T12:11:14.352Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1306,15 +1336,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2890,
+                      "duration": 1454,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:09:11.876Z",
+                      "startTime": "2026-10-12T12:07:35.501Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1342,15 +1372,15 @@
                   "projectName": "phone",
                   "results": [
                     {
-                      "workerIndex": 19,
+                      "workerIndex": 20,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2365,
+                      "duration": 1070,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:18:37.272Z",
+                      "startTime": "2026-10-12T12:11:15.887Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1373,7 +1403,7 @@
           "specs": [
             {
               "title": "TC-FP-01 full journey: email, PIN, new password, then log in with it",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -1393,40 +1423,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 139877,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-fp=\"4\"]')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-fp=\"4\"]')\u001b[22m\n\u001b[2m    6 × locator resolved to <div hidden=\"\" data-fp=\"4\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-fp=\"4\"]')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-fp=\"4\"]')\u001b[22m\n\u001b[2m    6 × locator resolved to <div hidden=\"\" data-fp=\"4\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js:130:49",
-                        "location": {
-                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js",
-                          "column": 49,
-                          "line": 130
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 128 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m\"#fpNew2\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"Brand#New1\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 129 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"#fpSave\"\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 130 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-fp=\"4\"]'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 131 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"#fpDone\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 132 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#fpModal\"\u001b[39m))\u001b[33m.\u001b[39mtoBeHidden()\u001b[33m;\u001b[39m\n \u001b[90m 133 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#lEmail\"\u001b[39m))\u001b[33m.\u001b[39mtoHaveValue(a\u001b[33m.\u001b[39memail)\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js",
-                            "column": 49,
-                            "line": 130
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-fp=\"4\"]')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-fp=\"4\"]')\u001b[22m\n\u001b[2m    6 × locator resolved to <div hidden=\"\" data-fp=\"4\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n\n\n  128 |     await page.fill(\"#fpNew2\", \"Brand#New1\");\n  129 |     await page.click(\"#fpSave\");\n> 130 |     await expect(page.locator('[data-fp=\"4\"]')).toBeVisible();\n      |                                                 ^\n  131 |     await page.click(\"#fpDone\");\n  132 |     await expect(page.locator(\"#fpModal\")).toBeHidden();\n  133 |     await expect(page.locator(\"#lEmail\")).toHaveValue(a.email);\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js:130:49"
-                        },
-                        {
-                          "message": "\u001b[31mTearing down \"context\" exceeded the test timeout of 90000ms.\u001b[39m"
-                        },
-                        {
-                          "message": "Error: browserContext.close: Target page, context or browser has been closed"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 5730,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:09:14.794Z",
+                      "startTime": "2026-10-12T12:07:36.971Z",
                       "annotations": [
                         {
                           "type": "slow",
@@ -1437,31 +1442,10 @@
                           }
                         }
                       ],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-89c06-assword-then-log-in-with-it-desktop\\test-failed-1.png"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-89c06-assword-then-log-in-with-it-desktop\\error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-89c06-assword-then-log-in-with-it-desktop\\trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\auth.spec.js",
-                        "column": 49,
-                        "line": 130
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
               "id": "d5ed79a6b333c2ba7209-584da7e07b52d190b5b3",
@@ -1485,12 +1469,12 @@
                       "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 29273,
+                      "duration": 4841,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:12:30.388Z",
+                      "startTime": "2026-10-12T12:07:42.727Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1519,12 +1503,12 @@
                       "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 12721,
+                      "duration": 3336,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:13:01.362Z",
+                      "startTime": "2026-10-12T12:07:47.600Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1539,7 +1523,7 @@
             },
             {
               "title": "TC-FP-04 the two new passwords must match",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -1552,48 +1536,18 @@
                     {
                       "workerIndex": 3,
                       "parallelIndex": 0,
-                      "status": "timedOut",
-                      "duration": 61552,
-                      "error": {
-                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
-                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                      },
-                      "errors": [
-                        {
-                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                        },
-                        {
-                          "message": "\u001b[31mTearing down \"context\" exceeded the test timeout of 30000ms.\u001b[39m"
-                        },
-                        {
-                          "message": "Error: apiRequestContext._wrapApiCall: Test ended."
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 3843,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:13:14.156Z",
+                      "startTime": "2026-10-12T12:07:50.978Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-540cc-wo-new-passwords-must-match-desktop\\test-failed-1.png"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-540cc-wo-new-passwords-must-match-desktop\\error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\auth-Forgot-password-TC-FP-540cc-wo-new-passwords-must-match-desktop\\trace.zip"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
               "id": "d5ed79a6b333c2ba7209-92eb7086f67049731c69",
@@ -1616,15 +1570,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 4,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6712,
+                      "duration": 3319,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:14:44.459Z",
+                      "startTime": "2026-10-12T12:07:54.863Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1650,15 +1604,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 4,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 9084,
+                      "duration": 4691,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:14:52.026Z",
+                      "startTime": "2026-10-12T12:07:58.214Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1686,15 +1640,15 @@
                   "projectName": "phone",
                   "results": [
                     {
-                      "workerIndex": 19,
+                      "workerIndex": 20,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1501,
+                      "duration": 1299,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:18:39.672Z",
+                      "startTime": "2026-10-12T12:11:16.976Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1737,15 +1691,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 4,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1218,
+                      "duration": 1403,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:01.179Z",
+                      "startTime": "2026-10-12T12:08:03.000Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1771,15 +1725,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 4,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1342,
+                      "duration": 2135,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:02.430Z",
+                      "startTime": "2026-10-12T12:08:04.430Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1805,15 +1759,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 4,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1692,
+                      "duration": 1787,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:03.806Z",
+                      "startTime": "2026-10-12T12:08:06.592Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1839,10 +1793,10 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 4,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 1389,
+                      "duration": 1996,
                       "error": {
                         "message": "Error: JavaScript is a different skill from Java\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"JavaScript Developer\"\u001b[39m\nReceived array:     \u001b[31m[\"Java Developer\", \u001b[7m\"JavaScript Developer\"\u001b[27m]\u001b[39m",
                         "stack": "Error: JavaScript is a different skill from Java\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"JavaScript Developer\"\u001b[39m\nReceived array:     \u001b[31m[\"Java Developer\", \u001b[7m\"JavaScript Developer\"\u001b[27m]\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:47:69",
@@ -1866,7 +1820,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:05.532Z",
+                      "startTime": "2026-10-12T12:08:08.402Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1913,15 +1867,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 5,
+                      "workerIndex": 4,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2074,
+                      "duration": 2133,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:10.587Z",
+                      "startTime": "2026-10-12T12:08:14.840Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1947,10 +1901,10 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 5,
+                      "workerIndex": 4,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 1237,
+                      "duration": 1387,
                       "error": {
                         "message": "Error: javascript: links must never reach the page\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^https?:\\/\\//\u001b[39m\nReceived string:  \u001b[31m\"javascript:window.__xss2=1\"\u001b[39m",
                         "stack": "Error: javascript: links must never reach the page\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^https?:\\/\\//\u001b[39m\nReceived string:  \u001b[31m\"javascript:window.__xss2=1\"\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:60:85",
@@ -1974,7 +1928,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:13.224Z",
+                      "startTime": "2026-10-12T12:08:17.657Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -2029,15 +1983,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 6,
+                      "workerIndex": 5,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1912,
+                      "duration": 1827,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:17.445Z",
+                      "startTime": "2026-10-12T12:08:20.459Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2063,15 +2017,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 6,
+                      "workerIndex": 5,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1328,
+                      "duration": 1482,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:19.773Z",
+                      "startTime": "2026-10-12T12:08:22.730Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2097,15 +2051,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 6,
+                      "workerIndex": 5,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1194,
+                      "duration": 1550,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:21.138Z",
+                      "startTime": "2026-10-12T12:08:24.241Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2131,15 +2085,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 6,
+                      "workerIndex": 5,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1384,
+                      "duration": 1479,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:22.355Z",
+                      "startTime": "2026-10-12T12:08:25.815Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2165,15 +2119,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 6,
+                      "workerIndex": 5,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1386,
+                      "duration": 1403,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:23.761Z",
+                      "startTime": "2026-10-12T12:08:27.318Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2199,10 +2153,10 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 6,
+                      "workerIndex": 5,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 1637,
+                      "duration": 1445,
                       "error": {
                         "message": "Error: an internship is not for someone with 3 years\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"QA Intern\"\u001b[39m\nReceived array:     \u001b[31m[\"QA Automation Engineer\", \"<img src=x onerror=\\\"window.__xss=1\\\">QA Tester\", \"QA Engineer\", \u001b[7m\"QA Intern\"\u001b[27m, \"Remote QA Tester\", \"Java Developer\", \"JavaScript Developer\"]\u001b[39m",
                         "stack": "Error: an internship is not for someone with 3 years\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"QA Intern\"\u001b[39m\nReceived array:     \u001b[31m[\"QA Automation Engineer\", \"<img src=x onerror=\\\"window.__xss=1\\\">QA Tester\", \"QA Engineer\", \u001b[7m\"QA Intern\"\u001b[27m, \"Remote QA Tester\", \"Java Developer\", \"JavaScript Developer\"]\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:106:73",
@@ -2226,7 +2180,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:25.174Z",
+                      "startTime": "2026-10-12T12:08:28.769Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -2273,15 +2227,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 7,
+                      "workerIndex": 6,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3117,
+                      "duration": 2025,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:30.590Z",
+                      "startTime": "2026-10-12T12:08:31.812Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2315,10 +2269,10 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 7,
+                      "workerIndex": 6,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1319,
+                      "duration": 1253,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -2326,10 +2280,10 @@
                       "steps": [
                         {
                           "title": "Expect \"poll toBeGreaterThan\"",
-                          "duration": 2
+                          "duration": 3
                         }
                       ],
-                      "startTime": "2026-10-10T23:15:35.339Z",
+                      "startTime": "2026-10-12T12:08:34.337Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2344,7 +2298,7 @@
             },
             {
               "title": "TC-LIVE-02 searching any role shows the jobs found for it",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -2355,20 +2309,60 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 7,
+                      "workerIndex": 6,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1315,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 6706,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#main .job h3').filter({ hasText: 'Staff Nurse' })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#main .job h3').filter({ hasText: 'Staff Nurse' })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#main .job h3').filter({ hasText: 'Staff Nurse' })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#main .job h3').filter({ hasText: 'Staff Nurse' })\u001b[22m\n\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:131:77",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                          "column": 77,
+                          "line": 131
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 129 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m\"#q\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"Nurse jobs in Chennai\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 130 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"#searchForm button\"\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 131 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#main .job h3\"\u001b[39m\u001b[33m,\u001b[39m { hasText\u001b[33m:\u001b[39m \u001b[32m\"Staff Nurse\"\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 132 |\u001b[39m     expect(calls)\u001b[33m.\u001b[39mtoContainEqual({ q\u001b[33m:\u001b[39m \u001b[32m\"Nurse\"\u001b[39m\u001b[33m,\u001b[39m where\u001b[33m:\u001b[39m \u001b[32m\"Chennai\"\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 133 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 134 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                            "column": 77,
+                            "line": 131
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#main .job h3').filter({ hasText: 'Staff Nurse' })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#main .job h3').filter({ hasText: 'Staff Nurse' })\u001b[22m\n\n\n  129 |     await page.fill(\"#q\", \"Nurse jobs in Chennai\");\n  130 |     await page.click(\"#searchForm button\");\n> 131 |     await expect(page.locator(\"#main .job h3\", { hasText: \"Staff Nurse\" })).toBeVisible();\n      |                                                                             ^\n  132 |     expect(calls).toContainEqual({ q: \"Nurse\", where: \"Chennai\" });\n  133 |   });\n  134 |\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:131:77"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:36.681Z",
+                      "startTime": "2026-10-12T12:08:35.620Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Search-and-live-searc-5179c-shows-the-jobs-found-for-it-desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Search-and-live-searc-5179c-shows-the-jobs-found-for-it-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Search-and-live-searc-5179c-shows-the-jobs-found-for-it-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                        "column": 77,
+                        "line": 131
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "7d25ea94ca683ffe0b70-09f9431c436818863817",
@@ -2378,7 +2372,7 @@
             },
             {
               "title": "TC-LIVE-03 the same search twice asks the job sites only once",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -2391,18 +2385,58 @@
                     {
                       "workerIndex": 7,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2129,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 3119,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m1\u001b[39m\nReceived length: \u001b[31m0\u001b[39m\nReceived array:  \u001b[31m[]\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m1\u001b[39m\nReceived length: \u001b[31m0\u001b[39m\nReceived array:  \u001b[31m[]\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:142:48",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                          "column": 48,
+                          "line": 142
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 140 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m300\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 141 |\u001b[39m     }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 142 |\u001b[39m     expect(calls\u001b[33m.\u001b[39mfilter(c \u001b[33m=>\u001b[39m c\u001b[33m.\u001b[39mq \u001b[33m===\u001b[39m \u001b[32m\"Nurse\"\u001b[39m))\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 143 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 144 |\u001b[39m\n \u001b[90m 145 |\u001b[39m   test(\u001b[32m\"TC-LIVE-04 a search with no results says so\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page\u001b[33m,\u001b[39m request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                            "column": 48,
+                            "line": 142
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m1\u001b[39m\nReceived length: \u001b[31m0\u001b[39m\nReceived array:  \u001b[31m[]\u001b[39m\n\n  140 |       await page.waitForTimeout(300);\n  141 |     }\n> 142 |     expect(calls.filter(c => c.q === \"Nurse\")).toHaveLength(1);\n      |                                                ^\n  143 |   });\n  144 |\n  145 |   test(\"TC-LIVE-04 a search with no results says so\", async ({ page, request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:142:48"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:38.029Z",
+                      "startTime": "2026-10-12T12:08:43.918Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Search-and-live-searc-4dd30-sks-the-job-sites-only-once-desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Search-and-live-searc-4dd30-sks-the-job-sites-only-once-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Search-and-live-searc-4dd30-sks-the-job-sites-only-once-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                        "column": 48,
+                        "line": 142
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "7d25ea94ca683ffe0b70-8170cd5ba9f3f2c50a5e",
@@ -2412,6 +2446,124 @@
             },
             {
               "title": "TC-LIVE-04 a search with no results says so",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 6584,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.empty h3')\nExpected string: \u001b[32m\"No jobs match right now\"\u001b[39m\nReceived: <element(s) not found>\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.empty h3')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.empty h3')\nExpected string: \u001b[32m\"No jobs match right now\"\u001b[39m\nReceived: <element(s) not found>\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.empty h3')\u001b[22m\n\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:149:45",
+                        "location": {
+                          "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                          "column": 45,
+                          "line": 149
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 147 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m\"#q\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"Zookeeper jobs in Leh\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 148 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"#searchForm button\"\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 149 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\".empty h3\"\u001b[39m))\u001b[33m.\u001b[39mtoHaveText(\u001b[32m\"No jobs match right now\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 150 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 151 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 152 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                            "column": 45,
+                            "line": 149
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.empty h3')\nExpected string: \u001b[32m\"No jobs match right now\"\u001b[39m\nReceived: <element(s) not found>\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.empty h3')\u001b[22m\n\n\n  147 |     await page.fill(\"#q\", \"Zookeeper jobs in Leh\");\n  148 |     await page.click(\"#searchForm button\");\n> 149 |     await expect(page.locator(\".empty h3\")).toHaveText(\"No jobs match right now\");\n      |                                             ^\n  150 |   });\n  151 | });\n  152 |\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js:149:45"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-12T12:08:48.770Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Search-and-live-searc-37717-rch-with-no-results-says-so-desktop\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Search-and-live-searc-37717-rch-with-no-results-says-so-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\jobs-Search-and-live-searc-37717-rch-with-no-results-says-so-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\jobs.spec.js",
+                        "column": 45,
+                        "line": 149
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-0783a5813fee9027281d",
+              "file": "jobs.spec.js",
+              "line": 205,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Filter button and picked filters",
+          "file": "jobs.spec.js",
+          "line": 215,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-FLT-08 filters are hidden until the filter button next to Search is pressed @phone",
+              "ok": true,
+              "tags": [
+                "phone"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1520,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-12T12:08:56.604Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-324d773fd2d9eb0e96cf",
+              "file": "jobs.spec.js",
+              "line": 216,
+              "column": 3
+            },
+            {
+              "title": "TC-FLT-09 picked filters show as chips next to the job count, with a count on the button",
               "ok": true,
               "tags": [],
               "tests": [
@@ -2423,15 +2575,15 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 7,
+                      "workerIndex": 9,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1369,
+                      "duration": 1297,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:15:40.187Z",
+                      "startTime": "2026-10-12T12:08:58.498Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2439,9 +2591,79 @@
                   "status": "expected"
                 }
               ],
-              "id": "7d25ea94ca683ffe0b70-0783a5813fee9027281d",
+              "id": "7d25ea94ca683ffe0b70-dc0dfc050272bf31662e",
               "file": "jobs.spec.js",
-              "line": 205,
+              "line": 229,
+              "column": 3
+            },
+            {
+              "title": "TC-FLT-10 Clear all removes every picked filter",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1763,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-12T12:08:59.812Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-50657e3e58edcda95352",
+              "file": "jobs.spec.js",
+              "line": 242,
+              "column": 3
+            },
+            {
+              "title": "TC-FLT-08 filters are hidden until the filter button next to Search is pressed @phone",
+              "ok": true,
+              "tags": [
+                "phone"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "phone",
+                  "projectName": "phone",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1046,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-12T12:11:18.305Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7d25ea94ca683ffe0b70-3364dacd855d58b7f39d",
+              "file": "jobs.spec.js",
+              "line": 216,
               "column": 3
             }
           ]
@@ -2449,13 +2671,13 @@
       ]
     },
     {
-      "title": "myjobs.spec.js",
-      "file": "myjobs.spec.js",
+      "title": "mail.spec.js",
+      "file": "mail.spec.js",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "TC-MY-01 saving a job puts it in My jobs > Saved, and it is kept on the server",
+          "title": "TC-MAIL-01 someone without Gmail connected sees no Gmail bar",
           "ok": true,
           "tags": [],
           "tests": [
@@ -2467,15 +2689,15 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 7,
+                  "workerIndex": 9,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2600,
+                  "duration": 1165,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:15:41.636Z",
+                  "startTime": "2026-10-12T12:09:01.622Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2483,7 +2705,287 @@
               "status": "expected"
             }
           ],
-          "id": "e8021bd4115f1ed31fe7-4de94ec4b7aec717a117",
+          "id": "7be1c7138d8a57d23e88-2760782fa7c8314e57ab",
+          "file": "mail.spec.js",
+          "line": 86,
+          "column": 1
+        },
+        {
+          "title": "TC-MAIL-02 a 'viewed' email moves the matching application to Viewed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1221,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:02.969Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7be1c7138d8a57d23e88-8b6c21f3241c706800e9",
+          "file": "mail.spec.js",
+          "line": 99,
+          "column": 1
+        },
+        {
+          "title": "TC-MAIL-03 an email about an application the app didn't know adds it to My jobs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1139,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:04.211Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7be1c7138d8a57d23e88-9db143fe473dfd3bb60e",
+          "file": "mail.spec.js",
+          "line": 115,
+          "column": 1
+        },
+        {
+          "title": "TC-MAIL-04 a rejection email ends it as Not selected, with a red last step",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1196,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:05.365Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7be1c7138d8a57d23e88-96cebf72ae5c0817a0ed",
+          "file": "mail.spec.js",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "TC-MAIL-05 an older email never moves a status back",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1453,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:06.576Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7be1c7138d8a57d23e88-d4d3ae728ffab81e9125",
+          "file": "mail.spec.js",
+          "line": 143,
+          "column": 1
+        },
+        {
+          "title": "TC-MAIL-06 a save from the app does not wipe statuses from email",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 32,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:08.052Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7be1c7138d8a57d23e88-43a38552ba2860be1bca",
+          "file": "mail.spec.js",
+          "line": 155,
+          "column": 1
+        },
+        {
+          "title": "TC-MAIL-07 Check now reads Gmail again and shows the new status",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2485,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:08.104Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7be1c7138d8a57d23e88-8756b38194707d2b0ca4",
+          "file": "mail.spec.js",
+          "line": 169,
+          "column": 1
+        },
+        {
+          "title": "TC-MAIL-08 another user's account never gets these statuses",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 114,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:10.609Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7be1c7138d8a57d23e88-8751673de24dd8c39fbe",
+          "file": "mail.spec.js",
+          "line": 178,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "myjobs.spec.js",
+      "file": "myjobs.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-MY-01 saving a job puts it in the Saved jobs menu, and it is kept on the server",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2386,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:10.763Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8021bd4115f1ed31fe7-de63c2fc27a5d54aec85",
           "file": "myjobs.spec.js",
           "line": 21,
           "column": 1
@@ -2500,7 +3002,7 @@
                   "type": "slow",
                   "location": {
                     "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
-                    "line": 30,
+                    "line": 31,
                     "column": 8
                   }
                 }
@@ -2510,21 +3012,21 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 7,
+                  "workerIndex": 9,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3955,
+                  "duration": 5843,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:15:44.265Z",
+                  "startTime": "2026-10-12T12:09:13.176Z",
                   "annotations": [
                     {
                       "type": "slow",
                       "location": {
                         "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
-                        "line": 30,
+                        "line": 31,
                         "column": 8
                       }
                     }
@@ -2537,7 +3039,7 @@
           ],
           "id": "e8021bd4115f1ed31fe7-efa96238a006fc8425b4",
           "file": "myjobs.spec.js",
-          "line": 37,
+          "line": 38,
           "column": 1
         },
         {
@@ -2562,15 +3064,15 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 7,
+                  "workerIndex": 9,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3652,
+                  "duration": 4139,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:15:48.241Z",
+                  "startTime": "2026-10-12T12:09:19.048Z",
                   "annotations": [
                     {
                       "type": "slow",
@@ -2593,8 +3095,8 @@
           "column": 1
         },
         {
-          "title": "TC-MY-04 an applied job can be moved to Interview / Offer / Closed or undone",
-          "ok": false,
+          "title": "TC-MY-04 the menu is Jobs, Saved jobs, My jobs, Profile, with saved and applied counts",
+          "ok": true,
           "tags": [],
           "tests": [
             {
@@ -2605,65 +3107,183 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 7,
+                  "workerIndex": 9,
                   "parallelIndex": 0,
-                  "status": "failed",
-                  "duration": 6901,
-                  "error": {
-                    "message": "Error: there should be a way to record an interview\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#sheet').getByRole('button', { name: /Interview/ })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - there should be a way to record an interview with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#sheet').getByRole('button', { name: /Interview/ })\u001b[22m\n",
-                    "stack": "Error: there should be a way to record an interview\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#sheet').getByRole('button', { name: /Interview/ })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - there should be a way to record an interview with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#sheet').getByRole('button', { name: /Interview/ })\u001b[22m\n\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:69:114",
-                    "location": {
-                      "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
-                      "column": 114,
-                      "line": 69
-                    },
-                    "snippet": "\u001b[0m \u001b[90m 67 |\u001b[39m   \u001b[36mconst\u001b[39m sheet \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#sheet\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 68 |\u001b[39m   \u001b[36mawait\u001b[39m expect(sheet)\u001b[33m.\u001b[39mtoHaveClass(\u001b[35m/open/\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 69 |\u001b[39m   \u001b[36mawait\u001b[39m expect(sheet\u001b[33m.\u001b[39mgetByRole(\u001b[32m\"button\"\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[35m/Interview/\u001b[39m })\u001b[33m,\u001b[39m \u001b[32m\"there should be a way to record an interview\"\u001b[39m)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 70 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 71 |\u001b[39m\n \u001b[90m 72 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m\"Account and data safety\"\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m"
-                  },
-                  "errors": [
-                    {
-                      "location": {
-                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
-                        "column": 114,
-                        "line": 69
-                      },
-                      "message": "Error: there should be a way to record an interview\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#sheet').getByRole('button', { name: /Interview/ })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - there should be a way to record an interview with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#sheet').getByRole('button', { name: /Interview/ })\u001b[22m\n\n\n  67 |   const sheet = page.locator(\"#sheet\");\n  68 |   await expect(sheet).toHaveClass(/open/);\n> 69 |   await expect(sheet.getByRole(\"button\", { name: /Interview/ }), \"there should be a way to record an interview\").toBeVisible();\n     |                                                                                                                  ^\n  70 | });\n  71 |\n  72 | test.describe(\"Account and data safety\", () => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:69:114"
-                    }
-                  ],
+                  "status": "passed",
+                  "duration": 1268,
+                  "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:15:51.913Z",
+                  "startTime": "2026-10-12T12:09:23.206Z",
                   "annotations": [],
-                  "attachments": [
-                    {
-                      "name": "screenshot",
-                      "contentType": "image/png",
-                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-TC-MY-04-an-applied-68edd-view-Offer-Closed-or-undone-desktop\\test-failed-1.png"
-                    },
-                    {
-                      "name": "error-context",
-                      "contentType": "text/markdown",
-                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-TC-MY-04-an-applied-68edd-view-Offer-Closed-or-undone-desktop\\error-context.md"
-                    },
-                    {
-                      "name": "trace",
-                      "contentType": "application/zip",
-                      "path": "C:\\Users\\kanch\\job-alerts\\tests\\test-results\\myjobs-TC-MY-04-an-applied-68edd-view-Offer-Closed-or-undone-desktop\\trace.zip"
-                    }
-                  ],
-                  "errorLocation": {
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8021bd4115f1ed31fe7-68771af6317bca5565ba",
+          "file": "myjobs.spec.js",
+          "line": 103,
+          "column": 1
+        },
+        {
+          "title": "TC-MY-05 Saved jobs shows only saved jobs; My jobs shows only applications",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1534,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:24.488Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8021bd4115f1ed31fe7-4841c1cda8dcab69b2ba",
+          "file": "myjobs.spec.js",
+          "line": 110,
+          "column": 1
+        },
+        {
+          "title": "TC-MY-06 removing the bookmark takes a job off Saved jobs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1645,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:26.043Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8021bd4115f1ed31fe7-48d134f8c6e5ca813493",
+          "file": "myjobs.spec.js",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "TC-MY-07 phone menu has the four sections @phone",
+          "ok": true,
+          "tags": [
+            "phone"
+          ],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "location": {
                     "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
-                    "column": 114,
-                    "line": 69
+                    "line": 97,
+                    "column": 8
                   }
                 }
               ],
-              "status": "unexpected"
+              "expectedStatus": "skipped",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 1461,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:09:27.709Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
+                        "line": 97,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
             }
           ],
-          "id": "e8021bd4115f1ed31fe7-98b7a014978ac204c4f2",
+          "id": "e8021bd4115f1ed31fe7-1659834305bd692ce18b",
           "file": "myjobs.spec.js",
-          "line": 72,
+          "line": 132,
+          "column": 1
+        },
+        {
+          "title": "TC-MY-07 phone menu has the four sections @phone",
+          "ok": true,
+          "tags": [
+            "phone"
+          ],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "phone",
+              "projectName": "phone",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1200,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T12:11:19.379Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8021bd4115f1ed31fe7-28e194b5a32b9e4c3646",
+          "file": "myjobs.spec.js",
+          "line": 132,
           "column": 1
         }
       ],
@@ -2671,7 +3291,7 @@
         {
           "title": "Account and data safety",
           "file": "myjobs.spec.js",
-          "line": 102,
+          "line": 142,
           "column": 6,
           "specs": [
             {
@@ -2687,34 +3307,34 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 8,
+                      "workerIndex": 9,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 192,
+                      "duration": 148,
                       "error": {
                         "message": "Error: the PIN should go to the owner (email/SMS), not to whoever asks\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m",
-                        "stack": "Error: the PIN should go to the owner (email/SMS), not to whoever asks\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:77:95",
+                        "stack": "Error: the PIN should go to the owner (email/SMS), not to whoever asks\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:108:95",
                         "location": {
                           "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                           "column": 95,
-                          "line": 77
+                          "line": 108
                         },
-                        "snippet": "\u001b[0m \u001b[90m 75 |\u001b[39m     \u001b[36mconst\u001b[39m { pin } \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m (\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/forgot\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m victim\u001b[33m.\u001b[39memail } }))\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 76 |\u001b[39m     \u001b[36mconst\u001b[39m r \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/reset\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m victim\u001b[33m.\u001b[39memail\u001b[33m,\u001b[39m pin\u001b[33m,\u001b[39m password\u001b[33m:\u001b[39m \u001b[32m\"Hacked#1\"\u001b[39m } })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 77 |\u001b[39m     expect(r\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m\"the PIN should go to the owner (email/SMS), not to whoever asks\"\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 78 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 79 |\u001b[39m\n \u001b[90m 80 |\u001b[39m   test(\u001b[32m\"TC-SEC-11 'Forgot password' does not reveal which emails have accounts\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                        "snippet": "\u001b[0m \u001b[90m 106 |\u001b[39m     \u001b[36mconst\u001b[39m { pin } \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m (\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/forgot\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m victim\u001b[33m.\u001b[39memail } }))\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 107 |\u001b[39m     \u001b[36mconst\u001b[39m r \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/reset\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m victim\u001b[33m.\u001b[39memail\u001b[33m,\u001b[39m pin\u001b[33m,\u001b[39m password\u001b[33m:\u001b[39m \u001b[32m\"Hacked#1\"\u001b[39m } })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 108 |\u001b[39m     expect(r\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m\"the PIN should go to the owner (email/SMS), not to whoever asks\"\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 109 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 110 |\u001b[39m\n \u001b[90m 111 |\u001b[39m   test(\u001b[32m\"TC-SEC-11 'Forgot password' does not reveal which emails have accounts\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                             "column": 95,
-                            "line": 77
+                            "line": 108
                           },
-                          "message": "Error: the PIN should go to the owner (email/SMS), not to whoever asks\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n\n  75 |     const { pin } = await (await request.post(\"/api/forgot\", { data: { email: victim.email } })).json();\n  76 |     const r = await request.post(\"/api/reset\", { data: { email: victim.email, pin, password: \"Hacked#1\" } });\n> 77 |     expect(r.status(), \"the PIN should go to the owner (email/SMS), not to whoever asks\").not.toBe(200);\n     |                                                                                               ^\n  78 |   });\n  79 |\n  80 |   test(\"TC-SEC-11 'Forgot password' does not reveal which emails have accounts\", async ({ request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:77:95"
+                          "message": "Error: the PIN should go to the owner (email/SMS), not to whoever asks\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n\n  106 |     const { pin } = await (await request.post(\"/api/forgot\", { data: { email: victim.email } })).json();\n  107 |     const r = await request.post(\"/api/reset\", { data: { email: victim.email, pin, password: \"Hacked#1\" } });\n> 108 |     expect(r.status(), \"the PIN should go to the owner (email/SMS), not to whoever asks\").not.toBe(200);\n      |                                                                                               ^\n  109 |   });\n  110 |\n  111 |   test(\"TC-SEC-11 'Forgot password' does not reveal which emails have accounts\", async ({ request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:108:95"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:16:01.705Z",
+                      "startTime": "2026-10-12T12:09:29.195Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -2726,7 +3346,7 @@
                       "errorLocation": {
                         "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                         "column": 95,
-                        "line": 77
+                        "line": 108
                       }
                     }
                   ],
@@ -2735,7 +3355,7 @@
               ],
               "id": "e8021bd4115f1ed31fe7-606036580c132388b550",
               "file": "myjobs.spec.js",
-              "line": 103,
+              "line": 143,
               "column": 3
             },
             {
@@ -2751,34 +3371,34 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 9,
+                      "workerIndex": 10,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 164,
+                      "duration": 124,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:84:30",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:115:30",
                         "location": {
                           "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                           "column": 30,
-                          "line": 84
+                          "line": 115
                         },
-                        "snippet": "\u001b[0m \u001b[90m 82 |\u001b[39m     \u001b[36mconst\u001b[39m known \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/forgot\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m a\u001b[33m.\u001b[39memail } })\u001b[33m;\u001b[39m\n \u001b[90m 83 |\u001b[39m     \u001b[36mconst\u001b[39m unknown \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/forgot\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m \u001b[32m\"nobody-\"\u001b[39m \u001b[33m+\u001b[39m \u001b[33mDate\u001b[39m\u001b[33m.\u001b[39mnow() \u001b[33m+\u001b[39m \u001b[32m\"@example.com\"\u001b[39m } })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 84 |\u001b[39m     expect(unknown\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(known\u001b[33m.\u001b[39mstatus())\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 85 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 86 |\u001b[39m\n \u001b[90m 87 |\u001b[39m   test(\u001b[32m\"TC-SEC-12 changing the password logs out the other devices\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                        "snippet": "\u001b[0m \u001b[90m 113 |\u001b[39m     \u001b[36mconst\u001b[39m known \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/forgot\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m a\u001b[33m.\u001b[39memail } })\u001b[33m;\u001b[39m\n \u001b[90m 114 |\u001b[39m     \u001b[36mconst\u001b[39m unknown \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/forgot\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m \u001b[32m\"nobody-\"\u001b[39m \u001b[33m+\u001b[39m \u001b[33mDate\u001b[39m\u001b[33m.\u001b[39mnow() \u001b[33m+\u001b[39m \u001b[32m\"@example.com\"\u001b[39m } })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 115 |\u001b[39m     expect(unknown\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(known\u001b[33m.\u001b[39mstatus())\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 116 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 117 |\u001b[39m\n \u001b[90m 118 |\u001b[39m   test(\u001b[32m\"TC-SEC-12 changing the password logs out the other devices\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                             "column": 30,
-                            "line": 84
+                            "line": 115
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n\n  82 |     const known = await request.post(\"/api/forgot\", { data: { email: a.email } });\n  83 |     const unknown = await request.post(\"/api/forgot\", { data: { email: \"nobody-\" + Date.now() + \"@example.com\" } });\n> 84 |     expect(unknown.status()).toBe(known.status());\n     |                              ^\n  85 |   });\n  86 |\n  87 |   test(\"TC-SEC-12 changing the password logs out the other devices\", async ({ request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:84:30"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n\n  113 |     const known = await request.post(\"/api/forgot\", { data: { email: a.email } });\n  114 |     const unknown = await request.post(\"/api/forgot\", { data: { email: \"nobody-\" + Date.now() + \"@example.com\" } });\n> 115 |     expect(unknown.status()).toBe(known.status());\n      |                              ^\n  116 |   });\n  117 |\n  118 |   test(\"TC-SEC-12 changing the password logs out the other devices\", async ({ request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:115:30"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:16:04.301Z",
+                      "startTime": "2026-10-12T12:09:30.800Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -2790,7 +3410,7 @@
                       "errorLocation": {
                         "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                         "column": 30,
-                        "line": 84
+                        "line": 115
                       }
                     }
                   ],
@@ -2799,7 +3419,7 @@
               ],
               "id": "e8021bd4115f1ed31fe7-8b17717bdc12d9c592c5",
               "file": "myjobs.spec.js",
-              "line": 123,
+              "line": 163,
               "column": 3
             },
             {
@@ -2815,34 +3435,34 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 10,
+                      "workerIndex": 11,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 301,
+                      "duration": 268,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m200\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m200\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:91:81",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m200\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:122:81",
                         "location": {
                           "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                           "column": 81,
-                          "line": 91
+                          "line": 122
                         },
-                        "snippet": "\u001b[0m \u001b[90m 89 |\u001b[39m     \u001b[36mconst\u001b[39m other \u001b[33m=\u001b[39m (\u001b[36mawait\u001b[39m (\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/login\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m a\u001b[33m.\u001b[39memail\u001b[33m,\u001b[39m password\u001b[33m:\u001b[39m \u001b[33mPASSWORD\u001b[39m } }))\u001b[33m.\u001b[39mjson())\u001b[33m.\u001b[39mtoken\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/password\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(a\u001b[33m.\u001b[39mtoken)\u001b[33m,\u001b[39m data\u001b[33m:\u001b[39m { old\u001b[33m:\u001b[39m \u001b[33mPASSWORD\u001b[39m\u001b[33m,\u001b[39m \u001b[36mnew\u001b[39m\u001b[33m:\u001b[39m \u001b[32m\"Changed#1\"\u001b[39m } })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 91 |\u001b[39m     expect((\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m\"/api/user\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(other) }))\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m401\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 92 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 93 |\u001b[39m\n \u001b[90m 94 |\u001b[39m   test(\u001b[32m\"TC-SEC-13 deleting the account asks for the password\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                        "snippet": "\u001b[0m \u001b[90m 120 |\u001b[39m     \u001b[36mconst\u001b[39m other \u001b[33m=\u001b[39m (\u001b[36mawait\u001b[39m (\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/login\"\u001b[39m\u001b[33m,\u001b[39m { data\u001b[33m:\u001b[39m { email\u001b[33m:\u001b[39m a\u001b[33m.\u001b[39memail\u001b[33m,\u001b[39m password\u001b[33m:\u001b[39m \u001b[33mPASSWORD\u001b[39m } }))\u001b[33m.\u001b[39mjson())\u001b[33m.\u001b[39mtoken\u001b[33m;\u001b[39m\n \u001b[90m 121 |\u001b[39m     \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m\"/api/password\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(a\u001b[33m.\u001b[39mtoken)\u001b[33m,\u001b[39m data\u001b[33m:\u001b[39m { old\u001b[33m:\u001b[39m \u001b[33mPASSWORD\u001b[39m\u001b[33m,\u001b[39m \u001b[36mnew\u001b[39m\u001b[33m:\u001b[39m \u001b[32m\"Changed#1\"\u001b[39m } })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 122 |\u001b[39m     expect((\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m\"/api/user\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(other) }))\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m401\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 123 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 124 |\u001b[39m\n \u001b[90m 125 |\u001b[39m   test(\u001b[32m\"TC-SEC-13 deleting the account asks for the password\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                             "column": 81,
-                            "line": 91
+                            "line": 122
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m200\u001b[39m\n\n  89 |     const other = (await (await request.post(\"/api/login\", { data: { email: a.email, password: PASSWORD } })).json()).token;\n  90 |     await request.post(\"/api/password\", { headers: auth(a.token), data: { old: PASSWORD, new: \"Changed#1\" } });\n> 91 |     expect((await request.get(\"/api/user\", { headers: auth(other) })).status()).toBe(401);\n     |                                                                                 ^\n  92 |   });\n  93 |\n  94 |   test(\"TC-SEC-13 deleting the account asks for the password\", async ({ request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:91:81"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m200\u001b[39m\n\n  120 |     const other = (await (await request.post(\"/api/login\", { data: { email: a.email, password: PASSWORD } })).json()).token;\n  121 |     await request.post(\"/api/password\", { headers: auth(a.token), data: { old: PASSWORD, new: \"Changed#1\" } });\n> 122 |     expect((await request.get(\"/api/user\", { headers: auth(other) })).status()).toBe(401);\n      |                                                                                 ^\n  123 |   });\n  124 |\n  125 |   test(\"TC-SEC-13 deleting the account asks for the password\", async ({ request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:122:81"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:16:06.679Z",
+                      "startTime": "2026-10-12T12:09:31.723Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -2854,7 +3474,7 @@
                       "errorLocation": {
                         "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                         "column": 81,
-                        "line": 91
+                        "line": 122
                       }
                     }
                   ],
@@ -2863,7 +3483,7 @@
               ],
               "id": "e8021bd4115f1ed31fe7-10a675b6b97e8cee64c4",
               "file": "myjobs.spec.js",
-              "line": 139,
+              "line": 179,
               "column": 3
             },
             {
@@ -2879,34 +3499,34 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 11,
+                      "workerIndex": 12,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 136,
+                      "duration": 123,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:96:90",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:127:90",
                         "location": {
                           "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                           "column": 90,
-                          "line": 96
+                          "line": 127
                         },
-                        "snippet": "\u001b[0m \u001b[90m 94 |\u001b[39m   test(\u001b[32m\"TC-SEC-13 deleting the account asks for the password\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\n \u001b[90m 95 |\u001b[39m     \u001b[36mconst\u001b[39m a \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m signupApi(request)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m     expect((\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mdelete\u001b[39m(\u001b[32m\"/api/user\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(a\u001b[33m.\u001b[39mtoken) }))\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 98 |\u001b[39m\n \u001b[90m 99 |\u001b[39m   test(\u001b[32m\"TC-SEC-14 log out leaves no personal data in the browser\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page\u001b[33m,\u001b[39m request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                        "snippet": "\u001b[0m \u001b[90m 125 |\u001b[39m   test(\u001b[32m\"TC-SEC-13 deleting the account asks for the password\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\n \u001b[90m 126 |\u001b[39m     \u001b[36mconst\u001b[39m a \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m signupApi(request)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 127 |\u001b[39m     expect((\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mdelete\u001b[39m(\u001b[32m\"/api/user\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(a\u001b[33m.\u001b[39mtoken) }))\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 128 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 129 |\u001b[39m\n \u001b[90m 130 |\u001b[39m   test(\u001b[32m\"TC-SEC-14 log out leaves no personal data in the browser\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page\u001b[33m,\u001b[39m request }) \u001b[33m=>\u001b[39m {\u001b[0m"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                             "column": 90,
-                            "line": 96
+                            "line": 127
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n\n  94 |   test(\"TC-SEC-13 deleting the account asks for the password\", async ({ request }) => {\n  95 |     const a = await signupApi(request);\n> 96 |     expect((await request.delete(\"/api/user\", { headers: auth(a.token) })).status()).not.toBe(200);\n     |                                                                                          ^\n  97 |   });\n  98 |\n  99 |   test(\"TC-SEC-14 log out leaves no personal data in the browser\", async ({ page, request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:96:90"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m200\u001b[39m\n\n  125 |   test(\"TC-SEC-13 deleting the account asks for the password\", async ({ request }) => {\n  126 |     const a = await signupApi(request);\n> 127 |     expect((await request.delete(\"/api/user\", { headers: auth(a.token) })).status()).not.toBe(200);\n      |                                                                                          ^\n  128 |   });\n  129 |\n  130 |   test(\"TC-SEC-14 log out leaves no personal data in the browser\", async ({ page, request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:127:90"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:16:09.305Z",
+                      "startTime": "2026-10-12T12:09:32.757Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -2918,7 +3538,7 @@
                       "errorLocation": {
                         "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                         "column": 90,
-                        "line": 96
+                        "line": 127
                       }
                     }
                   ],
@@ -2927,7 +3547,7 @@
               ],
               "id": "e8021bd4115f1ed31fe7-b4bda8224b87d78e8e24",
               "file": "myjobs.spec.js",
-              "line": 160,
+              "line": 200,
               "column": 3
             },
             {
@@ -2943,34 +3563,34 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 12,
+                      "workerIndex": 13,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 3606,
+                      "duration": 2172,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"uv.user.t-u-1791674173278-287070@example.com\",\u001b[39m\n\u001b[31m+ ]\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"uv.user.t-u-1791674173278-287070@example.com\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:104:18",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"uv.user.t-u-1791806974723-137402@example.com\",\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"uv.user.t-u-1791806974723-137402@example.com\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:135:18",
                         "location": {
                           "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                           "column": 18,
-                          "line": 104
+                          "line": 135
                         },
-                        "snippet": "\u001b[0m \u001b[90m 102 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#loginView\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m left \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mevaluate(() \u001b[33m=>\u001b[39m \u001b[33mObject\u001b[39m\u001b[33m.\u001b[39mkeys(localStorage)\u001b[33m.\u001b[39mfilter(k \u001b[33m=>\u001b[39m k\u001b[33m.\u001b[39mstartsWith(\u001b[32m\"uv.user.\"\u001b[39m)))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 |\u001b[39m     expect(left)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 105 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m\n \u001b[90m 107 |\u001b[39m   test(\u001b[32m\"TC-SEC-15 the GitHub key is not copied to the server\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page\u001b[33m,\u001b[39m request }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                        "snippet": "\u001b[0m \u001b[90m 133 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#loginView\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 134 |\u001b[39m     \u001b[36mconst\u001b[39m left \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mevaluate(() \u001b[33m=>\u001b[39m \u001b[33mObject\u001b[39m\u001b[33m.\u001b[39mkeys(localStorage)\u001b[33m.\u001b[39mfilter(k \u001b[33m=>\u001b[39m k\u001b[33m.\u001b[39mstartsWith(\u001b[32m\"uv.user.\"\u001b[39m)))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 135 |\u001b[39m     expect(left)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 136 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 137 |\u001b[39m\n \u001b[90m 138 |\u001b[39m   test(\u001b[32m\"TC-SEC-15 the GitHub key is not copied to the server\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page\u001b[33m,\u001b[39m request }) \u001b[33m=>\u001b[39m {\u001b[0m"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                             "column": 18,
-                            "line": 104
+                            "line": 135
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"uv.user.t-u-1791674173278-287070@example.com\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  102 |     await expect(page.locator(\"#loginView\")).toBeVisible();\n  103 |     const left = await page.evaluate(() => Object.keys(localStorage).filter(k => k.startsWith(\"uv.user.\")));\n> 104 |     expect(left).toEqual([]);\n      |                  ^\n  105 |   });\n  106 |\n  107 |   test(\"TC-SEC-15 the GitHub key is not copied to the server\", async ({ page, request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:104:18"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"uv.user.t-u-1791806974723-137402@example.com\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  133 |     await expect(page.locator(\"#loginView\")).toBeVisible();\n  134 |     const left = await page.evaluate(() => Object.keys(localStorage).filter(k => k.startsWith(\"uv.user.\")));\n> 135 |     expect(left).toEqual([]);\n      |                  ^\n  136 |   });\n  137 |\n  138 |   test(\"TC-SEC-15 the GitHub key is not copied to the server\", async ({ page, request }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:135:18"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:16:11.613Z",
+                      "startTime": "2026-10-12T12:09:33.671Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -2992,7 +3612,7 @@
                       "errorLocation": {
                         "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                         "column": 18,
-                        "line": 104
+                        "line": 135
                       }
                     }
                   ],
@@ -3001,7 +3621,7 @@
               ],
               "id": "e8021bd4115f1ed31fe7-c1a084bb2ac2aca32fd6",
               "file": "myjobs.spec.js",
-              "line": 168,
+              "line": 208,
               "column": 3
             },
             {
@@ -3017,34 +3637,34 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 13,
+                      "workerIndex": 14,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 3096,
+                      "duration": 2237,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"github_pat_TESTSECRET\"\u001b[39m\nReceived string:        \u001b[31m\"{\\\"name\\\":\\\"Test User\\\",\\\"user\\\":{\\\"profile\\\":{\\\"name\\\":\\\"Test User\\\",\\\"email\\\":\\\"t-u-1791674180615-417383@example.com\\\",\\\"phone\\\":\\\"\\\",\\\"headline\\\":\\\"\\\",\\\"location\\\":\\\"\\\",\\\"about\\\":\\\"\\\",\\\"currentCompany\\\":\\\"\\\",\\\"currentCtc\\\":\\\"\\\",\\\"expectedCtc\\\":\\\"\\\",\\\"notice\\\":\\\"\\\",\\\"education\\\":\\\"\\\",\\\"linkedin\\\":\\\"\\\",\\\"github\\\":\\\"\\\",\\\"portfolio\\\":\\\"\\\",\\\"resume\\\":\\\"\\\"},\\\"prefs\\\":{\\\"roles\\\":[\\\"QA / Testing\\\"],\\\"custom\\\":\\\"\\\",\\\"exp\\\":3,\\\"cities\\\":[\\\"Hyderabad\\\"],\\\"skills\\\":[],\\\"customSkills\\\":\\\"\\\"},\\\"jobs\\\":{},\\\"manual\\\":[],\\\"hidden\\\":{},\\\"settings\\\":{\\\"theme\\\":\\\"light\\\",\\\"days\\\":7,\\\"hideApplied\\\":true,\\\"telegram\\\":false,\\\"minMatch\\\":70,\\\"ghToken\\\":\\\"\u001b[7mgithub_pat_TESTSECRET\u001b[27m\\\",\\\"ghRepo\\\":\\\"chandramouli-projects/job-alerts\\\"},\\\"onboarded\\\":true,\\\"createdAt\\\":1791674181315,\\\"lastSeen\\\":0,\\\"thisVisit\\\":1791674181315}}\"\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"github_pat_TESTSECRET\"\u001b[39m\nReceived string:        \u001b[31m\"{\\\"name\\\":\\\"Test User\\\",\\\"user\\\":{\\\"profile\\\":{\\\"name\\\":\\\"Test User\\\",\\\"email\\\":\\\"t-u-1791674180615-417383@example.com\\\",\\\"phone\\\":\\\"\\\",\\\"headline\\\":\\\"\\\",\\\"location\\\":\\\"\\\",\\\"about\\\":\\\"\\\",\\\"currentCompany\\\":\\\"\\\",\\\"currentCtc\\\":\\\"\\\",\\\"expectedCtc\\\":\\\"\\\",\\\"notice\\\":\\\"\\\",\\\"education\\\":\\\"\\\",\\\"linkedin\\\":\\\"\\\",\\\"github\\\":\\\"\\\",\\\"portfolio\\\":\\\"\\\",\\\"resume\\\":\\\"\\\"},\\\"prefs\\\":{\\\"roles\\\":[\\\"QA / Testing\\\"],\\\"custom\\\":\\\"\\\",\\\"exp\\\":3,\\\"cities\\\":[\\\"Hyderabad\\\"],\\\"skills\\\":[],\\\"customSkills\\\":\\\"\\\"},\\\"jobs\\\":{},\\\"manual\\\":[],\\\"hidden\\\":{},\\\"settings\\\":{\\\"theme\\\":\\\"light\\\",\\\"days\\\":7,\\\"hideApplied\\\":true,\\\"telegram\\\":false,\\\"minMatch\\\":70,\\\"ghToken\\\":\\\"\u001b[7mgithub_pat_TESTSECRET\u001b[27m\\\",\\\"ghRepo\\\":\\\"chandramouli-projects/job-alerts\\\"},\\\"onboarded\\\":true,\\\"createdAt\\\":1791674181315,\\\"lastSeen\\\":0,\\\"thisVisit\\\":1791674181315}}\"\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:113:24",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"github_pat_TESTSECRET\"\u001b[39m\nReceived string:        \u001b[31m\"{\\\"name\\\":\\\"Test User\\\",\\\"user\\\":{\\\"profile\\\":{\\\"name\\\":\\\"Test User\\\",\\\"email\\\":\\\"t-u-1791806978173-340915@example.com\\\",\\\"phone\\\":\\\"\\\",\\\"headline\\\":\\\"\\\",\\\"location\\\":\\\"\\\",\\\"about\\\":\\\"\\\",\\\"currentCompany\\\":\\\"\\\",\\\"currentCtc\\\":\\\"\\\",\\\"expectedCtc\\\":\\\"\\\",\\\"notice\\\":\\\"\\\",\\\"education\\\":\\\"\\\",\\\"linkedin\\\":\\\"\\\",\\\"github\\\":\\\"\\\",\\\"portfolio\\\":\\\"\\\",\\\"resume\\\":\\\"\\\"},\\\"prefs\\\":{\\\"roles\\\":[\\\"QA / Testing\\\"],\\\"custom\\\":\\\"\\\",\\\"exp\\\":3,\\\"cities\\\":[\\\"Hyderabad\\\"],\\\"skills\\\":[],\\\"customSkills\\\":\\\"\\\"},\\\"jobs\\\":{},\\\"manual\\\":[],\\\"hidden\\\":{},\\\"settings\\\":{\\\"theme\\\":\\\"light\\\",\\\"days\\\":7,\\\"hideApplied\\\":true,\\\"telegram\\\":false,\\\"minMatch\\\":70,\\\"ghToken\\\":\\\"\u001b[7mgithub_pat_TESTSECRET\u001b[27m\\\",\\\"ghRepo\\\":\\\"chandramouli-projects/job-alerts\\\"},\\\"onboarded\\\":true,\\\"createdAt\\\":1791806978750,\\\"lastSeen\\\":0,\\\"thisVisit\\\":1791806978750}}\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"github_pat_TESTSECRET\"\u001b[39m\nReceived string:        \u001b[31m\"{\\\"name\\\":\\\"Test User\\\",\\\"user\\\":{\\\"profile\\\":{\\\"name\\\":\\\"Test User\\\",\\\"email\\\":\\\"t-u-1791806978173-340915@example.com\\\",\\\"phone\\\":\\\"\\\",\\\"headline\\\":\\\"\\\",\\\"location\\\":\\\"\\\",\\\"about\\\":\\\"\\\",\\\"currentCompany\\\":\\\"\\\",\\\"currentCtc\\\":\\\"\\\",\\\"expectedCtc\\\":\\\"\\\",\\\"notice\\\":\\\"\\\",\\\"education\\\":\\\"\\\",\\\"linkedin\\\":\\\"\\\",\\\"github\\\":\\\"\\\",\\\"portfolio\\\":\\\"\\\",\\\"resume\\\":\\\"\\\"},\\\"prefs\\\":{\\\"roles\\\":[\\\"QA / Testing\\\"],\\\"custom\\\":\\\"\\\",\\\"exp\\\":3,\\\"cities\\\":[\\\"Hyderabad\\\"],\\\"skills\\\":[],\\\"customSkills\\\":\\\"\\\"},\\\"jobs\\\":{},\\\"manual\\\":[],\\\"hidden\\\":{},\\\"settings\\\":{\\\"theme\\\":\\\"light\\\",\\\"days\\\":7,\\\"hideApplied\\\":true,\\\"telegram\\\":false,\\\"minMatch\\\":70,\\\"ghToken\\\":\\\"\u001b[7mgithub_pat_TESTSECRET\u001b[27m\\\",\\\"ghRepo\\\":\\\"chandramouli-projects/job-alerts\\\"},\\\"onboarded\\\":true,\\\"createdAt\\\":1791806978750,\\\"lastSeen\\\":0,\\\"thisVisit\\\":1791806978750}}\"\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:144:24",
                         "location": {
                           "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                           "column": 24,
-                          "line": 113
+                          "line": 144
                         },
-                        "snippet": "\u001b[0m \u001b[90m 111 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m800\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 112 |\u001b[39m     \u001b[36mconst\u001b[39m stored \u001b[33m=\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(\u001b[36mawait\u001b[39m (\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m\"/api/user\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(a\u001b[33m.\u001b[39mtoken) }))\u001b[33m.\u001b[39mjson())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 113 |\u001b[39m     expect(stored)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(\u001b[32m\"github_pat_TESTSECRET\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 114 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 115 |\u001b[39m\n \u001b[90m 116 |\u001b[39m   test(\u001b[32m\"TC-SEC-16 a broken jobs file still shows the log in page\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                        "snippet": "\u001b[0m \u001b[90m 142 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m800\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 143 |\u001b[39m     \u001b[36mconst\u001b[39m stored \u001b[33m=\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(\u001b[36mawait\u001b[39m (\u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m\"/api/user\"\u001b[39m\u001b[33m,\u001b[39m { headers\u001b[33m:\u001b[39m auth(a\u001b[33m.\u001b[39mtoken) }))\u001b[33m.\u001b[39mjson())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 144 |\u001b[39m     expect(stored)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(\u001b[32m\"github_pat_TESTSECRET\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 145 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 146 |\u001b[39m\n \u001b[90m 147 |\u001b[39m   test(\u001b[32m\"TC-SEC-16 a broken jobs file still shows the log in page\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                             "column": 24,
-                            "line": 113
+                            "line": 144
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"github_pat_TESTSECRET\"\u001b[39m\nReceived string:        \u001b[31m\"{\\\"name\\\":\\\"Test User\\\",\\\"user\\\":{\\\"profile\\\":{\\\"name\\\":\\\"Test User\\\",\\\"email\\\":\\\"t-u-1791674180615-417383@example.com\\\",\\\"phone\\\":\\\"\\\",\\\"headline\\\":\\\"\\\",\\\"location\\\":\\\"\\\",\\\"about\\\":\\\"\\\",\\\"currentCompany\\\":\\\"\\\",\\\"currentCtc\\\":\\\"\\\",\\\"expectedCtc\\\":\\\"\\\",\\\"notice\\\":\\\"\\\",\\\"education\\\":\\\"\\\",\\\"linkedin\\\":\\\"\\\",\\\"github\\\":\\\"\\\",\\\"portfolio\\\":\\\"\\\",\\\"resume\\\":\\\"\\\"},\\\"prefs\\\":{\\\"roles\\\":[\\\"QA / Testing\\\"],\\\"custom\\\":\\\"\\\",\\\"exp\\\":3,\\\"cities\\\":[\\\"Hyderabad\\\"],\\\"skills\\\":[],\\\"customSkills\\\":\\\"\\\"},\\\"jobs\\\":{},\\\"manual\\\":[],\\\"hidden\\\":{},\\\"settings\\\":{\\\"theme\\\":\\\"light\\\",\\\"days\\\":7,\\\"hideApplied\\\":true,\\\"telegram\\\":false,\\\"minMatch\\\":70,\\\"ghToken\\\":\\\"\u001b[7mgithub_pat_TESTSECRET\u001b[27m\\\",\\\"ghRepo\\\":\\\"chandramouli-projects/job-alerts\\\"},\\\"onboarded\\\":true,\\\"createdAt\\\":1791674181315,\\\"lastSeen\\\":0,\\\"thisVisit\\\":1791674181315}}\"\u001b[39m\n\n  111 |     await page.waitForTimeout(800);\n  112 |     const stored = JSON.stringify(await (await request.get(\"/api/user\", { headers: auth(a.token) })).json());\n> 113 |     expect(stored).not.toContain(\"github_pat_TESTSECRET\");\n      |                        ^\n  114 |   });\n  115 |\n  116 |   test(\"TC-SEC-16 a broken jobs file still shows the log in page\", async ({ page }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:113:24"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"github_pat_TESTSECRET\"\u001b[39m\nReceived string:        \u001b[31m\"{\\\"name\\\":\\\"Test User\\\",\\\"user\\\":{\\\"profile\\\":{\\\"name\\\":\\\"Test User\\\",\\\"email\\\":\\\"t-u-1791806978173-340915@example.com\\\",\\\"phone\\\":\\\"\\\",\\\"headline\\\":\\\"\\\",\\\"location\\\":\\\"\\\",\\\"about\\\":\\\"\\\",\\\"currentCompany\\\":\\\"\\\",\\\"currentCtc\\\":\\\"\\\",\\\"expectedCtc\\\":\\\"\\\",\\\"notice\\\":\\\"\\\",\\\"education\\\":\\\"\\\",\\\"linkedin\\\":\\\"\\\",\\\"github\\\":\\\"\\\",\\\"portfolio\\\":\\\"\\\",\\\"resume\\\":\\\"\\\"},\\\"prefs\\\":{\\\"roles\\\":[\\\"QA / Testing\\\"],\\\"custom\\\":\\\"\\\",\\\"exp\\\":3,\\\"cities\\\":[\\\"Hyderabad\\\"],\\\"skills\\\":[],\\\"customSkills\\\":\\\"\\\"},\\\"jobs\\\":{},\\\"manual\\\":[],\\\"hidden\\\":{},\\\"settings\\\":{\\\"theme\\\":\\\"light\\\",\\\"days\\\":7,\\\"hideApplied\\\":true,\\\"telegram\\\":false,\\\"minMatch\\\":70,\\\"ghToken\\\":\\\"\u001b[7mgithub_pat_TESTSECRET\u001b[27m\\\",\\\"ghRepo\\\":\\\"chandramouli-projects/job-alerts\\\"},\\\"onboarded\\\":true,\\\"createdAt\\\":1791806978750,\\\"lastSeen\\\":0,\\\"thisVisit\\\":1791806978750}}\"\u001b[39m\n\n  142 |     await page.waitForTimeout(800);\n  143 |     const stored = JSON.stringify(await (await request.get(\"/api/user\", { headers: auth(a.token) })).json());\n> 144 |     expect(stored).not.toContain(\"github_pat_TESTSECRET\");\n      |                        ^\n  145 |   });\n  146 |\n  147 |   test(\"TC-SEC-16 a broken jobs file still shows the log in page\", async ({ page }) => {\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:144:24"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:16:19.280Z",
+                      "startTime": "2026-10-12T12:09:37.389Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -3066,7 +3686,7 @@
                       "errorLocation": {
                         "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                         "column": 24,
-                        "line": 113
+                        "line": 144
                       }
                     }
                   ],
@@ -3075,7 +3695,7 @@
               ],
               "id": "e8021bd4115f1ed31fe7-6e802c7ee3ef0243e0fb",
               "file": "myjobs.spec.js",
-              "line": 178,
+              "line": 218,
               "column": 3
             },
             {
@@ -3091,34 +3711,34 @@
                   "projectName": "desktop",
                   "results": [
                     {
-                      "workerIndex": 14,
+                      "workerIndex": 15,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 6763,
+                      "duration": 6169,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#loginView')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#loginView')\u001b[22m\n\u001b[2m    8 × locator resolved to <div id=\"loginView\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#loginView')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#loginView')\u001b[22m\n\u001b[2m    8 × locator resolved to <div id=\"loginView\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:119:46",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#loginView')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#loginView')\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"loginView\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#loginView')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#loginView')\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"loginView\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:150:46",
                         "location": {
                           "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                           "column": 46,
-                          "line": 119
+                          "line": 150
                         },
-                        "snippet": "\u001b[0m \u001b[90m 117 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mroute(\u001b[32m\"**/jobs.json*\"\u001b[39m\u001b[33m,\u001b[39m r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mfulfill({ json\u001b[33m:\u001b[39m {} }))\u001b[33m;\u001b[39m\n \u001b[90m 118 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m\"/\"\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 119 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#loginView\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 120 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 121 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 122 |\u001b[39m\u001b[0m"
+                        "snippet": "\u001b[0m \u001b[90m 148 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mroute(\u001b[32m\"**/jobs.json*\"\u001b[39m\u001b[33m,\u001b[39m r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mfulfill({ json\u001b[33m:\u001b[39m {} }))\u001b[33m;\u001b[39m\n \u001b[90m 149 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m\"/\"\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 150 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m\"#loginView\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 151 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 152 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 153 |\u001b[39m\u001b[0m"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                             "column": 46,
-                            "line": 119
+                            "line": 150
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#loginView')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#loginView')\u001b[22m\n\u001b[2m    8 × locator resolved to <div id=\"loginView\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n\n\n  117 |     await page.route(\"**/jobs.json*\", r => r.fulfill({ json: {} }));\n  118 |     await page.goto(\"/\");\n> 119 |     await expect(page.locator(\"#loginView\")).toBeVisible();\n      |                                              ^\n  120 |   });\n  121 | });\n  122 |\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:119:46"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#loginView')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#loginView')\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"loginView\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"hidden\"\u001b[22m\n\n\n  148 |     await page.route(\"**/jobs.json*\", r => r.fulfill({ json: {} }));\n  149 |     await page.goto(\"/\");\n> 150 |     await expect(page.locator(\"#loginView\")).toBeVisible();\n      |                                              ^\n  151 |   });\n  152 | });\n  153 |\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js:150:46"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T23:16:25.804Z",
+                      "startTime": "2026-10-12T12:09:40.935Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -3140,7 +3760,7 @@
                       "errorLocation": {
                         "file": "C:\\Users\\kanch\\job-alerts\\tests\\specs\\myjobs.spec.js",
                         "column": 46,
-                        "line": 119
+                        "line": 150
                       }
                     }
                   ],
@@ -3149,7 +3769,7 @@
               ],
               "id": "e8021bd4115f1ed31fe7-a8da3e2cc79662a3646e",
               "file": "myjobs.spec.js",
-              "line": 199,
+              "line": 239,
               "column": 3
             }
           ]
@@ -3175,10 +3795,10 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 15,
+                  "workerIndex": 16,
                   "parallelIndex": 0,
                   "status": "timedOut",
-                  "duration": 32768,
+                  "duration": 30448,
                   "error": {
                     "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
                     "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
@@ -3193,13 +3813,13 @@
                         "column": 105,
                         "line": 10
                       },
-                      "message": "Error: page.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#ob h1')\u001b[22m\n\u001b[2m    - locator resolved to <h1>Tell us the job you want</h1>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   8 | const pickAndClose = async (page, k, v) => {\n   9 |   await pick(page, k, v);\n> 10 |   if (await page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"))) await page.click(\"#ob h1\");\n     |                                                                                                         ^\n  11 | };\n  12 | const isOpen = (page, k) => page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"));\n  13 | const chips = (page, k) => page.locator(`.pk[data-pk=\"${k}\"] .pk-chip`).allTextContents();\n    at pickAndClose (C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:10:105)\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:28:29"
+                      "message": "Error: page.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#ob h1')\u001b[22m\n\u001b[2m    - locator resolved to <h1>Tell us the job you want</h1>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    53 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   8 | const pickAndClose = async (page, k, v) => {\n   9 |   await pick(page, k, v);\n> 10 |   if (await page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"))) await page.click(\"#ob h1\");\n     |                                                                                                         ^\n  11 | };\n  12 | const isOpen = (page, k) => page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"));\n  13 | const chips = (page, k) => page.locator(`.pk[data-pk=\"${k}\"] .pk-chip`).allTextContents();\n    at pickAndClose (C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:10:105)\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:28:29"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:16:36.035Z",
+                  "startTime": "2026-10-12T12:09:48.214Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -3241,15 +3861,15 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 16,
+                  "workerIndex": 17,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3442,
+                  "duration": 1500,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:17:21.354Z",
+                  "startTime": "2026-10-12T12:10:20.045Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -3275,10 +3895,10 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 16,
+                  "workerIndex": 17,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1792,
+                  "duration": 1234,
                   "error": {
                     "message": "Error: the role list should close after picking\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m",
                     "stack": "Error: the role list should close after picking\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:42:82",
@@ -3302,7 +3922,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:17:26.801Z",
+                  "startTime": "2026-10-12T12:10:21.827Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -3349,10 +3969,10 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 17,
+                  "workerIndex": 18,
                   "parallelIndex": 0,
                   "status": "timedOut",
-                  "duration": 15282,
+                  "duration": 15191,
                   "error": {
                     "message": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m",
                     "stack": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m"
@@ -3367,13 +3987,13 @@
                         "column": 32,
                         "line": 5
                       },
-                      "message": "Error: page.click: Test timeout of 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-pkopen=\"city\"]')\u001b[22m\n\u001b[2m    - locator resolved to <div tabindex=\"0\" role=\"button\" class=\"pk-field\" data-pkopen=\"city\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\"q-city\">…</div>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button type=\"button\" role=\"option\" class=\"pk-opt\" data-pkval=\"role\" aria-selected=\"false\" data-v=\".NET Developer\">…</button> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button type=\"button\" role=\"option\" class=\"pk-opt\" data-pkval=\"role\" aria-selected=\"false\" data-v=\".NET Developer\">…</button> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    24 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button type=\"button\" role=\"option\" class=\"pk-opt\" data-pkval=\"role\" aria-selected=\"false\" data-v=\".NET Developer\">…</button> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  3 | import { signupApi, useFixtures, openLoggedIn } from \"./helpers.js\";\n  4 |\n> 5 | const open = (page, k) => page.click(`[data-pkopen=\"${k}\"]`);\n    |                                ^\n  6 | const pick = (page, k, v) => page.click(`.pk-opt[data-pkval=\"${k}\"][data-v=\"${v}\"]`);\n  7 | // a list that stays open covers the next field, so close it the way a person must: click outside\n  8 | const pickAndClose = async (page, k, v) => {\n    at open (C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:5:32)\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:48:9"
+                      "message": "Error: page.click: Test timeout of 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-pkopen=\"city\"]')\u001b[22m\n\u001b[2m    - locator resolved to <div tabindex=\"0\" role=\"button\" class=\"pk-field\" data-pkopen=\"city\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\"q-city\">…</div>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button type=\"button\" role=\"option\" class=\"pk-opt\" data-pkval=\"role\" aria-selected=\"false\" data-v=\".NET Developer\">…</button> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button type=\"button\" role=\"option\" class=\"pk-opt\" data-pkval=\"role\" aria-selected=\"false\" data-v=\".NET Developer\">…</button> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    27 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <button type=\"button\" role=\"option\" class=\"pk-opt\" data-pkval=\"role\" aria-selected=\"false\" data-v=\".NET Developer\">…</button> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  3 | import { signupApi, useFixtures, openLoggedIn } from \"./helpers.js\";\n  4 |\n> 5 | const open = (page, k) => page.click(`[data-pkopen=\"${k}\"]`);\n    |                                ^\n  6 | const pick = (page, k, v) => page.click(`.pk-opt[data-pkval=\"${k}\"][data-v=\"${v}\"]`);\n  7 | // a list that stays open covers the next field, so close it the way a person must: click outside\n  8 | const pickAndClose = async (page, k, v) => {\n    at open (C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:5:32)\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:48:9"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:17:32.235Z",
+                  "startTime": "2026-10-12T12:10:24.015Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -3415,15 +4035,15 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 18,
+                  "workerIndex": 19,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3134,
+                  "duration": 1496,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:17:51.762Z",
+                  "startTime": "2026-10-12T12:10:40.431Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -3449,15 +4069,15 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 18,
+                  "workerIndex": 19,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1479,
+                  "duration": 1100,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:17:57.581Z",
+                  "startTime": "2026-10-12T12:10:42.182Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -3483,10 +4103,10 @@
               "projectName": "desktop",
               "results": [
                 {
-                  "workerIndex": 18,
+                  "workerIndex": 19,
                   "parallelIndex": 0,
                   "status": "timedOut",
-                  "duration": 30359,
+                  "duration": 30175,
                   "error": {
                     "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
                     "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
@@ -3501,13 +4121,13 @@
                         "column": 105,
                         "line": 10
                       },
-                      "message": "Error: page.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#ob h1')\u001b[22m\n\u001b[2m    - locator resolved to <h1>Tell us the job you want</h1>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Anywhere in India</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Anywhere in India</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    53 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span>Anywhere in India</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   8 | const pickAndClose = async (page, k, v) => {\n   9 |   await pick(page, k, v);\n> 10 |   if (await page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"))) await page.click(\"#ob h1\");\n     |                                                                                                         ^\n  11 | };\n  12 | const isOpen = (page, k) => page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"));\n  13 | const chips = (page, k) => page.locator(`.pk[data-pk=\"${k}\"] .pk-chip`).allTextContents();\n    at pickAndClose (C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:10:105)\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:72:29"
+                      "message": "Error: page.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#ob h1')\u001b[22m\n\u001b[2m    - locator resolved to <h1>Tell us the job you want</h1>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span>Hyderabad</span> from <div class=\"q\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   8 | const pickAndClose = async (page, k, v) => {\n   9 |   await pick(page, k, v);\n> 10 |   if (await page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"))) await page.click(\"#ob h1\");\n     |                                                                                                         ^\n  11 | };\n  12 | const isOpen = (page, k) => page.locator(`.pk[data-pk=\"${k}\"]`).evaluate(e => e.classList.contains(\"open\"));\n  13 | const chips = (page, k) => page.locator(`.pk[data-pk=\"${k}\"] .pk-chip`).allTextContents();\n    at pickAndClose (C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:10:105)\n    at C:\\Users\\kanch\\job-alerts\\tests\\specs\\onboarding.spec.js:72:29"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T23:17:59.090Z",
+                  "startTime": "2026-10-12T12:10:43.298Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -3541,11 +4161,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-10T23:08:41.742Z",
-    "duration": 600400.491,
-    "expected": 57,
-    "skipped": 0,
-    "unexpected": 19,
+    "startTime": "2026-10-12T12:07:14.533Z",
+    "duration": 246618.658,
+    "expected": 71,
+    "skipped": 1,
+    "unexpected": 20,
     "flaky": 0
   }
 }

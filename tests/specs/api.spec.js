@@ -136,7 +136,7 @@ test.describe("Server safety", () => {
   });
 
   test("TC-SEC-02 the accounts file cannot be downloaded", async ({ request }) => {
-    for (const p of ["/../data/users.json", "/..%2fdata%2fusers.json", "/%2e%2e/data/users.json", "/../tests/.tmp/users.json"]) {
+    for (const p of ["/../database/app.db", "/..%2fdatabase%2fapp.db", "/%2e%2e/database/app.db", "/../tests/.tmp/app.db"]) {
       const r = await request.get(p);
       expect(r.status(), p).not.toBe(200);
     }

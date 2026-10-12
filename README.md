@@ -63,11 +63,11 @@ Needs the Adzuna key from step 2, or just the RapidAPI (JSearch) key until Adzun
 
 1. Sign up at https://dash.cloudflare.com (free).
 2. **Workers & Pages** → **Create** → **Create Worker** → name it `job-search` → **Deploy**.
-3. **Edit code** → delete everything → paste all of `worker/worker.js` from this repo → **Deploy**.
+3. **Edit code** → delete everything → paste all of `backend/worker/worker.js` from this repo → **Deploy**.
 4. Worker → **Settings** → **Variables and Secrets** → **Add**, type **Secret**:
    `ADZUNA_APP_ID` and `ADZUNA_APP_KEY` with your Adzuna values, and/or `RAPIDAPI_KEY`.
 5. Copy the Worker link (like `https://job-search.yourname.workers.dev`).
-6. In `config.json`, set `"live_search_url": "https://job-search.yourname.workers.dev"`, commit,
+6. In `backend/collector/config.json`, set `"live_search_url": "https://job-search.yourname.workers.dev"`, commit,
    then **Actions** → **Find my jobs** → **Run workflow** once so the portal picks up the link.
 
 Check it works: open `<your Worker link>/search?q=QA Engineer` in a browser. You should see jobs.
@@ -75,12 +75,12 @@ Check it works: open `<your Worker link>/search?q=QA Engineer` in a browser. You
 Every search also brings **related jobs** (for example Java Developer also finds Spring Boot and
 Backend jobs; Nurse also finds Nursing and GNM jobs). They show after the exact matches with a
 **Related** tag. Each new search uses up to 3 Adzuna calls; the same search is free for 12 hours.
-When `worker/worker.js` changes, paste it into the Worker again (step 3) and **Deploy**.
+When `backend/worker/worker.js` changes, paste it into the Worker again (step 3) and **Deploy**.
 
 ### Run it from your computer (phone and laptop on the same Wi-Fi)
 Needs Node.js. Put your keys in a `.env` file (copy `.env.example`), then run
-`node worker/server.mjs`. It prints the link to open, like `http://192.168.1.50:8080`.
-This includes live search, and accounts are kept on your computer (`data/users.json`), so the
+`node backend/server/server.mjs`. It prints the link to open, like `http://192.168.1.50:8080`.
+This includes live search, and accounts are kept on your computer (database `database/app.db`), so the
 same login works on every phone and browser. The link works only while the command is running.
 
 ---
@@ -96,13 +96,45 @@ straight on LinkedIn or Naukri show up too.
    16-letter password.
 3. In `.env` add `GMAIL_ADDRESS=you@gmail.com` and `GMAIL_APP_PASSWORD=<the 16 letters>`.
    If you log in to the app with a different email, also add `TRACK_ACCOUNT=<that email>`.
-4. Restart `node worker/server.mjs`. To see what it finds without changing anything: `python track_mail.py`.
+4. Restart `node backend/server/server.mjs`. To see what it finds without changing anything: `python backend/mail/track_mail.py`.
 
 Only the account in `TRACK_ACCOUNT` (or `GMAIL_ADDRESS`) sees these statuses. Works only with the
 local server, not on GitHub Pages. To stop it, delete the App password in your Google account.
 
+## Project structure
+
+```
+job-alerts/
+├── frontend/                 The website (Cloudflare Pages serves this folder)
+│   ├── index.html            HTML of every screen; loads the css/ and js/ files below in order
+│   ├── assets/               logo
+│   ├── data/jobs.json        the job list (written by the collector, read by the website)
+│   ├── css/
+│   │   ├── base/             colors, fonts, buttons, page frame, shared pieces
+│   │   ├── components/       parts used on many screens (header, job card, filters, job details…)
+│   │   └── pages/            one file per screen (login, forgot-password, onboarding, jobs, my-jobs, profile…)
+│   └── js/
+│       ├── core/             constants, helpers, state, router (URLs), app (start-up, loaded last)
+│       ├── services/         data and logic: job list + live search, matching, Gmail statuses, backup
+│       ├── components/       shared parts (header, job card, filters, job details, applications…)
+│       └── pages/            one file per screen
+├── backend/
+│   ├── server/               server.mjs (accounts API + serves the website on your Wi-Fi),
+│   │                         database.mjs (reads/writes the database), mail-sync.mjs (Gmail statuses)
+│   ├── worker/               worker.js: Cloudflare Worker for live search
+│   ├── collector/            fetch_jobs.py + config.json: collects jobs 6 times a day (GitHub Actions)
+│   └── mail/                 track_mail.py: reads job-site emails for application statuses
+├── database/
+│   ├── schema.sql            the database tables, with a note on each
+│   ├── app.db                the database itself (on your computer only, never in git)
+│   ├── backups/              old account files (never in git)
+│   └── state.json            what the collector found on its last run
+├── tests/                    automatic tests (Playwright for the app, unittest for the mail reader)
+└── .github/workflows/        the 6-times-a-day job run
+```
+
 ## Change what jobs you get
-Edit `config.json` on GitHub (pencil icon).
+Edit `backend/collector/config.json` on GitHub (pencil icon).
 
 **`search_roles`**: the roles collected from all over India. Every job for these roles shows in
 your portal, where you filter by role, experience, city and company yourself.
@@ -137,7 +169,7 @@ taking turns; about 180 a month), so you stay inside it. Add an Adzuna key to ge
 Jooble: `jooble_roles_per_run` roles per run (5 × 6 runs = 30 searches a day).
 
 ## Company career pages
-`company_boards` in `config.json` lists companies whose careers sites are read directly (no key).
+`company_boards` in `backend/collector/config.json` lists companies whose careers sites are read directly (no key).
 Supported: Greenhouse, Lever, Ashby, SmartRecruiters and Workday. For Workday, the slug is the
 part of the careers link, e.g. `https://accenture.wd103.myworkdayjobs.com/AccentureCareers` →
 `"accenture.wd103/AccentureCareers"`. TCS, Infosys and Wipro use their own sites, which can't be

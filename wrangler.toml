@@ -1,0 +1,5 @@
+# Cloudflare Pages settings for the website (https://udyogam-vetuku.pages.dev).
+# Cloudflare reads this on every deploy: the site is the frontend/ folder, with no build step.
+name = "udyogam-vetuku"
+pages_build_output_dir = "./frontend"
+compatibility_date = "2025-01-01"

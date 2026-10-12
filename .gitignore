@@ -2,5 +2,12 @@
 __pycache__/
 *.pyc
 .venv/
-data/users.json
-data/users.json.tmp
+
+# the database holds accounts and personal data: never commit it
+database/app.db
+database/app.db-*
+database/backups/
+data/
+tests/.tmp/*.db
+tests/.tmp/*.db-*
+*.log
