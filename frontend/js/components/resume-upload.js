@@ -18,7 +18,7 @@ function resumeCard(){
       <div class="rs-foot"><span>Added new skills to your resume?</span><button type="button" class="linkbtn" data-rsscan>Find skills again</button></div>`
     :`<button type="button" class="rs-drop" data-rsupload="profile"><span class="rs-up">${ICON.upload}</span>
         <b>Upload your resume</b><span>Drag it here or click to choose · PDF or Word (.docx), up to 2 MB</span></button>`;
-  return `<div class="card" id="resumeCard"><div class="rs-head"><h3>Resume</h3><small>We read your skills from it to find better jobs</small></div>${body}
+  return `<div class="card" id="resumeCard"><div class="rs-head"><h3>Resume</h3></div>${body}
     <div class="err" id="resumeErr" role="alert">${esc(resumeErr)}</div></div>`;
 }
 function refreshResume(){
@@ -54,7 +54,7 @@ function showFoundSkills(name,text,readErr){
   const already=found.filter(known);
   const why=readErr||(text.trim().length<40?"No text was found in it. It may be a scanned picture: upload a PDF made from Word or Google Docs instead.":"");
   const body=why?`<div class="rs-note">${ICON.file}<div><b>Your resume is saved, but we couldn't read skills from it.</b><p>${esc(why)}</p></div></div>`
-    :!found.length?`<div class="rs-note">${ICON.file}<div><b>Your resume is saved.</b><p>We didn't find skills we know in it. You can add your skills yourself.</p></div></div>`
+    :!found.length?`<div class="rs-note">${ICON.file}<div><b>Your resume is saved.</b><p>No skills found in it. Add them yourself.</p></div></div>`
     :`<p class="rs-sub">We found <b>${found.length} skill${found.length===1?"":"s"}</b> in ${esc(name)}.${foundNew.length?" Choose the ones to add to your profile.":" They are all in your profile already."}</p>
       ${foundNew.length?`<div class="rs-pickhead"><span>New skills</span><button type="button" class="linkbtn" data-rsall>Select all</button></div>
         <div class="rs-chips">${foundNew.map(s=>`<button type="button" class="rs-chip" data-rsk="${esc(s)}" aria-pressed="true">${esc(s)}</button>`).join("")}</div>`:""}

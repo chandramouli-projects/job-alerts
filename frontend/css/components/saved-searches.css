@@ -1,0 +1,9 @@
+/* Saved searches row on the Jobs page (js/components/saved-searches.js) */
+.saved-searches{display:flex;flex-wrap:wrap;gap:8px;margin:0 2px 12px}
+.ss-chip{display:inline-flex;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:999px;overflow:hidden}
+.ss-chip.on{border-color:var(--accent);background:var(--accent-soft)}
+.ss-chip button{border:0;background:none;padding:6px 6px 6px 12px;font-size:.86rem;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.ss-chip b{background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:1px 8px;font-size:.74rem}
+.ss-chip .ss-x{padding:6px 10px 6px 4px;color:var(--muted);font-size:1rem}
+.ss-save{border:1px dashed var(--accent);background:none;color:var(--accent);border-radius:999px;padding:6px 12px;font-size:.86rem;font-weight:700}
+.ss-save:disabled{opacity:.5;cursor:default}

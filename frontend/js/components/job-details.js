@@ -23,6 +23,7 @@ function openJob(id){
     <div class="kv" style="margin-bottom:12px">
       <div><small>Experience</small><b>${esc(expRange(j))}</b></div><div><small>Salary</small><b>${esc(j.salary||"Not disclosed")}</b></div>
       <div><small>Job type</small><b>${esc(j.type||"Not stated")}</b></div><div><small>Posted</small><b>${j.manual?"Added by you":`${esc(j.source)} · ${ago(when(j))}`}</b></div></div>
+    ${insightCard(j)}
     <div class="card"><h3>${e.ok?`${fitLabel(e)} for you`:"Why it's not in your feed"}</h3><ul class="why">${why.map(([ok,w])=>`<li class="${ok?"ok":""}">${ok===false?"✕ ":ok?"✓ ":"• "}${esc(w)}</li>`).join("")}</ul></div>
     <div class="card">${isApplied(t)?`<div class="app-head"><h3>Application status</h3>${statusPill(t)}</div><div style="margin:-6px 0 6px">${stepper(t)}</div><p class="wait">${statusNote(t)}</p>
       <ul class="tl">${t.history.filter(h=>h.stage!=="saved").slice().reverse().map(h=>{const s=STAGES.find(x=>x[0]===h.stage);return `<li><i class="dot" style="background:${s[2]}"></i><b style="color:var(--ink);font-weight:600">${s[1]}</b> · ${fmtWhen(h.at)}</li>`}).join("")}</ul>`
@@ -31,6 +32,7 @@ function openJob(id){
     ${(j.tech||[]).length?`<div class="card"><h3>Skills mentioned</h3><div class="facts" style="margin:0">${j.tech.map(s=>`<span class="${haveSkill(s)?"good":"t"}">${esc(s)}</span>`).join("")}</div>${missing.length?`<p class="miss">Your skills don't have: <b>${esc(missing.join(", "))}</b></p>`:""}</div>`:""}
     ${j.description?`<div class="card"><h3>About the job</h3><div class="desc">${esc(j.description)}${j.description.length>=3400?"…":""}</div></div>`:""}
     ${!done&&(j.apply_links||[]).length>1?`<div class="card"><h3>Where you can apply</h3><div class="list" style="gap:8px">${j.apply_links.map(l=>`<a class="cocard" style="grid-template-columns:1fr auto;text-decoration:none;color:var(--ink)" href="${esc(safeUrl(l.url))}" target="_blank" rel="noopener" data-apply="${esc(id)}"><span><b>${esc(l.site)}</b><small>${l.direct?"Company's own page":"Job website"}</small></span><span class="match ${l.direct?"hi":""}">${l.direct?"Direct":"View"}</span></a>`).join("")}</div></div>`:""}
+    ${interviewPrep(j,t)}
     ${done?"":quickCopy()}
     ${similar.length?`<div class="card"><h3>Similar jobs for you</h3><div class="list">${similar.map(s=>`<button class="cocard" data-open="${esc(s.id)}" style="width:100%">${logo(s)}<span><b>${esc(s.title)}</b><small>${esc(s.company)} · ${esc(s.city_norm||s.location||"")}</small></span></button>`).join("")}</div></div>`:""}
     <div style="display:flex;gap:8px;flex-wrap:wrap">${j.manual?`<button class="btn danger sm" data-delmanual="${esc(id)}">Delete this job</button>`:done?"":`<button class="btn ghost sm" data-hide="${esc(id)}">Not interested</button>`}</div>`,

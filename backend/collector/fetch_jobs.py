@@ -529,6 +529,30 @@ def telegram_hello(state):
 
 
 # ---------------------------------------------------------------- main
+def posted_time(job):
+    try:
+        return datetime.fromisoformat(str(job.get("posted") or "").replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def merge_duplicate(keep, dup):
+    """The same job (same title and company) seen again, on another site or in a later run:
+    keep one card with every place to apply, the company's own page first."""
+    links = keep.get("apply_links") or ([{"site": keep.get("source", ""), "url": keep["url"], "direct": bool(keep.get("direct"))}] if keep.get("url") else [])
+    seen = {l["url"] for l in links}
+    for l in dup.get("apply_links") or ([{"site": dup.get("source", ""), "url": dup["url"], "direct": bool(dup.get("direct"))}] if dup.get("url") else []):
+        if l.get("url") and l["url"] not in seen:
+            links.append(l)
+            seen.add(l["url"])
+    links.sort(key=lambda l: not l.get("direct"))
+    keep["apply_links"] = links[:6]
+    if dup.get("direct") and not keep.get("direct"):
+        keep["url"], keep["direct"] = dup["url"], True
+    if not keep.get("salary") and dup.get("salary"):
+        keep["salary"] = dup["salary"]
+
+
 def main():
 
     roles = CONFIG.get("search_roles", [])
@@ -560,17 +584,26 @@ def main():
     telegram_ok = telegram_hello(state)
 
     existing = json.loads(JOBS_FILE.read_text()).get("jobs", []) if JOBS_FILE.exists() else []
-    known = {j["id"] for j in existing}
+    known = {j["id"]: j for j in existing}
     now = datetime.now(timezone.utc)
 
-    fresh, alerts, batch = [], [], set()
+    fresh, alerts, batch = [], [], {}
+    merged = reposted = 0
     for job in raw:
         if not job["url"] or not job["title"] or not job["company"]:
             continue
         k = job_key(job)
         if k in known or k in batch:
+            # seen before: one card with every place to apply; posted again a week+ later = "Reposted"
+            keep = known.get(k) or batch[k]
+            merge_duplicate(keep, job)
+            merged += 1
+            first, again = posted_time(keep), posted_time(job)
+            if k in known and first and again and (again - first).days >= 7 and not keep.get("reposted"):
+                keep["reposted"] = True
+                reposted += 1
             continue
-        batch.add(k)
+        batch[k] = job
         if not job.get("role"):
             job["role"] = next((r for r in roles if any(w in job["title"].lower() for w in r.lower().replace("developer", "").replace("engineer", "").split())), "")
         lo, hi = required_years(job)
@@ -585,7 +618,7 @@ def main():
         if ok:
             alerts.append({**job, "match": hits})
 
-    log(f"Fetched {len(raw)} jobs, {len(fresh)} new, {len(alerts)} match my alerts.")
+    log(f"Fetched {len(raw)} jobs, {len(fresh)} new, {merged} merged into jobs we had ({reposted} reposted), {len(alerts)} match my alerts.")
     cutoff = now - timedelta(days=int(CONFIG.get("keep_jobs_days", 21)))
     all_jobs = [j for j in fresh + existing if datetime.fromisoformat(j["found"]) > cutoff][:1500]
 

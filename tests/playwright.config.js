@@ -1,10 +1,27 @@
 // Functional tests for the job portal. Run from this folder: npm test
-// Uses the Edge already installed on this computer, a separate server on port 8091,
+// Uses Playwright's own window-less browser (chromium headless shell), so nothing ever opens on the
+// screen, not even the job pages a test clicks; a separate server on port 8091,
 // its own accounts file (tests/.tmp) and fake job data, so real accounts and the
 // paid job-search quota are never touched.
-import { defineConfig } from "@playwright/test";
+import { defineConfig, chromium } from "@playwright/test";
+import { existsSync, readdirSync } from "node:fs";
+import { join } from "node:path";
 
-const PORT = 8091;
+// The window-less browser this Playwright version wants; if that exact one isn't downloaded,
+// the newest headless shell already on this computer (so no big download is needed)
+function headlessShell() {
+  const dir = join(process.env.LOCALAPPDATA || "", "ms-playwright");
+  const wanted = chromium.executablePath().match(/chromium-(\d+)/)?.[1];
+  if (wanted && existsSync(join(dir, `chromium_headless_shell-${wanted}`))) return undefined;
+  const found = existsSync(dir) ? readdirSync(dir).filter(d => d.startsWith("chromium_headless_shell-"))
+    .sort((a, b) => +b.split("-")[1] - +a.split("-")[1])
+    .map(d => [join(dir, d, "chrome-win", "headless_shell.exe"), join(dir, d, "chrome-headless-shell-win64", "chrome-headless-shell.exe")])
+    .flat().find(existsSync) : undefined;
+  return found;
+}
+
+// TEST_PORT / TEST_TMP let two test runs go at the same time without touching each other
+const PORT = +(process.env.TEST_PORT || 8091);
 
 export default defineConfig({
   testDir: "./specs",
@@ -21,8 +38,10 @@ export default defineConfig({
   ],
   use: {
     baseURL: `http://127.0.0.1:${PORT}`,
-    channel: "msedge",
+    // no channel: the real Edge opens visible windows for pop-ups (they showed up in Alt+Tab while
+    // tests ran); the headless shell has no windows at all
     headless: true,
+    launchOptions: { executablePath: headlessShell() },
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },

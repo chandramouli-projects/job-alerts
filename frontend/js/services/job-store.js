@@ -19,6 +19,7 @@ async function liveSearch(what,where=""){
       const have=byId.get(j.id)||j;
       if(j.related)have.searches=[...new Set([...(have.searches||[]),tag])];
       if(have===j&&cleanJob(j).url){byId.set(j.id,j);data.jobs.push(j);}
+      else if(have!==j)mergeDuplicate(have,j);   // same job from another site: one card, every place to apply
     }
   }catch(e){liveDone.delete(key);}
   liveBusy--;
@@ -50,3 +51,14 @@ function tracked(){return Object.entries(U.jobs).map(([id,t])=>({...cleanJob({..
 const jobKey=j=>(fixText(j.title||"")+"|"+fixText(j.company||"")).toLowerCase().replace(/[^a-z0-9|]+/g,"");
 function appliedKeys(){return new Set(Object.entries(U.jobs).filter(([,t])=>isApplied(t)).map(([id,t])=>jobKey(findJob(id)||t.snap||{})));}
 const wasApplied=(j,keys)=>isApplied(U.jobs[j.id])||keys.has(jobKey(j));
+
+/* The same job (same id = same title and company) from another site: keep one card with every
+   place to apply, the company's own page first. Same rule as merge_duplicate in fetch_jobs.py. */
+function mergeDuplicate(keep,dup){
+  const own=j=>j.apply_links?.length?j.apply_links:j.url?[{site:j.source||"",url:j.url,direct:!!j.direct}]:[];
+  const links=[...own(keep)],seen=new Set(links.map(l=>l.url));
+  for(const l of own(dup))if(l.url&&!seen.has(l.url)){links.push(l);seen.add(l.url);}
+  keep.apply_links=links.sort((a,b)=>!!b.direct-!!a.direct).slice(0,6);
+  if(dup.direct&&!keep.direct){keep.url=dup.url;keep.direct=true;}
+  if(!keep.salary&&dup.salary)keep.salary=dup.salary;
+}

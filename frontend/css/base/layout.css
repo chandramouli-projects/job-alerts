@@ -23,3 +23,13 @@
   .bottom svg{width:22px;height:22px}
   .bottom button[aria-current="page"]{color:var(--accent);background:var(--accent-soft)}
 }
+/* Desktop and laptop: the page itself doesn't scroll. The middle box (job list, My jobs, Profile)
+   scrolls inside itself with its own scrollbar; the menu stays put and the right panel scrolls on its own.
+   Phones (860px and less) keep the normal page scroll. */
+@media (min-width:861px){
+  body:has(#shell:not([hidden])){overflow:hidden}
+  .shell{height:calc(100vh - 76px);height:calc(100dvh - 76px);align-items:stretch;padding-bottom:16px}
+  .side{position:static;height:auto}
+  .main{height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable}
+  .shell>.rail{max-height:100%}
+}

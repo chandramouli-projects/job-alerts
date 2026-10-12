@@ -14,9 +14,13 @@ async function start(page, request, prefs = QA_HYD, live = {}) {
   await expect(page.locator(".resbar")).toBeVisible();
   return a;
 }
+// Filters live in a pop-up: open it, pick, then "Show N jobs" applies
 const filter = async (page, id, value) => {
-  if (!(await page.locator("#fpanel").isVisible())) await page.click("[data-ftoggle]");
-  await page.selectOption(`#${id}`, String(value));
+  await page.click("#searchForm [data-ftoggle]");
+  if (id === "remote") await page.check('#fModal [data-fchk="remote"]');
+  else await page.selectOption(`#${id}`, String(value));
+  await page.click("#fApply");
+  await expect(page.locator("#fModal")).toBeHidden();
 };
 
 test.describe("Jobs for me", () => {
@@ -86,7 +90,7 @@ test.describe("Filters", () => {
   test("TC-FLT-04 Remote only", async ({ page, request }) => {
     await start(page, request);
     await filter(page, "f_forYou", 0);
-    await page.check('[data-fchk="remote"]');
+    await filter(page, "remote");
     expect(await jobTitles(page)).toEqual(["Remote QA Tester"]);
   });
 
@@ -110,7 +114,7 @@ test.describe("Filters", () => {
     await start(page, request);
     const before = await jobTitles(page);
     await filter(page, "f_city", "Bangalore");
-    await page.click("[data-fclear]");
+    await page.click('[data-fdel="city"]');
     expect(await jobTitles(page)).toEqual(before);
   });
 });
@@ -151,15 +155,38 @@ test.describe("Search and live search", () => {
 });
 
 test.describe("Filter button and picked filters", () => {
-  test("TC-FLT-08 filters are hidden until the filter button next to Search is pressed @phone", async ({ page, request }) => {
+  test("TC-FLT-08 the filter button opens a Filters pop-up; nothing changes until Show N jobs @phone", async ({ page, request }) => {
     await start(page, request);
-    const btn = page.locator("#searchForm [data-ftoggle]");
-    await expect(page.locator("#fpanel")).toBeHidden();
-    await expect(btn).toHaveAttribute("aria-expanded", "false");
-    await btn.click();
-    await expect(page.locator("#fpanel")).toBeVisible();
-    await page.locator("#searchForm [data-ftoggle]").click();
-    await expect(page.locator("#fpanel")).toBeHidden();
+    const before = await jobTitles(page);
+    await expect(page.locator("#fModal")).toHaveCount(0);
+    await page.click("#searchForm [data-ftoggle]");
+    await expect(page.locator("#fModal")).toBeVisible();
+    await expect(page.locator("#fTitle")).toHaveText("Filters");
+    await page.selectOption("#f_forYou", "0");
+    await expect(page.locator("#fApply")).toHaveText("Show 8 jobs");     // the count updates as you pick
+    expect(await jobTitles(page)).toEqual(before);                       // ...but the list doesn't, yet
+    await page.click("#fApply");
+    await expect(page.locator("#fModal")).toBeHidden();
+    expect(await jobTitles(page)).toHaveLength(8);
+  });
+
+  test("TC-FLT-11 × and Esc close the pop-up without applying; Reset clears the picks", async ({ page, request }) => {
+    await start(page, request);
+    const before = await jobTitles(page);
+    await page.click("#searchForm [data-ftoggle]");
+    await page.selectOption("#f_city", "Bangalore");
+    await page.click("#fModal [data-fx]");
+    expect(await jobTitles(page)).toEqual(before);
+    await page.click("#searchForm [data-ftoggle]");
+    await expect(page.locator("#f_city")).toHaveValue("");               // the thrown-away pick is gone
+    await page.selectOption("#f_city", "Bangalore");
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#fModal")).toBeHidden();
+    expect(await jobTitles(page)).toEqual(before);
+    await page.click("#searchForm [data-ftoggle]");
+    await page.selectOption("#f_minSal", "12");
+    await page.click("#fModal [data-freset]");
+    await expect(page.locator("#f_minSal")).toHaveValue("");
   });
 
   test("TC-FLT-09 picked filters show as chips next to the job count, with a count on the button", async ({ page, request }) => {
@@ -207,4 +234,12 @@ test.describe("Smarter matching", () => {
     await page.click('[data-open="qa-hyd"]');   // it mentions java, like the saved Java job
     await expect(page.locator("#sheet .why")).toContainText("Like jobs you saved or applied to");
   });
+});
+
+test("TC-JOB-07 when there is no exact match, the count matches the role jobs shown below", async ({ page, request }) => {
+  await start(page, request, { roles: ["QA / Testing"], exp: 3, cities: ["Pune"], skills: [] });
+  await expect(page.locator(".card", { hasText: "No exact match." })).toBeVisible();
+  const shownJobs = await page.locator("#main .job").count();
+  expect(shownJobs).toBeGreaterThan(0);
+  await expect(page.locator(".resbar > span").first()).toContainText(`${shownJobs} job${shownJobs === 1 ? "" : "s"} in your role`);
 });

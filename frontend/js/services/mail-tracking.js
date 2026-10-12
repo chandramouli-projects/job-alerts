@@ -23,7 +23,7 @@ async function loadMail(){
 function mailBar(){
   if(!SERVER)return "";
   if(!MAIL.connected)return "";
-  return `<div class="mailbar ${MAIL.error?"bad":""}"><span>${MAIL.error?`Couldn't read Gmail: ${esc(MAIL.error)}`:`Statuses update from your Gmail every 15 minutes${MAIL.lastRun?` · checked ${ago(new Date(MAIL.lastRun).toISOString())}`:""}`}</span>
+  return `<div class="mailbar ${MAIL.error?"bad":""}"><span>${MAIL.error?`Couldn't read Gmail: ${esc(MAIL.error)}`:`Synced from Gmail${MAIL.lastRun?` · ${ago(new Date(MAIL.lastRun).toISOString())}`:""}`}</span>
     <button type="button" class="btn ghost sm" data-mailsync>Check now</button></div>`;
 }
 

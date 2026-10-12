@@ -4,10 +4,10 @@ import { signupApi, useFixtures, openLoggedIn } from "./helpers.js";
 
 const open = (page, k) => page.click(`[data-pkopen="${k}"]`);
 const pick = (page, k, v) => page.click(`.pk-opt[data-pkval="${k}"][data-v="${v}"]`);
-// a list that stays open covers the next field, so close it the way a person must: click outside
+// a list that stays open covers the next field, so close it the way a person can: Esc
 const pickAndClose = async (page, k, v) => {
   await pick(page, k, v);
-  if (await page.locator(`.pk[data-pk="${k}"]`).evaluate(e => e.classList.contains("open"))) await page.click("#ob h1");
+  if (await page.locator(`.pk[data-pk="${k}"]`).evaluate(e => e.classList.contains("open"))) await page.keyboard.press("Escape");
 };
 const isOpen = (page, k) => page.locator(`.pk[data-pk="${k}"]`).evaluate(e => e.classList.contains("open"));
 const chips = (page, k) => page.locator(`.pk[data-pk="${k}"] .pk-chip`).allTextContents();

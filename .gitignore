@@ -11,3 +11,9 @@ data/
 tests/.tmp/*.db
 tests/.tmp/*.db-*
 *.log
+tests/.tmp*/
+# test run output: made again on every run, so not kept in git
+tests/test-results/
+tests/reports/
+tests/.tmp/
+tests/reports-*.txt

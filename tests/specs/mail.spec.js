@@ -5,7 +5,7 @@ import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { PASSWORD, signupApi, saveUser, blankUser, useFixtures, openLoggedIn, uniqueEmail } from "./helpers.js";
 
-const EVENTS = fileURLToPath(new URL("../.tmp/mail-events.json", import.meta.url));
+const EVENTS = fileURLToPath(new URL("../" + (process.env.TEST_TMP || ".tmp/") + "mail-events.json", import.meta.url));
 const OWNER = "mail-owner@example.com";
 const auth = t => ({ Authorization: `Bearer ${t}` });
 const day = n => new Date(Date.now() - n * 864e5).toISOString();
@@ -91,7 +91,7 @@ test("TC-MAIL-07 Check now reads Gmail again and shows the new status", async ({
   setEmails([ev("m6", "interview", "Acme", "QA Automation Engineer", day(0))]);
   await page.click("[data-mailsync]");
   await expect(card(page, "QA Automation Engineer").locator(".status-pill")).toHaveText("Interview");
-  await expect(page.locator(".mailbar")).toContainText("checked just now");
+  await expect(page.locator(".mailbar")).toContainText("Synced from Gmail · just now");
 });
 
 test("TC-MAIL-08 another user's account never gets these statuses", async ({ request }) => {

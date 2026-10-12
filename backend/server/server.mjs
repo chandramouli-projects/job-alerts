@@ -25,7 +25,8 @@ const FRONTEND = join(ROOT, "frontend");
 const DB_FILE = process.env.DB_FILE || join(ROOT, "database", "app.db");
 const PORT = +(process.argv[2] || process.env.PORT || 8080);
 const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json; charset=utf-8",
-  ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".svg": "image/svg+xml", ".ico": "image/x-icon" };
+  ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".svg": "image/svg+xml", ".ico": "image/x-icon",
+  ".webmanifest": "application/manifest+json" };
 
 function env() {
   const out = {}, f = process.env.ENV_FILE || join(ROOT, ".env");

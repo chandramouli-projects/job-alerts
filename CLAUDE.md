@@ -35,6 +35,19 @@ for a static portal, and sends matching ones to Telegram.
     file for its screen or part; a new file must also be added to `index.html` in the right order.
   - Scripts are plain (not modules) and share one global scope, so load order matters:
     `core/constants` first, `core/app.js` (calls `boot()`) last. CSS order matters too (`base/` first).
+  - Smart features (all from data we already have, no API calls):
+    `services/job-insights.js` (possible-scam warning from fee / WhatsApp-only / no-interview signs,
+    with negations like "no registration fee" ignored; "Posted today" / "Old posting" 30+ days /
+    "Reposted"; typical salary = median of 3+ similar jobs with a ₹ LPA salary, same city else India;
+    `insightBoost` nudges the Best-fit order), `services/smart-search.js` (synonym groups such as
+    qa = tester / sdet, city other names, spelling fixes against words in the jobs; used by `feed()`),
+    `components/saved-searches.js` (`U.searches`, "N new" since last opened),
+    `components/progress.js` ("This week" on My jobs), `components/interview-prep.js` (shown at
+    Shortlisted / Interview), `core/pwa.js` + `sw.js` + `manifest.webmanifest` (install as an app;
+    service worker is network-first and never caches `/api/` or `/search`).
+    Duplicate jobs (same title + company = same id) are merged into one card with every apply link:
+    `merge_duplicate` in `fetch_jobs.py` and `mergeDuplicate` in `js/services/job-store.js` (keep the
+    same rules); the collector also sets `reposted` when a known job is posted again 7+ days later.
   - Button clicks after login: each screen file registers its own with `onAppClick((d, t, e) => …)`
     (from `helpers.js`); `d` is the clicked button's `data-*`.
   - Matching (`services/matching.js`): roles and skills match whole words with `hasWord()` ("java"

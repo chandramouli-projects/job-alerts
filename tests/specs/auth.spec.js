@@ -120,6 +120,7 @@ test.describe("Forgot password", () => {
     await openForgot(page, a.email);
     await expect(page.locator("#fpEmail")).toHaveValue(a.email);
     await page.click("#fpGen");
+    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/);   // the PIN comes from the server: wait for it
     const pin = (await page.locator("#fpPinShow").textContent()).trim();
     expect(pin).toMatch(/^\d{6}$/);
     await page.fill("#fpPin", pin);
@@ -149,6 +150,7 @@ test.describe("Forgot password", () => {
     const a = await signupApi(request);
     await openForgot(page, a.email);
     await page.click("#fpGen");
+    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/);   // the PIN comes from the server: wait for it
     const pin = (await page.locator("#fpPinShow").textContent()).trim();
     await page.fill("#fpPin", pin === "000000" ? "111111" : "000000");
     await page.click("#fpVerify");
@@ -160,6 +162,7 @@ test.describe("Forgot password", () => {
     const a = await signupApi(request);
     await openForgot(page, a.email);
     await page.click("#fpGen");
+    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/);   // wait for the PIN from the server
     await page.fill("#fpPin", (await page.locator("#fpPinShow").textContent()).trim());
     await page.click("#fpVerify");
     await page.fill("#fpNew", "Brand#New1");
@@ -188,6 +191,7 @@ test.describe("Forgot password", () => {
     await page.click("#fpGen");
     await expect(page.locator('[data-fp="2"]')).toBeVisible();
     const s2 = await card.boundingBox();
+    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/);   // wait for the PIN from the server
     await page.fill("#fpPin", (await page.locator("#fpPinShow").textContent()).trim());
     await page.click("#fpVerify");
     await expect(page.locator('[data-fp="3"]')).toBeVisible();

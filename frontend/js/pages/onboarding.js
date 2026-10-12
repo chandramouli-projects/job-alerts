@@ -4,12 +4,12 @@ const PK={role:{list:"roles",ph:"Choose roles",find:"Search or add a role",add:t
 /* dropdown options come from the jobs we actually have, with how many jobs match each */
 function buildOpts(){
   const J=data.jobs||[],cnt=f=>J.filter(f).length,byCount=a=>a.sort((x,y)=>y[1]-x[1]||x[0].localeCompare(y[0]));
-  OPTS.role=byCount([...new Set([...Object.keys(ROLES),...(data.roles||[])])].map(r=>{const kw=ROLES[r]||[r.toLowerCase()];return [r,cnt(j=>kw.some(k=>(j.title||"").toLowerCase().includes(k)))];}));
+  OPTS.role=byCount([...new Set([...Object.keys(ROLES),...(data.roles||[])])].map(r=>[r,cnt(j=>roleHitFor(j.title,r))]));
   const inCity=(j,c)=>{const l=((j.location||"")+" "+(j.city_norm||"")).toLowerCase();return l.includes(c.toLowerCase())||(c==="Bangalore"&&l.includes("bengaluru"))||(c==="Gurgaon"&&l.includes("gurugram"));};
   const cities=[...new Set([...CITIES.filter(c=>c!=="Remote"&&c!=="Anywhere in India"),...J.map(j=>j.city_norm).filter(c=>c&&c!=="India"&&/^[A-Z]/.test(c))])];
   OPTS.city=[["Anywhere in India",J.length],["Remote",cnt(j=>j.remote)],...byCount(cities.map(c=>[c,cnt(j=>inCity(j,c))]))];
   OPTS.skill=byCount([...new Set([...SKILLS,...J.flatMap(j=>j.tech||[])])].map(t=>[t,cnt(j=>(j.tech||[]).includes(t))]));
-  OPTS.exp=EXP.map(([v,l])=>[l,cnt(j=>!(v<5&&SENIOR.test(j.title))&&!(v>=2&&JUNIOR.test(j.title))&&(j.exp_min==null||(j.exp_min<=v+1&&(j.exp_max==null||j.exp_max>=v-2)))),v]);
+  OPTS.exp=EXP.map(([v,l])=>[l,cnt(j=>!(v<5&&SENIOR.test(j.title))&&!(v>=2&&JUNIOR.test(j.title))&&(j.exp_min==null||(j.exp_min<=v+1&&(j.exp_max==null||j.exp_max>=v-1)))),v]);
 }
 const pkEl=k=>document.querySelector(`[data-pk="${k}"]`);
 function pkField(k){

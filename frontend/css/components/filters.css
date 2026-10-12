@@ -1,18 +1,23 @@
-/* Filters panel on the Jobs page */
-.fpanel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.fpanel label{font-size:.76rem;font-weight:700;color:var(--muted);display:block}
-.fpanel select{display:block;width:100%;margin-top:4px;padding:10px 32px 10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%235D6B72' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 12px center;-webkit-appearance:none;appearance:none;font-weight:600;font-size:.9rem;color:var(--ink)}
-.fpanel select.on{border-color:var(--accent);background-color:var(--accent-soft);color:var(--accent)}
-.fpanel .fend{grid-column:1/-1;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:2px}
-.fpanel .fend label{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink);font-weight:600;cursor:pointer}
-.fpanel .fend input{width:18px;height:18px;accent-color:var(--accent);margin:0}
-.fpanel .fend .clear{margin-left:auto;background:none;border:0;color:var(--accent);font-weight:700;padding:0}
-.fpanel.collapsed{display:none}
-@media (max-width:700px){.fpanel{grid-template-columns:1fr 1fr}}
+/* Filters pop-up on the Jobs page: header, fields in two columns, Reset + Show N jobs at the bottom */
+#fModal{background:rgba(8,14,18,.32);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+#fModal .fcard{max-width:720px;padding:0;display:flex;flex-direction:column;max-height:calc(100vh - 32px);overflow:hidden}
+.fhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.fhead h2{margin:0;font-size:1.25rem}
+.fhead .modal-x{position:static}
+.fbody{padding:18px 20px;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.ff label{display:block;font-size:.78rem;font-weight:700;color:var(--muted)}
+.ff select{display:block;width:100%;margin-top:4px;padding:10px 32px 10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%235D6B72' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 12px center;-webkit-appearance:none;appearance:none;font-weight:600;font-size:.9rem;color:var(--ink)}
+.ff select.on{border-color:var(--accent);background-color:var(--accent-soft);color:var(--accent)}
+.fremote{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:.92rem;font-weight:600;cursor:pointer;padding-top:2px}
+.fremote input{width:18px;height:18px;accent-color:var(--accent);margin:0}
+.ffoot{display:flex;justify-content:space-between;gap:10px;padding:14px 20px;border-top:1px solid var(--line);background:var(--surface)}
+#fModal .ffoot .btn{width:auto;padding:12px 20px}
+#fModal .ffoot [data-fapply]{min-width:200px}
+@media (max-width:560px){.fbody{grid-template-columns:1fr}#fModal .ffoot [data-fapply]{flex:1;min-width:0}}
 /* filter button inside the search bar, with how many filters are on */
 .fbtn{position:relative;width:46px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);display:grid;place-items:center}
 .fbtn:hover{border-color:var(--accent);color:var(--accent)}
-.fbtn.on,.fbtn[aria-expanded="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.fbtn.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 .fbtn svg{width:18px;height:18px}
 .fbadge{position:absolute;top:-7px;right:-7px;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-size:.7rem;font-weight:700;display:grid;place-items:center}
 /* the picked filters, next to the job count */

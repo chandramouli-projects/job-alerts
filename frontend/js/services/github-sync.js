@@ -19,11 +19,9 @@ async function syncPrefs(silent){
   }catch(e){ if(msg) msg.textContent="Couldn't update the job search: "+e.message+". Check the connection key."; }
 }
 function openGh(){
-  openSheet("Connect job search",`<p class="meta" style="margin-top:0">This lets the app tell the job search which roles to look for and which jobs to send to Telegram. Do it once on each device.</p>
-    <div class="card"><h3>Make a key</h3><ol class="why" style="color:var(--ink)"><li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a></li><li>Repository access: only <b>job-alerts</b></li><li>Permissions: <b>Contents → Read and write</b> (nothing else)</li><li>Expiration: 1 year. Generate and copy the key.</li></ol></div>
+  openSheet("Connect job search",`<div class="card"><h3>Make a key</h3><ol class="why" style="color:var(--ink)"><li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a></li><li>Repository access: only <b>job-alerts</b></li><li>Permissions: <b>Contents → Read and write</b> (nothing else)</li><li>Expiration: 1 year. Generate and copy the key.</li></ol></div>
     <label class="lbl" for="ghTok">Paste the key</label><input class="inp" id="ghTok" placeholder="github_pat_…" value="${esc(U.settings.ghToken)}">
-    <div style="margin-top:12px"><label class="lbl" for="ghRepo">Repository</label><input class="inp" id="ghRepo" value="${esc(U.settings.ghRepo)}"></div>
-    <p class="hint">The key is stored only on this device.</p>`,
+    <div style="margin-top:12px"><label class="lbl" for="ghRepo">Repository</label><input class="inp" id="ghRepo" value="${esc(U.settings.ghRepo)}"></div>`,
     `<button class="btn" data-ghsave style="flex:1">Connect</button>`);
 }
 

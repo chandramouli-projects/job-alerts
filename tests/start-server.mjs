@@ -2,7 +2,7 @@
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-const tmp = fileURLToPath(new URL(".tmp/", import.meta.url));
+const tmp = fileURLToPath(new URL(process.env.TEST_TMP || ".tmp/", import.meta.url));
 rmSync(tmp, { recursive: true, force: true });
 mkdirSync(tmp, { recursive: true });
 writeFileSync(tmp + "empty.env", "");
