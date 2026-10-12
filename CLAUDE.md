@@ -34,6 +34,13 @@ for a static portal, and sends matching ones to Telegram.
     `constants` first, `app.js` (calls `boot()`) last. CSS order matters too (`base` first).
   - Button clicks after login: each screen file registers its own with `onAppClick((d, t, e) => …)`
     (from `helpers.js`); `d` is the clicked button's `data-*`.
+  - URLs: `js/router.js` gives every screen its own link (`/login`, `/signup`, `/forgot-password`,
+    `/setup`, `/jobs`, `/saved`, `/my-jobs`, `/profile`, `/job?id=…`). It wraps the screen functions
+    (`showAuth`, `go`, `openJob`, `closeSheet`, `openForgot`…) instead of editing them; a new screen
+    needs an entry in `ROUTE_OF_VIEW`. Routes stay one level deep so relative `css/` `js/` links
+    work. The host must answer unknown links with `index.html`: Cloudflare Pages does (no
+    `404.html` in `docs/`, or it stops), `worker/server.mjs` does for links without an extension;
+    GitHub Pages doesn't, so a refresh on `/jobs` there is a 404.
 - `worker/worker.js`: Cloudflare Worker for live search, pasted into the Cloudflare dashboard by
   hand, so no wrangler. `GET /search?q=&where=` uses ONE source at a time (the user asked
   for this): Adzuna first; if its limit is used up (401/403/429) it rests for `REST_HOURS` and

@@ -2,8 +2,8 @@
 .match.newb{background:var(--applied);color:#fff}
 .job{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;border-left:4px solid var(--s,var(--line));transition:border-color .15s}
 .job:hover{border-color:var(--accent)}
-.job .top{display:grid;grid-template-columns:46px 1fr auto;gap:12px;align-items:start}
-.job h3{font-size:1.05rem;font-family:Figtree,sans-serif;font-weight:700;line-height:1.3}
+.job .top{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:12px;align-items:start}
+.job h3{font-size:1.05rem;font-family:Figtree,sans-serif;font-weight:700;line-height:1.3;overflow-wrap:anywhere}
 .job .co{font-weight:600;font-size:.95rem}
 .job .foot{display:flex;align-items:center;gap:8px;margin-top:12px}
 .job .foot .when{color:var(--muted);font-size:.82rem;margin-right:auto}

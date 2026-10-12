@@ -15,8 +15,8 @@
 .app{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;cursor:pointer;transition:border-color .15s,box-shadow .3s}
 .app:hover{border-color:var(--accent)}
 .app.flash{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
-.app-top{display:grid;grid-template-columns:46px 1fr auto;gap:12px;align-items:start}
-.app h3{font-size:1.02rem;font-family:Figtree,sans-serif;font-weight:700;line-height:1.3}
+.app-top{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:12px;align-items:start}
+.app h3{font-size:1.02rem;font-family:Figtree,sans-serif;font-weight:700;line-height:1.3;overflow-wrap:anywhere}
 .app-status{border:1.5px solid var(--c);color:var(--c);background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' fill='none' stroke='%235D6B72' stroke-width='2'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 10px center;-webkit-appearance:none;appearance:none;border-radius:999px;padding:6px 28px 6px 12px;font-weight:700;font-size:.84rem;cursor:pointer}
 .app-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:.84rem}
 .wait{margin:0 0 6px;color:var(--muted);font-size:.88rem;text-align:center}
@@ -33,3 +33,11 @@
 #apStep{background:var(--surface2);border-radius:14px;padding:4px 8px 12px;margin:4px 0 18px}
 @keyframes okpop{from{transform:scale(.4);opacity:0}}
 @media (prefers-reduced-motion:reduce){.ok-badge{animation:none}}
+/* application card: when you applied, and the status menu */
+.app-when{color:var(--muted);font-size:.82rem;margin-top:3px}
+.app-top .app-status{align-self:start}
+.app-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.app-head h3{margin:0}
+a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.app-acts .btn{white-space:nowrap}
+@media (max-width:480px){.app-top{grid-template-columns:40px minmax(0,1fr)}.app-top .app-status{grid-column:1/-1;justify-self:start}}

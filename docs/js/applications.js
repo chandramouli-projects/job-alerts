@@ -1,25 +1,43 @@
 /* Application tracking: status steps, application cards, "Did you apply?" after Apply */
-const FLOW=["applied","interview"];
+const FLOW=["applied","interview","offer"];
 const isApplied=t=>!!t&&["applied","interview","offer","rejected"].includes(t.stage);
-const statusNote=t=>({applied:"Waiting for the recruiter to update",interview:"The recruiter moved you to interview",offer:"You got an offer",rejected:"The recruiter closed this application"})[t.stage];
+const statusNote=t=>({applied:"Waiting for the recruiter",interview:"Interview stage: add the date and notes",offer:"You got an offer",rejected:"Application closed"})[t.stage];
 const stageName=k=>STAGES.find(s=>s[0]===k)[1];
 const fmtShort=t=>t?new Date(t).toLocaleDateString(undefined,{day:"numeric",month:"short"}):"";
 const fmtWhen=t=>new Date(t).toLocaleString(undefined,{day:"numeric",month:"short",year:"numeric",hour:"numeric",minute:"2-digit"});
 function stageDate(t,k){const h=[...(t.history||[])].reverse().find(x=>x.stage===k);return h?.at||(k==="applied"?t.appliedAt:k==="saved"?t.savedAt:null);}
+// Applied -> Interview -> Offer; a closed application ends in a red "Closed" step after the last stage it reached
 function stepper(t){
-  const st=t.stage;
-  const cur=Math.max(0,FLOW.indexOf(st));
-  return `<ol class="stepper">${FLOW.map((k,i)=>`<li class="${i<=cur?"done":""} ${i===cur?"cur":""}"><i></i><b>${stageName(k)}</b><small>${i<=cur?fmtShort(stageDate(t,k)):""}</small></li>`).join("")}</ol>`;
+  const closed=t.stage==="rejected";
+  const reached=closed?[...(t.history||[])].reverse().find(h=>FLOW.includes(h.stage))?.stage||"applied":t.stage;
+  const cur=Math.max(0,FLOW.indexOf(reached)),steps=closed?[...FLOW.slice(0,cur+1),"rejected"]:FLOW;
+  return `<ol class="stepper">${steps.map((k,i)=>{const done=closed||i<=cur,now=closed?k==="rejected":i===cur;
+    return `<li class="${done?"done":""} ${now?"cur":""} ${k==="rejected"?"end":""}"><i></i><b>${stageName(k)}</b><small>${done?fmtShort(stageDate(t,k)):""}</small></li>`;}).join("")}</ol>`;
 }
+// The status is shown only; the person doesn't change it by hand (the user wants a tracker, not a status editor)
+function statusPill(t){const st=STAGES.find(s=>s[0]===t.stage);return `<span class="status-pill" style="color:${st[2]}">${st[1]}</span>`;}
+// Where the real status lives: each job site's own "applied jobs" page (Viewed, Shortlisted, Not selected...).
+// Judged from the link the person opened to apply, else the site the job came from. null = no such page.
+const STATUS_PAGES=[["linkedin","LinkedIn","https://www.linkedin.com/my-items/saved-jobs/?cardType=APPLIED"],
+  ["naukri","Naukri","https://www.naukri.com/myapply/historypage"],["indeed","Indeed","https://myjobs.indeed.com/applied"],
+  ["internshala","Internshala","https://internshala.com/student/applications/"]];
+function statusPage(j){
+  const url=String(j.url||""),m=url.match(/^https:\/\/([^/]+\.myworkdayjobs\.com)\/(?:[a-z]{2}-[A-Z]{2}\/)?([^/?#]+)/);
+  if(m)return {site:j.company||"company site",url:`https://${m[1]}/${m[2]}/userHome`};   // Workday: the company's candidate home
+  const where=(url.match(/^https?:\/\/([^/]+)/)?.[1]||"")+" "+(j.source||""),hit=STATUS_PAGES.find(([k])=>where.toLowerCase().includes(k));
+  return hit?{site:hit[1],url:hit[2]}:null;
+}
+const statusLink=(j,cls="btn ghost sm")=>{const p=statusPage(j);return p?`<a class="${cls}" href="${esc(p.url)}" target="_blank" rel="noopener">Check status on ${esc(p.site)} ↗</a>`:"";};
 function appCard(j){
-  const t=j._t,st=STAGES.find(s=>s[0]===t.stage),ap=t.appliedAt||stageDate(t,"applied");
+  const t=j._t,ap=t.appliedAt||stageDate(t,"applied"),open=t.stage==="applied"||t.stage==="interview";
   const follow=t.stage==="applied"&&ap&&Date.now()-ap>7*864e5;
   return `<article class="app" data-open="${esc(j.id)}" data-app="${esc(j.id)}" tabindex="0">
-    <div class="app-top">${logo(j)}<div class="app-main"><h3>${esc(j.title)}</h3><div class="meta">${esc(j.company)} · ${esc(j.city_norm||j.location||"India")}</div></div>
-      <span class="status-pill" style="color:${st[2]}">${st[1]}</span></div>
+    <div class="app-top">${logo(j)}<div class="app-main"><h3>${esc(j.title)}</h3><div class="meta">${esc(j.company)} · ${esc(j.city_norm||j.location||"India")}</div>
+      ${ap?`<div class="app-when">Applied ${fmtDate(ap)} · ${ago(new Date(ap).toISOString())}</div>`:""}</div>
+      ${statusPill(t)}</div>
     ${stepper(t)}
-    <div class="app-foot">${ap?`<span>Applied ${fmtDate(ap)} · ${ago(new Date(ap).toISOString())}</span>`:""}${follow?`<span class="due">Follow-up due</span>`:`<span>${statusNote(t)}</span>`}
-      <span class="app-acts"><button class="btn ghost sm" data-followup="${esc(j.id)}">Follow up</button><button class="btn ghost sm" data-open="${esc(j.id)}">Notes</button><button class="btn sm" data-open="${esc(j.id)}">Details</button></span></div>
+    <div class="app-foot">${follow?`<span class="due">Follow-up due</span>`:`<span>${statusNote(t)}</span>`}
+      <span class="app-acts">${open?`<button class="btn ghost sm" data-followup="${esc(j.id)}">Follow up</button>`:""}${statusLink(j)}<button class="btn sm" data-open="${esc(j.id)}">Details</button></span></div>
   </article>`;
 }
 function flashApp(id){requestAnimationFrame(()=>{const el=document.querySelector(`[data-app="${CSS.escape(id)}"]`);if(!el)return;el.scrollIntoView({block:"center",behavior:"smooth"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),2200);});}
@@ -51,7 +69,7 @@ function markApplied(){
 $("apYes").onclick=markApplied;
 $("apNo").onclick=$("apX").onclick=$("apBrowse").onclick=closeApply;
 $("applyModal").onclick=e=>{if(e.target===$("applyModal"))closeApply();};
-$("apView").onclick=()=>{closeApply();closeSheet();trackStage="applied";go("mine");flashApp(apId);};
+$("apView").onclick=()=>{closeApply();closeSheet();go("mine");flashApp(apId);};
 
 /* buttons on this screen */
 onAppClick(async(d,t,e)=>{

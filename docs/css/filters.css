@@ -7,5 +7,17 @@
 .fpanel .fend label{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink);font-weight:600;cursor:pointer}
 .fpanel .fend input{width:18px;height:18px;accent-color:var(--accent);margin:0}
 .fpanel .fend .clear{margin-left:auto;background:none;border:0;color:var(--accent);font-weight:700;padding:0}
-.ftoggle{display:none}
-@media (max-width:700px){.fpanel{grid-template-columns:1fr 1fr}.ftoggle{display:inline-flex}.fpanel.collapsed{display:none}}
+.fpanel.collapsed{display:none}
+@media (max-width:700px){.fpanel{grid-template-columns:1fr 1fr}}
+/* filter button inside the search bar, with how many filters are on */
+.fbtn{position:relative;width:46px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);display:grid;place-items:center}
+.fbtn:hover{border-color:var(--accent);color:var(--accent)}
+.fbtn.on,.fbtn[aria-expanded="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.fbtn svg{width:18px;height:18px}
+.fbadge{position:absolute;top:-7px;right:-7px;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-size:.7rem;font-weight:700;display:grid;place-items:center}
+/* the picked filters, next to the job count */
+.fchips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.fchip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:3px 4px 3px 11px;font-size:.82rem;font-weight:600}
+.fchip button{border:0;background:none;color:inherit;font-size:1.05rem;line-height:1;padding:0 5px;border-radius:50%}
+.fchip button:hover{background:color-mix(in srgb,var(--accent) 15%,transparent)}
+.fclear-all{border:0;background:none;color:var(--accent);font-weight:700;font-size:.84rem;padding:3px 6px}

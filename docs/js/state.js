@@ -9,7 +9,6 @@ let view="jobs", shown=PAGE;
 let F={q:"",forYou:true,days:7,role:"",exp:"",city:"",type:"",source:"",company:"",minSal:"",remote:false,sort:"match"};
 let prevSeen=0;
 let filtersOpen=false;
-let trackStage="saved";
 
 function blankUser(name,email,phone){return{
   profile:{name,email,phone,headline:"",location:"",about:"",currentCompany:"",currentCtc:"",expectedCtc:"",notice:"",education:"",linkedin:"",github:"",portfolio:"",resume:""},
@@ -25,7 +24,9 @@ function withDefaults(u,name,email){const b=blankUser(name,email,"");if(!u)retur
 async function api(path,body,method){
   const t=LS.get("uv.token","");
   const r=await fetch("api/"+path,{method:method||(body?"POST":"GET"),headers:{"Content-Type":"application/json",...(t?{Authorization:"Bearer "+t}:{})},body:body?JSON.stringify(body):undefined});
-  const d=await r.json().catch(()=>({}));
+  // a web page instead of JSON means there is no accounts server here
+  const d=await r.json().catch(()=>null);
+  if(!d)throw new Error("Can't reach the accounts server. Refresh the page and try again.");
   if(!r.ok)throw new Error(d.error||"Server error, try again.");
   return d;
 }

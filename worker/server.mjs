@@ -15,6 +15,7 @@ import { fileURLToPath } from "node:url";
 import { networkInterfaces } from "node:os";
 import { randomBytes, randomInt, scryptSync, timingSafeEqual } from "node:crypto";
 import worker from "./worker.js";
+import { createMailSync } from "./mail-sync.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const DOCS = join(ROOT, "docs");
@@ -72,6 +73,10 @@ const sessionEmail = req => {
   const s = t && db.sessions[t];
   return s && db.accounts[s.email] ? s.email : null;
 };
+db.mail ||= {};
+// application statuses read from Gmail every 15 minutes (track_mail.py)
+const mail = createMailSync({ root: ROOT, db, saveDb, env });
+let lastMailAsk = 0;
 const fails = new Map();     // email -> recent wrong passwords, to slow down guessing
 const resets = new Map();    // email -> reset PIN from "Forgot password", 10 minutes, 5 tries
 
@@ -152,6 +157,14 @@ async function api(req, path) {
     saveDb();
     return [200, { ok: true }];
   }
+  if (path === "mail" && req.method === "GET") return [200, mail.status(email)];
+  if (path === "mail/sync") {
+    if (!mail.status(email).connected) return [403, { error: "Gmail is not connected for this account." }];
+    if (Date.now() - lastMailAsk < 60_000) return [429, { error: "Checked less than a minute ago. Try again soon." }];
+    lastMailAsk = Date.now();
+    await mail.run();
+    return [200, mail.status(email)];
+  }
   if (path === "logout") {
     delete db.sessions[(req.headers.authorization || "").replace(/^Bearer /, "")];
     saveDb();
@@ -185,7 +198,9 @@ createServer(async (req, res) => {
       console.log(`search "${url.searchParams.get("q")}" ${url.searchParams.get("where") || ""} -> ${r.status} ${r.headers.get("X-Cache") || ""}`);
       return;
     }
-    const path = normalize(join(DOCS, decodeURIComponent(url.pathname === "/" ? "/index.html" : url.pathname)));
+    // App links like /jobs or /my-jobs have no file: they all get the app page, and js/router.js shows the screen
+    const page = url.pathname === "/" || !extname(url.pathname) ? "/index.html" : url.pathname;
+    const path = normalize(join(DOCS, decodeURIComponent(page)));
     if (!path.startsWith(DOCS)) { res.writeHead(403).end(); return; }
     let body = await readFile(path);
     if (url.pathname === "/jobs.json") {        // live search goes to this same server
@@ -207,5 +222,10 @@ createServer(async (req, res) => {
   console.log("Job portal is running. Open on any device on this Wi-Fi:");
   for (const ip of ips) console.log(`  http://${ip}:${PORT}`);
   console.log(`  (on this computer: http://localhost:${PORT})`);
+  if (mail.configured()) {
+    setTimeout(() => mail.run(), 5_000);
+    setInterval(() => mail.run(), 15 * 60_000);
+  }
+  console.log(`Gmail status tracking: ${mail.configured() ? "on for " + mail.account() : "off (add GMAIL_ADDRESS and GMAIL_APP_PASSWORD to .env)"}`);
   console.log(`Accounts: ${Object.keys(db.accounts).length}. Live search keys in .env: Adzuna ${k.ADZUNA_APP_ID && k.ADZUNA_APP_KEY ? "yes" : "no"}, JSearch ${k.RAPIDAPI_KEY ? "yes" : "no"}`);
 });

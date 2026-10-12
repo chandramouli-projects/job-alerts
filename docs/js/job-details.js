@@ -21,18 +21,18 @@ function openJob(id){
       <div><small>Experience</small><b>${esc(expRange(j))}</b></div><div><small>Salary</small><b>${esc(j.salary||"Not disclosed")}</b></div>
       <div><small>Job type</small><b>${esc(j.type||"Not stated")}</b></div><div><small>Posted</small><b>${j.manual?"Added by you":`${esc(j.source)} · ${ago(when(j))}`}</b></div></div>
     <div class="card"><h3>${e.ok?`${fitLabel(e)} for you`:"Why it's not in your feed"}</h3><ul class="why">${e.why.map(([ok,w])=>`<li class="${ok?"ok":""}">${ok===false?"✕ ":ok?"✓ ":"• "}${esc(w)}</li>`).join("")}</ul></div>
-    <div class="card">${isApplied(t)?`<h3>Application status</h3><div style="margin:-6px 0 6px">${stepper(t)}</div><p class="wait">${statusNote(t)}</p>
+    <div class="card">${isApplied(t)?`<div class="app-head"><h3>Application status</h3>${statusPill(t)}</div><div style="margin:-6px 0 6px">${stepper(t)}</div><p class="wait">${statusNote(t)}</p>
       <ul class="tl">${t.history.filter(h=>h.stage!=="saved").slice().reverse().map(h=>{const s=STAGES.find(x=>x[0]===h.stage);return `<li><i class="dot" style="background:${s[2]}"></i><b style="color:var(--ink);font-weight:600">${s[1]}</b> · ${fmtWhen(h.at)}</li>`}).join("")}</ul>`
       :`<h3>Your application</h3><button class="btn ghost sm" data-markapplied="${esc(id)}">I applied to this job</button>`}
       <div style="margin-top:14px"><label class="lbl" for="notes">My notes</label><textarea class="inp" id="notes" data-id="${esc(id)}" placeholder="Recruiter name, interview date, questions asked…">${esc(t?.notes||"")}</textarea></div></div>
     ${(j.tech||[]).length?`<div class="card"><h3>Skills mentioned</h3><div class="facts" style="margin:0">${j.tech.map(s=>`<span class="${e.hits.includes(s)?"good":"t"}">${esc(s)}</span>`).join("")}</div></div>`:""}
     ${j.description?`<div class="card"><h3>About the job</h3><div class="desc">${esc(j.description)}${j.description.length>=3400?"…":""}</div></div>`:""}
-    ${!done&&(j.apply_links||[]).length>1?`<div class="card"><h3>Where you can apply</h3><div class="list" style="gap:8px">${j.apply_links.map(l=>`<a class="cocard" style="grid-template-columns:1fr auto;text-decoration:none;color:var(--ink)" href="${esc(l.url)}" target="_blank" rel="noopener" data-apply="${esc(id)}"><span><b>${esc(l.site)}</b><small>${l.direct?"Company's own page":"Job website"}</small></span><span class="match ${l.direct?"hi":""}">${l.direct?"Direct":"Apply"}</span></a>`).join("")}</div></div>`:""}
+    ${!done&&(j.apply_links||[]).length>1?`<div class="card"><h3>Where you can apply</h3><div class="list" style="gap:8px">${j.apply_links.map(l=>`<a class="cocard" style="grid-template-columns:1fr auto;text-decoration:none;color:var(--ink)" href="${esc(l.url)}" target="_blank" rel="noopener" data-apply="${esc(id)}"><span><b>${esc(l.site)}</b><small>${l.direct?"Company's own page":"Job website"}</small></span><span class="match ${l.direct?"hi":""}">${l.direct?"Direct":"View"}</span></a>`).join("")}</div></div>`:""}
     ${done?"":quickCopy()}
     ${similar.length?`<div class="card"><h3>Similar jobs for you</h3><div class="list">${similar.map(s=>`<button class="cocard" data-open="${esc(s.id)}" style="width:100%">${logo(s)}<span><b>${esc(s.title)}</b><small>${esc(s.company)} · ${esc(s.city_norm||s.location||"")}</small></span></button>`).join("")}</div></div>`:""}
     <div style="display:flex;gap:8px;flex-wrap:wrap">${j.manual?`<button class="btn danger sm" data-delmanual="${esc(id)}">Delete this job</button>`:done?"":`<button class="btn ghost sm" data-hide="${esc(id)}">Not interested</button>`}</div>`,
-  done?`<div class="applied-bar"><i class="tk">✓</i>Applied on ${fmtDate(t.appliedAt||stageDate(t,"applied"))}</div><button class="btn ghost" data-followup="${esc(id)}" style="flex:none">Follow up</button>`
-  :`<button class="icon-btn" data-save="${esc(id)}" aria-pressed="${!!t?.saved}" aria-label="Save job" style="width:50px;height:auto">${ICON.bookmark}</button><a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(id)}">${j.manual?"Apply on job site":j.direct?"Apply on company site":"Apply on "+esc(j.source)}</a>`);
+  done?`<div class="applied-bar"><i class="tk">✓</i>Applied on ${fmtDate(t.appliedAt||stageDate(t,"applied"))}</div>${statusLink(j,"btn ghost")}<button class="btn ghost" data-followup="${esc(id)}" style="flex:none">Follow up</button>`
+  :`<button class="icon-btn" data-save="${esc(id)}" aria-pressed="${!!t?.saved}" aria-label="Save job" style="width:50px;height:auto">${ICON.bookmark}</button><a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(id)}">${j.manual?"View job":j.direct?"View job on company site":"View job on "+esc(j.source)}</a>`);
   $("notes")?.addEventListener("change",ev=>{track(id).notes=ev.target.value;if(!U.jobs[id].snap)U.jobs[id].snap=j;saveUser();toast("Notes saved");});
 }
 function quickCopy(){
@@ -44,5 +44,7 @@ function quickCopy(){
 onAppClick(async(d,t,e)=>{
   if(d.copy!==undefined){copy(d.copy);return;}
   if(d.company!==undefined){closeSheet();resetFilters();F.forYou=false;F.company=d.company;filtersOpen=true;go("jobs");return;}
+  // jobs added by hand in older versions can still be deleted
+  if(d.delmanual){if(!await ask("Delete this job?","The job and your notes on it will be removed.","Delete",true))return;U.manual=U.manual.filter(j=>j.id!==d.delmanual);delete U.jobs[d.delmanual];saveUser();closeSheet();renderNav();render();toast("Job deleted");return;}
   if(d.hide){U.hidden[d.hide]=1;saveUser();closeSheet();render();toast("Hidden from your feed");return;}
 });

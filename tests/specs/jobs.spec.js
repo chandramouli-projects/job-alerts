@@ -149,3 +149,36 @@ test.describe("Search and live search", () => {
     await expect(page.locator(".empty h3")).toHaveText("No jobs match right now");
   });
 });
+
+test.describe("Filter button and picked filters", () => {
+  test("TC-FLT-08 filters are hidden until the filter button next to Search is pressed @phone", async ({ page, request }) => {
+    await start(page, request);
+    const btn = page.locator("#searchForm [data-ftoggle]");
+    await expect(page.locator("#fpanel")).toBeHidden();
+    await expect(btn).toHaveAttribute("aria-expanded", "false");
+    await btn.click();
+    await expect(page.locator("#fpanel")).toBeVisible();
+    await page.locator("#searchForm [data-ftoggle]").click();
+    await expect(page.locator("#fpanel")).toBeHidden();
+  });
+
+  test("TC-FLT-09 picked filters show as chips next to the job count, with a count on the button", async ({ page, request }) => {
+    await start(page, request);
+    await filter(page, "f_forYou", 0);
+    await filter(page, "f_minSal", 12);
+    await expect(page.locator(".resbar .fchip")).toHaveText(["All jobs×", "12 LPA and above×"]);
+    await expect(page.locator(".fbtn .fbadge")).toHaveText("2");
+    await page.click('[data-fdel="minSal"]');
+    await expect(page.locator(".resbar .fchip")).toHaveText(["All jobs×"]);
+    expect(await jobTitles(page)).toHaveLength(8);
+  });
+
+  test("TC-FLT-10 Clear all removes every picked filter", async ({ page, request }) => {
+    await start(page, request);
+    await filter(page, "f_forYou", 0);
+    await filter(page, "f_city", "Bangalore");
+    await page.click(".resbar .fclear-all");
+    await expect(page.locator(".resbar .fchip")).toHaveCount(0);
+    await expect(page.locator(".fbtn .fbadge")).toHaveCount(0);
+  });
+});

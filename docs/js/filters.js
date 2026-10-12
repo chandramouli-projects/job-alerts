@@ -30,17 +30,21 @@ function feed(){
   out.sort((a,b)=>(a._rel-b._rel)||(F.sort==="new"?new Date(when(b))-new Date(when(a)):(isNew(b)-isNew(a))||(b._e.score-a._e.score)||(new Date(when(b))-new Date(when(a)))));
   return out;
 }
-function activeFilterCount(){return [F.role,F.exp,F.city,F.type,F.source,F.company,F.minSal].filter(v=>v!=="").length+F.remote+(F.days!==7)+(!F.forYou);}
+// What the person picked, as removable chips next to the job count: [key, label]
+function activeFilters(){
+  const days={1:"Last 24 hours",3:"Last 3 days",21:"Last 3 weeks"};
+  return [!F.forYou&&["forYou","All jobs"],F.role&&["role",F.role],F.exp!==""&&["exp",EXP.find(x=>String(x[0])===String(F.exp))?.[1]],
+    F.city&&["city",F.city],F.days!==7&&["days",days[F.days]],F.minSal&&["minSal",`${F.minSal} LPA and above`],F.company&&["company",F.company],
+    F.source&&["source",F.source],F.type&&["type",F.type],F.remote&&["remote","Remote only"],F.sort!=="match"&&["sort","Newest first"]].filter(Boolean);
+}
+function clearFilter(k){const d={forYou:true,days:7,remote:false,sort:"match"};F[k]=k in d?d[k]:"";shown=PAGE;renderJobs();}
 const fitLabel=e=>!e.ok?"":e.score>=80?"Great fit":"Good fit";
 
 /* The filter panel on the Jobs page */
 function filterPanel(n){
   const uniq=f=>[...new Set(allJobs().map(f).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
   const sel=(id,label,val,opts,def=opts[0][0])=>`<div><label for="${id}">${label}</label><select id="${id}" data-fsel="${id.slice(2)}" class="${String(val)!==String(def)?"on":""}">${opts.map(([v,l])=>`<option value="${esc(v)}" ${String(v)===String(val)?"selected":""}>${esc(l)}</option>`).join("")}</select></div>`;
-  return `<div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
-    <button class="btn ghost sm ftoggle" data-ftoggle>${ICON.filter}&nbsp;${filtersOpen?"Hide filters":"Filters"}${n?" ("+n+")":""}</button>
-  </div>
-  <div class="fpanel ${filtersOpen?"":"collapsed"}" id="fpanel">
+  return `<div class="fpanel ${filtersOpen?"":"collapsed"}" id="fpanel">
     ${sel("f_forYou","Show",F.forYou?"1":"0",[["1","Jobs for me"],["0","All jobs"]])}
     ${sel("f_role","Job role",F.role,[["","All roles"],...Object.keys(ROLES).map(r=>[r,r])])}
     ${sel("f_exp","Experience",F.exp,[["","Any experience"],...EXP.map(([v,l])=>[v,l])])}
@@ -65,4 +69,5 @@ function bindFilters(){
 onAppClick(async(d,t,e)=>{
   if("fclear" in d){const q=F.q;resetFilters();F.q=q;renderJobs();return;}
   if("ftoggle" in d){filtersOpen=!filtersOpen;renderJobs();return;}
+  if(d.fdel){clearFilter(d.fdel);return;}
 });

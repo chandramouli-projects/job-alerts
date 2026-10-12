@@ -14,12 +14,13 @@ async function start(page, request) {
   return a;
 }
 
-test("TC-MY-01 saving a job puts it in My jobs > Saved, and it is kept on the server", async ({ page, request }) => {
+test("TC-MY-01 saving a job puts it in the Saved jobs menu, and it is kept on the server", async ({ page, request }) => {
   const a = await start(page, request);
   await page.click('[data-save="qa-hyd"]');
   await expect(page.locator('[data-save="qa-hyd"]')).toHaveAttribute("aria-pressed", "true");
-  await page.click('.side [data-go="mine"]');
-  await page.click('[data-stage-tab="saved"]');
+  await expect(page.locator('.side [data-go="saved"] .n')).toHaveText("1");
+  await page.click('.side [data-go="saved"]');
+  await expect(page.locator(".topbar h1")).toHaveText("Saved jobs");
   expect(await jobTitles(page)).toEqual(["QA Automation Engineer"]);
   await page.waitForTimeout(800);
   const u = (await (await request.get("/api/user", { headers: auth(a.token) })).json()).user;
@@ -41,7 +42,6 @@ test("TC-MY-02 Apply -> 'Did you apply?' -> Yes: the job moves to Applied and le
   await page.click("#apBrowse");
   expect(await jobTitles(page)).not.toContain("QA Automation Engineer");
   await page.click('.side [data-go="mine"]');
-  await page.click('[data-stage-tab="applied"]');
   await expect(page.locator(".app h3")).toHaveText(["QA Automation Engineer"]);
 });
 
@@ -57,16 +57,47 @@ test("TC-MY-03 'Not yet' keeps the job in the feed", async ({ page, request }) =
   expect(await jobTitles(page)).toContain("QA Automation Engineer");
 });
 
-test("TC-MY-04 an applied job can be moved to Interview / Offer / Closed or undone", async ({ page, request }) => {
+// an account with one applied job and one saved job
+async function withApplied(page, request) {
   const a = await start(page, request);
-  await saveUser(request, a.token, { ...blankUser(a.email, QA_HYD), jobs: { "qa-hyd": { stage: "applied", saved: false, notes: "", history: [{ stage: "applied", at: Date.now() }], appliedAt: Date.now() } } });
+  const at = Date.now() - 2 * 864e5;
+  await saveUser(request, a.token, { ...blankUser(a.email, QA_HYD), jobs: {
+    "qa-hyd": { stage: "applied", saved: false, notes: "", history: [{ stage: "applied", at }], appliedAt: at },
+    "qa-blr": { stage: null, saved: true, savedAt: at, notes: "", history: [] } } });
   await page.reload();
+  await expect(page.locator("#shell")).toBeVisible();
+  return a;
+}
+
+test("TC-MY-04 the menu is Jobs, Saved jobs, My jobs, Profile, with saved and applied counts", async ({ page, request }) => {
+  await withApplied(page, request);
+  await expect(page.locator(".side .nav")).toHaveText(["Jobs", "Saved jobs1", "My jobs1", "Profile"]);
+});
+
+test("TC-MY-05 Saved jobs shows only saved jobs; My jobs shows only applications", async ({ page, request }) => {
+  await withApplied(page, request);
+  await page.click('.side [data-go="saved"]');
+  expect(await jobTitles(page)).toEqual(["QA Engineer"]);
   await page.click('.side [data-go="mine"]');
-  await page.click('[data-stage-tab="applied"]');
-  await page.locator(".app").first().click();
-  const sheet = page.locator("#sheet");
-  await expect(sheet).toHaveClass(/open/);
-  await expect(sheet.getByRole("button", { name: /Interview/ }), "there should be a way to record an interview").toBeVisible();
+  await expect(page.locator(".topbar h1")).toHaveText("My jobs");
+  await expect(page.locator(".app h3")).toHaveText(["QA Automation Engineer"]);
+  await expect(page.locator(".app .stepper b").first()).toHaveText("Applied");
+});
+
+test("TC-MY-06 removing the bookmark takes a job off Saved jobs", async ({ page, request }) => {
+  await withApplied(page, request);
+  await page.click('.side [data-go="saved"]');
+  await page.click('[data-save="qa-blr"]');
+  await expect(page.locator(".empty h3")).toHaveText("No saved jobs yet");
+  await expect(page.locator('.side [data-go="saved"] .n')).toHaveCount(0);
+});
+
+test("TC-MY-07 phone menu has the four sections @phone", async ({ page, request }) => {
+  await withApplied(page, request);
+  test.skip(test.info().project.name !== "phone");
+  await expect(page.locator("#bottom button")).toHaveText(["Jobs", "Saved jobs", "My jobs", "Profile"]);
+  await page.click('#bottom [data-go="saved"]');
+  await expect(page.locator(".topbar h1")).toHaveText("Saved jobs");
 });
 
 test.describe("Account and data safety", () => {

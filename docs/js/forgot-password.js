@@ -18,7 +18,8 @@ async function fpGenerate(){
   const email=$("fpEmail").value.trim().toLowerCase();let pin;
   if(SERVER){try{pin=(await api("forgot",{email})).pin;}catch(err){$("fpErr1").textContent=err.message;return false;}}
   else{
-    if(!accounts[email]){$("fpErr1").textContent="No account with this email on this device.";return false;}
+    // without the server, accounts live only in this browser
+    if(!accounts[email]){$("fpErr1").textContent="No account with this email in this browser. Accounts made on another phone or browser aren't here. Use Create account.";return false;}
     pin=String(crypto.getRandomValues(new Uint32Array(1))[0]%1e6).padStart(6,"0");
     fpLocal={email,pin,until:Date.now()+600e3,tries:0};
   }

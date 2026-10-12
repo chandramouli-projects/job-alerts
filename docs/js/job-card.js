@@ -1,4 +1,4 @@
-/* One job in a list: title, company, fit, Save and Apply buttons */
+/* One job in a list: title, company, fit, Save and View job buttons (View job opens the job's own page) */
 function jobCard(j,opt={}){
   const t=U.jobs[j.id],e=j._e||evaluate(j,U.prefs),st=t?.stage?STAGES.find(s=>s[0]===t.stage):null,fl=fitLabel(e);
   return `<article class="job" data-open="${esc(j.id)}" style="--s:${st?st[2]:"var(--line)"}" tabindex="0">
@@ -8,13 +8,13 @@ function jobCard(j,opt={}){
     <div class="foot"><span class="when">${j.manual?"Added by you":`${j.direct?`<b style="color:var(--accent)">Company site</b>`:esc(j.source)} · ${ago(when(j))}`}</span>
       ${st&&opt.showStage!==false?`<span class="status-pill" style="color:${st[2]}">${st[1]}</span>`:""}
       <button class="icon-btn" data-save="${esc(j.id)}" aria-pressed="${!!t?.saved}" aria-label="Save job">${ICON.bookmark}</button>
-      <a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">Apply</a></div>
+      <a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">View job</a></div>
   </article>`;
 }
 
 /* buttons on this screen */
 onAppClick(async(d,t,e)=>{
   if(d.apply){noteApply(d.apply);return;}
-  if(d.save){e.stopPropagation();const s=toggleSave(d.save);t.setAttribute("aria-pressed",s);toast(s?"Saved to My jobs":"Removed from saved");renderNav();if(view==="mine")renderMine();return;}
+  if(d.save){e.stopPropagation();const s=toggleSave(d.save);t.setAttribute("aria-pressed",s);toast(s?"Saved to Saved jobs":"Removed from Saved jobs");renderNav();if(view==="saved")renderSaved();return;}
   if(d.open){openJob(d.open);return;}
 });
