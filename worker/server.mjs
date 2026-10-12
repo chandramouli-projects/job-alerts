@@ -144,7 +144,7 @@ async function api(req, path) {
     return [200, { ok: true }];
   }
   if (path === "user" && req.method === "DELETE") {
-    delete db.accounts[email]; delete db.users[email];
+    delete db.accounts[email]; delete db.users[email]; delete db.mail[email];
     for (const [t, s] of Object.entries(db.sessions)) if (s.email === email) delete db.sessions[t];
     saveDb();
     return [200, { ok: true }];
@@ -160,7 +160,7 @@ async function api(req, path) {
   if (path === "mail" && req.method === "GET") return [200, mail.status(email)];
   if (path === "mail/sync") {
     if (!mail.status(email).connected) return [403, { error: "Gmail is not connected for this account." }];
-    if (Date.now() - lastMailAsk < 60_000) return [429, { error: "Checked less than a minute ago. Try again soon." }];
+    if (Date.now() - lastMailAsk < +(process.env.MAIL_SYNC_GAP_MS ?? 60_000)) return [429, { error: "Checked less than a minute ago. Try again soon." }];
     lastMailAsk = Date.now();
     await mail.run();
     return [200, mail.status(email)];

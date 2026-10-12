@@ -31,7 +31,7 @@ function openJob(id){
     ${done?"":quickCopy()}
     ${similar.length?`<div class="card"><h3>Similar jobs for you</h3><div class="list">${similar.map(s=>`<button class="cocard" data-open="${esc(s.id)}" style="width:100%">${logo(s)}<span><b>${esc(s.title)}</b><small>${esc(s.company)} · ${esc(s.city_norm||s.location||"")}</small></span></button>`).join("")}</div></div>`:""}
     <div style="display:flex;gap:8px;flex-wrap:wrap">${j.manual?`<button class="btn danger sm" data-delmanual="${esc(id)}">Delete this job</button>`:done?"":`<button class="btn ghost sm" data-hide="${esc(id)}">Not interested</button>`}</div>`,
-  done?`<div class="applied-bar"><i class="tk">✓</i>Applied on ${fmtDate(t.appliedAt||stageDate(t,"applied"))}</div>${statusLink(j,"btn ghost")}<button class="btn ghost" data-followup="${esc(id)}" style="flex:none">Follow up</button>`
+  done?`<div class="applied-bar"><i class="tk">✓</i>Applied on ${fmtDate(t.appliedAt||stageDate(t,"applied"))}</div>${statusLink(j,"btn ghost")}`
   :`<button class="icon-btn" data-save="${esc(id)}" aria-pressed="${!!t?.saved}" aria-label="Save job" style="width:50px;height:auto">${ICON.bookmark}</button><a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(id)}">${j.manual?"View job":j.direct?"View job on company site":"View job on "+esc(j.source)}</a>`);
   $("notes")?.addEventListener("change",ev=>{track(id).notes=ev.target.value;if(!U.jobs[id].snap)U.jobs[id].snap=j;saveUser();toast("Notes saved");});
 }

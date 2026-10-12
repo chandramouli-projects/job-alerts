@@ -78,6 +78,21 @@ for a static portal, and sends matching ones to Telegram.
 - A local run spends JSearch quota, moves `turn` forward, and rewrites `docs/jobs.json` and
   `data/state.json`. Don't commit those files after a local run; let the bot own them.
 
+## Application status from Gmail
+- LinkedIn / Naukri have no API for application status, and scraping them is not allowed, so status
+  comes from the person's job-site emails. `track_mail.py` (stdlib `imaplib`, Gmail App password from
+  `.env`) reads only mail from job sites / hiring systems (`SENDERS`), with `BODY.PEEK` so it stays unread,
+  and turns each into {stage, company, title, site}. Rules: `STAGE_RULES` (most advanced first), `SKIP`
+  for job alerts. Unit tests: `python -m unittest tests/test_track_mail.py`.
+- `worker/mail-sync.mjs` runs it every 15 min (and on `POST /api/mail/sync`, "Check now"), matches by
+  company + title to the user's applications, else adds a `mail-<hash>` application. Results live in
+  `db.mail[account]`, NOT in the user profile, because the app PUTs the whole profile on every save.
+  `GET /api/mail` returns them only to that account; `docs/js/mail-tracking.js` merges them in.
+  A status only moves forward; "Not selected" can follow anything but an offer.
+- Stages: applied → viewed → shortlisted → interview → offer, or rejected ("Not selected"). The user
+  wants a tracker: statuses come from email, not set by hand. The Follow up button was removed on request.
+- Tests use `MAIL_CMD` (tests/fake-mail.mjs) and `MAIL_ACCOUNT` instead of Gmail.
+
 ## Style
 - The user reads Telugu/English; the README and UI text are plain, simple English for a non-developer.
 - Keep it dependency-light (only `requests`). The portal is split per screen (see above): put new

@@ -1,12 +1,14 @@
 /* Application tracking: status steps, application cards, "Did you apply?" after Apply */
-const FLOW=["applied","interview","offer"];
-const isApplied=t=>!!t&&["applied","interview","offer","rejected"].includes(t.stage);
-const statusNote=t=>({applied:"Waiting for the recruiter",interview:"Interview stage: add the date and notes",offer:"You got an offer",rejected:"Application closed"})[t.stage];
+const FLOW=["applied","viewed","shortlisted","interview","offer"];
+const isApplied=t=>!!t&&["applied","viewed","shortlisted","interview","offer","rejected"].includes(t.stage);
+const statusNote=t=>({applied:"Waiting for the recruiter",viewed:"The recruiter viewed your application",shortlisted:"You are shortlisted",interview:"Interview stage: add the date and notes",offer:"You got an offer",rejected:"Not selected this time"})[t.stage];
+// the latest update that came from an email, e.g. "LinkedIn email · 2 Oct"
+const lastMail=t=>[...(t.history||[])].reverse().find(h=>h.via==="email");
 const stageName=k=>STAGES.find(s=>s[0]===k)[1];
 const fmtShort=t=>t?new Date(t).toLocaleDateString(undefined,{day:"numeric",month:"short"}):"";
 const fmtWhen=t=>new Date(t).toLocaleString(undefined,{day:"numeric",month:"short",year:"numeric",hour:"numeric",minute:"2-digit"});
 function stageDate(t,k){const h=[...(t.history||[])].reverse().find(x=>x.stage===k);return h?.at||(k==="applied"?t.appliedAt:k==="saved"?t.savedAt:null);}
-// Applied -> Interview -> Offer; a closed application ends in a red "Closed" step after the last stage it reached
+// Applied -> Viewed -> Shortlisted -> Interview -> Offer; "Not selected" ends in a red step after the last stage reached
 function stepper(t){
   const closed=t.stage==="rejected";
   const reached=closed?[...(t.history||[])].reverse().find(h=>FLOW.includes(h.stage))?.stage||"applied":t.stage;
@@ -29,22 +31,22 @@ function statusPage(j){
 }
 const statusLink=(j,cls="btn ghost sm")=>{const p=statusPage(j);return p?`<a class="${cls}" href="${esc(p.url)}" target="_blank" rel="noopener">Check status on ${esc(p.site)} ↗</a>`:"";};
 function appCard(j){
-  const t=j._t,ap=t.appliedAt||stageDate(t,"applied"),open=t.stage==="applied"||t.stage==="interview";
-  const follow=t.stage==="applied"&&ap&&Date.now()-ap>7*864e5;
+  const t=j._t,ap=t.appliedAt||stageDate(t,"applied"),m=lastMail(t);
+  const quiet=t.stage==="applied"&&ap&&Date.now()-ap>7*864e5;
   return `<article class="app" data-open="${esc(j.id)}" data-app="${esc(j.id)}" tabindex="0">
     <div class="app-top">${logo(j)}<div class="app-main"><h3>${esc(j.title)}</h3><div class="meta">${esc(j.company)} · ${esc(j.city_norm||j.location||"India")}</div>
       ${ap?`<div class="app-when">Applied ${fmtDate(ap)} · ${ago(new Date(ap).toISOString())}</div>`:""}</div>
       ${statusPill(t)}</div>
     ${stepper(t)}
-    <div class="app-foot">${follow?`<span class="due">Follow-up due</span>`:`<span>${statusNote(t)}</span>`}
-      <span class="app-acts">${open?`<button class="btn ghost sm" data-followup="${esc(j.id)}">Follow up</button>`:""}${statusLink(j)}<button class="btn sm" data-open="${esc(j.id)}">Details</button></span></div>
+    <div class="app-foot"><span>${quiet?`<span class="due">No update for over a week</span>`:statusNote(t)}${m?` · <span class="via">from ${esc(m.site)} email, ${fmtShort(m.at)}</span>`:""}</span>
+      <span class="app-acts">${statusLink(j)}<button class="btn sm" data-open="${esc(j.id)}">Details</button></span></div>
   </article>`;
 }
 function flashApp(id){requestAnimationFrame(()=>{const el=document.querySelector(`[data-app="${CSS.escape(id)}"]`);if(!el)return;el.scrollIntoView({block:"center",behavior:"smooth"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),2200);});}
 
 /* after Apply opens the job site, ask when the person comes back to this tab */
 let pendingApply=null,apId=null;
-function noteApply(id){if(["applied","interview","offer"].includes(U.jobs[id]?.stage))return;pendingApply={id,at:Date.now()};LS.set("uv.pendingApply",pendingApply);}
+function noteApply(id){if(isApplied(U.jobs[id])&&U.jobs[id].stage!=="rejected")return;pendingApply={id,at:Date.now()};LS.set("uv.pendingApply",pendingApply);}
 function clearApply(){pendingApply=null;LS.del("uv.pendingApply");}
 function checkApply(){
   const p=pendingApply||LS.get("uv.pendingApply",null);
@@ -73,7 +75,5 @@ $("apView").onclick=()=>{closeApply();closeSheet();go("mine");flashApp(apId);};
 
 /* buttons on this screen */
 onAppClick(async(d,t,e)=>{
-  if(d.followup){const t=U.jobs[d.followup],j=findJob(d.followup)||t.snap,P=U.profile;
-    copy(`Hello,\n\nI applied for the ${fixText(j.title)} role at ${fixText(j.company)} on ${fmtDate(t.appliedAt)}. I am still very interested in this position and would be glad to share anything else you need.\n\nThank you for your time.\n${P.name}${P.phone?"\n"+P.phone:""}\n${P.email}`,"Follow-up message copied. Send it to the recruiter.");return;}
   if(d.markapplied){apId=d.markapplied;markApplied();$("applyModal").hidden=false;return;}
 });

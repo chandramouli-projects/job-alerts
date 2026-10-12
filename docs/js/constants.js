@@ -17,7 +17,7 @@ const ROLES={
 const EXP=[[0,"Fresher"],[1,"1 year"],[2,"2 years"],[3,"3 years"],[4,"4 years"],[5,"5 years"],[7,"6–8 years"],[10,"9+ years"]];
 const CITIES=["Hyderabad","Bangalore","Chennai","Pune","Mumbai","Delhi","Noida","Gurgaon","Kolkata","Ahmedabad","Visakhapatnam","Vijayawada","Kochi","Coimbatore","Remote","Anywhere in India"];
 const SKILLS=["java","python","javascript","typescript","react","angular","node","spring boot","sql","mongodb","aws","azure","docker","kubernetes","html","css","django",".net","c#","power bi","excel","selenium","git","rest","microservices","flutter","kotlin","machine learning"];
-const STAGES=[["saved","Saved","var(--muted)"],["applied","Applied","var(--applied)"],["interview","Interview","var(--interview)"],["offer","Offer","var(--offer)"],["rejected","Closed","var(--rejected)"]];
+const STAGES=[["saved","Saved","var(--muted)"],["applied","Applied","var(--applied)"],["viewed","Viewed","var(--applied)"],["shortlisted","Shortlisted","var(--interview)"],["interview","Interview","var(--interview)"],["offer","Offer","var(--offer)"],["rejected","Not selected","var(--rejected)"]];
 const SENIOR=/\b(senior|sr\.?|lead|principal|staff|architect|manager|head|director)\b/i, JUNIOR=/\b(intern|internship|trainee|fresher)\b/i;
 const PAGE=25;
 const PREVIEW=!!window.__JOBS__;

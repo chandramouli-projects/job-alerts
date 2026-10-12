@@ -85,6 +85,22 @@ same login works on every phone and browser. The link works only while the comma
 
 ---
 
+### Application status from Gmail (My jobs)
+LinkedIn, Naukri and company hiring sites email you when your application is sent, viewed,
+shortlisted, invited to interview or not selected. The app reads only those emails (they stay
+unread; nothing is sent or deleted) and updates **My jobs** every 15 minutes. Applications you made
+straight on LinkedIn or Naukri show up too.
+
+1. Google account → **Security** → turn on **2-Step Verification**.
+2. Open https://myaccount.google.com/apppasswords → name it `Udyogam Vetuku` → **Create** → copy the
+   16-letter password.
+3. In `.env` add `GMAIL_ADDRESS=you@gmail.com` and `GMAIL_APP_PASSWORD=<the 16 letters>`.
+   If you log in to the app with a different email, also add `TRACK_ACCOUNT=<that email>`.
+4. Restart `node worker/server.mjs`. To see what it finds without changing anything: `python track_mail.py`.
+
+Only the account in `TRACK_ACCOUNT` (or `GMAIL_ADDRESS`) sees these statuses. Works only with the
+local server, not on GitHub Pages. To stop it, delete the App password in your Google account.
+
 ## Change what jobs you get
 Edit `config.json` on GitHub (pencil icon).
 
