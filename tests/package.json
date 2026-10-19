@@ -7,6 +7,7 @@
     "report": "playwright show-report reports/html"
   },
   "devDependencies": {
-    "@playwright/test": "1.55.0"
+    "@playwright/test": "1.55.0",
+    "wrangler": "4.147.0"
   }
 }

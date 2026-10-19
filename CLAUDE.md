@@ -61,6 +61,14 @@ for a static portal, and sends matching ones to Telegram.
     work. The host must answer unknown links with `index.html`: Cloudflare Pages does (no
     `404.html` in `frontend/`, or it stops), `backend/server/server.mjs` does for links without an extension;
     GitHub Pages doesn't, so a refresh on `/jobs` there is a 404.
+- Accounts on the live site: `functions/api/[[path]].js` (Cloudflare Pages Functions, deployed with
+  the site on every push) answers the same `/api/*` calls and messages as `backend/server/server.mjs`,
+  with a D1 database (binding `DB` in `wrangler.toml`, tables in `database/cloudflare.sql`, made on first
+  use). So `api/ping` answers on pages.dev too and the app uses server accounts everywhere (one login on
+  every device). No Gmail tracking there (`/api/mail` says not connected). PBKDF2 100k for passwords;
+  saved data and resumes in 1.5 MB `parts` (D1 rows are max 2 MB). A browser-only account from before
+  moves online at its first log in (`moveToServer` in `pages/login.js`). Change both servers together.
+  Tests: `npx playwright test -c playwright.cloudflare.config.js` (runs `wrangler pages dev` with a local D1).
 - `backend/worker/worker.js`: Cloudflare Worker for live search, pasted into the Cloudflare dashboard by
   hand, so no wrangler. `GET /search?q=&where=` uses ONE source at a time (the user asked
   for this): Adzuna first; if its limit is used up (401/403/429) it rests for `REST_HOURS` and

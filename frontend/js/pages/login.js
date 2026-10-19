@@ -32,10 +32,17 @@ $("loginForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const email=$("lEmail").value.trim().toLowerCase(),pw=$("lPass").value,a=accounts[email];
   if(SERVER){
-    let d;
-    try{d=await api("login",{email,password:pw});}catch(err){return $("lErr").textContent=err.message;}
+    let d,moved=false;
+    try{d=await api("login",{email,password:pw});}
+    catch(err){
+      // an account made earlier in this browser only: move it, with everything saved, to the server
+      d=a&&a.hash===await hashPw(pw,a.salt)?await moveToServer(email,pw,a).catch(()=>null):null;
+      if(!d)return $("lErr").textContent=err.message;
+      moved=true;
+    }
     LS.set("uv.token",d.token); session={email}; LS.set("uv.session",session); view="jobs";
     U=withDefaults(d.user,d.name,email); applyTheme();
+    if(moved)setTimeout(()=>toast("Your account is now online: log in from any phone or computer.","ok"),300);
     return U.onboarded?openShell():startOnboarding();
   }
   if(!a||a.hash!==await hashPw(pw,a.salt))return $("lErr").textContent="Email or password is wrong.";
@@ -43,5 +50,11 @@ $("loginForm").addEventListener("submit",async e=>{
   U=LS.get("uv.user."+email,null)||blankUser(a.name,email,""); applyTheme();
   U.onboarded?openShell():startOnboarding();
 });
+async function moveToServer(email,pw,a){
+  const user=LS.get("uv.user."+email,null),s=await api("signup",{name:a.name,email,phone:user?.profile?.phone||"",password:pw});
+  LS.set("uv.token",s.token);
+  if(user)await api("user",user,"PUT");
+  return {token:s.token,name:a.name,user};
+}
 function logout(){if(SERVER){clearTimeout(saveT);api("logout",{}).catch(()=>{});LS.del("uv.token");}LS.del("uv.session");session=null;U=null;closeSheet();$("lPass").value="";showAuth("login");$("loginView").hidden=false;$("signupView").hidden=true;}
 

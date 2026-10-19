@@ -3,3 +3,9 @@
 name = "udyogam-vetuku"
 pages_build_output_dir = "./frontend"
 compatibility_date = "2025-01-01"
+
+# Accounts database for functions/api (D1, Cloudflare's free SQLite). Tables: database/cloudflare.sql
+[[d1_databases]]
+binding = "DB"
+database_name = "udyogam-db"
+database_id = "00000000-0000-0000-0000-000000000000"

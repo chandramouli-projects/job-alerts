@@ -17,3 +17,7 @@ tests/test-results/
 tests/reports/
 tests/.tmp/
 tests/reports-*.txt
+# installed with npm install (in tests/), and Cloudflare's local files
+node_modules/
+.wrangler/
+tests/.tmp*
