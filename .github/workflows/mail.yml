@@ -1,0 +1,30 @@
+name: Track applications from Gmail
+
+# Every 30 minutes the live site reads new job-site emails for everyone who connected Gmail
+# (functions/api mail/run, one person per call) and sends an alert when an application moves.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: track-mail
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check Gmail for each person
+        env:
+          NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
+        run: |
+          if [ -z "$NOTIFY_SECRET" ]; then echo "NOTIFY_SECRET is not set; nothing to do."; exit 0; fi
+          for i in $(seq 1 40); do
+            r=$(curl -s -X POST https://udyogam-vetuku.pages.dev/api/mail/run -H "Authorization: Bearer $NOTIFY_SECRET" -H "Content-Type: application/json" -d '{}')
+            echo "$r"
+            echo "$r" | grep -q '"more":true' || break
+          done

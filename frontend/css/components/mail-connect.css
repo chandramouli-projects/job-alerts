@@ -1,0 +1,17 @@
+/* My jobs: "Connect Gmail" card, and the line that says which Gmail is tracked */
+.mail-connect{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin-bottom:14px}
+.mc-ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.mc-ico svg{width:24px;height:24px}
+.mc-txt{min-width:0}
+.mc-txt h3{font-size:1.02rem;margin:0 0 4px}
+.mc-txt p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.5}
+.mc-txt small{display:block;margin-top:6px;color:var(--muted);font-size:.8rem}
+.mail-connect .btn{white-space:nowrap}
+.mailbar .mb-txt{display:inline-flex;align-items:center;gap:8px;min-width:0}
+.mailbar .mb-txt svg{width:18px;height:18px;flex:none;color:var(--accent)}
+.mailbar.bad .mb-txt svg{color:var(--danger)}
+.mailbar .mb-acts{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap}
+@media (max-width:640px){
+  .mail-connect{grid-template-columns:44px minmax(0,1fr);padding:16px}
+  .mail-connect .btn{grid-column:1/-1;width:100%}
+}

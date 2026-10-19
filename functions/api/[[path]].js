@@ -7,6 +7,10 @@ Not here: Gmail status tracking (needs Python on a computer, see backend/server/
 Alerts with the app closed (Web Push): push/subscribe keeps each device's subscription; the job bot
 calls push/run with the new jobs after every run, and each person gets one alert for the jobs that fit
 them. Needs VAPID_PUBLIC_KEY (wrangler.toml), and the secrets VAPID_PRIVATE_JWK and NOTIFY_SECRET.
+Application tracking from email: "Connect Gmail" (gmail/start, gmail/callback) lets the server read the
+person's job-site emails (read-only) when the app asks (mail, mail/sync) and every 30 minutes for everyone
+(mail/run, called by .github/workflows/mail.yml). Needs GOOGLE_CLIENT_ID (wrangler.toml) and the secrets
+GOOGLE_CLIENT_SECRET and TOKEN_KEY.
 
 The database is the D1 binding "DB" set in wrangler.toml. Tables are in database/cloudflare.sql and
 are made here on first use. D1 keeps at most 2 MB in one row, so a person's saved data and resume
@@ -14,6 +18,8 @@ are stored in parts of 1.5 MB (table "parts"). Free plan: 5 GB, 100,000 rows wri
 */
 import { sendPush } from "../../backend/push/webpush.js";
 import { fits } from "../../backend/push/match.js";
+import { applyEvents } from "../../backend/mail/mail-rules.js";
+import * as G from "../../backend/mail/gmail.js";
 
 const SCHEMA = `
 CREATE TABLE IF NOT EXISTS accounts (email TEXT PRIMARY KEY, name TEXT NOT NULL, password_hash TEXT NOT NULL, password_salt TEXT NOT NULL, created_at INTEGER);
@@ -24,7 +30,8 @@ CREATE TABLE IF NOT EXISTS resumes (email TEXT PRIMARY KEY, file_name TEXT NOT N
 CREATE TABLE IF NOT EXISTS login_fails (email TEXT PRIMARY KEY, n INTEGER, at INTEGER);
 CREATE TABLE IF NOT EXISTS resets (email TEXT PRIMARY KEY, pin TEXT NOT NULL, at INTEGER, tries INTEGER);
 CREATE TABLE IF NOT EXISTS push_subs (endpoint TEXT PRIMARY KEY, email TEXT NOT NULL, p256dh TEXT NOT NULL, auth TEXT NOT NULL, created_at INTEGER);
-CREATE INDEX IF NOT EXISTS push_subs_email ON push_subs (email);`;
+CREATE INDEX IF NOT EXISTS push_subs_email ON push_subs (email);
+CREATE TABLE IF NOT EXISTS mail_accounts (email TEXT PRIMARY KEY, gmail TEXT, token TEXT NOT NULL, connected_at INTEGER, last_sync INTEGER, last_ask INTEGER, error TEXT);`;
 const PUSH_MAX = 40;   // alerts per run: Cloudflare's free plan allows 50 outside calls per request
 const PART = 1_500_000;
 const BODY_MAX = 5e6;
@@ -88,6 +95,8 @@ export async function onRequest({ request, env, params }) {
   const db = env.DB;
   try {
     await setUp(db);
+    // Google sends the person back here after "Connect Gmail" (a plain link)
+    if (path === "gmail/callback") return await gmailCallback(db, request, env);
     // the resume file itself, only to its owner
     if (path === "resume" && method === "GET") {
       const email = await sessionEmail(db, request);
@@ -104,6 +113,7 @@ export async function onRequest({ request, env, params }) {
       try { body = JSON.parse(raw || "{}") || {}; } catch { return json(400, { error: "The request was not valid." }); }
     }
     if (path.startsWith("push/")) return await push(db, request, env, path, body);
+    if (path.startsWith("gmail/") || path === "mail" || path.startsWith("mail/")) return await mail(db, request, env, path, body);
     return await api(db, request, path, method, body);
   } catch (e) {
     console.error(e);
@@ -178,7 +188,7 @@ async function api(db, request, path, method, body) {
     return json(200, { ok: true });
   }
   if (path === "user" && method === "DELETE") {
-    await db.batch(["parts", "resumes", "push_subs", "sessions", "login_fails", "resets", "accounts"].map(t => db.prepare(`DELETE FROM ${t} WHERE email = ?`).bind(email)));
+    await db.batch(["parts", "resumes", "push_subs", "mail_accounts", "sessions", "login_fails", "resets", "accounts"].map(t => db.prepare(`DELETE FROM ${t} WHERE email = ?`).bind(email)));
     return json(200, { ok: true });
   }
   if (path === "password") {
@@ -205,9 +215,6 @@ async function api(db, request, path, method, body) {
     await db.batch([db.prepare("DELETE FROM parts WHERE email = ? AND kind = 'resume'").bind(email), db.prepare("DELETE FROM resumes WHERE email = ?").bind(email)]);
     return json(200, { ok: true });
   }
-  // Gmail status tracking runs only on the computer server
-  if (path === "mail" && method === "GET") return json(200, { connected: false });
-  if (path === "mail/sync") return json(403, { error: "Gmail is not connected for this account." });
   if (path === "logout") {
     await db.prepare("DELETE FROM sessions WHERE token = ?").bind((request.headers.get("Authorization") || "").replace(/^Bearer /, "")).run();
     return json(200, { ok: true });
@@ -272,6 +279,121 @@ async function push(db, request, env, path, body) {
       if (r.gone) await db.prepare("DELETE FROM push_subs WHERE endpoint = ?").bind(s.endpoint).run();
     }
     return json(200, { sent });
+  }
+  return json(404, { error: "Not found" });
+}
+
+/* ---------------------------------------------------------------- application tracking from Gmail */
+const STATUS_ALERT = { viewed: ["Your application was viewed", "{c} viewed your application for {t}."],
+  shortlisted: ["You're shortlisted", "{c} shortlisted you for {t}."], interview: ["Interview stage", "{c} wants to interview you for {t}."],
+  offer: ["You got an offer", "{c} made you an offer for {t}."], rejected: ["Not selected this time", "{c} moved ahead with other people for {t}."],
+  applied: ["Application tracked", "Your application to {c} for {t} is in My jobs."] };
+const SYNC_EVERY = 15 * 60e3;
+const googleOf = (env, request) => ({ base: env.GOOGLE_BASE || "", clientId: env.GOOGLE_CLIENT_ID, clientSecret: env.GOOGLE_CLIENT_SECRET,
+  redirectUri: new URL(request.url).origin + "/api/gmail/callback" });
+const gmailReady = env => !!(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET && env.TOKEN_KEY);
+const readMailState = async (db, email) => { const b = await readParts(db, email, "mail"); return b ? JSON.parse(new TextDecoder().decode(b)) : { seen: [], jobs: {} }; };
+
+async function mailStatus(db, email) {
+  const row = await db.prepare("SELECT gmail, last_sync, error FROM mail_accounts WHERE email = ?").bind(email).first();
+  if (!row) return { connected: false, canConnect: true };
+  const st = await readMailState(db, email);
+  return { connected: true, gmail: row.gmail, lastRun: row.last_sync || 0, error: row.error || "", jobs: st.jobs || {} };
+}
+
+// Read new job emails for one person, update their applications, and alert them when a status moved
+async function syncMail(db, env, request, email) {
+  const row = await db.prepare("SELECT * FROM mail_accounts WHERE email = ?").bind(email).first();
+  if (!row) return { moved: [] };
+  const g = googleOf(env, request), now = Date.now();
+  try {
+    const { access_token } = await G.refreshAccess({ ...g, refreshToken: await G.unseal(row.token, env.TOKEN_KEY) });
+    const state = await readMailState(db, email), user = await readUser(db, email) || {};
+    const { events, read } = await G.readJobEmails({ base: g.base, access: access_token, seen: state.seen });
+    const moved = await applyEvents(state, user.jobs || {}, events);
+    state.seen = [...new Set([...(state.seen || []), ...read])].slice(-3000);
+    await db.batch([...writeParts(db, email, "mail", new TextEncoder().encode(JSON.stringify(state))),
+      db.prepare("UPDATE mail_accounts SET last_sync = ?, error = '' WHERE email = ?").bind(now, email)]);
+    if (moved.length && user.notifications?.settings?.status !== false) await alertStatus(db, env, email, moved);
+    return { moved };
+  } catch (e) {
+    await db.prepare("UPDATE mail_accounts SET last_sync = ?, error = ? WHERE email = ?").bind(now, e.message || "Couldn't read Gmail.", email).run();
+    return { moved: [], error: e.message };
+  }
+}
+async function alertStatus(db, env, email, moved) {
+  if (!(env.VAPID_PUBLIC_KEY && env.VAPID_PRIVATE_JWK)) return;
+  const top = moved[moved.length - 1], [title, text] = STATUS_ALERT[top.stage] || STATUS_ALERT.applied;
+  const message = moved.length > 1
+    ? { title: `${moved.length} application updates`, body: moved.slice(-3).map(m => `${m.company}: ${m.stage}`).join(" · "), url: "./my-jobs", tag: "status" }
+    : { title, body: text.replace("{c}", top.company || "The company").replace("{t}", top.title || "your application"), url: "./my-jobs", tag: "status" };
+  const { results } = await db.prepare("SELECT * FROM push_subs WHERE email = ?").bind(email).all();
+  for (const s of results.slice(0, 5)) {
+    const r = await sendPush(subOf(s), message, vapidOf(env)).catch(() => ({ ok: false }));
+    if (r.gone) await db.prepare("DELETE FROM push_subs WHERE endpoint = ?").bind(s.endpoint).run();
+  }
+}
+
+async function gmailCallback(db, request, env) {
+  const url = new URL(request.url), back = r => Response.redirect(`${url.origin}/my-jobs?gmail=${r}`, 302);
+  if (!gmailReady(env)) return back("error");
+  if (url.searchParams.get("error")) return back("denied");
+  const st = await G.readState(url.searchParams.get("state"), env.TOKEN_KEY).catch(() => null);
+  if (!st?.email || !(await db.prepare("SELECT 1 FROM accounts WHERE email = ?").bind(st.email).first())) return back("error");
+  try {
+    const g = googleOf(env, request), t = await G.exchangeCode({ ...g, code: url.searchParams.get("code") || "" });
+    if (!t.refresh_token) return back("error");
+    if (!String(t.scope || G.SCOPE).includes("gmail.readonly")) return back("noscope");
+    const me = await G.profile(g.base, t.access_token).catch(() => ({}));
+    await db.prepare("INSERT OR REPLACE INTO mail_accounts (email, gmail, token, connected_at, last_sync, error) VALUES (?, ?, ?, ?, 0, '')")
+      .bind(st.email, me.emailAddress || "", await G.seal(t.refresh_token, env.TOKEN_KEY), Date.now()).run();
+    await syncMail(db, env, request, st.email);   // the first emails, so My jobs fills straight away
+    return back("connected");
+  } catch {
+    return back("error");
+  }
+}
+
+async function mail(db, request, env, path, body) {
+  // every 30 minutes (.github/workflows/mail.yml): the person checked longest ago, one per call
+  if (path === "mail/run") {
+    const secret = (request.headers.get("Authorization") || "").replace(/^Bearer /, "");
+    if (!env.NOTIFY_SECRET || secret !== env.NOTIFY_SECRET) return json(401, { error: "Wrong key." });
+    if (!gmailReady(env)) return json(200, { synced: 0, more: false });
+    const due = Date.now() - 25 * 60e3;
+    const { results } = await db.prepare("SELECT email FROM mail_accounts WHERE COALESCE(last_sync, 0) < ? ORDER BY COALESCE(last_sync, 0) LIMIT 2").bind(due).all();
+    if (!results.length) return json(200, { synced: 0, more: false });
+    const r = await syncMail(db, env, request, results[0].email);
+    return json(200, { synced: 1, moved: r.moved.length, more: results.length > 1 });
+  }
+  const email = await sessionEmail(db, request);
+  if (!email) return json(401, { error: "Please log in again." });
+  if (!gmailReady(env)) {
+    if (path === "mail") return json(200, { connected: false });
+    return json(503, { error: "Gmail tracking is not set up yet." });
+  }
+  if (path === "mail" && request.method === "GET") {
+    const row = await db.prepare("SELECT last_sync, error FROM mail_accounts WHERE email = ?").bind(email).first();
+    if (row && !row.error && Date.now() - (row.last_sync || 0) > SYNC_EVERY) await syncMail(db, env, request, email);
+    return json(200, await mailStatus(db, email));
+  }
+  if (path === "mail/sync") {
+    const row = await db.prepare("SELECT last_ask FROM mail_accounts WHERE email = ?").bind(email).first();
+    if (!row) return json(403, { error: "Gmail is not connected for this account." });
+    if (Date.now() - (row.last_ask || 0) < 60_000) return json(429, { error: "Checked less than a minute ago. Try again soon." });
+    await db.prepare("UPDATE mail_accounts SET last_ask = ? WHERE email = ?").bind(Date.now(), email).run();
+    await syncMail(db, env, request, email);
+    return json(200, await mailStatus(db, email));
+  }
+  if (path === "gmail/start") {
+    const state = await G.signState({ email, exp: Date.now() + 10 * 60e3, n: randomHex(8) }, env.TOKEN_KEY);
+    return json(200, { url: G.authUrl({ ...googleOf(env, request), state }) });
+  }
+  if (path === "gmail/disconnect") {
+    const row = await db.prepare("SELECT token FROM mail_accounts WHERE email = ?").bind(email).first();
+    if (row) await G.revoke({ base: env.GOOGLE_BASE || "", token: await G.unseal(row.token, env.TOKEN_KEY).catch(() => "") });
+    await db.prepare("DELETE FROM mail_accounts WHERE email = ?").bind(email).run();
+    return json(200, { ok: true });
   }
   return json(404, { error: "Not found" });
 }

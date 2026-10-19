@@ -136,6 +136,16 @@ for a static portal, and sends matching ones to Telegram.
   `database/state.json`. Don't commit those files after a local run; let the bot own them.
 
 ## Application status from Gmail
+- Live site (everyone): "Connect Gmail" on My jobs (`services/mail-tracking.js`) → `gmail/start` (signed
+  state) → Google → `gmail/callback` stores the refresh token encrypted (`TOKEN_KEY`) in D1 `mail_accounts`.
+  `backend/mail/gmail.js` reads only job-site emails with the Gmail API (read-only scope, at most 25 per
+  call); `backend/mail/mail-rules.js` is a JS copy of `track_mail.py` parse (+ the matching from
+  mail-sync.mjs, which now imports it): `tests/unit/mail-rules.test.mjs` runs both parsers on the same
+  emails, so change them together. Sync: `GET /api/mail` if 15+ min old, "Check now" (1/min), and
+  `.github/workflows/mail.yml` every 30 min (`mail/run`, one person per call). A moved status sends a push
+  alert. Needs `GOOGLE_CLIENT_ID` (wrangler.toml), secrets `GOOGLE_CLIENT_SECRET`, `TOKEN_KEY`; setup steps
+  in README. Unverified Google app: warning screen, 100 people max. Tests: `specs/gmail.cloudflare.js`
+  (fake Google on port 8094).
 - LinkedIn / Naukri have no API for application status, and scraping them is not allowed, so status
   comes from the person's job-site emails. `backend/mail/track_mail.py` (stdlib `imaplib`, Gmail App password from
   `.env`) reads only mail from job sites / hiring systems (`SENDERS`), with `BODY.PEEK` so it stays unread,

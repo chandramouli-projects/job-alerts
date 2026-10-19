@@ -20,3 +20,6 @@ CREATE TABLE IF NOT EXISTS resets (email TEXT PRIMARY KEY, pin TEXT NOT NULL, at
 -- Devices that get alerts with the app closed (Web Push): one row per browser subscription.
 CREATE TABLE IF NOT EXISTS push_subs (endpoint TEXT PRIMARY KEY, email TEXT NOT NULL, p256dh TEXT NOT NULL, auth TEXT NOT NULL, created_at INTEGER);
 CREATE INDEX IF NOT EXISTS push_subs_email ON push_subs (email);
+-- People who connected Gmail for application tracking: the Google refresh token, encrypted with TOKEN_KEY.
+-- What the emails said is kept as JSON in parts (kind "mail": {seen, jobs}); the emails themselves are not kept.
+CREATE TABLE IF NOT EXISTS mail_accounts (email TEXT PRIMARY KEY, gmail TEXT, token TEXT NOT NULL, connected_at INTEGER, last_sync INTEGER, last_ask INTEGER, error TEXT);

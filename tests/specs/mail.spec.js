@@ -91,7 +91,7 @@ test("TC-MAIL-07 Check now reads Gmail again and shows the new status", async ({
   setEmails([ev("m6", "interview", "Acme", "QA Automation Engineer", day(0))]);
   await page.click("[data-mailsync]");
   await expect(card(page, "QA Automation Engineer").locator(".status-pill")).toHaveText("Interview");
-  await expect(page.locator(".mailbar")).toContainText("Synced from Gmail · just now");
+  await expect(page.locator(".mailbar")).toContainText("Tracking from Gmail · checked just now");
 });
 
 test("TC-MAIL-08 another user's account never gets these statuses", async ({ request }) => {

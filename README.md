@@ -101,6 +101,22 @@ straight on LinkedIn or Naukri show up too.
 Only the account in `TRACK_ACCOUNT` (or `GMAIL_ADDRESS`) sees these statuses. Works only with the
 local server, not on GitHub Pages. To stop it, delete the App password in your Google account.
 
+**On the live site, for everyone:** each person presses **Connect Gmail** on My jobs. One-time setup by
+the site owner:
+1. https://console.cloud.google.com → new project `Udyogam Vetuku` → **APIs & Services → Library** →
+   **Gmail API** → **Enable**.
+2. **Google Auth Platform → Branding**: app name `Udyogam Vetuku`, your email. **Audience**: External,
+   then **Publish app** (in "Testing" Google logs people out every 7 days). **Data access → Add scopes**:
+   `https://www.googleapis.com/auth/gmail.readonly`.
+3. **Clients → Create client → Web application**. Authorized redirect URI:
+   `https://udyogam-vetuku.pages.dev/api/gmail/callback`. Copy the **Client ID** and **Client secret**.
+4. Put the Client ID in `wrangler.toml` as `GOOGLE_CLIENT_ID`. In Cloudflare → udyogam-vetuku →
+   **Settings → Variables and Secrets** add the secrets `GOOGLE_CLIENT_SECRET` and `TOKEN_KEY` (from `.env`).
+5. GitHub Secrets: `NOTIFY_SECRET` (from `.env`), so `.github/workflows/mail.yml` checks everyone every 30 minutes.
+
+The app is unverified by Google, so people see "Google hasn't verified this app" → **Advanced** →
+**Go to Udyogam Vetuku**. Up to 100 people can connect until Google verifies it.
+
 ## Project structure
 
 ```

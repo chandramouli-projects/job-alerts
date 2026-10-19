@@ -7,7 +7,7 @@ import { defineConfig } from "@playwright/test";
 const PORT = 8093;
 export default defineConfig({
   ...base,
-  testMatch: ["api.spec.js", "auth.spec.js", "resume.spec.js", "cloudflare.spec.js", "push.cloudflare.js"],
+  testMatch: ["api.spec.js", "auth.spec.js", "resume.spec.js", "cloudflare.spec.js", "push.cloudflare.js", "gmail.cloudflare.js"],
   // only on the computer server: Gmail tracking, live search through /search, and serving files
   grepInvert: /TC-MAIL|TC-SEC-0[2367]|TC-RES-08/,
   reporter: [["list"]],

@@ -16,6 +16,9 @@ const keys = { publicKey: Buffer.from(await crypto.subtle.exportKey("raw", pair.
   privateJwk: JSON.stringify(await crypto.subtle.exportKey("jwk", pair.privateKey)), notifySecret: "test-notify-secret" };
 writeFileSync(state + "push-keys.json", JSON.stringify(keys));
 const bindings = ["--binding", `VAPID_PUBLIC_KEY=${keys.publicKey}`, "--binding", `VAPID_PRIVATE_JWK=${keys.privateJwk}`, "--binding", `NOTIFY_SECRET=${keys.notifySecret}`];
+// Gmail tracking against a fake Google that tests/specs/gmail.cloudflare.js runs on port 8094
+bindings.push("--binding", "GOOGLE_CLIENT_ID=test-client", "--binding", "GOOGLE_CLIENT_SECRET=test-secret",
+  "--binding", `TOKEN_KEY=${Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString("base64url")}`, "--binding", "GOOGLE_BASE=http://127.0.0.1:8094");
 const child = spawn(process.execPath, [bin, "pages", "dev", "frontend", "--port", port, "--persist-to", state, ...bindings], { cwd: root, stdio: "inherit" });
 for (const sig of ["SIGINT", "SIGTERM"]) process.on(sig, () => { child.kill(); process.exit(0); });
 child.on("exit", code => process.exit(code ?? 0));
