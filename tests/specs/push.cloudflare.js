@@ -205,3 +205,16 @@ test("TC-PUSH-05 'Turn on' sends a test alert; unsubscribe and deleting the acco
   await run(request, JOBS);
   expect(received.filter(x => x.path === "/push/t2")).toEqual([]);
 });
+
+test("TC-PUSH-06 the bot learns which roles people picked (counts only, with the secret)", async ({ request }) => {
+  const one = await signupApi(request), two = await signupApi(request);
+  await saveUser(request, one.token, { ...blankUser(one.email, { roles: ["Data Analyst"], exp: 2, cities: ["Remote"], skills: [] }) });
+  await saveUser(request, two.token, { ...blankUser(two.email, { roles: ["Data Analyst"], custom: "Tableau Developer", exp: 2, cities: ["Pune"], skills: [] }) });
+  expect((await request.get("/api/stats/roles")).status()).toBe(401);
+  const r = await (await request.get("/api/stats/roles", { headers: { Authorization: `Bearer ${KEYS.notifySecret}` } })).json();
+  expect(r.roles.find(x => x.role === "Data Analyst")).toMatchObject({ people: expect.any(Number) });
+  expect(r.roles.find(x => x.role === "Data Analyst").people).toBeGreaterThanOrEqual(2);
+  expect(r.roles.find(x => x.role === "Data Analyst").remote).toBeGreaterThanOrEqual(1);
+  expect(r.roles.find(x => x.role === "Tableau Developer")).toBeTruthy();
+  expect(JSON.stringify(r)).not.toContain("@");   // no emails
+});

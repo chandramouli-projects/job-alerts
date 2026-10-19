@@ -582,6 +582,33 @@ def fetch_jooble(role):
     return out
 
 
+def wanted_roles(top=3):
+    """The roles people picked in the app (most picked first), from the live site: /api/stats/roles.
+    Only counts, never who. Needs NOTIFY_URL and NOTIFY_SECRET; without them, no extra roles.
+    -> [{"term": "QA Testing", "remote": True}]"""
+    url, secret = os.getenv("NOTIFY_URL"), os.getenv("NOTIFY_SECRET")
+    if not (url and secret):
+        return []
+    try:
+        r = requests.get(
+            url.split("/api/")[0] + "/api/stats/roles",
+            headers={"Authorization": f"Bearer {secret}"},
+            timeout=30,
+        )
+        r.raise_for_status()
+        roles = r.json().get("roles", [])[:top]
+    except Exception as e:
+        RUN_INFO["wanted_roles"] = {"error": str(e)[:80]}
+        return []
+    out = [
+        {"term": re.sub(r"\s*/\s*", " ", x["role"]).strip(), "remote": x.get("remote", 0) > 0}
+        for x in roles
+        if x.get("role")
+    ]
+    RUN_INFO["wanted_roles"] = [w["term"] for w in out]
+    return out
+
+
 def fetch_adzuna(role):
     app_id, app_key = os.getenv("ADZUNA_APP_ID"), os.getenv("ADZUNA_APP_KEY")
     if not (app_id and app_key):
@@ -894,15 +921,26 @@ def main():
     # Adzuna: a few roles per run, taking turns, to stay inside the free limits
     n = int(CONFIG.get("adzuna_roles_per_run", 5))
     start = (turn * n) % max(1, len(roles))
-    for role in (roles[start:] + roles[:start])[:n]:
+    turn_roles = (roles[start:] + roles[:start])[:n]
+    for role in turn_roles:
         log(f"Adzuna: {role}")
         raw += fetch_adzuna(role)
+    # The roles people chose in the app are asked for on every run, not once a day
+    wanted = [w for w in wanted_roles() if w["term"].lower() not in {r.lower() for r in turn_roles}]
+    for w in wanted:
+        log(f"Adzuna (people's role): {w['term']}{' + remote' if w['remote'] else ''}")
+        raw += fetch_adzuna(w["term"])
+        if w["remote"]:
+            raw += fetch_adzuna(f"{w['term']} remote")
     # Jooble: same idea, its own turn through the roles
     n = int(CONFIG.get("jooble_roles_per_run", 5))
     start = (turn * n) % max(1, len(roles))
     for role in (roles[start:] + roles[:start])[:n] if os.getenv("JOOBLE_KEY") else []:
         log(f"Jooble: {role}")
         raw += fetch_jooble(role)
+    for w in wanted if os.getenv("JOOBLE_KEY") else []:
+        log(f"Jooble (people's role): {w['term']}")
+        raw += fetch_jooble(w["term"])
     raw += fetch_company_boards()
     state["turn"] = turn + 1
     telegram_ok = telegram_hello(state)

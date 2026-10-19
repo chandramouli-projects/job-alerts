@@ -179,6 +179,7 @@ export async function onRequest({ request, env, params }) {
         return json(400, { error: "The request was not valid." });
       }
     }
+    if (path === "stats/roles") return await statsRoles(db, request, env);
     if (path.startsWith("push/")) return await push(db, request, env, path, body);
     if (path.startsWith("gmail/") || path === "mail" || path.startsWith("mail/"))
       return await mail(db, request, env, path, body);
@@ -628,4 +629,51 @@ async function mail(db, request, env, path, body) {
     return json(200, { ok: true });
   }
   return json(404, { error: "Not found" });
+}
+
+/* ---------------------------------------------------------------- roles people want (for the job bot) */
+// GET /api/stats/roles with NOTIFY_SECRET: how many people picked each role, and how many of them want
+// remote work, most picked first. Only counts, never who. The bot asks for these roles on every run.
+async function statsRoles(db, request, env) {
+  const secret = (request.headers.get("Authorization") || "").replace(/^Bearer /, "");
+  if (!env.NOTIFY_SECRET || secret !== env.NOTIFY_SECRET) return json(401, { error: "Wrong key." });
+  const { results } = await db
+    .prepare("SELECT email, data FROM parts WHERE kind = 'user' ORDER BY email, part")
+    .all();
+  const byEmail = new Map();
+  for (const r of results) byEmail.set(r.email, [...(byEmail.get(r.email) || []), new Uint8Array(r.data)]);
+  const count = new Map();
+  for (const chunks of byEmail.values()) {
+    let prefs;
+    try {
+      const all = new Uint8Array(chunks.reduce((n, c) => n + c.length, 0));
+      let at = 0;
+      for (const c of chunks) {
+        all.set(c, at);
+        at += c.length;
+      }
+      prefs = JSON.parse(new TextDecoder().decode(all)).prefs;
+    } catch {
+      continue;
+    }
+    if (!prefs) continue;
+    const remote = (prefs.cities || []).includes("Remote");
+    const roles = new Set(
+      [
+        ...(prefs.roles || []),
+        ...String(prefs.custom || "")
+          .split(",")
+          .map(x => x.trim()),
+      ].filter(Boolean)
+    );
+    for (const role of roles) {
+      const c = count.get(role) || { role, people: 0, remote: 0 };
+      c.people++;
+      if (remote) c.remote++;
+      count.set(role, c);
+    }
+  }
+  return json(200, {
+    roles: [...count.values()].sort((a, b) => b.people - a.people || a.role.localeCompare(b.role)),
+  });
 }

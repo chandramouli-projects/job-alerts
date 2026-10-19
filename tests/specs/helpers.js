@@ -192,4 +192,6 @@ export async function loginUi(page, email, password) {
   await page.click("#loginForm button[type=submit]");
 }
 
-export const jobTitles = page => page.locator("#main .job h3").allTextContents();
+// the main results only, not "More ... jobs in other cities" below them
+export const jobTitles = page => page.locator("#main .list:not(.elsewhere-list) .job h3").allTextContents();
+export const elsewhereTitles = page => page.locator("#main .elsewhere-list .job h3").allTextContents();
