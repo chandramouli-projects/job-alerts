@@ -1,25 +1,25 @@
 {
- "turn": 10,
+ "turn": 11,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-19T14:51:18+00:00",
-  "fetched": 681,
-  "new": 428,
-  "alerts": 428,
+  "at": "2026-10-19T21:12:31+00:00",
+  "fetched": 631,
+  "new": 262,
+  "alerts": 262,
   "jsearch": {
-   "role": "Data Analyst OR Data Scientist OR Data Engineer OR Business Analyst jobs in India",
+   "role": "DevOps Engineer OR Cloud Engineer OR Support Engineer OR Cyber Security jobs in India",
    "tried": [
     "/search-v2:200"
    ],
    "path": "/search-v2",
-   "results": 10
+   "results": 3
   },
   "jooble": {
-   "Data Scientist": 30,
-   "Data Engineer": 30,
-   "Machine Learning Engineer": 30,
-   "DevOps Engineer": 30,
-   "Cloud Engineer": 30
+   "QA Engineer": 30,
+   "Automation Tester": 7,
+   "UI UX Designer": 18,
+   "Business Analyst": 30,
+   "Salesforce Developer": 30
   },
   "company_boards": {
    "ok": [
@@ -36,23 +36,23 @@
     "Visa:0",
     "Bosch:29",
     "ServiceNow:8",
-    "Accenture:18",
-    "NVIDIA:12",
+    "Accenture:17",
+    "NVIDIA:13",
     "Adobe:0",
     "Intel:0",
-    "Mastercard:8",
-    "PwC:5",
+    "Mastercard:3",
+    "PwC:4",
     "MongoDB:19",
     "Okta:10",
     "Twilio:6",
     "Zscaler:27",
     "Coinbase:5",
     "Airbnb:0",
-    "Pure Storage:4",
+    "Pure Storage:3",
     "Commvault:3",
     "FamPay:0",
     "Citi:30",
-    "State Street:15",
+    "State Street:16",
     "Autodesk:4",
     "FIS:3",
     "Applied Materials:13",
@@ -60,7 +60,7 @@
     "HP:2",
     "Micron:0",
     "PayPal:5",
-    "Pfizer:3",
+    "Pfizer:1",
     "KLA:0"
    ],
    "failed": [
