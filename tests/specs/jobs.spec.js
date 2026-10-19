@@ -16,7 +16,7 @@ async function start(page, request, prefs = QA_HYD, live = {}) {
 }
 // Filters live in a pop-up: open it, pick, then "Show N jobs" applies
 const filter = async (page, id, value) => {
-  await page.click("#searchForm [data-ftoggle]");
+  await page.click(".search-row [data-ftoggle]");
   if (id === "remote") await page.check('#fModal [data-fchk="remote"]');
   else await page.selectOption(`#${id}`, String(value));
   await page.click("#fApply");
@@ -159,7 +159,7 @@ test.describe("Filter button and picked filters", () => {
     await start(page, request);
     const before = await jobTitles(page);
     await expect(page.locator("#fModal")).toHaveCount(0);
-    await page.click("#searchForm [data-ftoggle]");
+    await page.click(".search-row [data-ftoggle]");
     await expect(page.locator("#fModal")).toBeVisible();
     await expect(page.locator("#fTitle")).toHaveText("Filters");
     await page.selectOption("#f_forYou", "0");
@@ -173,17 +173,17 @@ test.describe("Filter button and picked filters", () => {
   test("TC-FLT-11 × and Esc close the pop-up without applying; Reset clears the picks", async ({ page, request }) => {
     await start(page, request);
     const before = await jobTitles(page);
-    await page.click("#searchForm [data-ftoggle]");
+    await page.click(".search-row [data-ftoggle]");
     await page.selectOption("#f_city", "Bangalore");
     await page.click("#fModal [data-fx]");
     expect(await jobTitles(page)).toEqual(before);
-    await page.click("#searchForm [data-ftoggle]");
+    await page.click(".search-row [data-ftoggle]");
     await expect(page.locator("#f_city")).toHaveValue("");               // the thrown-away pick is gone
     await page.selectOption("#f_city", "Bangalore");
     await page.keyboard.press("Escape");
     await expect(page.locator("#fModal")).toBeHidden();
     expect(await jobTitles(page)).toEqual(before);
-    await page.click("#searchForm [data-ftoggle]");
+    await page.click(".search-row [data-ftoggle]");
     await page.selectOption("#f_minSal", "12");
     await page.click("#fModal [data-freset]");
     await expect(page.locator("#f_minSal")).toHaveValue("");

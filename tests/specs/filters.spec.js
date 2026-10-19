@@ -28,7 +28,7 @@ async function open(page, request, prefs = { roles: ["QA / Testing"], exp: 3, ci
 }
 // Filters live in a pop-up: open it, pick, "Show N jobs" applies
 async function pick(page, id, v) {
-  await page.click("#searchForm [data-ftoggle]");
+  await page.click(".search-row [data-ftoggle]");
   if (id === "remote") await page.check('#fModal [data-fchk="remote"]'); else await page.selectOption(`#${id}`, String(v));
   await page.click("#fApply");
 }
@@ -84,7 +84,7 @@ test.describe("Salary, type, website, company", () => {
   test("TC-F-14 12 LPA and above", async ({ page, request }) => { await open(page, request); await ALL(page); await pick(page, "f_days", 21); await pick(page, "f_minSal", 12); await expectJobs(page, ["f2", "f4"]); });
   test("TC-F-15 one 'Full-time' option, whatever the site wrote", async ({ page, request }) => {
     await open(page, request); await ALL(page); await pick(page, "f_days", 21);
-    await page.click("#searchForm [data-ftoggle]");
+    await page.click(".search-row [data-ftoggle]");
     expect(await page.locator("#f_type option").allTextContents()).toEqual(["Any type", "Full-time", "Internship", "Not stated"]);
     await page.keyboard.press("Escape");
     await pick(page, "f_type", "Full-time");

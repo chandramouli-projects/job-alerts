@@ -1,0 +1,13 @@
+# Written by the job collector (GitHub Actions) or by the app: not hand-written code
+frontend/data/
+database/
+data/
+# Installed packages and test output
+node_modules/
+tests/node_modules/
+tests/reports/
+tests/test-results/
+tests/.tmp*/
+.wrangler/
+# Documents: keep them as written
+*.md

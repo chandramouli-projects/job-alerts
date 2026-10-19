@@ -1,0 +1,3 @@
+# Settings for Black, the Python formatter (VS Code: "Black Formatter" extension)
+[tool.black]
+line-length = 110

@@ -78,8 +78,9 @@ function insightBoost(j){
 // small labels on a job card (css/components/job-insights.css)
 function insightBadges(j){
   const scam=scamCheck(j),age=postingAge(j);
-  return (scam.risk==="high"?`<span class="match scam" title="${esc(scam.reasons.join(". "))}">⚠ Possible scam</span>`:"")+
-    (age?`<span class="match age-${age.kind}" title="${esc(age.tip)}">${esc(age.label)}</span>`:"");
+  const icon={fresh:"⚡",old:"⏳",reposted:"↻"};
+  return (scam.risk==="high"?`<span class="sig sig-scam" title="${esc(scam.reasons.join(". "))}">⚠ Possible scam</span>`:"")+
+    (age?`<span class="sig sig-${age.kind}" title="${esc(age.tip)}">${icon[age.kind]} ${esc(age.label)}</span>`:"");
 }
 // on a card without a salary: the typical one, marked as a guess
 function salaryChip(j){

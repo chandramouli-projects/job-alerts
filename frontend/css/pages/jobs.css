@@ -11,3 +11,26 @@
 @media (max-width:560px){.searchbar.one{grid-template-columns:1fr auto auto}.searchbar.one .btn{grid-column:auto}}
 .resbar{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:8px 12px;margin:4px 2px 12px;color:var(--muted);font-size:.9rem}
 .resbar select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 10px;font-size:.88rem}
+
+/* Search bar: one rounded bar with a search icon, the filter button and Search inside it */
+.searchbar.one{display:flex;align-items:center;gap:6px;height:52px;max-width:760px;padding:6px 6px 6px 16px;margin-bottom:14px;
+  border:1px solid var(--line);border-radius:999px;background:var(--surface);box-shadow:0 8px 24px -16px rgba(8,14,18,.35);
+  transition:border-color .15s,box-shadow .15s}
+.searchbar.one:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.searchbar.one .sb-icon{display:grid;place-items:center;color:var(--muted);flex:none}
+.searchbar.one .sb-icon svg{width:18px;height:18px}
+.searchbar.one input{flex:1;min-width:0;height:100%;border:0;background:none;padding:0 6px;font-size:.95rem;border-radius:0}
+.searchbar.one input:focus,.searchbar.one input:focus-visible{outline:none}
+.searchbar.one .fbtn{width:40px;height:40px;flex:none;border:0;border-radius:50%;background:var(--surface2)}
+.searchbar.one .fbtn.on{background:var(--accent-soft)}
+.searchbar.one .btn{height:40px;flex:none;padding:0 20px;border-radius:999px;font-size:.9rem}
+@media (max-width:560px){
+  .searchbar.one{height:48px;padding:4px 4px 4px 14px}
+  .searchbar.one .fbtn,.searchbar.one .btn{height:38px}
+  .searchbar.one .fbtn{width:38px}
+  .searchbar.one .btn{padding:0 14px}
+}
+
+/* the Filters button and the search bar on one row */
+.search-row{display:flex;align-items:center;gap:10px;max-width:880px;margin-bottom:14px}
+.search-row .searchbar.one{flex:1;margin:0;max-width:none}

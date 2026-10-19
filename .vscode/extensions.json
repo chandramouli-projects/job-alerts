@@ -1,0 +1,4 @@
+{
+  // VS Code suggests these when someone opens the project
+  "recommendations": ["esbenp.prettier-vscode", "ms-python.black-formatter", "editorconfig.editorconfig"]
+}

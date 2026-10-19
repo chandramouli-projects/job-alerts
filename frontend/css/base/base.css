@@ -22,6 +22,18 @@ a{color:var(--accent)}
 .btn.danger{background:none;color:var(--danger);border:1.5px solid var(--line)}
 .btn.sm{padding:8px 13px;font-size:.88rem;border-radius:10px}
 .btn:disabled{opacity:.45;cursor:default}
+/* Modern feel for every button and button-like link: soft shadow, lift on hover, press on click */
+.btn,.apply{transition:background-color .15s,box-shadow .15s,transform .12s,border-color .15s,color .15s}
+.btn:not(.ghost):not(.danger),.apply{box-shadow:0 1px 2px rgba(8,14,18,.12),0 6px 16px -8px color-mix(in srgb,var(--accent) 70%,transparent)}
+.btn:not(.ghost):not(.danger):not(:disabled):hover,.apply:hover{background:color-mix(in srgb,var(--accent) 86%,#000);transform:translateY(-1px);
+  box-shadow:0 2px 4px rgba(8,14,18,.12),0 10px 20px -10px color-mix(in srgb,var(--accent) 80%,transparent)}
+.btn.ghost{border-width:1px}
+.btn.ghost:not(:disabled):hover{background:var(--surface2);border-color:color-mix(in srgb,var(--accent) 45%,var(--line));color:var(--accent)}
+.btn:not(:disabled):active,.apply:active,.icon-btn:active{transform:translateY(0) scale(.97)}
+.btn:focus-visible,.apply:focus-visible,.icon-btn:focus-visible{outline:none;box-shadow:0 0 0 4px var(--accent-soft),0 0 0 1px var(--accent)}
+.icon-btn{transition:background-color .15s,border-color .15s,color .15s,transform .12s}
+.icon-btn:hover{color:var(--accent)}
+@media (prefers-reduced-motion:reduce){.btn,.apply,.icon-btn{transition:none}}
 .inp,.sel,textarea.inp{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}
 textarea.inp{min-height:96px;resize:vertical}
 .lbl{display:block;font-weight:600;font-size:.88rem;margin:0 0 6px}
@@ -43,7 +55,7 @@ textarea.inp{min-height:96px;resize:vertical}
 .modal-card .sub{color:var(--muted);margin:0 0 18px;font-size:.95rem}
 .modal-card form>div{margin-bottom:14px}
 .modal-card .btn{width:100%}
-.modal-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border:0;border-radius:10px;background:var(--surface2);color:var(--muted);font-size:1.4rem;line-height:1;display:grid;place-items:center}
+.modal-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border:0;border-radius:10px;background:none;color:var(--muted);font-size:1.4rem;line-height:1;display:grid;place-items:center}
 .modal-ico{width:52px;height:52px;border-radius:16px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:14px}
 .modal-ico svg{width:26px;height:26px}
 @keyframes mpop{from{transform:translateY(10px) scale(.98);opacity:0}}
@@ -53,9 +65,12 @@ textarea.inp{min-height:96px;resize:vertical}
 [data-tip]::after{content:attr(data-tip);position:absolute;top:calc(100% + 8px);right:0;background:var(--ink);color:var(--bg);font-size:.78rem;font-weight:600;padding:5px 9px;border-radius:8px;white-space:nowrap;opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .15s,transform .15s;z-index:5}
 [data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;transform:none}
 .inp[readonly]{opacity:.7}
-.x{border:0;width:36px;height:36px;border-radius:10px;background:var(--surface2);font-size:1.4rem;line-height:1;color:var(--muted);display:grid;place-items:center;flex:none}
+.x{border:0;width:36px;height:36px;border-radius:10px;background:none;font-size:1.4rem;line-height:1;color:var(--muted);display:grid;place-items:center;flex:none}
 .ask-btns{display:flex;gap:8px;margin-top:4px}
 .modal-card .ask-btns .btn{width:auto;flex:1}
 .btn.red{background:var(--danger);color:#fff}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
 .card h3{font-size:1.02rem;margin-bottom:10px}
+
+/* close buttons: just the ×, darker on hover */
+.modal-x:hover,.x:hover{color:var(--ink)}

@@ -58,18 +58,19 @@ function countFor(f){
 function filterFields(){
   const uniq=f=>[...new Set(allJobs().map(f).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
   const val=k=>k==="forYou"?(FD.forYou?"1":"0"):FD[k],def=k=>k==="forYou"?"1":FILTER_DEFAULTS[k];
+  // every filter in the same format: a small label and a dropdown; a changed one is shown in green
   const sel=(k,label,opts)=>`<div class="ff"><label for="f_${k}">${label}</label><select id="f_${k}" data-fsel="${k}" class="${String(val(k))!==String(def(k))?"on":""}">${opts.map(([v,l])=>`<option value="${esc(v)}" ${String(v)===String(val(k))?"selected":""}>${esc(l)}</option>`).join("")}</select></div>`;
   return sel("forYou","Show",[["1","Jobs for me"],["0","All jobs"]])+
+    sel("days","Date posted",[[1,"Last 24 hours"],[3,"Last 3 days"],[7,"Last 7 days"],[21,"Last 3 weeks"]])+
+    sel("sort","Sort by",[["match","Best fit"],["new","Newest first"]])+
     sel("role","Job role",[["","All roles"],...Object.keys(ROLES).map(r=>[r,r])])+
     sel("exp","Experience",[["","Any experience"],...EXP.map(([v,l])=>[v,l])])+
-    sel("city","City",[["","All India"],...uniq(j=>j.city_norm||"India").map(c=>[c,c])])+
-    sel("days","Posted",[[1,"Last 24 hours"],[3,"Last 3 days"],[7,"Last 7 days"],[21,"Last 3 weeks"]])+
     sel("minSal","Salary",[["","Any salary"],["3","3 LPA and above"],["5","5 LPA and above"],["8","8 LPA and above"],["12","12 LPA and above"],["20","20 LPA and above"]])+
+    sel("city","Location",[["","All India"],...uniq(j=>j.city_norm||"India").map(c=>[c,c])])+
+    sel("type","Job type",[["","Any type"],...uniq(jobType).map(t=>[t,t])])+
     sel("company","Company",[["","All companies"],...uniq(j=>j.company).map(c=>[c,c])])+
     sel("source","Posted on",[["","Any website"],...uniq(j=>j.direct?"Company site":j.source).map(t=>[t,t])])+
-    sel("type","Job type",[["","Any type"],...uniq(jobType).map(t=>[t,t])])+
-    sel("sort","Sort by",[["match","Best fit"],["new","Newest first"]])+
-    `<label class="fremote"><input type="checkbox" data-fchk="remote" ${FD.remote?"checked":""}>Remote only</label>`;
+    `<div class="ff"><span class="ff-label">Work mode</span><label class="fremote"><input type="checkbox" data-fchk="remote" ${FD.remote?"checked":""}>Remote only</label></div>`;
 }
 function filterCountLabel(){const n=countFor(FD);return `Show ${n} job${n===1?"":"s"}`;}
 function openFilters(){
@@ -87,6 +88,7 @@ function openFilters(){
       $("fApply").textContent=filterCountLabel();
     });
     m.addEventListener("click",e=>{
+      if(e.target===m){closeFilters();return;}
       const b=e.target.closest("button");if(!b)return;
       if("fx" in b.dataset)closeFilters();
       else if("freset" in b.dataset){FD={...FILTER_DEFAULTS};$("fBody").innerHTML=filterFields();$("fApply").textContent=filterCountLabel();}
@@ -94,12 +96,21 @@ function openFilters(){
     });
     document.addEventListener("keydown",e=>{if(e.key==="Escape"&&FD)closeFilters();});
   }
-  m.innerHTML=`<div class="modal-card fcard">
+  // a panel right under the Filters button and search bar, as wide as they are (css/components/filters.css)
+  m.innerHTML=`<div class="fpop" aria-labelledby="fTitle">
     <div class="fhead"><h2 id="fTitle">Filters</h2><button type="button" class="modal-x" data-fx aria-label="Close">×</button></div>
     <div class="fbody" id="fBody">${filterFields()}</div>
-    <div class="ffoot"><button type="button" class="btn ghost" data-freset>Reset</button><button type="button" class="btn" id="fApply" data-fapply>${filterCountLabel()}</button></div></div>`;
-  m.hidden=false;document.body.style.overflow="hidden";setTimeout(()=>$("f_forYou")?.focus(),30);
+    <div class="ffoot"><button type="button" class="freset" data-freset>Reset</button><button type="button" class="btn" id="fApply" data-fapply>${filterCountLabel()}</button></div></div>`;
+  m.hidden=false;placeFilters();document.body.style.overflow="hidden";setTimeout(()=>$("f_forYou")?.focus(),30);
 }
+// put the panel just below the search row; the page can scroll or resize while it is open
+function placeFilters(){
+  const pop=$("fModal")?.querySelector(".fpop"),row=document.querySelector(".search-row");
+  if(!pop||!row||$("fModal").hidden)return;
+  const r=row.getBoundingClientRect(),top=Math.max(8,Math.min(r.bottom+10,innerHeight-320));
+  Object.assign(pop.style,{top:top+"px",left:Math.max(8,r.left)+"px",width:Math.min(r.width,innerWidth-16)+"px",maxHeight:(innerHeight-top-12)+"px"});
+}
+addEventListener("resize",placeFilters);
 function closeFilters(){if(!$("fModal"))return;$("fModal").hidden=true;FD=null;document.body.style.overflow="";document.querySelector("[data-ftoggle]")?.focus();}
 function applyFilters(){
   const moved=["role","city","remote"].some(k=>FD[k]!==F[k]);

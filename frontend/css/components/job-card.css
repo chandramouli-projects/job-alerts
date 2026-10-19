@@ -1,9 +1,90 @@
-/* One job in the list */
-.match.newb{background:var(--applied);color:#fff}
-.job{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;border-left:4px solid var(--s,var(--line));transition:border-color .15s}
-.job:hover{border-color:var(--accent)}
-.job .top{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:12px;align-items:start}
-.job h3{font-size:1.05rem;font-family:Figtree,sans-serif;font-weight:700;line-height:1.3;overflow-wrap:anywhere}
-.job .co{font-weight:600;font-size:.95rem}
-.job .foot{display:flex;align-items:center;gap:8px;margin-top:12px}
-.job .foot .when{color:var(--muted);font-size:.82rem;margin-right:auto}
+/* One job in the list (js/components/job-card.js):
+   [tick] title / company / posted on / facts / description / skills        [logo]
+          posted ago · tags                                         Hide  Save */
+.job{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:16px;background:var(--surface);
+  border:1px solid var(--line);border-radius:20px;padding:20px 22px 16px 20px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.job:hover{border-color:color-mix(in srgb,var(--accent) 40%,var(--line));box-shadow:0 14px 30px -18px rgba(8,14,18,.3)}
+.job:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.job.picked{border-color:var(--accent);background:color-mix(in srgb,var(--accent-soft) 35%,var(--surface))}
+.job.tracked{box-shadow:inset 4px 0 0 var(--accent)}
+
+/* the tick box */
+.job-pick{grid-row:1;padding-top:3px;cursor:pointer}
+.job-pick input{appearance:none;-webkit-appearance:none;width:20px;height:20px;margin:0;border:2px solid color-mix(in srgb,var(--muted) 70%,var(--line));border-radius:5px;
+  background:var(--surface);display:grid;place-items:center;cursor:pointer;transition:background .12s,border-color .12s}
+.job-pick input:hover{border-color:var(--accent)}
+.job-pick input:checked{background:var(--accent);border-color:var(--accent)}
+.job-pick input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
+.job-pick input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* title, company, posted on */
+.job-main{grid-row:1;min-width:0}
+.job h3{font-family:Figtree,sans-serif;font-size:1.12rem;font-weight:700;line-height:1.3;margin:0;color:var(--ink);overflow-wrap:anywhere}
+.job-co{margin-top:5px;font-size:.95rem;font-weight:700;color:color-mix(in srgb,var(--ink) 72%,var(--muted));overflow-wrap:anywhere}
+.job-by{margin-top:3px;font-size:.88rem;font-weight:600;color:var(--muted)}
+
+/* experience | salary | place */
+.job-meta{list-style:none;display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0;padding:0;color:color-mix(in srgb,var(--ink) 80%,var(--muted));font-size:.92rem}
+.job-meta li{display:inline-flex;align-items:center;gap:8px;min-width:0;padding:0 14px;border-left:1px solid var(--line);line-height:1.2}
+.job-meta li:first-child{padding-left:0;border-left:0}
+.job-meta svg{width:18px;height:18px;flex:none;color:var(--muted)}
+.job-meta span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* one line of the description, then the skills */
+.job-desc{display:flex;align-items:center;gap:8px;margin:10px 0 0;color:color-mix(in srgb,var(--ink) 80%,var(--muted));font-size:.9rem;min-width:0}
+.job-desc svg{width:18px;height:18px;flex:none;color:var(--muted)}
+.job-desc span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.job-skills{margin:10px 0 0;color:var(--muted);font-size:.86rem;line-height:1.5}
+.job-skills span+span::before{content:"•";margin:0 7px;opacity:.7}
+
+/* logo on the right */
+.job-logo{grid-row:1;align-self:start}
+.job-logo .logo{width:72px;height:72px;border-radius:14px;font-size:1.6rem;background:var(--surface);border:1px solid var(--line)}
+.job-logo .logo img{padding:6px;background:#fff}
+
+/* posted ago and tags | Hide  Save */
+.job-foot{grid-column:2/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
+.job-when{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;min-width:0;color:var(--muted);font-size:.84rem}
+.job-when .sig,.job-when .match.fit{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;font-weight:700;background:none;padding:0;border-radius:0;white-space:nowrap}
+.job-when .status-pill{font-size:.74rem}
+.job-acts{display:flex;align-items:center;gap:4px;flex:none}
+.job-act{display:inline-flex;align-items:center;gap:6px;border:0;background:none;color:color-mix(in srgb,var(--ink) 85%,var(--muted));
+  font-size:.9rem;font-weight:600;padding:7px 10px;border-radius:10px}
+.job-act:hover{background:var(--surface2);color:var(--ink)}
+.job-act svg{width:19px;height:19px}
+.job-act[aria-pressed="true"]{color:var(--accent)}
+.job-act[aria-pressed="true"] svg{fill:currentColor}
+
+/* tags, also used in the job details: coloured text, no pill */
+.sig-new{color:var(--applied)}
+.sig-new .dot{width:7px;height:7px;border-radius:50%;background:var(--applied)}
+.match.fit.great{color:var(--accent)}
+.match.fit.good{color:color-mix(in srgb,var(--accent) 70%,var(--ink))}
+.sig-rel{color:var(--muted)}
+.sig-fresh{color:var(--accent)}
+.sig-old,.sig-reposted{color:var(--interview)}
+.sig-scam{color:var(--danger)}
+.bars{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.bars i{width:3px;border-radius:2px;background:var(--line)}
+.bars i:nth-child(1){height:5px}.bars i:nth-child(2){height:8px}.bars i:nth-child(3){height:12px}
+.fit.great .bars i,.fit.good .bars i:nth-child(-n+2){background:currentColor}
+
+/* picked jobs: a bar at the bottom */
+.pick-bar{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:10px;
+  background:var(--ink);color:var(--bg);border-radius:16px;padding:10px 12px 10px 18px;box-shadow:0 18px 40px -12px rgba(8,14,18,.5)}
+.pick-bar .btn.ghost{background:transparent;color:var(--bg);border-color:color-mix(in srgb,var(--bg) 35%,transparent)}
+.pick-bar .linkbtn{color:var(--bg);opacity:.8}
+
+@media (max-width:640px){
+  .job{column-gap:12px;padding:16px 14px 12px 14px;border-radius:18px}
+  .job-logo .logo{width:52px;height:52px;border-radius:12px;font-size:1.2rem}
+  .job h3{font-size:1.02rem}
+  /* phones: facts wrap onto a second line, so no divider lines (one would start a line) */
+  .job-meta{gap:6px 16px;font-size:.86rem}
+  .job-meta li{padding:0;border-left:0;gap:6px}
+  .job-meta svg{width:16px;height:16px}
+  .job-foot{grid-column:1/-1}
+  .job-act span{display:none}
+  .job-act{padding:8px}
+  .pick-bar{bottom:calc(84px + env(safe-area-inset-bottom,0px));width:calc(100% - 24px);justify-content:space-between}
+}

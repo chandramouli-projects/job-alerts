@@ -2,10 +2,10 @@
 function renderJobs(){
   const jobs=feed(),chips=activeFilters(),n=chips.length,fresh=jobs.filter(isNew).length;
   let near=[];if(!jobs.length&&F.forYou&&!F.q.trim()){F.forYou=false;near=feed().filter(j=>myRoleHit(j.title,U.prefs));F.forYou=true;}
-  $("main").innerHTML=topbar(`Hi ${esc(U.profile.name.split(" ")[0])}`,`<span style="color:var(--muted);font-size:.82rem">${data.updated?"Updated "+ago(data.updated):""}</span>`)+`
-  <form class="searchbar one" id="searchForm"><input id="q" placeholder="Search by skill, job title or company" value="${esc(F.q)}" aria-label="Search">
-    <button type="button" class="fbtn ${n?"on":""}" data-ftoggle aria-haspopup="dialog" aria-label="Filters${n?` (${n} on)`:""}" data-tip="Filters">${ICON.filter}${n?`<span class="fbadge">${n}</span>`:""}</button>
-    <button class="btn" type="submit">Search</button></form>
+  $("main").innerHTML=topbar(`Hi ${esc(U.profile.name.split(" ")[0])}`)+`
+  <div class="search-row"><button type="button" class="fbtn ${n?"on":""}" data-ftoggle aria-haspopup="dialog" aria-label="Filters${n?` (${n} on)`:""}" data-tip="Filters">${ICON.filter}<span class="fbtn-label">Filters</span>${n?`<span class="fbadge">${n}</span>`:""}</button>
+  <form class="searchbar one" id="searchForm" role="search"><span class="sb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><input id="q" placeholder="Search by skill, job title or company" value="${esc(F.q)}" aria-label="Search">
+    <button class="btn" type="submit">Search</button></form></div>
   <div class="resbar"><span><b style="color:var(--ink)">${jobs.length||near.length}</b> job${(jobs.length||near.length)===1?"":"s"}${jobs.length?(F.forYou&&!F.q.trim()?" for you":""):near.length?" in your role":(F.forYou&&!F.q.trim()?" for you":"")}${Object.keys(searchFixes).length?` · showing results for <b style="color:var(--ink)">${esc(Object.values(searchFixes).join(", "))}</b>`:""}${liveBusy?` · <span style="color:var(--accent)">Searching more jobs…</span>`:""}${fresh?` · <b style="color:var(--accent)">${fresh} new</b> since your last visit`:""}</span>
     ${chips.length?`<div class="fchips">${chips.map(([k,l])=>`<span class="fchip">${esc(l)}<button type="button" data-fdel="${k}" aria-label="Remove ${esc(l)}">×</button></span>`).join("")}${chips.length>1?`<button type="button" class="fclear-all" data-fclear>Clear all</button>`:""}</div>`:""}</div>
   ${savedSearchBar()}

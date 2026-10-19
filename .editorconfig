@@ -1,0 +1,16 @@
+# Same basic rules for every editor: 2 spaces (4 for Python), LF line endings, a newline at the end
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.py]
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false

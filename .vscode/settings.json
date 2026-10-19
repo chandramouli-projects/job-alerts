@@ -1,0 +1,8 @@
+{
+  // Format every file the same way when it is saved
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[python]": { "editor.defaultFormatter": "ms-python.black-formatter" },
+  "files.eol": "\n",
+  "files.insertFinalNewline": true
+}

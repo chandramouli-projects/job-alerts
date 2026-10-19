@@ -15,4 +15,9 @@ async function boot(){
   if(session && accounts[session.email]){ U=LS.get("uv.user."+session.email,null); if(U){ applyTheme(); return U.onboarded?openShell():startOnboarding(); } }
   showAuth("login");
 }
-boot();
+// Loading screen: stays at least 0.9 s from page start so it doesn't just flash, then fades out
+function hideBoot(){
+  const b=$("boot");if(!b)return;
+  setTimeout(()=>{b.classList.add("done");setTimeout(()=>b.remove(),350);},Math.max(0,900-performance.now()));
+}
+boot().finally(hideBoot);
