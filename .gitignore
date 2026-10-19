@@ -7,7 +7,7 @@ __pycache__/
 database/app.db
 database/app.db-*
 database/backups/
-data/
+/data/
 tests/.tmp/*.db
 tests/.tmp/*.db-*
 *.log
