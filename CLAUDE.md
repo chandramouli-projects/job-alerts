@@ -48,6 +48,14 @@ for a static portal, and sends matching ones to Telegram.
     Duplicate jobs (same title + company = same id) are merged into one card with every apply link:
     `merge_duplicate` in `fetch_jobs.py` and `mergeDuplicate` in `js/services/job-store.js` (keep the
     same rules); the collector also sets `reposted` when a known job is posted again 7+ days later.
+  - Notifications: `services/notifications.js` makes notes from data the app already has (application
+    updates from email, new jobs that fit from the bot's jobs.json, saved-search matches, a reminder
+    for saved jobs 2+ days old, a one-time resume tip), keeps them in `U.notifications` (saved with the
+    profile, so read state syncs), checks jobs.json every 10 min and on tab focus, and shows a toast plus
+    an optional system alert (`sw.js` handles the click). `components/notification-center.js` is the
+    bell next to the name and its panel (drop-down; bottom sheet on phones) with per-kind settings.
+    System alerts work while the app is open or in the background; alerts with the app closed need
+    Web Push (not built). Tests: `tests/specs/notifications.spec.js`.
   - Button clicks after login: each screen file registers its own with `onAppClick((d, t, e) => …)`
     (from `helpers.js`); `d` is the clicked button's `data-*`.
   - Matching (`services/matching.js`): roles and skills match whole words with `hasWord()` ("java"
