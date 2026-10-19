@@ -12,7 +12,7 @@
 }
 .rs-head small {
   color: var(--muted);
-  font-size: 0.84rem;
+  font-size: var(--fs-sm);
 }
 
 .rs-drop {
@@ -26,7 +26,7 @@
   border-radius: 14px;
   background: var(--surface2);
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
   text-align: center;
   transition:
     border-color 0.15s,
@@ -40,7 +40,7 @@
 }
 .rs-drop b {
   color: var(--ink);
-  font-size: 0.98rem;
+  font-size: var(--fs-md);
   font-weight: 700;
 }
 .rs-up {
@@ -58,8 +58,8 @@
   background: var(--surface);
 }
 .rs-up svg {
-  width: 22px;
-  height: 22px;
+  width: var(--icon-lg);
+  height: var(--icon-lg);
 }
 
 .rs-file {
@@ -90,7 +90,7 @@
   bottom: 2px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.6rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   letter-spacing: 0.03em;
   background: var(--accent);
@@ -125,7 +125,7 @@
 }
 .rs-name small {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-xs);
 }
 .rs-acts {
   display: flex;
@@ -139,7 +139,7 @@
   gap: 4px 10px;
   flex-wrap: wrap;
   margin-top: 10px;
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 
@@ -160,7 +160,7 @@
   padding: 6px 0;
   border: 0;
   background: none;
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
 }
 .rs-spin {
   width: 18px;
@@ -198,8 +198,8 @@
   gap: 7px;
 }
 .rs-obbtn svg {
-  width: 16px;
-  height: 16px;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
 }
 
 .rs-sub {
@@ -214,7 +214,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 0 8px;
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -235,7 +235,7 @@
   color: var(--ink);
   border-radius: 999px;
   padding: 6px 13px;
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
   font-weight: 600;
 }
 button.rs-chip::before {
@@ -272,8 +272,8 @@ button.rs-chip[aria-pressed="true"]::before {
   border: 1px solid var(--line);
 }
 .rs-note svg {
-  width: 28px;
-  height: 28px;
+  width: var(--icon-lg);
+  height: var(--icon-lg);
   flex: none;
   color: var(--accent);
 }
@@ -284,7 +284,7 @@ button.rs-chip[aria-pressed="true"]::before {
 .rs-note p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
 }
 #resumeErr:empty {
   min-height: 0;

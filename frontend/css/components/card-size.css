@@ -1,0 +1,63 @@
+/* One card size everywhere (loaded after job-card.css and applications.css, so it wins): job cards (Jobs, Saved) and application cards (My jobs) have the same
+   height, width, corners and padding. Each line stays on one line ("…" when longer), so extra text
+   never makes a card taller; the bottom row (Hide/Save, Details) always sits at the bottom. */
+.job,
+.app {
+  height: var(--card-h);
+  overflow: hidden;
+  border-radius: 16px;
+  padding: 14px 16px 10px 16px;
+}
+.job {
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+}
+.job h3,
+.job-co,
+.job-by,
+.job-skills,
+.app h3,
+.app .meta,
+.app-when {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.job-meta,
+.job-when,
+.app-foot {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.job-meta li {
+  flex: none;
+}
+.job-meta li:last-child {
+  flex: 0 1 auto;
+}
+/* phones: the facts may take two lines (still fits the same card height) */
+@media (max-width: 640px) {
+  :root {
+    --card-h: 236px;
+  }
+  .job-meta {
+    flex-wrap: wrap;
+  }
+}
+.job-foot,
+.app-foot {
+  margin-top: auto;
+}
+.app-foot > span:first-child {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-acts {
+  flex-wrap: nowrap;
+  flex: none;
+}

@@ -57,7 +57,7 @@
   background: var(--surface);
 }
 .sheet-head h2 {
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
 }
 .sheet-body {
   overflow: auto;
@@ -80,7 +80,7 @@
 }
 .desc {
   white-space: pre-wrap;
-  font-size: 0.94rem;
+  font-size: var(--fs-md);
   line-height: 1.6;
   color: var(--ink);
 }
@@ -88,14 +88,14 @@
   margin: 0;
   padding-left: 18px;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: var(--fs-md);
 }
 .why li.ok {
   color: var(--accent);
 }
 .miss {
   margin: 10px 0 0;
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 .miss b {
@@ -112,7 +112,7 @@
   background: var(--surface);
   border-radius: 999px;
   padding: 7px 12px;
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -132,7 +132,7 @@
   list-style: none;
   margin: 10px 0 0;
   padding: 0;
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 .tl li {
@@ -145,7 +145,7 @@
   margin-bottom: 20px;
 }
 .filter-group h3 {
-  font-size: 0.95rem;
+  font-size: var(--fs-md);
   margin-bottom: 10px;
 }
 .cos {
@@ -186,8 +186,7 @@
   background: var(--surface);
 }
 .sheet-head h2 {
-  font-family: Figtree, sans-serif;
-  font-size: 0.74rem;
+  font-size: var(--fs-xs);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -196,7 +195,7 @@
 .sheet-head .x {
   width: 32px;
   height: 32px;
-  font-size: 1.2rem;
+  font-size: var(--fs-xl);
   border-radius: 8px;
 }
 .sheet-body {
@@ -213,11 +212,10 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  font-size: 1.05rem;
+  font-size: var(--fs-lg);
 }
 .jd-title h2 {
-  font-family: Figtree, sans-serif;
-  font-size: 1.12rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   line-height: 1.3;
   margin: 0 0 2px;
@@ -228,7 +226,7 @@
   background: none;
   padding: 0;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
   color: var(--accent);
   text-align: left;
 }
@@ -242,11 +240,11 @@
   gap: 5px;
   margin-top: 2px;
   color: var(--muted);
-  font-size: 0.84rem;
+  font-size: var(--fs-sm);
 }
 .jd-where svg {
-  width: 14px;
-  height: 14px;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
   flex: none;
 }
 .jd-facts {
@@ -257,7 +255,7 @@
   flex-wrap: wrap;
   gap: 6px 16px;
   color: var(--muted);
-  font-size: 0.84rem;
+  font-size: var(--fs-sm);
 }
 .jd-facts li {
   display: inline-flex;
@@ -266,8 +264,8 @@
   min-width: 0;
 }
 .jd-facts svg {
-  width: 14px;
-  height: 14px;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
   flex: none;
 }
 .jd-facts .t {
@@ -286,7 +284,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   background: none;
   padding: 0;
@@ -306,8 +304,7 @@
   margin-top: 14px;
 }
 .sheet-body .card h3 {
-  font-family: Figtree, sans-serif;
-  font-size: 0.72rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -319,7 +316,7 @@
   letter-spacing: 0;
 }
 .sheet-body .insights {
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
   gap: 8px;
 }
 .sheet-body .insights li {
@@ -337,7 +334,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
 }
 .why li i {
   width: 18px;
@@ -347,7 +344,7 @@
   display: grid;
   place-items: center;
   font-style: normal;
-  font-size: 0.62rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   background: var(--surface2);
   color: var(--muted);
@@ -364,23 +361,23 @@
   color: var(--danger);
 }
 .sheet-body .desc {
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   line-height: 1.65;
   color: color-mix(in srgb, var(--ink) 88%, var(--muted));
 }
 .sheet-body .btn.sm {
   padding: 6px 12px;
-  font-size: 0.82rem;
+  font-size: var(--fs-xs);
 }
 .sheet-body #notes {
   min-height: 72px;
   border-radius: 10px;
   background: var(--surface2);
   border: 1px solid var(--line);
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
 }
 .sheet-body .lbl {
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
 }
 /* bottom: small buttons on the right */
 .sheet-foot {
@@ -403,7 +400,7 @@
   display: inline-flex;
   align-items: center;
   border-radius: 10px;
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
 }
 .sheet-foot .apply::after {
   content: " ↗";
@@ -412,7 +409,7 @@
 .sheet-foot .applied-bar {
   flex: 0 1 auto;
   padding: 8px 12px;
-  font-size: 0.84rem;
+  font-size: var(--fs-sm);
   border-radius: 10px;
   margin-right: auto;
 }
@@ -460,8 +457,8 @@
   transition: color 0.15s;
 }
 .jd-save svg {
-  width: 18px;
-  height: 18px;
+  width: var(--icon-md);
+  height: var(--icon-md);
 }
 .jd-save:hover {
   color: var(--accent);

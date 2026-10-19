@@ -10,7 +10,7 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <!-- Styles: css/base (shared), css/components (parts used on many screens), css/pages (one per screen).
@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="css/components/job-details.css" />
     <link rel="stylesheet" href="css/pages/my-jobs.css" />
     <link rel="stylesheet" href="css/components/applications.css" />
+    <link rel="stylesheet" href="css/components/card-size.css" />
     <link rel="stylesheet" href="css/components/progress.css" />
     <link rel="stylesheet" href="css/pages/profile.css" />
     <link rel="stylesheet" href="css/components/resume-upload.css" />
@@ -40,6 +41,7 @@
     <link rel="stylesheet" href="css/components/notifications.css" />
     <link rel="stylesheet" href="css/components/mail-connect.css" />
     <link rel="stylesheet" href="css/components/hidden-jobs.css" />
+    <link rel="stylesheet" href="css/components/tooltip.css" />
   </head>
   <body>
     <!-- ================= LOADING (shown until the app knows which screen to open) ================= -->
@@ -304,7 +306,7 @@
           </div>
           <div data-fp="4" hidden style="text-align: center">
             <div class="modal-ico" style="margin: 0 auto 16px">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                 <path d="M5 12.5l4.5 4.5L19 7.5" />
               </svg>
             </div>
@@ -350,7 +352,7 @@
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2.6"
+              stroke-width="1.8"
               stroke-linecap="round"
               stroke-linejoin="round"
             >
@@ -374,6 +376,7 @@
     <script src="js/core/constants.js"></script>
     <script src="js/core/helpers.js"></script>
     <script src="js/core/state.js"></script>
+    <script src="js/components/tooltip.js"></script>
     <script src="js/components/header.js"></script>
     <script src="js/components/password-field.js"></script>
     <script src="js/pages/login.js"></script>

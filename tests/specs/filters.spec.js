@@ -310,3 +310,14 @@ test.describe("Together", () => {
     await expectJobs(page, ["f1", "f4"]); // Jobs for me: QA, 3 years, last 7 days
   });
 });
+
+test("TC-F-21 Best fit shows fresh jobs first: last 24 hours, then 3 days, then older", async ({ page, request }) => {
+  await open(page, request);
+  await pick(page, "f_forYou", 0);
+  await pick(page, "f_days", 21);
+  const age = Object.fromEntries(JOBS.map(j => [j.title, (Date.now() - new Date(j.posted)) / 36e5]));
+  const bucket = t => (age[t] <= 24 ? 0 : age[t] <= 72 ? 1 : 2);
+  const order = (await page.locator("#main .job h3").allTextContents()).map(bucket);
+  expect(order).toEqual([...order].sort((a, b) => a - b));
+  expect(order[0]).toBe(0);
+});

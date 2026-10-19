@@ -101,12 +101,18 @@ function feed() {
     out.push({ ...j, _e: ev, _rel: !exact, _t: tasteScore(j, tw) + insightBoost(j) }); // insightBoost: services/job-insights.js
   }
   // exact matches first, then related ones
+  // Best fit: fresh jobs first (posted in the last 24 hours, then 3 days, then older), best fit inside each
+  const fresh = j => {
+    const d = (Date.now() - new Date(when(j))) / 864e5;
+    return d <= 1 ? 0 : d <= 3 ? 1 : 2;
+  };
   out.sort(
     (a, b) =>
       a._rel - b._rel ||
       (F.sort === "new"
         ? new Date(when(b)) - new Date(when(a))
-        : isNew(b) - isNew(a) ||
+        : fresh(a) - fresh(b) ||
+          isNew(b) - isNew(a) ||
           b._e.score + b._t - a._e.score - a._t ||
           new Date(when(b)) - new Date(when(a)))
   );

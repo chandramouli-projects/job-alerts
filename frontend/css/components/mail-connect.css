@@ -20,27 +20,27 @@
   color: var(--accent);
 }
 .mc-ico svg {
-  width: 24px;
-  height: 24px;
+  width: var(--icon-lg);
+  height: var(--icon-lg);
 }
 .mc-txt {
   min-width: 0;
 }
 .mc-txt h3 {
-  font-size: 1.02rem;
+  font-size: var(--fs-lg);
   margin: 0 0 4px;
 }
 .mc-txt p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
   line-height: 1.5;
 }
 .mc-txt small {
   display: block;
   margin-top: 6px;
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
 }
 .mail-connect .btn {
   white-space: nowrap;
@@ -52,8 +52,8 @@
   min-width: 0;
 }
 .mailbar .mb-txt svg {
-  width: 18px;
-  height: 18px;
+  width: var(--icon-md);
+  height: var(--icon-md);
   flex: none;
   color: var(--accent);
 }

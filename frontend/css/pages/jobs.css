@@ -41,7 +41,7 @@
   background: var(--surface);
   border-radius: 999px;
   padding: 7px 13px;
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -73,14 +73,14 @@
   gap: 8px 12px;
   margin: 4px 2px 12px;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
 }
 .resbar select {
   border: 1px solid var(--line);
   background: var(--surface);
   border-radius: 10px;
   padding: 6px 10px;
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
 }
 
 /* Search bar: one rounded bar with a search icon, the filter button and Search inside it */
@@ -111,8 +111,8 @@
   flex: none;
 }
 .searchbar.one .sb-icon svg {
-  width: 18px;
-  height: 18px;
+  width: var(--icon-md);
+  height: var(--icon-md);
 }
 .searchbar.one input {
   flex: 1;
@@ -121,7 +121,7 @@
   border: 0;
   background: none;
   padding: 0 6px;
-  font-size: 0.95rem;
+  font-size: var(--fs-md);
   border-radius: 0;
 }
 .searchbar.one input:focus,
@@ -144,7 +144,7 @@
   flex: none;
   padding: 0 20px;
   border-radius: 999px;
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
 }
 @media (max-width: 560px) {
   .searchbar.one {

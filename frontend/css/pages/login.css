@@ -36,7 +36,7 @@ body:has(#auth:not([hidden])) .auth {
 }
 .auth-side .brand {
   color: inherit;
-  font-size: 1.4rem;
+  font-size: var(--fs-xl);
 }
 .auth-side .brand-logo {
   width: 44px;
@@ -50,7 +50,7 @@ body:has(#auth:not([hidden])) .auth {
   border-radius: 12px;
 }
 .auth-side h1 {
-  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  font-size: var(--fs-3xl);
   font-weight: 800;
   letter-spacing: -0.02em;
   max-width: 16ch;
@@ -78,7 +78,7 @@ body:has(#auth:not([hidden])) .auth {
   max-width: 460px;
 }
 .auth-card h2 {
-  font-size: 1.9rem;
+  font-size: var(--fs-3xl);
   margin-bottom: 22px;
 }
 .auth-card h2:has(+ .sub) {
@@ -176,5 +176,5 @@ body:has(#auth:not([hidden])) .auth {
   border-top: 1px solid var(--line);
   text-align: center;
   color: var(--muted);
-  font-size: 0.84rem;
+  font-size: var(--fs-sm);
 }

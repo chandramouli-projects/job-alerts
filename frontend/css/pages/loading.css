@@ -50,8 +50,8 @@
   animation: boot-pulse 1.6s ease-in-out infinite;
 }
 .boot-icon svg {
-  width: 24px;
-  height: 24px;
+  width: var(--icon-lg);
+  height: var(--icon-lg);
 }
 @keyframes boot-turn {
   to {

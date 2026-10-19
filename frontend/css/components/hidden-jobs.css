@@ -8,7 +8,7 @@
   background: none;
   color: var(--accent-soft);
   font-weight: 800;
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
   padding: 6px 10px;
   border-radius: 8px;
   cursor: pointer;
@@ -30,7 +30,7 @@
 }
 .hj-sub {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
   margin: 0 0 12px;
 }
 .hj-list {
@@ -52,7 +52,7 @@
 .hj-row .logo {
   width: 42px;
   height: 42px;
-  font-size: 1rem;
+  font-size: var(--fs-lg);
 }
 .hj-txt {
   min-width: 0;
@@ -67,7 +67,7 @@
 }
 .hj-txt span {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -81,7 +81,7 @@ function jobCard(j, opt = {}) {
       : `Posted on ${j.source || "a job site"}`;
   const tags = `${fresh ? `<span class="sig sig-new"><i class="dot"></i>New</span>` : ""}${fl ? `<span class="match fit ${fl === "Great fit" ? "great" : "good"}" title="How well it fits your role, experience and city">${fl}</span>` : ""}${j._rel ? `<span class="sig sig-rel">Related</span>` : ""}${insightBadges(j)}${st && opt.showStage !== false ? `<span class="status-pill" style="color:${st[2]}">${st[1]}</span>` : ""}`;
   return `<article class="job ${st ? "tracked" : ""} ${picked.has(j.id) ? "picked" : ""}" data-open="${esc(j.id)}" tabindex="0">
-    <label class="job-pick" title="Select"><input type="checkbox" data-pick="${esc(j.id)}" ${picked.has(j.id) ? "checked" : ""} aria-label="Select ${esc(j.title)}"></label>
+    <label class="job-pick" data-tip="Select"><input type="checkbox" data-pick="${esc(j.id)}" ${picked.has(j.id) ? "checked" : ""} aria-label="Select ${esc(j.title)}"></label>
     <div class="job-main">
       <h3>${esc(j.title)}</h3>
       <div class="job-co">${esc(j.company)}</div>
@@ -108,8 +108,12 @@ document.body.appendChild(pickBar);
 function renderPickBar() {
   pickBar.hidden = !picked.size || $("shell").hidden;
   if (pickBar.hidden) return;
-  pickBar.innerHTML = `<b>${picked.size} selected</b><button type="button" class="btn sm" data-picksave>Save</button>
-    <button type="button" class="btn ghost sm" data-pickhide>Hide</button><button type="button" class="linkbtn" data-pickclear>Clear</button>`;
+  pickBar.innerHTML = `<span class="pb-count"><b>${picked.size}</b> selected</span>
+    <span class="pb-acts">
+      <button type="button" class="pb-btn primary" data-picksave>${ICON.bookmark}<span>Save</span></button>
+      <button type="button" class="pb-btn" data-pickhide>${CARD_ICON.hide}<span>Hide</span></button>
+    </span>
+    <button type="button" class="pb-x" data-pickclear aria-label="Clear selection" data-tip="Clear selection">×</button>`;
 }
 function clearPicks() {
   picked.clear();

@@ -1,0 +1,48 @@
+/* The app's tooltip (js/components/tooltip.js): small dark label with an arrow, fades in */
+.tip {
+  position: fixed;
+  z-index: 200;
+  max-width: 260px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #1f2a30;
+  color: #fff;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 24px -8px rgba(8, 14, 18, 0.45);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(3px);
+  transition:
+    opacity 0.14s ease,
+    transform 0.14s ease;
+}
+.tip.below {
+  transform: translateY(-3px);
+}
+.tip.on {
+  opacity: 1;
+  transform: none;
+}
+/* the arrow, pointing at the element */
+.tip::after {
+  content: "";
+  position: absolute;
+  left: var(--arrow, 50%);
+  top: 100%;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: 1px;
+}
+.tip.below::after {
+  top: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tip {
+    transition: none;
+  }
+}

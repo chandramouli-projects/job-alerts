@@ -3,8 +3,8 @@
   position: relative;
 }
 .np-bell svg {
-  width: 19px;
-  height: 19px;
+  width: var(--icon-md);
+  height: var(--icon-md);
 }
 .np-bell[aria-expanded="true"] {
   border-color: var(--accent);
@@ -21,7 +21,7 @@
   border-radius: 999px;
   background: var(--danger);
   color: #fff;
-  font-size: 0.7rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   line-height: 19px;
   text-align: center;
@@ -66,7 +66,7 @@
   padding: 14px 12px 10px 18px;
 }
 .np-head h2 {
-  font-size: 1.1rem;
+  font-size: var(--fs-lg);
   margin: 0;
   flex: 1;
 }
@@ -76,8 +76,8 @@
   border-radius: 10px;
 }
 .np-head .icon-btn svg {
-  width: 17px;
-  height: 17px;
+  width: var(--icon-md);
+  height: var(--icon-md);
 }
 .np-acts {
   display: flex;
@@ -101,7 +101,7 @@
   color: var(--ink);
   border-radius: 999px;
   padding: 5px 12px;
-  font-size: 0.84rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -116,7 +116,7 @@
   background: var(--danger);
   color: #fff;
   border-radius: 999px;
-  font-size: 0.7rem;
+  font-size: var(--fs-2xs);
   padding: 0 6px;
   line-height: 17px;
 }
@@ -127,7 +127,7 @@
   padding: 4px 8px 10px;
 }
 .np-group {
-  font-size: 0.72rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -165,7 +165,7 @@
 }
 .np-txt b {
   font-weight: 600;
-  font-size: 0.93rem;
+  font-size: var(--fs-md);
   line-height: 1.3;
 }
 .np-item.unread .np-txt b {
@@ -173,13 +173,13 @@
 }
 .np-txt span {
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
   line-height: 1.4;
   overflow-wrap: anywhere;
 }
 .np-txt small {
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: var(--fs-xs);
   margin-top: 2px;
 }
 .np-dot {
@@ -200,8 +200,8 @@
   color: var(--accent);
 }
 .np-ico svg {
-  width: 19px;
-  height: 19px;
+  width: var(--icon-md);
+  height: var(--icon-md);
 }
 .k-search {
   background: color-mix(in srgb, var(--applied) 14%, transparent);
@@ -241,7 +241,7 @@
   gap: 6px;
   padding: 36px 24px 30px;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
 }
 .np-empty .np-ico {
   width: 52px;
@@ -250,12 +250,12 @@
   margin-bottom: 6px;
 }
 .np-empty .np-ico svg {
-  width: 24px;
-  height: 24px;
+  width: var(--icon-lg);
+  height: var(--icon-lg);
 }
 .np-empty b {
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-lg);
 }
 
 .np-sets {
@@ -278,11 +278,11 @@
 .np-set b {
   display: block;
   font-weight: 600;
-  font-size: 0.93rem;
+  font-size: var(--fs-md);
 }
 .np-set small {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-xs);
 }
 .np-set .btn {
   flex: none;

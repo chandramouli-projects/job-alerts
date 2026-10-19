@@ -14,7 +14,7 @@
   padding: 26px 24px 22px;
 }
 .ob h1 {
-  font-size: clamp(1.6rem, 5vw, 2.1rem);
+  font-size: var(--fs-3xl);
 }
 .ob-top {
   margin-bottom: 20px;
@@ -27,7 +27,7 @@
   margin-bottom: 16px;
 }
 .q > .lbl {
-  font-size: 0.95rem;
+  font-size: var(--fs-md);
 }
 .ob-top {
   display: flex;
@@ -82,7 +82,7 @@
   background: var(--accent-soft);
   color: var(--accent);
   font-weight: 700;
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
   border-radius: 999px;
   padding: 3px 3px 3px 11px;
 }
@@ -95,7 +95,7 @@
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 1.05rem;
+  font-size: var(--fs-lg);
   line-height: 1;
   padding: 0;
 }
@@ -167,7 +167,7 @@
 }
 .pk-opt small {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -206,7 +206,7 @@
   color: var(--muted);
   text-align: center;
   margin: 10px 0;
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
 }
 .ob-go {
   width: 100%;
