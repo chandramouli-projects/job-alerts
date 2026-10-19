@@ -1,8 +1,36 @@
 /* Labels and tips from js/services/job-insights.js: scam warning, posting age, typical salary */
-.match.scam{background:color-mix(in srgb,var(--danger) 14%,transparent);color:var(--danger)}
-.match.age-fresh{background:var(--accent-soft);color:var(--accent)}
-.match.age-old,.match.age-reposted{background:color-mix(in srgb,var(--interview) 16%,transparent);color:var(--interview)}
-.insights{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:.92rem;color:var(--ink)}
-.insights li{padding:10px 12px;border-radius:12px;background:var(--surface2);line-height:1.45}
-.insights li.bad{background:color-mix(in srgb,var(--danger) 10%,transparent);color:var(--danger)}
-.insights li.ok{background:var(--accent-soft)}
+.match.scam {
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  color: var(--danger);
+}
+.match.age-fresh {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.match.age-old,
+.match.age-reposted {
+  background: color-mix(in srgb, var(--interview) 16%, transparent);
+  color: var(--interview);
+}
+.insights {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+.insights li {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface2);
+  line-height: 1.45;
+}
+.insights li.bad {
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+  color: var(--danger);
+}
+.insights li.ok {
+  background: var(--accent-soft);
+}

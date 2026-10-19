@@ -1,7 +1,46 @@
 /* Top bar with the logo and the logged-in person (hidden on the login page) */
-.headwrap{position:sticky;top:0;z-index:40;padding:16px 16px 0;background:var(--bg)}
-.apphead{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px;padding:0 12px 0 16px;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 30px rgba(8,14,18,.06)}
-.head-r{display:flex;align-items:center;gap:10px}
-.head-r .avatar{width:36px;height:36px;font-size:.85rem}
-.head-r .who{font-weight:600;font-size:.92rem}
-@media (max-width:560px){.headwrap{padding:10px 10px 0}.apphead{height:56px;border-radius:18px}.head-r .who{display:none}}
+.headwrap {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  padding: 16px 16px 0;
+  background: var(--bg);
+}
+.apphead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 60px;
+  padding: 0 12px 0 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(8, 14, 18, 0.06);
+}
+.head-r {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.head-r .avatar {
+  width: 36px;
+  height: 36px;
+  font-size: 0.85rem;
+}
+.head-r .who {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+@media (max-width: 560px) {
+  .headwrap {
+    padding: 10px 10px 0;
+  }
+  .apphead {
+    height: 56px;
+    border-radius: 18px;
+  }
+  .head-r .who {
+    display: none;
+  }
+}

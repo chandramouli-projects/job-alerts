@@ -2,8 +2,8 @@ name: Find my jobs
 
 on:
   schedule:
-    - cron: "30 1,4,7,10,13,16 * * *"   # 7 AM, 10 AM, 1 PM, 4 PM, 7 PM, 10 PM IST
-  workflow_dispatch:                    # "Run workflow" button; optional search text
+    - cron: "30 1,4,7,10,13,16 * * *" # 7 AM, 10 AM, 1 PM, 4 PM, 7 PM, 10 PM IST
+  workflow_dispatch: # "Run workflow" button; optional search text
     inputs:
       query:
         description: "Search for (e.g. QA Testing jobs in Hyderabad). Leave empty for the normal search."
@@ -32,7 +32,7 @@ jobs:
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           JOOBLE_KEY: ${{ secrets.JOOBLE_KEY }}
-          NOTIFY_URL: https://udyogam-vetuku.pages.dev/api/push/run   # alerts with the app closed
+          NOTIFY_URL: https://udyogam-vetuku.pages.dev/api/push/run # alerts with the app closed
           NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

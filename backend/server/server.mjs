@@ -24,17 +24,28 @@ const FRONTEND = join(ROOT, "frontend");
 // DB_FILE / ENV_FILE let the automated tests use their own database and no API keys
 const DB_FILE = process.env.DB_FILE || join(ROOT, "database", "app.db");
 const PORT = +(process.argv[2] || process.env.PORT || 8080);
-const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json; charset=utf-8",
-  ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".svg": "image/svg+xml", ".ico": "image/x-icon",
-  ".webmanifest": "application/manifest+json" };
+const TYPES = {
+  ".html": "text/html; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".js": "text/javascript",
+  ".css": "text/css",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
+  ".webmanifest": "application/manifest+json",
+};
 
 function env() {
-  const out = {}, f = process.env.ENV_FILE || join(ROOT, ".env");
+  const out = {},
+    f = process.env.ENV_FILE || join(ROOT, ".env");
   if (!existsSync(f)) return out;
   for (const line of readFileSync(f, "utf8").split(/\r?\n/)) {
     const i = line.indexOf("=");
     if (i > 0 && !line.trim().startsWith("#")) {
-      const v = line.slice(i + 1).trim().replace(/^["']|["']$/g, "");
+      const v = line
+        .slice(i + 1)
+        .trim()
+        .replace(/^["']|["']$/g, "");
       if (v) out[line.slice(0, i).trim()] = v;
     }
   }
@@ -43,30 +54,42 @@ function env() {
 
 // Stand-in for Cloudflare's cache, kept in memory while this runs
 const store = new Map();
-globalThis.caches = { default: {
-  async match(req) {
-    const e = store.get(req.url);
-    return e && e.until > Date.now() ? new Response(e.body) : undefined;
+globalThis.caches = {
+  default: {
+    async match(req) {
+      const e = store.get(req.url);
+      return e && e.until > Date.now() ? new Response(e.body) : undefined;
+    },
+    async put(req, res) {
+      const age = +((res.headers.get("Cache-Control") || "").match(/max-age=(\d+)/)?.[1] || 0);
+      store.set(req.url, { body: await res.text(), until: Date.now() + age * 1000 });
+    },
   },
-  async put(req, res) {
-    const age = +((res.headers.get("Cache-Control") || "").match(/max-age=(\d+)/)?.[1] || 0);
-    store.set(req.url, { body: await res.text(), until: Date.now() + age * 1000 });
-  },
-} };
+};
 
 /* ---------------------------------------------------------------- accounts */
 // accounts, saved data and sessions live in SQLite tables; the old data/users.json is imported once
-const database = openDatabase({ file: DB_FILE, legacyFile: process.env.DB_FILE ? null : join(ROOT, "data", "users.json") });
+const database = openDatabase({
+  file: DB_FILE,
+  legacyFile: process.env.DB_FILE ? null : join(ROOT, "data", "users.json"),
+});
 const db = database.load();
 const saveDb = () => database.save(db);
-const RESUME_TYPES = { ".pdf": "application/pdf", ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document", ".txt": "text/plain; charset=utf-8" };
+const RESUME_TYPES = {
+  ".pdf": "application/pdf",
+  ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ".txt": "text/plain; charset=utf-8",
+};
 const RESUME_MAX = 2 * 1024 * 1024;
 const hash = (pw, salt) => scryptSync(pw, salt, 32).toString("hex");
 function checkPw(a, pw) {
   const h = Buffer.from(hash(pw, a.salt), "hex");
   return h.length === Buffer.from(a.hash, "hex").length && timingSafeEqual(h, Buffer.from(a.hash, "hex"));
 }
-function setPw(a, pw) { a.salt = randomBytes(16).toString("hex"); a.hash = hash(pw, a.salt); }
+function setPw(a, pw) {
+  a.salt = randomBytes(16).toString("hex");
+  a.hash = hash(pw, a.salt);
+}
 function newSession(email) {
   const token = randomBytes(32).toString("hex");
   db.sessions[token] = { email, at: Date.now() };
@@ -81,21 +104,31 @@ db.mail ||= {};
 // application statuses read from Gmail every 15 minutes (track_mail.py)
 const mail = createMailSync({ root: ROOT, db, saveDb, env });
 let lastMailAsk = 0;
-const fails = new Map();     // email -> recent wrong passwords, to slow down guessing
-const resets = new Map();    // email -> reset PIN from "Forgot password", 10 minutes, 5 tries
+const fails = new Map(); // email -> recent wrong passwords, to slow down guessing
+const resets = new Map(); // email -> reset PIN from "Forgot password", 10 minutes, 5 tries
 
 async function api(req, path) {
   let body = {};
   if (req.method !== "GET") {
-    try { body = JSON.parse(await readBody(req) || "{}") || {}; }
-    catch (e) { return e.status === 413 ? [413, { error: "This is too big to save." }] : [400, { error: "The request was not valid." }]; }
+    try {
+      body = JSON.parse((await readBody(req)) || "{}") || {};
+    } catch (e) {
+      return e.status === 413
+        ? [413, { error: "This is too big to save." }]
+        : [400, { error: "The request was not valid." }];
+    }
   }
   if (path === "ping") return [200, { ok: true }];
   if (path === "signup") {
-    const email = String(body.email || "").trim().toLowerCase(), name = String(body.name || "").trim();
+    const email = String(body.email || "")
+        .trim()
+        .toLowerCase(),
+      name = String(body.name || "").trim();
     const pw = String(body.password || "");
-    if (!name || !/^\S+@\S+\.\S+$/.test(email) || pw.length < 6) return [400, { error: "Fill your name, a valid email and a 6+ character password." }];
-    if (db.accounts[email]) return [409, { error: "An account with this email already exists. Log in instead." }];
+    if (!name || !/^\S+@\S+\.\S+$/.test(email) || pw.length < 6)
+      return [400, { error: "Fill your name, a valid email and a 6+ character password." }];
+    if (db.accounts[email])
+      return [409, { error: "An account with this email already exists. Log in instead." }];
     const a = { name, createdAt: Date.now() };
     setPw(a, pw);
     db.accounts[email] = a;
@@ -104,9 +137,13 @@ async function api(req, path) {
     return [200, { token, name }];
   }
   if (path === "login") {
-    const email = String(body.email || "").trim().toLowerCase(), a = db.accounts[email];
+    const email = String(body.email || "")
+        .trim()
+        .toLowerCase(),
+      a = db.accounts[email];
     const f = fails.get(email) || { n: 0, at: 0 };
-    if (f.n >= 5 && Date.now() - f.at < 60_000) return [429, { error: "Too many tries. Wait a minute and try again." }];
+    if (f.n >= 5 && Date.now() - f.at < 60_000)
+      return [429, { error: "Too many tries. Wait a minute and try again." }];
     if (!a || !checkPw(a, String(body.password || ""))) {
       fails.set(email, { n: f.n + 1, at: Date.now() });
       return [401, { error: "Email or password is wrong." }];
@@ -118,26 +155,39 @@ async function api(req, path) {
   }
   if (path === "forgot") {
     // The app shows the PIN on screen (no email service), so anyone who knows an email can reset it
-    const email = String(body.email || "").trim().toLowerCase();
+    const email = String(body.email || "")
+      .trim()
+      .toLowerCase();
     if (!db.accounts[email]) return [404, { error: "No account with this email." }];
     const last = resets.get(email);
-    if (last && Date.now() - last.at < 15_000) return [429, { error: "Wait a few seconds before getting a new PIN." }];
+    if (last && Date.now() - last.at < 15_000)
+      return [429, { error: "Wait a few seconds before getting a new PIN." }];
     const pin = String(randomInt(0, 1_000_000)).padStart(6, "0");
     resets.set(email, { pin, at: Date.now(), tries: 0 });
     return [200, { pin }];
   }
   if (path === "verify" || path === "reset") {
     // "verify" only checks the PIN (step 2 of the app); "reset" checks it again and sets the password
-    const email = String(body.email || "").trim().toLowerCase(), r = resets.get(email), a = db.accounts[email];
-    if (!a || !r || Date.now() - r.at > 600_000) return [400, { error: "This PIN has expired. Get a new PIN." }];
+    const email = String(body.email || "")
+        .trim()
+        .toLowerCase(),
+      r = resets.get(email),
+      a = db.accounts[email];
+    if (!a || !r || Date.now() - r.at > 600_000)
+      return [400, { error: "This PIN has expired. Get a new PIN." }];
     if (String(body.pin || "").trim() !== r.pin) {
-      if (++r.tries >= 5) { resets.delete(email); return [429, { error: "Too many wrong PINs. Get a new PIN." }]; }
+      if (++r.tries >= 5) {
+        resets.delete(email);
+        return [429, { error: "Too many wrong PINs. Get a new PIN." }];
+      }
       return [400, { error: `Wrong PIN. ${5 - r.tries} tries left.` }];
     }
     if (path === "verify") return [200, { ok: true }];
-    if (String(body.password || "").length < 6) return [400, { error: "New password needs at least 6 characters." }];
+    if (String(body.password || "").length < 6)
+      return [400, { error: "New password needs at least 6 characters." }];
     setPw(a, String(body.password));
-    resets.delete(email); fails.delete(email);
+    resets.delete(email);
+    fails.delete(email);
     for (const [t, s] of Object.entries(db.sessions)) if (s.email === email) delete db.sessions[t];
     saveDb();
     return [200, { ok: true }];
@@ -147,7 +197,8 @@ async function api(req, path) {
   if (path.startsWith("push/")) return [503, { error: "Alerts with the app closed work on the live site." }];
   const email = sessionEmail(req);
   if (!email) return [401, { error: "Please log in again." }];
-  if (path === "user" && req.method === "GET") return [200, { name: db.accounts[email].name, user: db.users[email] || null }];
+  if (path === "user" && req.method === "GET")
+    return [200, { name: db.accounts[email].name, user: db.users[email] || null }];
   if (path === "user" && req.method === "PUT") {
     db.users[email] = body;
     if (body.profile?.name) db.accounts[email].name = body.profile.name;
@@ -156,7 +207,10 @@ async function api(req, path) {
   }
   if (path === "resume" && req.method === "PUT") {
     // the app sends { name, type, data: base64 }; the file comes back from GET /api/resume
-    const name = String(body.name || "").trim().slice(0, 120), type = RESUME_TYPES[extname(name).toLowerCase()];
+    const name = String(body.name || "")
+        .trim()
+        .slice(0, 120),
+      type = RESUME_TYPES[extname(name).toLowerCase()];
     const data = Buffer.from(String(body.data || ""), "base64");
     if (!type) return [400, { error: "Upload a PDF or Word (.docx) file." }];
     if (!data.length) return [400, { error: "This file is empty." }];
@@ -171,7 +225,9 @@ async function api(req, path) {
   }
   if (path === "user" && req.method === "DELETE") {
     database.resume.remove(email);
-    delete db.accounts[email]; delete db.users[email]; delete db.mail[email];
+    delete db.accounts[email];
+    delete db.users[email];
+    delete db.mail[email];
     for (const [t, s] of Object.entries(db.sessions)) if (s.email === email) delete db.sessions[t];
     saveDb();
     return [200, { ok: true }];
@@ -179,7 +235,8 @@ async function api(req, path) {
   if (path === "password") {
     const a = db.accounts[email];
     if (!checkPw(a, String(body.old || ""))) return [400, { error: "Current password is wrong." }];
-    if (String(body.new || "").length < 6) return [400, { error: "New password needs at least 6 characters." }];
+    if (String(body.new || "").length < 6)
+      return [400, { error: "New password needs at least 6 characters." }];
     setPw(a, String(body.new));
     saveDb();
     return [200, { ok: true }];
@@ -187,7 +244,8 @@ async function api(req, path) {
   if (path === "mail" && req.method === "GET") return [200, mail.status(email)];
   if (path === "mail/sync") {
     if (!mail.status(email).connected) return [403, { error: "Gmail is not connected for this account." }];
-    if (Date.now() - lastMailAsk < +(process.env.MAIL_SYNC_GAP_MS ?? 60_000)) return [429, { error: "Checked less than a minute ago. Try again soon." }];
+    if (Date.now() - lastMailAsk < +(process.env.MAIL_SYNC_GAP_MS ?? 60_000))
+      return [429, { error: "Checked less than a minute ago. Try again soon." }];
     lastMailAsk = Date.now();
     await mail.run();
     return [200, mail.status(email)];
@@ -203,9 +261,17 @@ async function api(req, path) {
 function readBody(req) {
   return new Promise((ok, fail) => {
     // a body over 5 MB is read to the end but thrown away, so the app still gets a 413 answer
-    let s = "", big = false;
-    req.on("data", c => { if (big) return; s += c; if (s.length > 5e6) { big = true; s = ""; } });
-    req.on("end", () => big ? fail(Object.assign(new Error("too big"), { status: 413 })) : ok(s));
+    let s = "",
+      big = false;
+    req.on("data", c => {
+      if (big) return;
+      s += c;
+      if (s.length > 5e6) {
+        big = true;
+        s = "";
+      }
+    });
+    req.on("end", () => (big ? fail(Object.assign(new Error("too big"), { status: 413 })) : ok(s)));
     req.on("error", fail);
   });
 }
@@ -214,17 +280,32 @@ function readBody(req) {
 createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
   try {
-    if (url.pathname === "/api/resume" && req.method === "GET") {   // the file itself, only to its owner
-      const email = sessionEmail(req), r = email && database.resume.get(email);
-      if (!r) { res.writeHead(email ? 404 : 401, { "Content-Type": "application/json; charset=utf-8" }).end(JSON.stringify({ error: email ? "No resume uploaded." : "Please log in again." })); return; }
-      res.writeHead(200, { "Content-Type": r.file_type, "Content-Length": r.data.length, "Cache-Control": "no-store",
-        "Content-Disposition": `inline; filename*=UTF-8''${encodeURIComponent(r.file_name)}`, "X-Content-Type-Options": "nosniff" });
+    if (url.pathname === "/api/resume" && req.method === "GET") {
+      // the file itself, only to its owner
+      const email = sessionEmail(req),
+        r = email && database.resume.get(email);
+      if (!r) {
+        res
+          .writeHead(email ? 404 : 401, { "Content-Type": "application/json; charset=utf-8" })
+          .end(JSON.stringify({ error: email ? "No resume uploaded." : "Please log in again." }));
+        return;
+      }
+      res.writeHead(200, {
+        "Content-Type": r.file_type,
+        "Content-Length": r.data.length,
+        "Cache-Control": "no-store",
+        "Content-Disposition": `inline; filename*=UTF-8''${encodeURIComponent(r.file_name)}`,
+        "X-Content-Type-Options": "nosniff",
+      });
       res.end(Buffer.from(r.data));
       return;
     }
     if (url.pathname.startsWith("/api/")) {
       const [status, out] = await api(req, url.pathname.slice(5));
-      res.writeHead(status, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.writeHead(status, {
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-store",
+      });
       res.end(JSON.stringify(out));
       return;
     }
@@ -232,22 +313,34 @@ createServer(async (req, res) => {
       const r = await worker.fetch(new Request(url), env(), { waitUntil: () => {} });
       res.writeHead(r.status, Object.fromEntries(r.headers));
       res.end(await r.text());
-      console.log(`search "${url.searchParams.get("q")}" ${url.searchParams.get("where") || ""} -> ${r.status} ${r.headers.get("X-Cache") || ""}`);
+      console.log(
+        `search "${url.searchParams.get("q")}" ${url.searchParams.get("where") || ""} -> ${r.status} ${r.headers.get("X-Cache") || ""}`
+      );
       return;
     }
     // App links like /jobs or /my-jobs have no file: they all get the app page, and js/router.js shows the screen
     // hidden files (.env, .git, ...) are never served, not even as the app page
-    if (/\/\./.test(decodeURIComponent(url.pathname))) { res.writeHead(404).end("Not found"); return; }
+    if (/\/\./.test(decodeURIComponent(url.pathname))) {
+      res.writeHead(404).end("Not found");
+      return;
+    }
     const page = url.pathname === "/" || !extname(url.pathname) ? "/index.html" : url.pathname;
     const path = normalize(join(FRONTEND, decodeURIComponent(page)));
-    if (!path.startsWith(FRONTEND + sep)) { res.writeHead(403).end(); return; }
+    if (!path.startsWith(FRONTEND + sep)) {
+      res.writeHead(403).end();
+      return;
+    }
     let body = await readFile(path);
-    if (url.pathname === "/data/jobs.json") {   // live search goes to this same server
+    if (url.pathname === "/data/jobs.json") {
+      // live search goes to this same server
       const data = JSON.parse(body);
       data.live_api = `//${req.headers.host}`;
       body = JSON.stringify(data);
     }
-    res.writeHead(200, { "Content-Type": TYPES[extname(path)] || "application/octet-stream", "Cache-Control": "no-store" });
+    res.writeHead(200, {
+      "Content-Type": TYPES[extname(path)] || "application/octet-stream",
+      "Cache-Control": "no-store",
+    });
     res.end(body);
   } catch (e) {
     const missing = e.code === "ENOENT";
@@ -257,7 +350,10 @@ createServer(async (req, res) => {
   }
 }).listen(PORT, "0.0.0.0", () => {
   const k = env();
-  const ips = Object.values(networkInterfaces()).flat().filter(i => i && i.family === "IPv4" && !i.internal).map(i => i.address);
+  const ips = Object.values(networkInterfaces())
+    .flat()
+    .filter(i => i && i.family === "IPv4" && !i.internal)
+    .map(i => i.address);
   console.log("Job portal is running. Open on any device on this Wi-Fi:");
   for (const ip of ips) console.log(`  http://${ip}:${PORT}`);
   console.log(`  (on this computer: http://localhost:${PORT})`);
@@ -265,6 +361,10 @@ createServer(async (req, res) => {
     setTimeout(() => mail.run(), 5_000);
     setInterval(() => mail.run(), 15 * 60_000);
   }
-  console.log(`Gmail status tracking: ${mail.configured() ? "on for " + mail.account() : "off (add GMAIL_ADDRESS and GMAIL_APP_PASSWORD to .env)"}`);
-  console.log(`Accounts: ${Object.keys(db.accounts).length}. Live search keys in .env: Adzuna ${k.ADZUNA_APP_ID && k.ADZUNA_APP_KEY ? "yes" : "no"}, JSearch ${k.RAPIDAPI_KEY ? "yes" : "no"}`);
+  console.log(
+    `Gmail status tracking: ${mail.configured() ? "on for " + mail.account() : "off (add GMAIL_ADDRESS and GMAIL_APP_PASSWORD to .env)"}`
+  );
+  console.log(
+    `Accounts: ${Object.keys(db.accounts).length}. Live search keys in .env: Adzuna ${k.ADZUNA_APP_ID && k.ADZUNA_APP_KEY ? "yes" : "no"}, JSearch ${k.RAPIDAPI_KEY ? "yes" : "no"}`
+  );
 });

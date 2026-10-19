@@ -1,41 +1,180 @@
 /* Login and Create account page */
-.auth{min-height:calc(100vh - 76px);display:grid;place-items:center;padding:16px}
-.auth-box{width:min(1160px,100%);min-height:min(500px,calc(100vh - 32px));display:grid;grid-template-columns:1.1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 24px 60px rgba(8,14,18,.12)}
-.auth-side{background:var(--accent);color:var(--accent-ink);padding:36px 56px;display:flex;flex-direction:column;justify-content:center}
-.auth-pitch{margin-top:28px}
+.auth {
+  min-height: calc(100vh - 76px);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+.auth-box {
+  width: min(1160px, 100%);
+  min-height: min(500px, calc(100vh - 32px));
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(8, 14, 18, 0.12);
+}
+.auth-side {
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 36px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.auth-pitch {
+  margin-top: 28px;
+}
 /* the login page has its brand inside the card, so the app header is hidden there */
-body:has(#auth:not([hidden])) .headwrap{display:none}
-body:has(#auth:not([hidden])) .auth{min-height:100vh}
-.auth-side .brand{color:inherit;font-size:1.4rem}
-.auth-side .brand-logo{width:44px;height:44px;border-radius:13px;box-shadow:0 0 0 2px rgba(255,255,255,.35)}
-.mbrand .brand-logo{width:40px;height:40px;border-radius:12px}
-.auth-side h1{font-size:clamp(2rem,3.4vw,2.8rem);font-weight:800;letter-spacing:-.02em;max-width:16ch}
-.auth-side ul{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:10px;opacity:.92}
-.auth-side li::before{content:"✓  ";font-weight:700}
-.auth-main{display:flex;align-items:center;justify-content:center;padding:32px 48px}
-.auth-card{width:100%;max-width:460px}
-.auth-card h2{font-size:1.9rem;margin-bottom:22px}
-.auth-card h2:has(+.sub){margin-bottom:6px}
-.auth-card .sub{color:var(--muted);margin:0 0 22px}
-.auth-card form>div{margin-bottom:14px}
-.auth-card .btn{width:100%;margin-top:4px}
-.switch{text-align:center;margin-top:18px;color:var(--muted)}
-.switch button{background:none;border:0;color:var(--accent);font-weight:700;padding:0}
-.mbrand{display:none;margin-bottom:24px}
-@media (max-width:820px){.auth-box{grid-template-columns:1fr;min-height:0;border-radius:24px}.auth-side{display:none}.mbrand{display:flex}.auth-main{padding:28px 18px}}
-.forgot-row{display:flex;justify-content:flex-end;margin:-8px 0 0!important}
-#lErr{margin:0 0 8px}
+body:has(#auth:not([hidden])) .headwrap {
+  display: none;
+}
+body:has(#auth:not([hidden])) .auth {
+  min-height: 100vh;
+}
+.auth-side .brand {
+  color: inherit;
+  font-size: 1.4rem;
+}
+.auth-side .brand-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+.mbrand .brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+.auth-side h1 {
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  max-width: 16ch;
+}
+.auth-side ul {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: grid;
+  gap: 10px;
+  opacity: 0.92;
+}
+.auth-side li::before {
+  content: "✓  ";
+  font-weight: 700;
+}
+.auth-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 48px;
+}
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+}
+.auth-card h2 {
+  font-size: 1.9rem;
+  margin-bottom: 22px;
+}
+.auth-card h2:has(+ .sub) {
+  margin-bottom: 6px;
+}
+.auth-card .sub {
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+.auth-card form > div {
+  margin-bottom: 14px;
+}
+.auth-card .btn {
+  width: 100%;
+  margin-top: 4px;
+}
+.switch {
+  text-align: center;
+  margin-top: 18px;
+  color: var(--muted);
+}
+.switch button {
+  background: none;
+  border: 0;
+  color: var(--accent);
+  font-weight: 700;
+  padding: 0;
+}
+.mbrand {
+  display: none;
+  margin-bottom: 24px;
+}
+@media (max-width: 820px) {
+  .auth-box {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    border-radius: 24px;
+  }
+  .auth-side {
+    display: none;
+  }
+  .mbrand {
+    display: flex;
+  }
+  .auth-main {
+    padding: 28px 18px;
+  }
+}
+.forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: -8px 0 0 !important;
+}
+#lErr {
+  margin: 0 0 8px;
+}
 /* Log in and Create account share one spot, so the box keeps the same size when switching:
    the hidden form still takes its space, it just isn't shown */
-.auth-card{display:grid}
-.auth-card>.mbrand{grid-row:1}
-.auth-card>#loginView,.auth-card>#signupView{grid-row:2;grid-column:1;align-self:center}
-.auth-card>#loginView[hidden],.auth-card>#signupView[hidden]{display:block!important;visibility:hidden}
+.auth-card {
+  display: grid;
+}
+.auth-card > .mbrand {
+  grid-row: 1;
+}
+.auth-card > #loginView,
+.auth-card > #signupView {
+  grid-row: 2;
+  grid-column: 1;
+  align-self: center;
+}
+.auth-card > #loginView[hidden],
+.auth-card > #signupView[hidden] {
+  display: block !important;
+  visibility: hidden;
+}
 /* wide screens: Email and Mobile side by side, so Create account is not much taller than Log in */
-@media (min-width:821px){
-  #signupForm{display:grid;grid-template-columns:1fr 1fr;column-gap:14px}
-  #signupForm>*{grid-column:1/-1}
-  #signupForm>div:nth-child(2),#signupForm>div:nth-child(3){grid-column:auto}
+@media (min-width: 821px) {
+  #signupForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 14px;
+  }
+  #signupForm > * {
+    grid-column: 1/-1;
+  }
+  #signupForm > div:nth-child(2),
+  #signupForm > div:nth-child(3) {
+    grid-column: auto;
+  }
 }
 /* note under the login form */
-.auth-note{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:.84rem}
+.auth-note {
+  margin: 20px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.84rem;
+}

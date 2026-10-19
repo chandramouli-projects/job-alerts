@@ -2,7 +2,9 @@
 import { test, expect } from "@playwright/test";
 import { PASSWORD, uniqueEmail, signupApi, useFixtures, loginUi } from "./helpers.js";
 
-test.beforeEach(async ({ page }) => { await useFixtures(page); });
+test.beforeEach(async ({ page }) => {
+  await useFixtures(page);
+});
 
 test.describe("Sign up and log in", () => {
   test("TC-AUTH-01 first visit shows the log in form @phone", async ({ page }) => {
@@ -28,20 +30,31 @@ test.describe("Sign up and log in", () => {
     await page.goto("/");
     await page.click("#toSignup");
     const submit = () => page.click("#signupForm button[type=submit]");
-    await page.fill("#sEmail", uniqueEmail("x")); await page.fill("#sPass", PASSWORD); await submit();
+    await page.fill("#sEmail", uniqueEmail("x"));
+    await page.fill("#sPass", PASSWORD);
+    await submit();
     await expect(page.locator("#sErr")).toHaveText("Enter your full name.");
-    await page.fill("#sName", "Ravi"); await page.fill("#sEmail", "ravi@"); await submit();
+    await page.fill("#sName", "Ravi");
+    await page.fill("#sEmail", "ravi@");
+    await submit();
     await expect(page.locator("#sErr")).toHaveText("Enter a valid email.");
-    await page.fill("#sEmail", uniqueEmail("x")); await page.fill("#sPass", "12345"); await submit();
+    await page.fill("#sEmail", uniqueEmail("x"));
+    await page.fill("#sPass", "12345");
+    await submit();
     await expect(page.locator("#sErr")).toHaveText("Password needs at least 6 characters.");
     await expect(page.locator("#ob")).toBeHidden();
   });
 
-  test("TC-AUTH-04 sign up with an email that already has an account is refused", async ({ page, request }) => {
+  test("TC-AUTH-04 sign up with an email that already has an account is refused", async ({
+    page,
+    request,
+  }) => {
     const a = await signupApi(request);
     await page.goto("/");
     await page.click("#toSignup");
-    await page.fill("#sName", "Someone"); await page.fill("#sEmail", a.email); await page.fill("#sPass", PASSWORD);
+    await page.fill("#sName", "Someone");
+    await page.fill("#sEmail", a.email);
+    await page.fill("#sPass", PASSWORD);
     await page.click("#signupForm button[type=submit]");
     await expect(page.locator("#sErr")).toContainText("already exists");
   });
@@ -53,7 +66,10 @@ test.describe("Sign up and log in", () => {
     await expect(page.locator("#loginView")).toBeVisible();
   });
 
-  test("TC-AUTH-06 right password logs in; a new user goes to the job questions", async ({ page, request }) => {
+  test("TC-AUTH-06 right password logs in; a new user goes to the job questions", async ({
+    page,
+    request,
+  }) => {
     const a = await signupApi(request);
     await loginUi(page, a.email.toUpperCase(), PASSWORD);
     await expect(page.locator("#ob")).toBeVisible();
@@ -77,7 +93,10 @@ test.describe("Sign up and log in", () => {
     expect(signup).toEqual(login);
   });
 
-  test("TC-AUTH-09 log out returns to log in and the old session no longer works", async ({ page, request }) => {
+  test("TC-AUTH-09 log out returns to log in and the old session no longer works", async ({
+    page,
+    request,
+  }) => {
     const a = await signupApi(request);
     await loginUi(page, a.email, PASSWORD);
     await expect(page.locator("#ob")).toBeVisible();
@@ -120,7 +139,7 @@ test.describe("Forgot password", () => {
     await openForgot(page, a.email);
     await expect(page.locator("#fpEmail")).toHaveValue(a.email);
     await page.click("#fpGen");
-    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/);   // the PIN comes from the server: wait for it
+    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/); // the PIN comes from the server: wait for it
     const pin = (await page.locator("#fpPinShow").textContent()).trim();
     expect(pin).toMatch(/^\d{6}$/);
     await page.fill("#fpPin", pin);
@@ -150,7 +169,7 @@ test.describe("Forgot password", () => {
     const a = await signupApi(request);
     await openForgot(page, a.email);
     await page.click("#fpGen");
-    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/);   // the PIN comes from the server: wait for it
+    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/); // the PIN comes from the server: wait for it
     const pin = (await page.locator("#fpPinShow").textContent()).trim();
     await page.fill("#fpPin", pin === "000000" ? "111111" : "000000");
     await page.click("#fpVerify");
@@ -162,7 +181,7 @@ test.describe("Forgot password", () => {
     const a = await signupApi(request);
     await openForgot(page, a.email);
     await page.click("#fpGen");
-    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/);   // wait for the PIN from the server
+    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/); // wait for the PIN from the server
     await page.fill("#fpPin", (await page.locator("#fpPinShow").textContent()).trim());
     await page.click("#fpVerify");
     await page.fill("#fpNew", "Brand#New1");
@@ -182,22 +201,27 @@ test.describe("Forgot password", () => {
     await expect(page.locator("#fpModal")).toBeHidden();
   });
 
-  test("TC-FP-06 the pop-up keeps one size on every step and blurs the page behind", async ({ page, request }) => {
+  test("TC-FP-06 the pop-up keeps one size on every step and blurs the page behind", async ({
+    page,
+    request,
+  }) => {
     const a = await signupApi(request);
     await openForgot(page, a.email);
     const card = page.locator("#fpModal .modal-card");
-    await page.waitForTimeout(300);                       // opening animation
+    await page.waitForTimeout(300); // opening animation
     const s1 = await card.boundingBox();
     await page.click("#fpGen");
     await expect(page.locator('[data-fp="2"]')).toBeVisible();
     const s2 = await card.boundingBox();
-    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/);   // wait for the PIN from the server
+    await expect(page.locator("#fpPinShow")).toHaveText(/^\d{6}$/); // wait for the PIN from the server
     await page.fill("#fpPin", (await page.locator("#fpPinShow").textContent()).trim());
     await page.click("#fpVerify");
     await expect(page.locator('[data-fp="3"]')).toBeVisible();
     const s3 = await card.boundingBox();
     expect(s2).toEqual(s1);
     expect(s3).toEqual(s1);
-    expect(await page.locator("#fpModal").evaluate(e => getComputedStyle(e).backdropFilter)).toContain("blur");
+    expect(await page.locator("#fpModal").evaluate(e => getComputedStyle(e).backdropFilter)).toContain(
+      "blur"
+    );
   });
 });

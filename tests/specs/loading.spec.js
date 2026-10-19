@@ -8,13 +8,27 @@ test("TC-LOAD-01 the loading screen shows while jobs load, then the app opens", 
   await useFixtures(page);
   let release;
   const wait = new Promise(r => (release = r));
-  await page.route("**/jobs.json*", async r => { await wait; await r.fallback(); });
+  await page.route("**/jobs.json*", async r => {
+    await wait;
+    await r.fallback();
+  });
   const a = await signupApi(request);
-  await saveUser(request, a.token, blankUser(a.email, { roles: ["QA / Testing"], exp: 3, cities: ["Hyderabad"], skills: [] }));
+  await saveUser(
+    request,
+    a.token,
+    blankUser(a.email, { roles: ["QA / Testing"], exp: 3, cities: ["Hyderabad"], skills: [] })
+  );
   const opened = openLoggedIn(page, a);
   await expect(page.locator("#boot")).toBeVisible();
   await expect(page.locator("#boot .boot-ring")).toBeVisible();
-  if (SHOTS) for (const n of [1, 2]) { await page.waitForTimeout(350); await page.screenshot({ path: `${SHOTS}/loading-${n}.png`, clip: { x: 583, y: 284, width: 200, height: 200 } }); }
+  if (SHOTS)
+    for (const n of [1, 2]) {
+      await page.waitForTimeout(350);
+      await page.screenshot({
+        path: `${SHOTS}/loading-${n}.png`,
+        clip: { x: 583, y: 284, width: 200, height: 200 },
+      });
+    }
   release();
   await opened;
   await expect(page.locator("#shell")).toBeVisible();

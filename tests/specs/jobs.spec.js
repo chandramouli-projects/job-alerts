@@ -28,7 +28,14 @@ test.describe("Jobs for me", () => {
     await start(page, request);
     const titles = await jobTitles(page);
     expect(titles).toContain("QA Automation Engineer");
-    for (const hidden of ["Senior QA Engineer", "QA Intern", "Test Engineer", "Remote QA Tester", "QA Engineer", "Java Developer"])
+    for (const hidden of [
+      "Senior QA Engineer",
+      "QA Intern",
+      "Test Engineer",
+      "Remote QA Tester",
+      "QA Engineer",
+      "Java Developer",
+    ])
       expect(titles, `${hidden} must not be in Jobs for me`).not.toContain(hidden);
   });
 
@@ -70,7 +77,7 @@ test.describe("Filters", () => {
     await start(page, request);
     await filter(page, "f_forYou", 0);
     const titles = await jobTitles(page);
-    expect(titles).toHaveLength(8);                       // 9 jobs, 1 is 10 days old
+    expect(titles).toHaveLength(8); // 9 jobs, 1 is 10 days old
     expect(titles).not.toContain("Test Engineer");
   });
 
@@ -101,7 +108,10 @@ test.describe("Filters", () => {
     expect(await jobTitles(page)).toEqual(["QA Engineer"]);
   });
 
-  test("TC-FLT-06 experience filter (3 years) hides senior AND intern jobs, like Jobs for me", async ({ page, request }) => {
+  test("TC-FLT-06 experience filter (3 years) hides senior AND intern jobs, like Jobs for me", async ({
+    page,
+    request,
+  }) => {
     await start(page, request);
     await filter(page, "f_forYou", 0);
     await filter(page, "f_exp", 3);
@@ -120,7 +130,17 @@ test.describe("Filters", () => {
 });
 
 test.describe("Search and live search", () => {
-  const NURSE = { nurse: [makeJob("nurse-1", { title: "Staff Nurse", company: "Apollo", location: "Chennai, Tamil Nadu", city_norm: "Chennai", city: "Chennai" })] };
+  const NURSE = {
+    nurse: [
+      makeJob("nurse-1", {
+        title: "Staff Nurse",
+        company: "Apollo",
+        location: "Chennai, Tamil Nadu",
+        city_norm: "Chennai",
+        city: "Chennai",
+      }),
+    ],
+  };
 
   test("TC-LIVE-01 opening the app fetches fresh jobs for my role and city", async ({ page, request }) => {
     await start(page, request);
@@ -155,7 +175,10 @@ test.describe("Search and live search", () => {
 });
 
 test.describe("Filter button and picked filters", () => {
-  test("TC-FLT-08 the filter button opens a Filters pop-up; nothing changes until Show N jobs @phone", async ({ page, request }) => {
+  test("TC-FLT-08 the filter button opens a Filters pop-up; nothing changes until Show N jobs @phone", async ({
+    page,
+    request,
+  }) => {
     await start(page, request);
     const before = await jobTitles(page);
     await expect(page.locator("#fModal")).toHaveCount(0);
@@ -163,14 +186,17 @@ test.describe("Filter button and picked filters", () => {
     await expect(page.locator("#fModal")).toBeVisible();
     await expect(page.locator("#fTitle")).toHaveText("Filters");
     await page.selectOption("#f_forYou", "0");
-    await expect(page.locator("#fApply")).toHaveText("Show 8 jobs");     // the count updates as you pick
-    expect(await jobTitles(page)).toEqual(before);                       // ...but the list doesn't, yet
+    await expect(page.locator("#fApply")).toHaveText("Show 8 jobs"); // the count updates as you pick
+    expect(await jobTitles(page)).toEqual(before); // ...but the list doesn't, yet
     await page.click("#fApply");
     await expect(page.locator("#fModal")).toBeHidden();
     expect(await jobTitles(page)).toHaveLength(8);
   });
 
-  test("TC-FLT-11 × and Esc close the pop-up without applying; Reset clears the picks", async ({ page, request }) => {
+  test("TC-FLT-11 × and Esc close the pop-up without applying; Reset clears the picks", async ({
+    page,
+    request,
+  }) => {
     await start(page, request);
     const before = await jobTitles(page);
     await page.click(".search-row [data-ftoggle]");
@@ -178,7 +204,7 @@ test.describe("Filter button and picked filters", () => {
     await page.click("#fModal [data-fx]");
     expect(await jobTitles(page)).toEqual(before);
     await page.click(".search-row [data-ftoggle]");
-    await expect(page.locator("#f_city")).toHaveValue("");               // the thrown-away pick is gone
+    await expect(page.locator("#f_city")).toHaveValue(""); // the thrown-away pick is gone
     await page.selectOption("#f_city", "Bangalore");
     await page.keyboard.press("Escape");
     await expect(page.locator("#fModal")).toBeHidden();
@@ -189,7 +215,10 @@ test.describe("Filter button and picked filters", () => {
     await expect(page.locator("#f_minSal")).toHaveValue("");
   });
 
-  test("TC-FLT-09 picked filters show as chips next to the job count, with a count on the button", async ({ page, request }) => {
+  test("TC-FLT-09 picked filters show as chips next to the job count, with a count on the button", async ({
+    page,
+    request,
+  }) => {
     await start(page, request);
     await filter(page, "f_forYou", 0);
     await filter(page, "f_minSal", 12);
@@ -211,14 +240,20 @@ test.describe("Filter button and picked filters", () => {
 });
 
 test.describe("Smarter matching", () => {
-  test("TC-SMART-01 job details name the skills the job asks for that my profile doesn't have", async ({ page, request }) => {
-    await start(page, request);   // my skills: selenium; the job mentions selenium and java
+  test("TC-SMART-01 job details name the skills the job asks for that my profile doesn't have", async ({
+    page,
+    request,
+  }) => {
+    await start(page, request); // my skills: selenium; the job mentions selenium and java
     await page.click('[data-open="qa-hyd"]');
     await expect(page.locator("#sheet .miss")).toHaveText("Your skills don't have: java");
     await expect(page.locator("#sheet .facts .good")).toHaveText(["selenium"]);
   });
 
-  test("TC-SMART-02 jobs like the ones I saved go up, jobs like the ones I hid go down", async ({ page, request }) => {
+  test("TC-SMART-02 jobs like the ones I saved go up, jobs like the ones I hid go down", async ({
+    page,
+    request,
+  }) => {
     calls = await useFixtures(page);
     const a = await signupApi(request);
     const user = blankUser(a.email, QA_HYD);
@@ -231,15 +266,20 @@ test.describe("Smarter matching", () => {
     expect(await score({ title: "Java Engineer", company: "Other", tech: ["spring"] })).toBeGreaterThan(0);
     expect(await score({ title: "JavaScript Developer", company: "Theta", tech: [] })).toBeLessThan(0);
     expect(await score({ title: "Nurse", company: "Hospital", tech: [] })).toBe(0);
-    await page.click('[data-open="qa-hyd"]');   // it mentions java, like the saved Java job
+    await page.click('[data-open="qa-hyd"]'); // it mentions java, like the saved Java job
     await expect(page.locator("#sheet .why")).toContainText("Like jobs you saved or applied to");
   });
 });
 
-test("TC-JOB-07 when there is no exact match, the count matches the role jobs shown below", async ({ page, request }) => {
+test("TC-JOB-07 when there is no exact match, the count matches the role jobs shown below", async ({
+  page,
+  request,
+}) => {
   await start(page, request, { roles: ["QA / Testing"], exp: 3, cities: ["Pune"], skills: [] });
   await expect(page.locator(".card", { hasText: "No exact match." })).toBeVisible();
   const shownJobs = await page.locator("#main .job").count();
   expect(shownJobs).toBeGreaterThan(0);
-  await expect(page.locator(".resbar > span").first()).toContainText(`${shownJobs} job${shownJobs === 1 ? "" : "s"} in your role`);
+  await expect(page.locator(".resbar > span").first()).toContainText(
+    `${shownJobs} job${shownJobs === 1 ? "" : "s"} in your role`
+  );
 });

@@ -11,7 +11,8 @@ async function start(page, request) {
   await expect(page.locator("#main .job").first()).toBeVisible();
   return a;
 }
-const card = (page, title) => page.locator("#main .job", { has: page.locator("h3", { hasText: new RegExp(`^${title}$`) }) });
+const card = (page, title) =>
+  page.locator("#main .job", { has: page.locator("h3", { hasText: new RegExp(`^${title}$`) }) });
 
 test("TC-HIDE-01 Hide on a card, then Undo brings it back", async ({ page, request }) => {
   await start(page, request);
@@ -23,15 +24,22 @@ test("TC-HIDE-01 Hide on a card, then Undo brings it back", async ({ page, reque
   expect(await jobTitles(page)).toContain("QA Engineer");
 });
 
-test("TC-HIDE-02 'N hidden' opens the hidden jobs; Unhide puts one back, and it stays after a reload", async ({ page, request }) => {
+test("TC-HIDE-02 'N hidden' opens the hidden jobs; Unhide puts one back, and it stays after a reload", async ({
+  page,
+  request,
+}) => {
   const a = await start(page, request);
   await card(page, "QA Engineer").locator("[data-cardhide]").click();
   await card(page, "Remote QA Tester").locator("[data-cardhide]").click();
-  const hiddenOnServer = async () => Object.keys((await (await request.get("/api/user", { headers: { Authorization: `Bearer ${a.token}` } })).json()).user?.hidden || {}).length;
+  const hiddenOnServer = async () =>
+    Object.keys(
+      (await (await request.get("/api/user", { headers: { Authorization: `Bearer ${a.token}` } })).json())
+        .user?.hidden || {}
+    ).length;
   await expect.poll(hiddenOnServer).toBe(2);
   await page.reload();
   await expect(page.locator("#main .job").first()).toBeVisible();
-  await expect(page.locator("[data-showhidden]")).toHaveText("2 hidden");   // kept on the server
+  await expect(page.locator("[data-showhidden]")).toHaveText("2 hidden"); // kept on the server
   await page.click("[data-showhidden]");
   await expect(page.locator("#sheetTitle")).toHaveText("Hidden jobs");
   await expect(page.locator("#sheet .hj-row b")).toHaveText(["QA Engineer", "Remote QA Tester"]);
@@ -69,6 +77,13 @@ test("TC-HIDE-04 pick two jobs, Hide both, then Unhide all", async ({ page, requ
 test("TC-HIDE-05 a change made just before leaving the page is still saved", async ({ page, request }) => {
   const a = await start(page, request);
   await card(page, "QA Engineer").locator("[data-cardhide]").click();
-  await page.goto("about:blank");   // leave at once, inside the half-second wait
-  await expect.poll(async () => Object.keys((await (await request.get("/api/user", { headers: { Authorization: `Bearer ${a.token}` } })).json()).user?.hidden || {})).toEqual(["qa-blr"]);
+  await page.goto("about:blank"); // leave at once, inside the half-second wait
+  await expect
+    .poll(async () =>
+      Object.keys(
+        (await (await request.get("/api/user", { headers: { Authorization: `Bearer ${a.token}` } })).json())
+          .user?.hidden || {}
+      )
+    )
+    .toEqual(["qa-blr"]);
 });

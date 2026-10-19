@@ -43,9 +43,7 @@
     "include_remote": true,
     "experience_tolerance_years": 1,
     "min_skill_matches": 1,
-    "exclude_words": [
-      "unpaid"
-    ],
+    "exclude_words": ["unpaid"],
     "max_messages_per_run": 10,
     "telegram_enabled": false,
     "min_match": 70

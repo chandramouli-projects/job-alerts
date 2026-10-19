@@ -12,6 +12,7 @@ Needs in .env:  GMAIL_ADDRESS, GMAIL_APP_PASSWORD (a Google "App password", not 
   python backend/mail/track_mail.py --json    ->  {"events": [...]} for the server
   python backend/mail/track_mail.py --days 30
 """
+
 import email
 import hashlib
 import html
@@ -24,7 +25,7 @@ from email.header import decode_header, make_header
 from email.utils import parseaddr, parsedate_to_datetime
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent.parent   # the project folder, where .env is
+ROOT = Path(__file__).resolve().parent.parent.parent  # the project folder, where .env is
 if (ROOT / ".env").exists():
     for line in (ROOT / ".env").read_text().splitlines():
         k, sep, v = line.partition("=")
@@ -32,25 +33,51 @@ if (ROOT / ".env").exists():
             os.environ.setdefault(k.strip(), v.strip().strip("\"'"))
 
 # Job sites and hiring systems whose emails carry application updates
-SENDERS = {"linkedin.com": "LinkedIn", "naukri.com": "Naukri", "indeed.com": "Indeed", "foundit.in": "Foundit",
-           "instahyre.com": "Instahyre", "glassdoor.com": "Glassdoor", "internshala.com": "Internshala",
-           "wellfound.com": "Wellfound", "cutshort.io": "Cutshort", "hirist.tech": "Hirist", "apna.co": "Apna",
-           "greenhouse.io": "Greenhouse", "lever.co": "Lever", "myworkday.com": "Workday",
-           "smartrecruiters.com": "SmartRecruiters", "ashbyhq.com": "Ashby", "zohorecruit.com": "Zoho Recruit"}
+SENDERS = {
+    "linkedin.com": "LinkedIn",
+    "naukri.com": "Naukri",
+    "indeed.com": "Indeed",
+    "foundit.in": "Foundit",
+    "instahyre.com": "Instahyre",
+    "glassdoor.com": "Glassdoor",
+    "internshala.com": "Internshala",
+    "wellfound.com": "Wellfound",
+    "cutshort.io": "Cutshort",
+    "hirist.tech": "Hirist",
+    "apna.co": "Apna",
+    "greenhouse.io": "Greenhouse",
+    "lever.co": "Lever",
+    "myworkday.com": "Workday",
+    "smartrecruiters.com": "SmartRecruiters",
+    "ashbyhq.com": "Ashby",
+    "zohorecruit.com": "Zoho Recruit",
+}
 
 # Most advanced first: an email that says "unfortunately" is a rejection even if it also says "applied"
 STAGE_RULES = [
-    ("rejected", r"unfortunately|not (?:be )?moving forward|decided (?:to )?(?:move|go|proceed) forward with other|"
-                 r"not (?:been )?selected|regret to inform|position (?:has been|is now) filled|will not be proceeding|"
-                 r"not a (?:fit|match) at this time|no longer under consideration"),
+    (
+        "rejected",
+        r"unfortunately|not (?:be )?moving forward|decided (?:to )?(?:move|go|proceed) forward with other|"
+        r"not (?:been )?selected|regret to inform|position (?:has been|is now) filled|will not be proceeding|"
+        r"not a (?:fit|match) at this time|no longer under consideration",
+    ),
     ("offer", r"offer letter|pleased to (?:extend|offer)|job offer|we(?:'d| would) like to offer you"),
-    ("interview", r"interview (?:invitation|invite|scheduled|call|round)|invit\w* you (?:to|for) (?:an? )?interview|"
-                  r"schedule (?:an?|your) interview|interview with"),
-    ("shortlisted", r"shortlist|moved (?:you )?(?:to|forward to) the next (?:round|step|stage)|recruiter (?:is|was) interested|"
-                    r"interested in your (?:profile|application)|under consideration|in review"),
+    (
+        "interview",
+        r"interview (?:invitation|invite|scheduled|call|round)|invit\w* you (?:to|for) (?:an? )?interview|"
+        r"schedule (?:an?|your) interview|interview with",
+    ),
+    (
+        "shortlisted",
+        r"shortlist|moved (?:you )?(?:to|forward to) the next (?:round|step|stage)|recruiter (?:is|was) interested|"
+        r"interested in your (?:profile|application)|under consideration|in review",
+    ),
     ("viewed", r"(?:application|profile) (?:was |has been )?viewed|viewed your (?:application|profile)"),
-    ("applied", r"application (?:was )?sent|application (?:has been |was )?(?:received|submitted)|thank(?:s| you) for applying|"
-                r"you(?:'ve| have)? applied|successfully applied|applied (?:for|to)|we received your application"),
+    (
+        "applied",
+        r"application (?:was )?sent|application (?:has been |was )?(?:received|submitted)|thank(?:s| you) for applying|"
+        r"you(?:'ve| have)? applied|successfully applied|applied (?:for|to)|we received your application",
+    ),
 ]
 # Emails about other things (job alerts, newsletters) that could share words with the rules above
 SKIP = r"jobs? (?:alert|for you|you may be interested)|recommended jobs|new jobs|apply now|people also viewed|who viewed your profile"
@@ -75,7 +102,9 @@ def text_of(msg):
     plain, rich = [], []
     for part in msg.walk() if msg.is_multipart() else [msg]:
         ctype = part.get_content_type()
-        if ctype not in ("text/plain", "text/html") or part.get("Content-Disposition", "").startswith("attachment"):
+        if ctype not in ("text/plain", "text/html") or part.get("Content-Disposition", "").startswith(
+            "attachment"
+        ):
             continue
         try:
             body = part.get_payload(decode=True).decode(part.get_content_charset() or "utf-8", "replace")
@@ -112,7 +141,9 @@ def parse(subject, body, sender, date=""):
     if not stage:
         return None
     company = title = ""
-    subj = re.sub(r"(?i)^(?:re|fwd?):\s*|^[^,]{1,40},\s*", "", subject.strip())   # drop "Re:" and a leading "Name, "
+    subj = re.sub(
+        r"(?i)^(?:re|fwd?):\s*|^[^,]{1,40},\s*", "", subject.strip()
+    )  # drop "Re:" and a leading "Name, "
     for rx in COMPANY_PATTERNS:
         m = re.search(rx, subj, re.I)
         if m:
@@ -126,10 +157,23 @@ def parse(subject, body, sender, date=""):
                 title = title or clean(m.group("title"))
                 company = company or clean(m.groupdict().get("company") or "")
                 break
-    if not company and site not in ("LinkedIn", "Naukri", "Indeed", "Foundit", "Instahyre", "Glassdoor",
-                                     "Internshala", "Wellfound", "Cutshort", "Hirist", "Apna"):
+    if not company and site not in (
+        "LinkedIn",
+        "Naukri",
+        "Indeed",
+        "Foundit",
+        "Instahyre",
+        "Glassdoor",
+        "Internshala",
+        "Wellfound",
+        "Cutshort",
+        "Hirist",
+        "Apna",
+    ):
         # company hiring systems send in the company's name: "Acme Careers <no-reply@greenhouse.io>"
-        company = clean(re.sub(r"(?i)\b(careers?|hiring|talent|recruiting|team|jobs|via \w+)\b", "", parseaddr(sender)[0]))
+        company = clean(
+            re.sub(r"(?i)\b(careers?|hiring|talent|recruiting|team|jobs|via \w+)\b", "", parseaddr(sender)[0])
+        )
     if not company:
         return None
     return {"stage": stage, "company": company, "title": title, "site": site}
@@ -190,7 +234,9 @@ def main():
         return
     print(f"{len(events)} application updates in the last {days} days:")
     for e in events:
-        print(f"  {e['at'][:10]}  {e['stage']:<11} {e['company']} | {e['title'] or '-'}  ({e['site']})  [{e['subject']}]")
+        print(
+            f"  {e['at'][:10]}  {e['stage']:<11} {e['company']} | {e['title'] or '-'}  ({e['site']})  [{e['subject']}]"
+        )
 
 
 if __name__ == "__main__":

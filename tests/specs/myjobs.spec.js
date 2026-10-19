@@ -14,7 +14,10 @@ async function start(page, request) {
   return a;
 }
 
-test("TC-MY-01 saving a job puts it in the Saved jobs menu, and it is kept on the server", async ({ page, request }) => {
+test("TC-MY-01 saving a job puts it in the Saved jobs menu, and it is kept on the server", async ({
+  page,
+  request,
+}) => {
   const a = await start(page, request);
   await page.click('[data-save="qa-hyd"]');
   await expect(page.locator('[data-save="qa-hyd"]')).toHaveAttribute("aria-pressed", "true");
@@ -27,12 +30,18 @@ test("TC-MY-01 saving a job puts it in the Saved jobs menu, and it is kept on th
   expect(u.jobs["qa-hyd"].saved).toBe(true);
 });
 
-test("TC-MY-02 Apply -> 'Did you apply?' -> Yes: the job moves to Applied and leaves the feed", async ({ page, request }) => {
+test("TC-MY-02 Apply -> 'Did you apply?' -> Yes: the job moves to Applied and leaves the feed", async ({
+  page,
+  request,
+}) => {
   test.slow();
   await start(page, request);
-  await page.click('[data-open="qa-hyd"]');   // the card opens the details; View job is there
-  const [popup] = await Promise.all([page.waitForEvent("popup"), page.click('#sheet .sheet-foot a[data-apply="qa-hyd"]')]);
-  await page.waitForTimeout(1700);                 // the app asks only after you have been away a moment
+  await page.click('[data-open="qa-hyd"]'); // the card opens the details; View job is there
+  const [popup] = await Promise.all([
+    page.waitForEvent("popup"),
+    page.click('#sheet .sheet-foot a[data-apply="qa-hyd"]'),
+  ]);
+  await page.waitForTimeout(1700); // the app asks only after you have been away a moment
   await popup.close();
   await page.bringToFront();
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
@@ -49,8 +58,11 @@ test("TC-MY-02 Apply -> 'Did you apply?' -> Yes: the job moves to Applied and le
 test("TC-MY-03 'Not yet' keeps the job in the feed", async ({ page, request }) => {
   test.slow();
   await start(page, request);
-  await page.click('[data-open="qa-hyd"]');   // the card opens the details; View job is there
-  const [popup] = await Promise.all([page.waitForEvent("popup"), page.click('#sheet .sheet-foot a[data-apply="qa-hyd"]')]);
+  await page.click('[data-open="qa-hyd"]'); // the card opens the details; View job is there
+  const [popup] = await Promise.all([
+    page.waitForEvent("popup"),
+    page.click('#sheet .sheet-foot a[data-apply="qa-hyd"]'),
+  ]);
   await page.waitForTimeout(1700);
   await popup.close();
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
@@ -62,22 +74,38 @@ test("TC-MY-03 'Not yet' keeps the job in the feed", async ({ page, request }) =
 // an account with one applied job and one saved job
 async function withApplied(page, request) {
   const a = await start(page, request);
-  await page.waitForFunction(() => !saveT);   // the app's own save is done, so it can't overwrite the one below
+  await page.waitForFunction(() => !saveT); // the app's own save is done, so it can't overwrite the one below
   const at = Date.now() - 2 * 864e5;
-  await saveUser(request, a.token, { ...blankUser(a.email, QA_HYD), jobs: {
-    "qa-hyd": { stage: "applied", saved: false, notes: "", history: [{ stage: "applied", at }], appliedAt: at },
-    "qa-blr": { stage: null, saved: true, savedAt: at, notes: "", history: [] } } });
+  await saveUser(request, a.token, {
+    ...blankUser(a.email, QA_HYD),
+    jobs: {
+      "qa-hyd": {
+        stage: "applied",
+        saved: false,
+        notes: "",
+        history: [{ stage: "applied", at }],
+        appliedAt: at,
+      },
+      "qa-blr": { stage: null, saved: true, savedAt: at, notes: "", history: [] },
+    },
+  });
   await page.reload();
   await expect(page.locator("#shell")).toBeVisible();
   return a;
 }
 
-test("TC-MY-04 the menu is Jobs, Saved jobs, My jobs, Profile, with saved and applied counts", async ({ page, request }) => {
+test("TC-MY-04 the menu is Jobs, Saved jobs, My jobs, Profile, with saved and applied counts", async ({
+  page,
+  request,
+}) => {
   await withApplied(page, request);
   await expect(page.locator(".side .nav")).toHaveText(["Jobs", "Saved jobs1", "My jobs1", "Profile"]);
 });
 
-test("TC-MY-05 Saved jobs shows only saved jobs; My jobs shows only applications", async ({ page, request }) => {
+test("TC-MY-05 Saved jobs shows only saved jobs; My jobs shows only applications", async ({
+  page,
+  request,
+}) => {
   await withApplied(page, request);
   await page.click('.side [data-go="saved"]');
   expect(await jobTitles(page)).toEqual(["QA Engineer"]);
@@ -114,14 +142,21 @@ test.describe("Account and data safety", () => {
   test("TC-SEC-11 'Forgot password' does not reveal which emails have accounts", async ({ request }) => {
     const a = await signupApi(request);
     const known = await request.post("/api/forgot", { data: { email: a.email } });
-    const unknown = await request.post("/api/forgot", { data: { email: "nobody-" + Date.now() + "@example.com" } });
+    const unknown = await request.post("/api/forgot", {
+      data: { email: "nobody-" + Date.now() + "@example.com" },
+    });
     expect(unknown.status()).toBe(known.status());
   });
 
   test("TC-SEC-12 changing the password logs out the other devices", async ({ request }) => {
     const a = await signupApi(request);
-    const other = (await (await request.post("/api/login", { data: { email: a.email, password: PASSWORD } })).json()).token;
-    await request.post("/api/password", { headers: auth(a.token), data: { old: PASSWORD, new: "Changed#1" } });
+    const other = (
+      await (await request.post("/api/login", { data: { email: a.email, password: PASSWORD } })).json()
+    ).token;
+    await request.post("/api/password", {
+      headers: auth(a.token),
+      data: { old: PASSWORD, new: "Changed#1" },
+    });
     expect((await request.get("/api/user", { headers: auth(other) })).status()).toBe(401);
   });
 
@@ -141,7 +176,10 @@ test.describe("Account and data safety", () => {
   test("TC-SEC-15 the GitHub key is not copied to the server", async ({ page, request }) => {
     const a = await start(page, request);
     await page.route("https://api.github.com/**", r => r.fulfill({ status: 401, json: { message: "test" } }));
-    await page.evaluate(() => { U.settings.ghToken = "github_pat_TESTSECRET"; saveUser(); });
+    await page.evaluate(() => {
+      U.settings.ghToken = "github_pat_TESTSECRET";
+      saveUser();
+    });
     await page.waitForTimeout(800);
     const stored = JSON.stringify(await (await request.get("/api/user", { headers: auth(a.token) })).json());
     expect(stored).not.toContain("github_pat_TESTSECRET");

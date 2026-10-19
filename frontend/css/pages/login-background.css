@@ -1,51 +1,175 @@
 /* Login page background: aurora color glows, a slow dot grid, orbit rings around the card,
    glowing particles and a soft spotlight that
    follows the mouse. Only transform / opacity move, so it stays light. */
-.auth{position:relative;overflow:hidden}
-.auth>.auth-box{position:relative;z-index:1}
-.auth-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;contain:strict;background:var(--bg);
-  --g1:var(--accent);
-  --g2:color-mix(in srgb,var(--accent) 55%,#8FE3C6);
-  --g3:color-mix(in srgb,var(--accent) 35%,#BDEBD8);
-  --g4:color-mix(in srgb,var(--accent) 55%,#7CC4E8)}
-.auth-bg>*{position:absolute;will-change:transform}
+.auth {
+  position: relative;
+  overflow: hidden;
+}
+.auth > .auth-box {
+  position: relative;
+  z-index: 1;
+}
+.auth-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  background: var(--bg);
+  --g1: var(--accent);
+  --g2: color-mix(in srgb, var(--accent) 55%, #8fe3c6);
+  --g3: color-mix(in srgb, var(--accent) 35%, #bdebd8);
+  --g4: color-mix(in srgb, var(--accent) 55%, #7cc4e8);
+}
+.auth-bg > * {
+  position: absolute;
+  will-change: transform;
+}
 
 /* aurora: big soft glows that drift and grow / shrink */
-.bg-glow{width:62vmax;height:62vmax;border-radius:50%;left:var(--x);top:var(--y);margin:-31vmax 0 0 -31vmax;
-  background:radial-gradient(circle,color-mix(in srgb,var(--c) var(--a),transparent) 0%,transparent 66%);
-  animation:bgGlow var(--t) ease-in-out infinite alternate;animation-delay:var(--d)}
-@keyframes bgGlow{0%{transform:translate(0,0) scale(1)}50%{transform:translate(var(--dx),calc(var(--dy) * -1)) scale(1.15)}100%{transform:translate(calc(var(--dx) * -1),var(--dy)) scale(.92)}}
+.bg-glow {
+  width: 62vmax;
+  height: 62vmax;
+  border-radius: 50%;
+  left: var(--x);
+  top: var(--y);
+  margin: -31vmax 0 0 -31vmax;
+  background: radial-gradient(circle, color-mix(in srgb, var(--c) var(--a), transparent) 0%, transparent 66%);
+  animation: bgGlow var(--t) ease-in-out infinite alternate;
+  animation-delay: var(--d);
+}
+@keyframes bgGlow {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(var(--dx), calc(var(--dy) * -1)) scale(1.15);
+  }
+  100% {
+    transform: translate(calc(var(--dx) * -1), var(--dy)) scale(0.92);
+  }
+}
 
 /* dot grid, clear around the card and stronger at the edges; slides exactly one cell so it loops */
-.bg-grid{inset:-28px;background-image:radial-gradient(color-mix(in srgb,var(--accent) 34%,transparent) 1.3px,transparent 1.8px);background-size:28px 28px;
-  -webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 50%,transparent 32%,#000 80%);mask-image:radial-gradient(ellipse 75% 65% at 50% 50%,transparent 32%,#000 80%);
-  animation:bgGrid 24s linear infinite}
-@keyframes bgGrid{to{transform:translate(28px,28px)}}
+.bg-grid {
+  inset: -28px;
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--accent) 34%, transparent) 1.3px,
+    transparent 1.8px
+  );
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, transparent 32%, #000 80%);
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, transparent 32%, #000 80%);
+  animation: bgGrid 24s linear infinite;
+}
+@keyframes bgGrid {
+  to {
+    transform: translate(28px, 28px);
+  }
+}
 
 /* orbit rings around the card, each with a glowing dot riding on it */
-.bg-orbit{left:50%;top:50%;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);border-radius:50%;
-  border:1.5px dashed color-mix(in srgb,var(--accent) 26%,transparent);animation:bgSpin var(--t) linear infinite var(--dir,normal)}
-.bg-orbit::after{content:"";position:absolute;top:-5px;left:calc(50% - 5px);width:10px;height:10px;border-radius:50%;
-  background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 18%,transparent),0 0 18px var(--accent)}
-@keyframes bgSpin{to{transform:rotate(360deg)}}
+.bg-orbit {
+  left: 50%;
+  top: 50%;
+  width: var(--s);
+  height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  border-radius: 50%;
+  border: 1.5px dashed color-mix(in srgb, var(--accent) 26%, transparent);
+  animation: bgSpin var(--t) linear infinite var(--dir, normal);
+}
+.bg-orbit::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: calc(50% - 5px);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 0 18px var(--accent);
+}
+@keyframes bgSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* glowing particles drifting up */
-.bg-dot{left:var(--x);bottom:-12px;width:var(--s);height:var(--s);border-radius:50%;background:var(--accent);opacity:0;
-  box-shadow:0 0 10px var(--accent);animation:bgRise var(--t) linear infinite;animation-delay:var(--d)}
-@keyframes bgRise{0%{transform:translate(0,0);opacity:0}15%{opacity:.55}80%{opacity:.35}100%{transform:translate(var(--dx),-75vh);opacity:0}}
+.bg-dot {
+  left: var(--x);
+  bottom: -12px;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  box-shadow: 0 0 10px var(--accent);
+  animation: bgRise var(--t) linear infinite;
+  animation-delay: var(--d);
+}
+@keyframes bgRise {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.55;
+  }
+  80% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate(var(--dx), -75vh);
+    opacity: 0;
+  }
+}
 
 /* soft light that follows the mouse (moved by js/login-background.js) */
-.bg-spot{left:0;top:0;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;opacity:0;transition:opacity .4s;
-  background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 62%)}
-.bg-spot.on{opacity:1}
+.bg-spot {
+  left: 0;
+  top: 0;
+  width: 560px;
+  height: 560px;
+  margin: -280px 0 0 -280px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 62%);
+}
+.bg-spot.on {
+  opacity: 1;
+}
 
 /* fine grain on top, so the gradients look smooth instead of banded */
-.auth-bg::after{content:"";position:absolute;inset:0;opacity:.07;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.auth-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 /* phones: smaller rings, fewer particles */
-@media (max-width:820px){
-  .bg-orbit{--s:calc(var(--sm) * 1px)!important}
-  .bg-dot:nth-child(2n),.bg-spot{display:none}
+@media (max-width: 820px) {
+  .bg-orbit {
+    --s: calc(var(--sm) * 1px) !important;
+  }
+  .bg-dot:nth-child(2n),
+  .bg-spot {
+    display: none;
+  }
 }
-@media (prefers-reduced-motion:reduce){.auth-bg>*{animation:none!important}.bg-dot,.bg-spot{display:none}}
+@media (prefers-reduced-motion: reduce) {
+  .auth-bg > * {
+    animation: none !important;
+  }
+  .bg-dot,
+  .bg-spot {
+    display: none;
+  }
+}

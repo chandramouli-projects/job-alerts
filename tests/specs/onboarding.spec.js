@@ -7,7 +7,8 @@ const pick = (page, k, v) => page.click(`.pk-opt[data-pkval="${k}"][data-v="${v}
 // a list that stays open covers the next field, so close it the way a person can: Esc
 const pickAndClose = async (page, k, v) => {
   await pick(page, k, v);
-  if (await page.locator(`.pk[data-pk="${k}"]`).evaluate(e => e.classList.contains("open"))) await page.keyboard.press("Escape");
+  if (await page.locator(`.pk[data-pk="${k}"]`).evaluate(e => e.classList.contains("open")))
+    await page.keyboard.press("Escape");
 };
 const isOpen = (page, k) => page.locator(`.pk[data-pk="${k}"]`).evaluate(e => e.classList.contains("open"));
 const chips = (page, k) => page.locator(`.pk[data-pk="${k}"] .pk-chip`).allTextContents();
@@ -21,11 +22,14 @@ test.beforeEach(async ({ page, request }) => {
 test("TC-OB-01 Show my jobs stays off until role, experience and city are chosen", async ({ page }) => {
   const go = page.locator("#obNext");
   await expect(go).toBeDisabled();
-  await open(page, "role"); await pickAndClose(page, "role", "QA / Testing");
+  await open(page, "role");
+  await pickAndClose(page, "role", "QA / Testing");
   await expect(go).toBeDisabled();
-  await open(page, "exp"); await pickAndClose(page, "exp", "3");
+  await open(page, "exp");
+  await pickAndClose(page, "exp", "3");
   await expect(go).toBeDisabled();
-  await open(page, "city"); await pickAndClose(page, "city", "Hyderabad");
+  await open(page, "city");
+  await pickAndClose(page, "city", "Hyderabad");
   await expect(go).toBeEnabled();
 });
 
@@ -66,13 +70,18 @@ test("TC-OB-06 a role that is not in the list can be added by typing it", async 
   expect((await chips(page, "role")).map(c => c.replace("×", "").trim())).toContain("SAP Consultant");
 });
 
-test("TC-OB-07 answers are saved on the server: after reload the jobs page opens, not the questions", async ({ page }) => {
-  await open(page, "role"); await pickAndClose(page, "role", "QA / Testing");
-  await open(page, "exp"); await pickAndClose(page, "exp", "3");
-  await open(page, "city"); await pickAndClose(page, "city", "Hyderabad");
+test("TC-OB-07 answers are saved on the server: after reload the jobs page opens, not the questions", async ({
+  page,
+}) => {
+  await open(page, "role");
+  await pickAndClose(page, "role", "QA / Testing");
+  await open(page, "exp");
+  await pickAndClose(page, "exp", "3");
+  await open(page, "city");
+  await pickAndClose(page, "city", "Hyderabad");
   await page.click("#obNext");
   await expect(page.locator("#shell")).toBeVisible();
-  await page.waitForTimeout(800);                 // the save is sent 0.5 s after a change
+  await page.waitForTimeout(800); // the save is sent 0.5 s after a change
   await page.reload();
   await expect(page.locator("#shell")).toBeVisible();
   await expect(page.locator("#ob")).toBeHidden();

@@ -13,10 +13,17 @@ function headlessShell() {
   const dir = join(process.env.LOCALAPPDATA || "", "ms-playwright");
   const wanted = chromium.executablePath().match(/chromium-(\d+)/)?.[1];
   if (wanted && existsSync(join(dir, `chromium_headless_shell-${wanted}`))) return undefined;
-  const found = existsSync(dir) ? readdirSync(dir).filter(d => d.startsWith("chromium_headless_shell-"))
-    .sort((a, b) => +b.split("-")[1] - +a.split("-")[1])
-    .map(d => [join(dir, d, "chrome-win", "headless_shell.exe"), join(dir, d, "chrome-headless-shell-win64", "chrome-headless-shell.exe")])
-    .flat().find(existsSync) : undefined;
+  const found = existsSync(dir)
+    ? readdirSync(dir)
+        .filter(d => d.startsWith("chromium_headless_shell-"))
+        .sort((a, b) => +b.split("-")[1] - +a.split("-")[1])
+        .map(d => [
+          join(dir, d, "chrome-win", "headless_shell.exe"),
+          join(dir, d, "chrome-headless-shell-win64", "chrome-headless-shell.exe"),
+        ])
+        .flat()
+        .find(existsSync)
+    : undefined;
   return found;
 }
 
@@ -28,8 +35,8 @@ export default defineConfig({
   timeout: 30_000,
   expect: { timeout: 5_000 },
   fullyParallel: true,
-  workers: 1,                      // this computer has little free memory
-  retries: 0,                      // strict: a flaky pass is not a pass
+  workers: 1, // this computer has little free memory
+  retries: 0, // strict: a flaky pass is not a pass
   forbidOnly: true,
   reporter: [
     ["list"],
@@ -47,7 +54,11 @@ export default defineConfig({
   },
   projects: [
     { name: "desktop", use: { viewport: { width: 1366, height: 768 } } },
-    { name: "phone", use: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, grep: /@phone/ },
+    {
+      name: "phone",
+      use: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true },
+      grep: /@phone/,
+    },
   ],
   webServer: {
     command: `node start-server.mjs ${PORT}`,

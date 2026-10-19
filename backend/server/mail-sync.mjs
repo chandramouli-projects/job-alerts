@@ -7,10 +7,13 @@ An update for an application the app doesn't know (applied straight on LinkedIn)
 */
 import { spawn } from "node:child_process";
 import { join } from "node:path";
-import { applyEvents } from "../mail/mail-rules.js";   // matching rules shared with the live site
+import { applyEvents } from "../mail/mail-rules.js"; // matching rules shared with the live site
 
 export function createMailSync({ root, db, saveDb, env }) {
-  const account = () => String(process.env.MAIL_ACCOUNT || env().TRACK_ACCOUNT || env().GMAIL_ADDRESS || "").trim().toLowerCase();
+  const account = () =>
+    String(process.env.MAIL_ACCOUNT || env().TRACK_ACCOUNT || env().GMAIL_ADDRESS || "")
+      .trim()
+      .toLowerCase();
   const configured = () => !!(process.env.MAIL_CMD || (env().GMAIL_ADDRESS && env().GMAIL_APP_PASSWORD));
   let running = null;
 
@@ -18,20 +21,27 @@ export function createMailSync({ root, db, saveDb, env }) {
     return new Promise(resolve => {
       const p = process.env.MAIL_CMD
         ? spawn(process.env.MAIL_CMD, { shell: true, cwd: root })
-        : spawn(process.env.PYTHON || "python", [join(root, "backend", "mail", "track_mail.py"), "--json"], { cwd: root });
-      let out = "", err = "";
-      p.stdout.on("data", c => out += c);
-      p.stderr.on("data", c => err += c);
+        : spawn(process.env.PYTHON || "python", [join(root, "backend", "mail", "track_mail.py"), "--json"], {
+            cwd: root,
+          });
+      let out = "",
+        err = "";
+      p.stdout.on("data", c => (out += c));
+      p.stderr.on("data", c => (err += c));
       p.on("error", e => resolve({ error: "Could not start the mail reader: " + e.message }));
       p.on("close", () => {
-        try { resolve(JSON.parse(out)); } catch { resolve({ error: (err || out || "The mail reader gave no answer").trim().slice(0, 200) }); }
+        try {
+          resolve(JSON.parse(out));
+        } catch {
+          resolve({ error: (err || out || "The mail reader gave no answer").trim().slice(0, 200) });
+        }
       });
     });
   }
 
   // match each update to the person's applications (backend/mail/mail-rules.js); returns how many moved
   async function apply(acc, events) {
-    const st = db.mail[acc] ||= { seen: [], jobs: {}, lastRun: 0, error: "" };
+    const st = (db.mail[acc] ||= { seen: [], jobs: {}, lastRun: 0, error: "" });
     return (await applyEvents(st, db.users[acc]?.jobs || {}, events)).length;
   }
 
@@ -41,13 +51,17 @@ export function createMailSync({ root, db, saveDb, env }) {
     if (running) return running;
     running = (async () => {
       const r = await readMail();
-      const st = db.mail[acc] ||= { seen: [], jobs: {}, lastRun: 0, error: "" };
+      const st = (db.mail[acc] ||= { seen: [], jobs: {}, lastRun: 0, error: "" });
       st.lastRun = Date.now();
       st.error = r.error || "";
       const changed = r.error ? 0 : await apply(acc, r.events || []);
       saveDb();
-      console.log(`mail check: ${r.error ? "error: " + r.error : `${(r.events || []).length} updates read, ${changed} statuses changed`}`);
-    })().finally(() => { running = null; });
+      console.log(
+        `mail check: ${r.error ? "error: " + r.error : `${(r.events || []).length} updates read, ${changed} statuses changed`}`
+      );
+    })().finally(() => {
+      running = null;
+    });
     return running;
   }
 

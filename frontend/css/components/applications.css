@@ -1,49 +1,295 @@
 /* Application tracking: progress steps, application cards, "Did you apply?" pop-up */
-.stepper{list-style:none;margin:12px 0 0 58px;padding:0;display:flex;max-width:400px}
-@media (max-width:480px){.stepper{margin-left:0}}
-.stepper li{flex:1;position:relative;text-align:center;color:var(--muted);padding-top:15px;min-width:0}
-.stepper li::before{content:"";position:absolute;top:4px;left:-50%;right:50%;height:2px;background:var(--line)}
-.stepper li:first-child::before{display:none}
-.stepper li.done::before{background:var(--accent)}
-.stepper i{position:absolute;top:0;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--line);z-index:1}
-.stepper li.done i{background:var(--accent);border-color:var(--accent)}
-.stepper li.cur i{box-shadow:0 0 0 3px var(--accent-soft)}
-.stepper li.end::before,.stepper li.end i{background:var(--danger);border-color:var(--danger)}
-.stepper li.end i{box-shadow:0 0 0 3px color-mix(in srgb,var(--danger) 18%,transparent)}
-.stepper b{display:block;font-weight:600;color:var(--muted);font-size:.72rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.stepper li.done b{color:var(--ink)}
-.stepper li.cur b{font-weight:700}
-.stepper small{display:none}
-.app{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;cursor:pointer;transition:border-color .15s,box-shadow .3s}
-.app:hover{border-color:var(--accent)}
-.app.flash{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
-.app-top{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:12px;align-items:start}
-.app h3{font-size:1.02rem;font-family:Figtree,sans-serif;font-weight:700;line-height:1.3;overflow-wrap:anywhere}
-.app-status{border:1.5px solid var(--c);color:var(--c);background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' fill='none' stroke='%235D6B72' stroke-width='2'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 10px center;-webkit-appearance:none;appearance:none;border-radius:999px;padding:6px 28px 6px 12px;font-weight:700;font-size:.84rem;cursor:pointer}
-.app-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:.84rem}
-.wait{margin:0 0 6px;color:var(--muted);font-size:.88rem;text-align:center}
-.app-foot .due{color:var(--interview);font-weight:700}
-.app-acts{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
-.applied-bar{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--accent-soft);color:var(--accent);font-weight:700;border-radius:12px;padding:12px}
-.apply.sm{padding:7px 13px;font-size:.84rem}
-@media (max-width:480px){.app-top{grid-template-columns:40px 1fr auto;gap:10px}.app .logo{width:40px;height:40px}.app-acts{margin-left:0;width:100%}.app-acts .btn{flex:1}}
-.ap-job{display:flex;align-items:center;gap:12px;background:var(--surface2);border-radius:14px;padding:12px;margin:4px 0 18px}
-.ap-job b{display:block;line-height:1.3}
-.ap-job small{color:var(--muted)}
-.ok-badge{width:72px;height:72px;border-radius:50%;background:var(--offer);color:#fff;display:grid;place-items:center;margin:6px auto 16px;box-shadow:0 0 0 10px color-mix(in srgb,var(--offer) 15%,transparent);animation:okpop .35s cubic-bezier(.3,1.6,.6,1)}
-.ok-badge svg{width:36px;height:36px}
-#apStep{background:var(--surface2);border-radius:14px;padding:4px 8px 12px;margin:4px 0 18px}
-@keyframes okpop{from{transform:scale(.4);opacity:0}}
-@media (prefers-reduced-motion:reduce){.ok-badge{animation:none}}
+.stepper {
+  list-style: none;
+  margin: 12px 0 0 58px;
+  padding: 0;
+  display: flex;
+  max-width: 400px;
+}
+@media (max-width: 480px) {
+  .stepper {
+    margin-left: 0;
+  }
+}
+.stepper li {
+  flex: 1;
+  position: relative;
+  text-align: center;
+  color: var(--muted);
+  padding-top: 15px;
+  min-width: 0;
+}
+.stepper li::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: -50%;
+  right: 50%;
+  height: 2px;
+  background: var(--line);
+}
+.stepper li:first-child::before {
+  display: none;
+}
+.stepper li.done::before {
+  background: var(--accent);
+}
+.stepper i {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  z-index: 1;
+}
+.stepper li.done i {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.stepper li.cur i {
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.stepper li.end::before,
+.stepper li.end i {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+.stepper li.end i {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 18%, transparent);
+}
+.stepper b {
+  display: block;
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.stepper li.done b {
+  color: var(--ink);
+}
+.stepper li.cur b {
+  font-weight: 700;
+}
+.stepper small {
+  display: none;
+}
+.app {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.3s;
+}
+.app:hover {
+  border-color: var(--accent);
+}
+.app.flash {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.app-top {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+.app h3 {
+  font-size: 1.02rem;
+  font-family: Figtree, sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.app-status {
+  border: 1.5px solid var(--c);
+  color: var(--c);
+  background: var(--surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' fill='none' stroke='%235D6B72' stroke-width='2'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 999px;
+  padding: 6px 28px 6px 12px;
+  font-weight: 700;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+.app-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+.wait {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
+}
+.app-foot .due {
+  color: var(--interview);
+  font-weight: 700;
+}
+.app-acts {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.applied-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 12px;
+}
+.apply.sm {
+  padding: 7px 13px;
+  font-size: 0.84rem;
+}
+@media (max-width: 480px) {
+  .app-top {
+    grid-template-columns: 40px 1fr auto;
+    gap: 10px;
+  }
+  .app .logo {
+    width: 40px;
+    height: 40px;
+  }
+  .app-acts {
+    margin-left: 0;
+    width: 100%;
+  }
+  .app-acts .btn {
+    flex: 1;
+  }
+}
+.ap-job {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface2);
+  border-radius: 14px;
+  padding: 12px;
+  margin: 4px 0 18px;
+}
+.ap-job b {
+  display: block;
+  line-height: 1.3;
+}
+.ap-job small {
+  color: var(--muted);
+}
+.ok-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--offer);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  margin: 6px auto 16px;
+  box-shadow: 0 0 0 10px color-mix(in srgb, var(--offer) 15%, transparent);
+  animation: okpop 0.35s cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+.ok-badge svg {
+  width: 36px;
+  height: 36px;
+}
+#apStep {
+  background: var(--surface2);
+  border-radius: 14px;
+  padding: 4px 8px 12px;
+  margin: 4px 0 18px;
+}
+@keyframes okpop {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ok-badge {
+    animation: none;
+  }
+}
 /* application card: when you applied, and the status menu */
-.app-when{color:var(--muted);font-size:.82rem;margin-top:3px}
-.app-top .app-status{align-self:start}
-.app-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
-.app-head h3{margin:0}
-a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-.app-acts .btn{white-space:nowrap}
-@media (max-width:480px){.app-top{grid-template-columns:40px minmax(0,1fr) auto}.app-top .status-pill{font-size:.72rem;padding:3px 8px;white-space:nowrap}}
+.app-when {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 3px;
+}
+.app-top .app-status {
+  align-self: start;
+}
+.app-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.app-head h3 {
+  margin: 0;
+}
+a.btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.app-acts .btn {
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .app-top {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+  }
+  .app-top .status-pill {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    white-space: nowrap;
+  }
+}
 /* Gmail status line on My jobs, and "from LinkedIn email" on a card */
-.mailbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px 10px 14px;margin-bottom:12px;color:var(--muted);font-size:.86rem}
-.mailbar.bad{border-color:var(--danger);color:var(--danger)}
-.app-foot .via{color:var(--muted);font-style:italic}
+.mailbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 12px 10px 14px;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+.mailbar.bad {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.app-foot .via {
+  color: var(--muted);
+  font-style: italic;
+}
