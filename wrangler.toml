@@ -8,4 +8,4 @@ compatibility_date = "2025-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "udyogam-db"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "602d1b40-270e-4e16-a7d5-e8d7b4f756c5"
