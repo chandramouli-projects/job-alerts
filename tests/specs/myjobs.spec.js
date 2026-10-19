@@ -30,7 +30,8 @@ test("TC-MY-01 saving a job puts it in the Saved jobs menu, and it is kept on th
 test("TC-MY-02 Apply -> 'Did you apply?' -> Yes: the job moves to Applied and leaves the feed", async ({ page, request }) => {
   test.slow();
   await start(page, request);
-  const [popup] = await Promise.all([page.waitForEvent("popup"), page.click('a[data-apply="qa-hyd"]')]);
+  await page.click('[data-open="qa-hyd"]');   // the card opens the details; View job is there
+  const [popup] = await Promise.all([page.waitForEvent("popup"), page.click('#sheet .sheet-foot a[data-apply="qa-hyd"]')]);
   await page.waitForTimeout(1700);                 // the app asks only after you have been away a moment
   await popup.close();
   await page.bringToFront();
@@ -48,7 +49,8 @@ test("TC-MY-02 Apply -> 'Did you apply?' -> Yes: the job moves to Applied and le
 test("TC-MY-03 'Not yet' keeps the job in the feed", async ({ page, request }) => {
   test.slow();
   await start(page, request);
-  const [popup] = await Promise.all([page.waitForEvent("popup"), page.click('a[data-apply="qa-hyd"]')]);
+  await page.click('[data-open="qa-hyd"]');   // the card opens the details; View job is there
+  const [popup] = await Promise.all([page.waitForEvent("popup"), page.click('#sheet .sheet-foot a[data-apply="qa-hyd"]')]);
   await page.waitForTimeout(1700);
   await popup.close();
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
@@ -60,6 +62,7 @@ test("TC-MY-03 'Not yet' keeps the job in the feed", async ({ page, request }) =
 // an account with one applied job and one saved job
 async function withApplied(page, request) {
   const a = await start(page, request);
+  await page.waitForFunction(() => !saveT);   // the app's own save is done, so it can't overwrite the one below
   const at = Date.now() - 2 * 864e5;
   await saveUser(request, a.token, { ...blankUser(a.email, QA_HYD), jobs: {
     "qa-hyd": { stage: "applied", saved: false, notes: "", history: [{ stage: "applied", at }], appliedAt: at },

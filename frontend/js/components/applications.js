@@ -69,7 +69,8 @@ function markApplied(){
   $("apAsk").hidden=true;$("apDone").hidden=false;setTimeout(()=>$("apView").focus(),30);
 }
 $("apYes").onclick=markApplied;
-$("apNo").onclick=$("apX").onclick=$("apBrowse").onclick=closeApply;
+$("apNo").onclick=$("apX").onclick=closeApply;
+$("apBrowse").onclick=()=>{closeApply();closeSheet();};   // applied: back to the list, not the job's details
 $("applyModal").onclick=e=>{if(e.target===$("applyModal"))closeApply();};
 $("apView").onclick=()=>{closeApply();closeSheet();go("mine");flashApp(apId);};
 

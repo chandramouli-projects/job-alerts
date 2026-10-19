@@ -81,12 +81,12 @@ onAppClick(async(d,t,e)=>{
     document.querySelectorAll(`[data-save="${CSS.escape(d.save)}"]`).forEach(b=>{b.setAttribute("aria-pressed",s);const l=b.querySelector("span");if(l)l.textContent=s?"Saved":"Save";});
     toast(s?"Saved to Saved jobs":"Removed from Saved jobs");renderNav();if(view==="saved")renderSaved();return;
   }
-  if(d.cardhide){U.hidden[d.cardhide]=1;picked.delete(d.cardhide);saveUser();render();renderPickBar();toast("Hidden from your feed");return;}
+  if(d.cardhide){hideJobs([d.cardhide]);return;}   // components/hidden-jobs.js: with Undo
   if("picksave" in d){
     for(const id of picked){const tr=track(id);if(!tr.saved){tr.saved=true;tr.savedAt=Date.now();tr.snap||=findJob(id);}}
     const n=picked.size;picked.clear();saveUser();renderNav();render();renderPickBar();toast(`Saved ${n} job${n===1?"":"s"}`,"ok");return;
   }
-  if("pickhide" in d){const n=picked.size;for(const id of picked)U.hidden[id]=1;picked.clear();saveUser();render();renderPickBar();toast(`Hid ${n} job${n===1?"":"s"}`);return;}
+  if("pickhide" in d){const ids=[...picked];picked.clear();hideJobs(ids);renderPickBar();return;}
   if("pickclear" in d){clearPicks();return;}
   if(d.open){openJob(d.open);return;}
 });

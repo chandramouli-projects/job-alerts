@@ -33,6 +33,13 @@ async function api(path,body,method){
 function saveUser(){
   if(!session)return;
   LS.set("uv.user."+session.email,U);
-  if(SERVER){const u=U;clearTimeout(saveT);saveT=setTimeout(()=>api("user",u,"PUT").catch(e=>toast(e.message)),500);}
+  if(SERVER){const u=U;clearTimeout(saveT);saveT=setTimeout(()=>{saveT=null;api("user",u,"PUT").catch(e=>toast(e.message));},500);}
 }
+// Leaving or refreshing the page inside that half second: send the waiting save now, so nothing is lost
+addEventListener("pagehide",()=>{
+  if(!saveT||!SERVER||!U)return;
+  clearTimeout(saveT);saveT=null;
+  const body=JSON.stringify(U);
+  fetch("api/user",{method:"PUT",keepalive:body.length<60000,headers:{"Content-Type":"application/json",Authorization:"Bearer "+LS.get("uv.token","")},body}).catch(()=>{});
+});
 function applyTheme(){const t=U?.settings.theme||"system";if(t==="system")document.documentElement.removeAttribute("data-theme");else document.documentElement.dataset.theme=t;}
