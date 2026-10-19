@@ -176,29 +176,3 @@
   margin: 0;
   max-width: none;
 }
-
-/* "More QA jobs in other cities" under a short Jobs for me list */
-.elsewhere {
-  margin: 22px 0 12px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-}
-.elsewhere h3 {
-  font-size: var(--fs-lg);
-  margin: 0 0 4px;
-}
-.elsewhere p {
-  margin: 0;
-  color: var(--muted);
-  font-size: var(--fs-md);
-}
-.elsewhere .linkbtn {
-  font-size: inherit;
-  margin-left: 4px;
-}
-.elsewhere-more {
-  color: var(--muted);
-  font-size: var(--fs-sm);
-  text-align: center;
-  margin: 14px 0 0;
-}

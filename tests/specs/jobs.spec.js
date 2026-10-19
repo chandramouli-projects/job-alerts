@@ -1,6 +1,6 @@
 // Jobs feed: "Jobs for me" rules, filters, search and live search. TC-JOB-xx, TC-FLT-xx, TC-LIVE-xx
 import { test, expect } from "@playwright/test";
-import { signupApi, saveUser, blankUser, useFixtures, openLoggedIn, jobTitles, elsewhereTitles, makeJob } from "./helpers.js";
+import { signupApi, saveUser, blankUser, useFixtures, openLoggedIn, jobTitles, makeJob } from "./helpers.js";
 
 const QA_HYD = { roles: ["QA / Testing"], exp: 3, cities: ["Hyderabad"], skills: ["selenium"] };
 let calls;
@@ -271,22 +271,25 @@ test.describe("Smarter matching", () => {
   });
 });
 
-test("TC-JOB-07 no job in my city: the count says 0, and jobs for my role and level in other cities show below", async ({
+test("TC-JOB-07 when there is no exact match, the count matches the role jobs shown below", async ({
   page,
   request,
 }) => {
   await start(page, request, { roles: ["QA / Testing"], exp: 3, cities: ["Pune"], skills: [] });
-  await expect(page.locator(".resbar > span").first()).toContainText("0 jobs for you");
-  await expect(page.locator(".elsewhere")).toContainText("No jobs in your cities right now.");
-  expect((await elsewhereTitles(page)).length).toBeGreaterThan(0);
+  await expect(page.locator(".card", { hasText: "No exact match." })).toBeVisible();
+  const shownJobs = await page.locator("#main .job").count();
+  expect(shownJobs).toBeGreaterThan(0);
+  await expect(page.locator(".resbar > span").first()).toContainText(
+    `${shownJobs} job${shownJobs === 1 ? "" : "s"} in your role`
+  );
 });
 
-test.describe("Few jobs for me", () => {
-  test("TC-FEW-01 with few fits, jobs for my role and level in other cities show below, never senior ones", async ({ page, request }) => {
-    await start(page, request);   // QA, 3 years, Hyderabad
-    await expect(page.locator(".elsewhere h3")).toHaveText("More QA / Testing jobs in other cities");
-    const other = await elsewhereTitles(page);
-    expect(other).toEqual(expect.arrayContaining(["QA Engineer", "Remote QA Tester"]));
-    for (const t of ["Senior QA Engineer", "QA Intern", "Java Developer", "QA Automation Engineer"]) expect(other).not.toContain(t);
-  });
+test("TC-LIVE-05 a role's live search asks for any of its words (QA, tester, testing, SDET...)", async ({
+  page,
+  request,
+}) => {
+  const asked = page.waitForRequest(r => r.url().includes("/search?") && r.url().includes("q=QA%20Testing"));
+  await start(page, request); // QA / Testing, Hyderabad: the app fetches fresh jobs for it on open
+  const any = new URL((await asked).url()).searchParams.get("any").split(",");
+  for (const w of ["qa", "tester", "testing", "sdet"]) expect(any).toContain(w);
 });

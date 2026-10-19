@@ -13,16 +13,28 @@ function searchParts(s) {
     where: m ? m[2].trim() : "",
   };
 }
+// The words a known role is written with, for the live search to ask "any of these" (ROLES in constants.js):
+// "QA Testing" -> "qa,tester,testing,sdet,quality assurance,...". Unknown words: none (searched as typed).
+function roleWords(what) {
+  const n = normQuery(what).replace(/\s+/g, " ");
+  const role = Object.keys(ROLES).find(
+    r => normQuery(r).replace(/\s+/g, " ") === n || ROLES[r].some(k => k.trim().replace(/[-/]$/, "") === n)
+  );
+  return role ? [...new Set(ROLES[role].map(k => k.trim().replace(/[-/]$/, "")).filter(Boolean))] : [];
+}
 async function liveSearch(what, where = "") {
   const api = (data.live_api || "").replace(/\/$/, ""),
-    key = (what + "|" + where).toLowerCase();
+    key = (what + "|" + where).toLowerCase(),
+    any = roleWords(what);
   if (!api || PREVIEW || what.length < 2 || liveDone.has(key)) return;
   liveDone.add(key);
   liveBusy++;
   if (view === "jobs") renderJobs();
   try {
     const r = await (
-      await fetch(`${api}/search?q=${encodeURIComponent(what)}&where=${encodeURIComponent(where)}`)
+      await fetch(
+        `${api}/search?q=${encodeURIComponent(what)}&where=${encodeURIComponent(where)}${any.length ? `&any=${encodeURIComponent(any.join(","))}` : ""}`
+      )
     ).json();
     // Both job search limits used up: say so once; the saved jobs still show
     if (r.limit) {

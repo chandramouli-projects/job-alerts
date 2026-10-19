@@ -97,6 +97,11 @@ for a static portal, and sends matching ones to Telegram.
   `config.json` `live_search_url`, then `fetch_jobs.py` copies it into `jobs.json` as `live_api`.
   The app calls it on search submit and for the user's own roles when it opens; a search shows
   every match, not just "Jobs for me".
+  A known role is also searched by any of its words: the app sends `any=` (the role's words from
+  `ROLES`, `roleWords()` in js/services/job-store.js), the Worker asks Adzuna `what_or` and keeps only
+  titles with one of them (also for the typed search), because "QA Testing" as one search needs both
+  words and finds a fraction of the jobs. The bot does the same for the roles people picked
+  (`/api/stats/roles` returns each role's words).
   Every search also fetches related jobs: `RELATED` (job families → related titles) gives up to 2
   extra Adzuna `title_only` calls; a role not in `RELATED` uses its main words inside the Adzuna
   category of the exact results. Those jobs carry `related: true`; the app (`liveSearch` in

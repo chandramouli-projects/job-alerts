@@ -601,7 +601,11 @@ def wanted_roles(top=3):
         RUN_INFO["wanted_roles"] = {"error": str(e)[:80]}
         return []
     out = [
-        {"term": re.sub(r"\s*/\s*", " ", x["role"]).strip(), "remote": x.get("remote", 0) > 0}
+        {
+            "term": re.sub(r"\s*/\s*", " ", x["role"]).strip(),
+            "words": x.get("words") or [x["role"].lower()],
+            "remote": x.get("remote", 0) > 0,
+        }
         for x in roles
         if x.get("role")
     ]
@@ -609,14 +613,26 @@ def wanted_roles(top=3):
     return out
 
 
-def fetch_adzuna(role):
+def title_has(title, words):
+    """The title has one of the words as a whole word ("qa" is not in "qatar")."""
+    t = (title or "").lower()
+    return any(re.search(r"(^|[^a-z0-9])" + re.escape(w) + r"($|[^a-z0-9])", t) for w in words)
+
+
+def fetch_adzuna(role, words=None, remote=False):
+    """Jobs for a role. With `words` (a role's words, e.g. qa, tester, testing, sdet), any of them
+    may match and only titles with one of them are kept; "QA Testing" as one search needs both."""
     app_id, app_key = os.getenv("ADZUNA_APP_ID"), os.getenv("ADZUNA_APP_KEY")
     if not (app_id and app_key):
         return []
+    single = [w for w in (words or []) if " " not in w][:8]
+    search = (
+        {"what_or": " ".join(single), **({"what": "remote"} if remote else {})} if single else {"what": role}
+    )
     params = {
         "app_id": app_id,
         "app_key": app_key,
-        "what": role,
+        **search,
         "results_per_page": 50,
         "max_days_old": DAYS_MAP.get(CONFIG.get("posted_within", "3days"), 3),
         "content-type": "application/json",
@@ -634,6 +650,8 @@ def fetch_adzuna(role):
         return []
     out = []
     for j in items:
+        if words and not title_has(html.unescape(re.sub("<[^>]+>", "", j.get("title") or "")), words):
+            continue
         loc = (j.get("location") or {}).get("display_name") or "India"
         desc = j.get("description") or ""
         out.append(
@@ -928,10 +946,10 @@ def main():
     # The roles people chose in the app are asked for on every run, not once a day
     wanted = [w for w in wanted_roles() if w["term"].lower() not in {r.lower() for r in turn_roles}]
     for w in wanted:
-        log(f"Adzuna (people's role): {w['term']}{' + remote' if w['remote'] else ''}")
-        raw += fetch_adzuna(w["term"])
+        log(f"Adzuna (people's role): {w['term']} {w['words'][:5]}{' + remote' if w['remote'] else ''}")
+        raw += fetch_adzuna(w["term"], w["words"])
         if w["remote"]:
-            raw += fetch_adzuna(f"{w['term']} remote")
+            raw += fetch_adzuna(w["term"], w["words"], remote=True)
     # Jooble: same idea, its own turn through the roles
     n = int(CONFIG.get("jooble_roles_per_run", 5))
     start = (turn * n) % max(1, len(roles))

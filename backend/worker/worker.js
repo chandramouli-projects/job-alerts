@@ -115,6 +115,7 @@ const CITIES = [
 ];
 const JUNIOR = /\b(intern|internship|trainee|fresher|graduate)\b/;
 const REMOTE = /\b(remote|work from home|wfh)\b/i;
+const ONSITE = /\b(on-?site|work from office|wfo|in-office)\b/i;
 
 export default {
   async fetch(request, env, ctx) {
@@ -131,13 +132,23 @@ export default {
     let where = clean(url.searchParams.get("where"), 40);
     const remote = url.searchParams.get("remote") === "1" || /^(remote|wfh|work from home)$/i.test(where);
     if (remote) where = "";
+    // the words a role is written with ("qa,tester,testing,sdet,..."): jobs with any of them in the title
+    const any = [
+      ...new Set(
+        String(url.searchParams.get("any") || "")
+          .toLowerCase()
+          .split(",")
+          .map(w => w.trim().replace(/[^a-z0-9 .#+/-]/g, ""))
+          .filter(w => w.length >= 2 && w.length <= 30)
+      ),
+    ].slice(0, 12);
     if (q.length < 2) return json({ jobs: [], error: "Type a role to search" }, cors, 400);
     const hasAdzuna = !!(env.ADZUNA_APP_ID && env.ADZUNA_APP_KEY);
     if (!hasAdzuna && !env.RAPIDAPI_KEY) return json({ jobs: [], error: "No job search key set" }, cors, 500);
 
     // Same search (any letter case) shares one cached answer
     const cacheKey = new Request(
-      `https://cache.local/search?q=${encodeURIComponent(q.toLowerCase())}&where=${encodeURIComponent(where.toLowerCase())}&remote=${remote ? 1 : 0}`
+      `https://cache.local/search?q=${encodeURIComponent(q.toLowerCase())}&where=${encodeURIComponent(where.toLowerCase())}&remote=${remote ? 1 : 0}&any=${encodeURIComponent(any.join(","))}`
     );
     const cache = caches.default;
     const hit = await cache.match(cacheKey);
@@ -156,7 +167,7 @@ export default {
         continue;
       }
       try {
-        jobs = await (s === "adzuna" ? adzuna : jsearch)(q, where, env, remote);
+        jobs = await (s === "adzuna" ? adzuna : jsearch)(q, where, env, remote, any);
         source = s;
         break;
       } catch (e) {
@@ -387,16 +398,43 @@ async function adzunaPage(env, search, where) {
   return (await r.json()).results || [];
 }
 
-async function adzuna(q, where, env, remote) {
-  const exact = await adzunaPage(env, { what: remote ? `${q} remote` : q }, where);
+// a title that has one of the role's words, as a whole word ("qa" is not in "qatar")
+const titleHas = (title, words) => {
+  const t = title.toLowerCase();
+  return words.some(w =>
+    new RegExp(`(^|[^a-z0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}($|[^a-z0-9])`).test(t)
+  );
+};
+
+async function adzuna(q, where, env, remote, any = []) {
+  // a known role: only jobs whose title has one of its words (the text match alone brings in other jobs)
+  const exact = (await adzunaPage(env, { what: remote ? `${q} remote` : q }, where)).filter(
+    j => !any.length || titleHas(strip(j.title), any)
+  );
+  // A known role: also "any of its words" (Adzuna what_or), kept only when the title has one of them.
+  // "QA Testing" alone needs both words in one job and misses most QA jobs.
+  const single = any.filter(w => !w.includes(" ")).slice(0, 8);
+  const broad = single.length
+    ? (
+        await adzunaPage(
+          env,
+          { what_or: single.join(" "), ...(remote ? { what: "remote" } : {}), sort_by: "relevance" },
+          where
+        ).catch(() => [])
+      ).filter(j => titleHas(strip(j.title), any))
+    : [];
   // Related searches are extra: if one fails, the exact jobs are still returned
   const related = await Promise.all(
-    relatedSearches(q, exact).map(s =>
+    (broad.length ? relatedSearches(q, exact).slice(0, 1) : relatedSearches(q, exact)).map(s =>
       adzunaPage(env, remote ? { ...s, what: "remote" } : s, where).catch(() => [])
     )
   );
   // related: true marks jobs found only by a related title, so the app shows them for this search
-  const items = [...exact.map(j => [j, false]), ...related.flat().map(j => [j, true])];
+  const items = [
+    ...exact.map(j => [j, false]),
+    ...broad.map(j => [j, false]),
+    ...related.flat().map(j => [j, true]),
+  ];
   const now = new Date().toISOString().slice(0, 19) + "+00:00";
   const out = [],
     ids = new Set();
@@ -410,7 +448,8 @@ async function adzuna(q, where, env, remote) {
       company_site: "",
       city: loc.split(",")[0].trim(),
       location: loc,
-      remote: REMOTE.test(`${loc} ${j.title}`) || (remote && REMOTE.test(desc)),
+      // a remote search: Adzuna found "remote" in the full text; trust it unless the snippet says office work
+      remote: REMOTE.test(`${loc} ${j.title}`) || (remote && (REMOTE.test(desc) || !ONSITE.test(desc))),
       type: { full_time: "Full-time", part_time: "Part-time" }[j.contract_time] || "",
       url: j.redirect_url || "",
       direct: false,
@@ -451,7 +490,7 @@ async function jsearch(q, where, env, remote) {
     const now = new Date().toISOString().slice(0, 19) + "+00:00";
     const out = [];
     for (const j of items) {
-      if (/usa/i.test(j.job_publisher || "") || (j.job_country && j.job_country !== "IN")) continue;
+      if (/\busa\b/i.test(j.job_publisher || "") || (j.job_country && j.job_country !== "IN")) continue;
       const links = applyLinks(j);
       const job = {
         title: j.job_title || "",

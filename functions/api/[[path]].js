@@ -17,7 +17,7 @@ are made here on first use. D1 keeps at most 2 MB in one row, so a person's save
 are stored in parts of 1.5 MB (table "parts"). Free plan: 5 GB, 100,000 rows written a day.
 */
 import { sendPush } from "../../backend/push/webpush.js";
-import { fits } from "../../backend/push/match.js";
+import { fits, ROLES } from "../../backend/push/match.js";
 import { applyEvents } from "../../backend/mail/mail-rules.js";
 import * as G from "../../backend/mail/gmail.js";
 
@@ -667,7 +667,13 @@ async function statsRoles(db, request, env) {
       ].filter(Boolean)
     );
     for (const role of roles) {
-      const c = count.get(role) || { role, people: 0, remote: 0 };
+      // the words the role is written with, so the bot finds every job for it (custom roles: as typed)
+      const words = [
+        ...new Set(
+          (ROLES[role] || [role.toLowerCase()]).map(k => k.trim().replace(/[-/]$/, "")).filter(Boolean)
+        ),
+      ];
+      const c = count.get(role) || { role, words, people: 0, remote: 0 };
       c.people++;
       if (remote) c.remote++;
       count.set(role, c);
