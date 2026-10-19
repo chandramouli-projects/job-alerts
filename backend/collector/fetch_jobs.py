@@ -28,15 +28,15 @@ HERE = Path(__file__).resolve().parent  # backend/collector: this script and con
 ROOT = HERE.parent.parent  # the project folder: .env, frontend/, database/
 # On my computer, read secrets from .env (GitHub Actions passes them as env vars instead)
 if (ROOT / ".env").exists():
-    for line in (ROOT / ".env").read_text().splitlines():
+    for line in (ROOT / ".env").read_text(encoding="utf-8").splitlines():
         k, sep, v = line.partition("=")
         if sep and not k.strip().startswith("#") and v.strip():
             os.environ.setdefault(k.strip(), v.strip().strip("\"'"))
-CONFIG = json.loads((HERE / "config.json").read_text())
+CONFIG = json.loads((HERE / "config.json").read_text(encoding="utf-8"))
 ALERTS = CONFIG.get("alerts", {})
 RUN_INFO = {}
 STATE = (
-    json.loads((ROOT / "database" / "state.json").read_text())
+    json.loads((ROOT / "database" / "state.json").read_text(encoding="utf-8"))
     if (ROOT / "database" / "state.json").exists()
     else {}
 )  # what each source answered, saved in database/state.json for troubleshooting
@@ -844,10 +844,12 @@ def telegram_hello(state):
 
 # ---------------------------------------------------------------- main
 def posted_time(job):
+    """When the job was posted, always with a time zone (some sites, like Jooble, give none: taken as UTC)."""
     try:
-        return datetime.fromisoformat(str(job.get("posted") or "").replace("Z", "+00:00"))
+        t = datetime.fromisoformat(str(job.get("posted") or "").replace("Z", "+00:00"))
     except ValueError:
         return None
+    return t if t.tzinfo else t.replace(tzinfo=timezone.utc)
 
 
 def merge_duplicate(keep, dup):
@@ -905,7 +907,7 @@ def main():
     state["turn"] = turn + 1
     telegram_ok = telegram_hello(state)
 
-    existing = json.loads(JOBS_FILE.read_text()).get("jobs", []) if JOBS_FILE.exists() else []
+    existing = json.loads(JOBS_FILE.read_text(encoding="utf-8")).get("jobs", []) if JOBS_FILE.exists() else []
     known = {j["id"]: j for j in existing}
     now = datetime.now(timezone.utc)
 
