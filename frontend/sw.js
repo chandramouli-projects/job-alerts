@@ -25,14 +25,22 @@ self.addEventListener("fetch", e => {
   })());
 });
 
-// A clicked system alert (from js/services/notifications.js): bring the app forward and open that note
+// An alert sent by the server while the app may be closed (Web Push; functions/api push/run)
+self.addEventListener("push", e => {
+  let d = {};
+  try { d = e.data ? e.data.json() : {}; } catch { d = { body: e.data ? e.data.text() : "" }; }
+  e.waitUntil(self.registration.showNotification(d.title || "Udyogam Vetuku", {
+    body: d.body || "", tag: d.tag || "udyogam", icon: "assets/icon-512.png", badge: "assets/logo.png", data: { url: d.url || "./jobs", push: true } }));
+});
+
+// A clicked system alert: bring the app forward and open that note, or the newest jobs
 self.addEventListener("notificationclick", e => {
   e.notification.close();
-  const note = e.notification.data?.id;
+  const { id: note, url, push } = e.notification.data || {};
   e.waitUntil((async () => {
     const wins = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
     const win = wins.find(w => new URL(w.url).origin === location.origin);
-    if (win) { await win.focus(); if (note) win.postMessage({ note }); return; }
-    await self.clients.openWindow("./jobs");
+    if (win) { await win.focus(); win.postMessage(note ? { note } : push ? { go: "jobs-new" } : {}); return; }
+    await self.clients.openWindow(url || "./jobs");
   })());
 });

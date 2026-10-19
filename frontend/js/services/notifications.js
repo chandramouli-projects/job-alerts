@@ -114,6 +114,9 @@ async function checkForNewJobs(){
   if(view==="jobs"&&document.activeElement?.id!=="q")renderJobs();
 }
 function startNotes(){
+  // turned on before (on any device) and allowed on this one: make sure this device gets alerts too
+  const st=notesState().settings;
+  if(st.push&&st.device&&"Notification" in window&&Notification.permission==="granted")subscribePush().catch(()=>{});else checkPushHere().catch(()=>{});
   if(!noteBase.size)noteBase=new Set(data.jobs.map(j=>j.id));   // before live search adds its jobs
   refreshNotes({quiet:true});
   clearInterval(notePoll);notePoll=setInterval(checkForNewJobs,NOTE_POLL);
@@ -134,10 +137,38 @@ async function askDeviceAlerts(){
   if(!("Notification" in window))return "unsupported";
   const p=Notification.permission==="default"?await Notification.requestPermission():Notification.permission;
   notesState().settings.device=p==="granted";saveUser();
+  if(p==="granted")await subscribePush({test:true}).catch(()=>false);
   return p;
 }
-// a system notification that was clicked: open its note (sw.js sends {note:id})
-navigator.serviceWorker?.addEventListener("message",e=>{if(e.data?.note&&U)openNote(e.data.note);});
+
+/* Alerts with the app closed (Web Push, live site only): this device subscribes with the server's key;
+   the job bot then asks the server to send each person one alert per run for the new jobs that fit them. */
+let pushHere=null;   // is this device subscribed? (null = not checked yet)
+const keyBytes=k=>Uint8Array.from(atob(k.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((k.length+3)%4)),c=>c.charCodeAt(0));
+const pushReg=async()=>"PushManager" in window&&navigator.serviceWorker?await navigator.serviceWorker.getRegistration():null;
+async function pushKey(){if(!SERVER)return null;try{return (await api("push/key")).key;}catch(e){return null;}}
+async function checkPushHere(){const r=await pushReg().catch(()=>null);pushHere=!!(r&&await r.pushManager.getSubscription());return pushHere;}
+async function subscribePush({test=false}={}){
+  const key=await pushKey(),reg=key&&await pushReg();
+  if(!reg){pushHere=false;return false;}
+  const sub=await reg.pushManager.getSubscription()||await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:keyBytes(key)});
+  await api("push/subscribe",sub.toJSON());
+  notesState().settings.push=true;saveUser();pushHere=true;
+  if(test)api("push/test",{}).catch(()=>{});
+  return true;
+}
+async function unsubscribePush({keep=false}={}){
+  const sub=await (await pushReg().catch(()=>null))?.pushManager.getSubscription();
+  if(sub){await api("push/unsubscribe",{endpoint:sub.endpoint}).catch(()=>{});await sub.unsubscribe().catch(()=>{});}
+  if(!keep){notesState().settings.push=false;saveUser();}
+  pushHere=false;
+}
+// a system notification that was clicked: open its note (sw.js sends {note:id}) or the newest jobs
+navigator.serviceWorker?.addEventListener("message",e=>{
+  if(!U)return;
+  if(e.data?.note)openNote(e.data.note);
+  else if(e.data?.go==="jobs-new"){resetFilters();F.sort="new";go("jobs");}
+});
 
 /* ---------------------------------------------------------------- hooks into the app */
 const _openShellN=openShell;
@@ -145,4 +176,14 @@ openShell=function(){_openShellN();startNotes();};
 const _loadMailN=loadMail;
 loadMail=async function(){await _loadMailN();refreshNotes();};
 const _logoutN=logout;
-logout=function(){clearInterval(notePoll);notePoll=null;closeNotePanel?.();_logoutN();};
+logout=function(){
+  clearInterval(notePoll);notePoll=null;closeNotePanel?.();
+  // the next person on this device must not get these alerts: drop this device's subscription
+  const token=LS.get("uv.token","");
+  pushReg().then(r=>r?.pushManager.getSubscription()).then(sub=>{
+    if(!sub)return;
+    fetch("api/push/unsubscribe",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify({endpoint:sub.endpoint})}).catch(()=>{});
+    sub.unsubscribe().catch(()=>{});
+  }).catch(()=>{});
+  pushHere=false;_logoutN();
+};

@@ -54,8 +54,17 @@ for a static portal, and sends matching ones to Telegram.
     profile, so read state syncs), checks jobs.json every 10 min and on tab focus, and shows a toast plus
     an optional system alert (`sw.js` handles the click). `components/notification-center.js` is the
     bell next to the name and its panel (drop-down; bottom sheet on phones) with per-kind settings.
-    System alerts work while the app is open or in the background; alerts with the app closed need
-    Web Push (not built). Tests: `tests/specs/notifications.spec.js`.
+    Tests: `tests/specs/notifications.spec.js`.
+  - Alerts with the app closed (Web Push, live site only): "Turn on" in the bell's settings subscribes
+    the device (`subscribePush` in notifications.js, `push` handler in `sw.js`). After each run the bot
+    (`send_push_alerts` in fetch_jobs.py, `NOTIFY_URL` + `NOTIFY_SECRET`) posts the new jobs to
+    `/api/push/run`; functions/api matches them per person with `backend/push/match.js` (a copy of the
+    app's rules; `tests/unit/push-match.test.mjs` fails if they drift) and sends one alert each with
+    `backend/push/webpush.js` (RFC 8291/8292 in WebCrypto, checked against the RFC example in
+    `tests/unit/webpush.test.mjs`). Max 40 alerts per run (free plan: 50 outside calls per request).
+    Keys: `VAPID_PUBLIC_KEY` in wrangler.toml; `VAPID_PRIVATE_JWK` and `NOTIFY_SECRET` are Cloudflare
+    Pages secrets (values in `.env`), `NOTIFY_SECRET` also a GitHub secret. Logout unsubscribes the
+    device. iPhone gets them only after "Add to Home Screen". Tests: `specs/push.cloudflare.js`.
   - Button clicks after login: each screen file registers its own with `onAppClick((d, t, e) => …)`
     (from `helpers.js`); `d` is the clicked button's `data-*`.
   - Matching (`services/matching.js`): roles and skills match whole words with `hasWord()` ("java"

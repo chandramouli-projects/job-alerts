@@ -142,6 +142,9 @@ async function api(req, path) {
     saveDb();
     return [200, { ok: true }];
   }
+  // alerts with the app closed (Web Push) run on the live site only (functions/api)
+  if (path === "push/key") return [200, { key: null }];
+  if (path.startsWith("push/")) return [503, { error: "Alerts with the app closed work on the live site." }];
   const email = sessionEmail(req);
   if (!email) return [401, { error: "Please log in again." }];
   if (path === "user" && req.method === "GET") return [200, { name: db.accounts[email].name, user: db.users[email] || null }];

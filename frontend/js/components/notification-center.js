@@ -57,8 +57,12 @@ function deviceRow(){
   if(!("Notification" in window))return `<div class="np-set"><div><b>Phone / computer alerts</b><small>This browser can't show alerts.</small></div></div>`;
   const p=Notification.permission;
   if(p==="denied")return `<div class="np-set"><div><b>Phone / computer alerts</b><small>Blocked for this site. Allow notifications in your browser's site settings, then come back.</small></div></div>`;
-  return `<div class="np-set"><div><b>Phone / computer alerts</b><small>A system alert while the app is open or running in the background.</small></div>
-    ${p==="granted"?`<label class="toggle"><input type="checkbox" id="npDevice" ${s.device?"checked":""}><span></span></label>`:`<button type="button" class="btn sm" data-npdevice>Turn on</button>`}</div>`;
+  const on=p==="granted"&&s.device;
+  const how=!on?"Get an alert on this device for new jobs and updates."
+    :pushHere?"On. Alerts reach this device even when the app is closed."
+    :SERVER?"On while the app is open. Install the app, or allow it, to get alerts when it's closed.":"On while the app is open or running in the background.";
+  return `<div class="np-set"><div><b>Phone / computer alerts</b><small>${how}</small></div>
+    ${p==="granted"?`<label class="toggle"><input type="checkbox" id="npDevice" ${s.device?"checked":""} aria-label="Phone / computer alerts"><span></span></label>`:`<button type="button" class="btn sm" data-npdevice>Turn on</button>`}</div>`;
 }
 function noteSettingsHtml(){
   const s=notesState().settings;
@@ -99,18 +103,23 @@ document.addEventListener("click",async e=>{
   if(t.id==="noteBell"){notePanel.hidden?openNotePanel():closeNotePanel();return;}
   if(d.note){openNote(d.note);return;}
   if("npreadall" in d){notesState().items.forEach(x=>x.read=true);saveUser();renderNotePanel();renderNoteBell();return;}
-  if("npsettings" in d){notePanelMode="settings";renderNotePanel();return;}
+  if("npsettings" in d){notePanelMode="settings";renderNotePanel();checkPushHere().then(()=>notePanelMode==="settings"&&!notePanel.hidden&&renderNotePanel()).catch(()=>{});return;}
   if("npback" in d){notePanelMode="list";renderNotePanel();return;}
   if(d.nptab){noteTab=d.nptab;renderNotePanel();return;}
   if("npdevice" in d){
     const p=await askDeviceAlerts();renderNotePanel();
     p==="granted"?toast("Alerts are on for this device","ok"):toast("Alerts were not allowed. You can allow them in your browser's site settings.");
-    if(p==="granted")navigator.serviceWorker?.getRegistration().then(r=>r?.showNotification("Alerts are on",{body:"You'll get new jobs and application updates here.",icon:"assets/icon-512.png",tag:"alerts-on"}));
+    // with Web Push the server sends the "Alerts are on" test itself; otherwise show one here
+    if(p==="granted"&&!pushHere)navigator.serviceWorker?.getRegistration().then(r=>r?.showNotification("Alerts are on",{body:"You'll get new jobs and application updates here.",icon:"assets/icon-512.png",tag:"alerts-on"}));
+    renderNotePanel();
   }
 });
 notePanel.addEventListener("change",e=>{
   const k=e.target.dataset.npkind;
   if(k){notesState().settings[k]=e.target.checked;saveUser();return;}
-  if(e.target.id==="npDevice"){notesState().settings.device=e.target.checked;saveUser();}
+  if(e.target.id==="npDevice"){
+    const on=e.target.checked;notesState().settings.device=on;saveUser();
+    (on?subscribePush({test:true}):unsubscribePush()).catch(()=>{}).finally(()=>{if(!notePanel.hidden)renderNotePanel();});
+  }
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!notePanel.hidden){e.stopPropagation();closeNotePanel();}},true);

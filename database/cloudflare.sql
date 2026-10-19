@@ -17,3 +17,6 @@ CREATE TABLE IF NOT EXISTS resumes (email TEXT PRIMARY KEY, file_name TEXT NOT N
 CREATE TABLE IF NOT EXISTS login_fails (email TEXT PRIMARY KEY, n INTEGER, at INTEGER);
 -- "Forgot password" PINs: 10 minutes, 5 tries.
 CREATE TABLE IF NOT EXISTS resets (email TEXT PRIMARY KEY, pin TEXT NOT NULL, at INTEGER, tries INTEGER);
+-- Devices that get alerts with the app closed (Web Push): one row per browser subscription.
+CREATE TABLE IF NOT EXISTS push_subs (endpoint TEXT PRIMARY KEY, email TEXT NOT NULL, p256dh TEXT NOT NULL, auth TEXT NOT NULL, created_at INTEGER);
+CREATE INDEX IF NOT EXISTS push_subs_email ON push_subs (email);

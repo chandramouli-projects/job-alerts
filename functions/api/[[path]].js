@@ -4,11 +4,17 @@ phone, computer and browser. Cloudflare runs this file for every /api/... link o
 other links are the normal site files. It answers the same /api/... calls, with the same messages,
 as backend/server/server.mjs (the server on this computer), so the app works the same with both.
 Not here: Gmail status tracking (needs Python on a computer, see backend/server/mail-sync.mjs).
+Alerts with the app closed (Web Push): push/subscribe keeps each device's subscription; the job bot
+calls push/run with the new jobs after every run, and each person gets one alert for the jobs that fit
+them. Needs VAPID_PUBLIC_KEY (wrangler.toml), and the secrets VAPID_PRIVATE_JWK and NOTIFY_SECRET.
 
 The database is the D1 binding "DB" set in wrangler.toml. Tables are in database/cloudflare.sql and
 are made here on first use. D1 keeps at most 2 MB in one row, so a person's saved data and resume
 are stored in parts of 1.5 MB (table "parts"). Free plan: 5 GB, 100,000 rows written a day.
 */
+import { sendPush } from "../../backend/push/webpush.js";
+import { fits } from "../../backend/push/match.js";
+
 const SCHEMA = `
 CREATE TABLE IF NOT EXISTS accounts (email TEXT PRIMARY KEY, name TEXT NOT NULL, password_hash TEXT NOT NULL, password_salt TEXT NOT NULL, created_at INTEGER);
 CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY, email TEXT NOT NULL, created_at INTEGER);
@@ -16,7 +22,10 @@ CREATE INDEX IF NOT EXISTS sessions_email ON sessions (email);
 CREATE TABLE IF NOT EXISTS parts (email TEXT NOT NULL, kind TEXT NOT NULL, part INTEGER NOT NULL, data BLOB, PRIMARY KEY (email, kind, part));
 CREATE TABLE IF NOT EXISTS resumes (email TEXT PRIMARY KEY, file_name TEXT NOT NULL, file_type TEXT NOT NULL, size INTEGER, uploaded_at INTEGER);
 CREATE TABLE IF NOT EXISTS login_fails (email TEXT PRIMARY KEY, n INTEGER, at INTEGER);
-CREATE TABLE IF NOT EXISTS resets (email TEXT PRIMARY KEY, pin TEXT NOT NULL, at INTEGER, tries INTEGER);`;
+CREATE TABLE IF NOT EXISTS resets (email TEXT PRIMARY KEY, pin TEXT NOT NULL, at INTEGER, tries INTEGER);
+CREATE TABLE IF NOT EXISTS push_subs (endpoint TEXT PRIMARY KEY, email TEXT NOT NULL, p256dh TEXT NOT NULL, auth TEXT NOT NULL, created_at INTEGER);
+CREATE INDEX IF NOT EXISTS push_subs_email ON push_subs (email);`;
+const PUSH_MAX = 40;   // alerts per run: Cloudflare's free plan allows 50 outside calls per request
 const PART = 1_500_000;
 const BODY_MAX = 5e6;
 const RESUME_MAX = 2 * 1024 * 1024;
@@ -94,6 +103,7 @@ export async function onRequest({ request, env, params }) {
       if (raw.length > BODY_MAX) return json(413, { error: "This is too big to save." });
       try { body = JSON.parse(raw || "{}") || {}; } catch { return json(400, { error: "The request was not valid." }); }
     }
+    if (path.startsWith("push/")) return await push(db, request, env, path, body);
     return await api(db, request, path, method, body);
   } catch (e) {
     console.error(e);
@@ -168,7 +178,7 @@ async function api(db, request, path, method, body) {
     return json(200, { ok: true });
   }
   if (path === "user" && method === "DELETE") {
-    await db.batch(["parts", "resumes", "sessions", "login_fails", "resets", "accounts"].map(t => db.prepare(`DELETE FROM ${t} WHERE email = ?`).bind(email)));
+    await db.batch(["parts", "resumes", "push_subs", "sessions", "login_fails", "resets", "accounts"].map(t => db.prepare(`DELETE FROM ${t} WHERE email = ?`).bind(email)));
     return json(200, { ok: true });
   }
   if (path === "password") {
@@ -201,6 +211,67 @@ async function api(db, request, path, method, body) {
   if (path === "logout") {
     await db.prepare("DELETE FROM sessions WHERE token = ?").bind((request.headers.get("Authorization") || "").replace(/^Bearer /, "")).run();
     return json(200, { ok: true });
+  }
+  return json(404, { error: "Not found" });
+}
+
+/* ---------------------------------------------------------------- alerts with the app closed */
+const vapidOf = env => ({ publicKey: env.VAPID_PUBLIC_KEY, privateJwk: env.VAPID_PRIVATE_JWK, subject: "https://udyogam-vetuku.pages.dev" });
+const subOf = r => ({ endpoint: r.endpoint, keys: { p256dh: r.p256dh, auth: r.auth } });
+
+async function push(db, request, env, path, body) {
+  const ready = !!(env.VAPID_PUBLIC_KEY && env.VAPID_PRIVATE_JWK);
+  if (path === "push/key") return json(200, { key: ready ? env.VAPID_PUBLIC_KEY : null });
+  if (!ready) return json(503, { error: "Alerts with the app closed are not set up yet." });
+
+  // the job bot, after every run: one alert per person for the new jobs that fit them
+  if (path === "push/run") {
+    const secret = (request.headers.get("Authorization") || "").replace(/^Bearer /, "");
+    if (!env.NOTIFY_SECRET || secret !== env.NOTIFY_SECRET) return json(401, { error: "Wrong key." });
+    const jobs = Array.isArray(body.jobs) ? body.jobs : [];
+    const { results: subs } = await db.prepare("SELECT * FROM push_subs ORDER BY created_at").all();
+    const emails = [...new Set(subs.map(s => s.email))];
+    let sent = 0, removed = 0, people = 0;
+    for (const email of emails) {
+      if (sent >= PUSH_MAX || !jobs.length) break;
+      const user = await readUser(db, email);
+      if (!user?.prefs || user.notifications?.settings?.jobs === false) continue;
+      const mine = jobs.filter(j => !user.hidden?.[j.id] && !user.jobs?.[j.id]?.stage && fits(j, user.prefs));
+      if (!mine.length) continue;
+      people++;
+      const best = mine[0], n = mine.length;
+      const message = { title: `${n} new job${n === 1 ? "" : "s"} for you`, body: `${best.title} at ${best.company}${n > 1 ? ` and ${n - 1} more` : ""}`, url: "./jobs", tag: "new-jobs" };
+      for (const s of subs.filter(x => x.email === email)) {
+        if (sent >= PUSH_MAX) break;
+        const r = await sendPush(subOf(s), message, vapidOf(env)).catch(() => ({ ok: false }));
+        if (r.ok) sent++;
+        if (r.gone) { await db.prepare("DELETE FROM push_subs WHERE endpoint = ?").bind(s.endpoint).run(); removed++; }
+      }
+    }
+    return json(200, { jobs: jobs.length, people, sent, removed });
+  }
+
+  const email = await sessionEmail(db, request);
+  if (!email) return json(401, { error: "Please log in again." });
+  if (path === "push/subscribe") {
+    const endpoint = String(body.endpoint || ""), p256dh = String(body.keys?.p256dh || ""), auth = String(body.keys?.auth || "");
+    if (!/^https?:\/\//.test(endpoint) || !p256dh || !auth) return json(400, { error: "This browser didn't give a usable subscription." });
+    await db.prepare("INSERT OR REPLACE INTO push_subs (endpoint, email, p256dh, auth, created_at) VALUES (?, ?, ?, ?, ?)").bind(endpoint, email, p256dh, auth, Date.now()).run();
+    return json(200, { ok: true });
+  }
+  if (path === "push/unsubscribe") {
+    await db.prepare("DELETE FROM push_subs WHERE endpoint = ? AND email = ?").bind(String(body.endpoint || ""), email).run();
+    return json(200, { ok: true });
+  }
+  if (path === "push/test") {
+    const { results } = await db.prepare("SELECT * FROM push_subs WHERE email = ?").bind(email).all();
+    let sent = 0;
+    for (const s of results.slice(0, 5)) {
+      const r = await sendPush(subOf(s), { title: "Alerts are on", body: "You'll get new jobs for you here, even when the app is closed.", url: "./jobs", tag: "alerts-on" }, vapidOf(env)).catch(() => ({ ok: false }));
+      if (r.ok) sent++;
+      if (r.gone) await db.prepare("DELETE FROM push_subs WHERE endpoint = ?").bind(s.endpoint).run();
+    }
+    return json(200, { sent });
   }
   return json(404, { error: "Not found" });
 }

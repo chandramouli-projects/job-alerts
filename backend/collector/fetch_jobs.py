@@ -474,6 +474,22 @@ def job_key(job):
 
 
 # ---------------------------------------------------------------- telegram
+def send_push_alerts(fresh):
+    """Ask the live site to send phone / computer alerts (even with the app closed) for the new jobs:
+    functions/api push/run matches them to each person. Needs NOTIFY_URL and NOTIFY_SECRET."""
+    url, secret = os.getenv("NOTIFY_URL"), os.getenv("NOTIFY_SECRET")
+    if not (url and secret) or not fresh:
+        return
+    keys = ("id", "title", "company", "location", "city_norm", "remote", "type", "exp_min", "exp_max", "found")
+    try:
+        r = requests.post(url, json={"jobs": [{k: j.get(k) for k in keys} for j in fresh[:300]]},
+                          headers={"Authorization": f"Bearer {secret}"}, timeout=60)
+        RUN_INFO["push"] = r.json() if r.ok else {"error": f"{r.status_code} {r.text[:80]}"}
+    except Exception as e:
+        RUN_INFO["push"] = {"error": str(e)[:80]}
+    log(f"Alerts: {RUN_INFO['push']}")
+
+
 def send_telegram(jobs):
     token, chat = os.getenv("TELEGRAM_BOT_TOKEN"), os.getenv("TELEGRAM_CHAT_ID")
     if not (token and chat) or not jobs:
@@ -627,6 +643,7 @@ def main():
                                      "my_experience": ALERTS.get("experience_years"),
                                      "live_api": CONFIG.get("live_search_url", ""),
                                      "jobs": all_jobs}, ensure_ascii=False, separators=(",", ":")))
+    send_push_alerts(fresh)
     state["last_run"] = {"at": now.isoformat(timespec="seconds"), "fetched": len(raw),
                          "new": len(fresh), "alerts": len(alerts), **RUN_INFO}
     STATE_FILE.write_text(json.dumps(state, indent=1))

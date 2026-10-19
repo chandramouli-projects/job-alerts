@@ -32,6 +32,8 @@ jobs:
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           JOOBLE_KEY: ${{ secrets.JOOBLE_KEY }}
+          NOTIFY_URL: https://udyogam-vetuku.pages.dev/api/push/run   # alerts with the app closed
+          NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SEARCH_QUERY: ${{ github.event.inputs.query }}
