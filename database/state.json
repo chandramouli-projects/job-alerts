@@ -1,43 +1,70 @@
 {
- "turn": 9,
+ "turn": 10,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-12T07:37:45+00:00",
-  "fetched": 123,
-  "new": 18,
-  "alerts": 18,
+  "at": "2026-10-19T14:51:18+00:00",
+  "fetched": 681,
+  "new": 428,
+  "alerts": 428,
   "jsearch": {
-   "role": "Java Developer OR Python Developer OR Node.js Developer OR .NET Developer OR Backend Developer jobs in India",
+   "role": "Data Analyst OR Data Scientist OR Data Engineer OR Business Analyst jobs in India",
    "tried": [
     "/search-v2:200"
    ],
    "path": "/search-v2",
    "results": 10
   },
+  "jooble": {
+   "Data Scientist": 30,
+   "Data Engineer": 30,
+   "Machine Learning Engineer": 30,
+   "DevOps Engineer": 30,
+   "Cloud Engineer": 30
+  },
   "company_boards": {
    "ok": [
-    "Databricks:13",
-    "Stripe:9",
-    "Rubrik:7",
+    "Databricks:21",
+    "Stripe:1",
+    "Rubrik:9",
     "Groww:0",
-    "Druva:3",
+    "Druva:4",
     "CRED:0",
-    "Meesho:0",
+    "Meesho:1",
     "Zeta:0",
-    "Sarvam AI:0",
-    "Freshworks:2",
+    "Sarvam AI:1",
+    "Freshworks:1",
     "Visa:0",
-    "Bosch:23",
-    "ServiceNow:14",
-    "NVIDIA:6",
-    "Salesforce:16",
-    "Adobe:2",
+    "Bosch:29",
+    "ServiceNow:8",
+    "Accenture:18",
+    "NVIDIA:12",
+    "Adobe:0",
     "Intel:0",
-    "Mastercard:9",
-    "PwC:9"
+    "Mastercard:8",
+    "PwC:5",
+    "MongoDB:19",
+    "Okta:10",
+    "Twilio:6",
+    "Zscaler:27",
+    "Coinbase:5",
+    "Airbnb:0",
+    "Pure Storage:4",
+    "Commvault:3",
+    "FamPay:0",
+    "Citi:30",
+    "State Street:15",
+    "Autodesk:4",
+    "FIS:3",
+    "Applied Materials:13",
+    "Workday:4",
+    "HP:2",
+    "Micron:0",
+    "PayPal:5",
+    "Pfizer:3",
+    "KLA:0"
    ],
    "failed": [
-    "Accenture:500 Server Error: Internal Server Error for url: https://acc"
+    "Salesforce:429 Client Error: Too Many Requests for url: https://salesfo"
    ]
   }
  },
