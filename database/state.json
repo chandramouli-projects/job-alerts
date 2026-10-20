@@ -1,25 +1,25 @@
 {
- "turn": 13,
+ "turn": 14,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-20T12:50:56+00:00",
-  "fetched": 629,
-  "new": 205,
-  "alerts": 205,
+  "at": "2026-10-20T18:04:47+00:00",
+  "fetched": 545,
+  "new": 87,
+  "alerts": 87,
   "jsearch": {
-   "role": "QA Engineer OR Software Tester OR Automation Testing OR Manual Testing jobs in India",
+   "role": "Frontend Developer OR React Developer OR Angular Developer OR Full Stack Developer jobs in India",
    "tried": [
     "/search-v2:200"
    ],
    "path": "/search-v2",
-   "results": 6
+   "results": 3
   },
   "jooble": {
-   "Software Engineer": 30,
-   "Java Developer": 30,
-   "Python Developer": 30,
-   "Full Stack Developer": 30,
-   "Frontend Developer": 30
+   "Backend Developer": 30,
+   "React Developer": 30,
+   "Angular Developer": 4,
+   "Node.js Developer": 30,
+   ".NET Developer": 30
   },
   "company_boards": {
    "ok": [
@@ -52,14 +52,14 @@
     "Commvault:3",
     "FamPay:0",
     "Citi:30",
-    "State Street:13",
+    "State Street:12",
     "Autodesk:4",
     "FIS:3",
     "Applied Materials:9",
     "Workday:4",
     "HP:1",
     "Micron:0",
-    "PayPal:4",
+    "PayPal:1",
     "Pfizer:1",
     "KLA:0"
    ],
