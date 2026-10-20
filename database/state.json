@@ -1,30 +1,31 @@
 {
- "turn": 11,
+ "turn": 12,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-19T21:12:31+00:00",
-  "fetched": 631,
-  "new": 262,
-  "alerts": 262,
+  "at": "2026-10-20T06:15:06+00:00",
+  "fetched": 560,
+  "new": 196,
+  "alerts": 196,
   "jsearch": {
-   "role": "DevOps Engineer OR Cloud Engineer OR Support Engineer OR Cyber Security jobs in India",
+   "role": "Android Developer OR Flutter Developer OR UI UX Designer OR Salesforce OR SAP Consultant jobs in India",
    "tried": [
     "/search-v2:200"
    ],
    "path": "/search-v2",
-   "results": 3
+   "results": 0,
+   "note": "{\"status\": \"OK\", \"request_id\": \"7229489c-a08a-4141-b1ee-c89b66bb29bd\", \"parameters\": {\"query\": \"Android Developer OR Flutter Developer OR UI UX Designer OR Salesforce OR SAP Consultant jobs in India\", \"num_pages\": 1, \"date_posted\": \"3days\", \"country\": \"in\", \"language\": \"en\"}}"
   },
   "jooble": {
-   "QA Engineer": 30,
-   "Automation Tester": 7,
-   "UI UX Designer": 18,
-   "Business Analyst": 30,
-   "Salesforce Developer": 30
+   "SAP Consultant": 0,
+   "Support Engineer": 30,
+   "Network Engineer": 30,
+   "Cyber Security Analyst": 20,
+   "Product Manager": 30
   },
   "company_boards": {
    "ok": [
     "Databricks:21",
-    "Stripe:1",
+    "Stripe:0",
     "Rubrik:9",
     "Groww:0",
     "Druva:4",
@@ -34,37 +35,37 @@
     "Sarvam AI:1",
     "Freshworks:1",
     "Visa:0",
-    "Bosch:29",
+    "Bosch:27",
     "ServiceNow:8",
-    "Accenture:17",
     "NVIDIA:13",
+    "Salesforce:22",
     "Adobe:0",
     "Intel:0",
     "Mastercard:3",
     "PwC:4",
     "MongoDB:19",
-    "Okta:10",
+    "Okta:8",
     "Twilio:6",
-    "Zscaler:27",
+    "Zscaler:10",
     "Coinbase:5",
     "Airbnb:0",
     "Pure Storage:3",
     "Commvault:3",
     "FamPay:0",
-    "Citi:30",
-    "State Street:16",
+    "Citi:31",
+    "State Street:15",
     "Autodesk:4",
     "FIS:3",
     "Applied Materials:13",
     "Workday:4",
     "HP:2",
     "Micron:0",
-    "PayPal:5",
+    "PayPal:3",
     "Pfizer:1",
     "KLA:0"
    ],
    "failed": [
-    "Salesforce:429 Client Error: Too Many Requests for url: https://salesfo"
+    "Accenture:429 Client Error: Too Many Requests for url: https://accentu"
    ]
   }
  },
