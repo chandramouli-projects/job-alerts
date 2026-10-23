@@ -13,6 +13,9 @@ database_id = "602d1b40-270e-4e16-a7d5-e8d7b4f756c5"
 
 # Public key for alerts with the app closed (Web Push); the private key is a Cloudflare secret
 [vars]
+# The build must not install anything by itself: it saw pyproject.toml (Black settings only) and ran
+# "pip install .", which fails. The build command's "npm ci" installs what the React app needs.
+SKIP_DEPENDENCY_INSTALL = "1"
 VAPID_PUBLIC_KEY = "BF_GvrEMzhSKD036uYLR29OnrYXr19txEMUYjARC9FibbK_9m3B6dym1LrbYCvo7lstsgIwjz7dWlnJd57yhn0o"
 # Google sign-in for "Connect Gmail" (not secret); GOOGLE_CLIENT_SECRET and TOKEN_KEY are Cloudflare secrets
 # GOOGLE_CLIENT_ID = "<from Google Cloud>"
