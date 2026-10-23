@@ -11,7 +11,7 @@ every search, so no restart after editing .env.
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { existsSync, readFileSync } from "node:fs";
-import { extname, join, normalize, sep } from "node:path";
+import { extname, join, normalize, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { networkInterfaces } from "node:os";
 import { randomBytes, randomInt, scryptSync, timingSafeEqual } from "node:crypto";
@@ -20,7 +20,10 @@ import { openDatabase } from "./database.mjs";
 import { createMailSync } from "./mail-sync.mjs";
 
 const ROOT = fileURLToPath(new URL("../..", import.meta.url));
-const FRONTEND = join(ROOT, "frontend");
+// FRONTEND_DIR=frontend-react/dist serves the React app instead (build it first: npm run build there);
+// the jobs list always comes from frontend/data, where the bot writes it
+const FRONTEND = process.env.FRONTEND_DIR ? resolve(ROOT, process.env.FRONTEND_DIR) : join(ROOT, "frontend");
+const DATA_DIR = join(ROOT, "frontend");
 // DB_FILE / ENV_FILE let the automated tests use their own database and no API keys
 const DB_FILE = process.env.DB_FILE || join(ROOT, "database", "app.db");
 const PORT = +(process.argv[2] || process.env.PORT || 8080);
@@ -104,6 +107,14 @@ db.mail ||= {};
 // application statuses read from Gmail every 15 minutes (track_mail.py)
 const mail = createMailSync({ root: ROOT, db, saveDb, env });
 let lastMailAsk = 0;
+// the GitHub key is a secret: it stays in the person's browser and is never kept on the server
+function withoutSecrets(u) {
+  if (u?.settings && "ghToken" in u.settings) {
+    u = { ...u, settings: { ...u.settings } };
+    delete u.settings.ghToken;
+  }
+  return u;
+}
 const fails = new Map(); // email -> recent wrong passwords, to slow down guessing
 const resets = new Map(); // email -> reset PIN from "Forgot password", 10 minutes, 5 tries
 
@@ -198,9 +209,9 @@ async function api(req, path) {
   const email = sessionEmail(req);
   if (!email) return [401, { error: "Please log in again." }];
   if (path === "user" && req.method === "GET")
-    return [200, { name: db.accounts[email].name, user: db.users[email] || null }];
+    return [200, { name: db.accounts[email].name, user: withoutSecrets(db.users[email] || null) }];
   if (path === "user" && req.method === "PUT") {
-    db.users[email] = body;
+    db.users[email] = withoutSecrets(body);
     if (body.profile?.name) db.accounts[email].name = body.profile.name;
     saveDb();
     return [200, { ok: true }];
@@ -224,6 +235,9 @@ async function api(req, path) {
     return [200, { ok: true }];
   }
   if (path === "user" && req.method === "DELETE") {
+    // deleting everything needs the password, not just a logged-in browser
+    if (!checkPw(db.accounts[email], String(body.password || "")))
+      return [403, { error: "Password is wrong." }];
     database.resume.remove(email);
     delete db.accounts[email];
     delete db.users[email];
@@ -238,6 +252,10 @@ async function api(req, path) {
     if (String(body.new || "").length < 6)
       return [400, { error: "New password needs at least 6 characters." }];
     setPw(a, String(body.new));
+    // other phones / computers must log in again with the new password; this one stays logged in
+    const mine = (req.headers.authorization || "").replace(/^Bearer /, "");
+    for (const [t, ses] of Object.entries(db.sessions))
+      if (ses.email === email && t !== mine) delete db.sessions[t];
     saveDb();
     return [200, { ok: true }];
   }
@@ -325,8 +343,9 @@ createServer(async (req, res) => {
       return;
     }
     const page = url.pathname === "/" || !extname(url.pathname) ? "/index.html" : url.pathname;
-    const path = normalize(join(FRONTEND, decodeURIComponent(page)));
-    if (!path.startsWith(FRONTEND + sep)) {
+    const base = url.pathname.startsWith("/data/") ? DATA_DIR : FRONTEND;
+    const path = normalize(join(base, decodeURIComponent(page)));
+    if (!path.startsWith(base + sep)) {
       res.writeHead(403).end();
       return;
     }

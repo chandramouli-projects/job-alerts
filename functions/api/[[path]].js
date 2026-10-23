@@ -81,6 +81,14 @@ async function hashPw(pw, salt) {
     )
   );
 }
+// the GitHub key is a secret: it stays in the person's browser and is never kept on the server
+function withoutSecrets(u) {
+  if (u?.settings && "ghToken" in u.settings) {
+    u = { ...u, settings: { ...u.settings } };
+    delete u.settings.ghToken;
+  }
+  return u;
+}
 async function checkPw(a, pw) {
   const h = await hashPw(pw, a.password_salt);
   let diff = h.length ^ a.password_hash.length; // same time whatever the answer
@@ -276,10 +284,15 @@ async function api(db, request, path, method, body) {
   if (!email) return json(401, { error: "Please log in again." });
   if (path === "user" && method === "GET") {
     const a = await db.prepare("SELECT name FROM accounts WHERE email = ?").bind(email).first();
-    return json(200, { name: a.name, user: await readUser(db, email) });
+    return json(200, { name: a.name, user: withoutSecrets(await readUser(db, email)) });
   }
   if (path === "user" && method === "PUT") {
-    const steps = writeParts(db, email, "user", new TextEncoder().encode(JSON.stringify(body)));
+    const steps = writeParts(
+      db,
+      email,
+      "user",
+      new TextEncoder().encode(JSON.stringify(withoutSecrets(body)))
+    );
     if (typeof body.profile?.name === "string" && body.profile.name.trim())
       steps.push(
         db.prepare("UPDATE accounts SET name = ? WHERE email = ?").bind(body.profile.name.trim(), email)
@@ -288,6 +301,9 @@ async function api(db, request, path, method, body) {
     return json(200, { ok: true });
   }
   if (path === "user" && method === "DELETE") {
+    // deleting everything needs the password, not just a logged-in browser
+    const a = await db.prepare("SELECT * FROM accounts WHERE email = ?").bind(email).first();
+    if (!(await checkPw(a, String(body.password || "")))) return json(403, { error: "Password is wrong." });
     await db.batch(
       ["parts", "resumes", "push_subs", "mail_accounts", "sessions", "login_fails", "resets", "accounts"].map(
         t => db.prepare(`DELETE FROM ${t} WHERE email = ?`).bind(email)
@@ -302,10 +318,14 @@ async function api(db, request, path, method, body) {
     if (String(body.new || "").length < 6)
       return json(400, { error: "New password needs at least 6 characters." });
     const { salt, hash } = await newPw(String(body.new));
-    await db
-      .prepare("UPDATE accounts SET password_hash = ?, password_salt = ? WHERE email = ?")
-      .bind(hash, salt, email)
-      .run();
+    // other phones / computers must log in again with the new password; this one stays logged in
+    const mine = (request.headers.get("Authorization") || "").replace(/^Bearer /, "");
+    await db.batch([
+      db
+        .prepare("UPDATE accounts SET password_hash = ?, password_salt = ? WHERE email = ?")
+        .bind(hash, salt, email),
+      db.prepare("DELETE FROM sessions WHERE email = ? AND token != ?").bind(email, mine),
+    ]);
     return json(200, { ok: true });
   }
   if (path === "resume" && method === "PUT") {

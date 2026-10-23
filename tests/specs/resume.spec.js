@@ -258,7 +258,10 @@ test.describe("Resume", () => {
       ).status()
     ).toBe(400);
     // deleting the account deletes the resume
-    await request.delete("/api/user", { headers: { Authorization: `Bearer ${a.token}` } });
+    await request.delete("/api/user", {
+      headers: { Authorization: `Bearer ${a.token}` },
+      data: { password: "Test@1234" },
+    });
     const again = await signupApi(request, a.email);
     expect(
       (await request.get("/api/resume", { headers: { Authorization: `Bearer ${again.token}` } })).status()

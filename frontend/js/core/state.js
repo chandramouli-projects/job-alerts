@@ -73,7 +73,8 @@ function withDefaults(u, name, email) {
     ...u,
     profile: { ...b.profile, ...u.profile, email },
     prefs: { ...b.prefs, ...u.prefs },
-    settings: { ...b.settings, ...u.settings },
+    // the GitHub key is never kept on the server (see saveUser), only in this browser
+    settings: { ...b.settings, ...u.settings, ghToken: u.settings?.ghToken || LS.get("uv.gh." + email, "") },
   };
 }
 async function api(path, body, method) {
@@ -92,6 +93,9 @@ async function api(path, body, method) {
 function saveUser() {
   if (!session) return;
   LS.set("uv.user." + session.email, U);
+  // the GitHub key stays in this browser; the server drops it from what it saves
+  if (U.settings.ghToken) LS.set("uv.gh." + session.email, U.settings.ghToken);
+  else LS.del("uv.gh." + session.email);
   if (SERVER) {
     const u = U;
     clearTimeout(saveT);

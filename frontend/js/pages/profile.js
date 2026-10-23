@@ -131,18 +131,22 @@ onAppClick(async (d, t, e) => {
     return;
   }
   if ("delacc" in d) {
+    let pw;
     if (
-      !(await ask(
+      !(pw = await ask(
         "Delete your account?",
-        "All your data will be removed. This can't be undone.",
+        SERVER
+          ? "All your data will be removed. This can't be undone. Enter your password to confirm."
+          : "All your data will be removed. This can't be undone.",
         "Delete account",
-        true
+        true,
+        { password: SERVER }
       ))
     )
       return;
     if (SERVER) {
       try {
-        await api("user", null, "DELETE");
+        await api("user", { password: pw }, "DELETE");
       } catch (err) {
         toast(err.message);
         return;

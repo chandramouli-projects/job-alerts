@@ -49,7 +49,10 @@ test("TC-OB-03 role list closes as soon as a role is picked (owner's rule)", asy
 test("TC-OB-04 the next list can be opened straight away while one is open", async ({ page }) => {
   test.setTimeout(15_000);
   await open(page, "role");
-  await open(page, "city");
+  // the open role list covers the fields below it (like any drop-down), so reach City the way a person
+  // can while it is open: the keyboard. Opening City must close the role list.
+  await page.locator('[data-pkopen="city"]').focus();
+  await page.keyboard.press("Enter");
   expect(await isOpen(page, "role")).toBe(false);
   expect(await isOpen(page, "city")).toBe(true);
 });

@@ -329,6 +329,20 @@
       <div class="modal-card">
         <h2 id="askTitle"></h2>
         <p class="sub" id="askText"></p>
+        <form id="askPwBox" hidden novalidate>
+          <label class="lbl" for="askPw">Password</label>
+          <div class="pw">
+            <input class="inp" id="askPw" type="password" autocomplete="current-password" /><button
+              type="button"
+              class="eye"
+              data-eye="askPw"
+              aria-label="Show password"
+              aria-pressed="false"
+              disabled
+            ></button>
+          </div>
+          <div class="err" id="askErr"></div>
+        </form>
         <div class="ask-btns">
           <button type="button" class="btn ghost" id="askNo">Cancel</button
           ><button type="button" class="btn" id="askYes">OK</button>

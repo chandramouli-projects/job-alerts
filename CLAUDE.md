@@ -128,6 +128,12 @@ for a static portal, and sends matching ones to Telegram.
   on screen**, because there is no email service. `/api/reset` takes PIN + new password (10 min,
   5 tries) and logs out other sessions. The user chose this on purpose; it isn't real identity
   proof, since anyone who knows an email can reset it. Sending the PIN by email is the upgrade.
+  `tests/specs/myjobs.spec.js` TC-SEC-10/11 are marked `test.fail()` for this known gap; remove that
+  when the PIN goes by email.
+- Account safety (both servers): `DELETE /api/user` needs `{ password }` (the app asks for it in the
+  Are-you-sure pop-up); changing the password logs out the other devices; `settings.ghToken` (GitHub
+  key) is never stored on or returned by the server (`withoutSecrets`): the app keeps it in
+  localStorage `uv.gh.<email>`. With a server, Log out removes `uv.user.<email>` and `uv.gh.<email>`.
 - Resume (Profile card + "Fill from my resume" in setup; `components/resume-upload.js`): PDF, .docx or
   .txt up to 2 MB. Read in the browser (`services/resume-reader.js`: pdf.js 3.11.174 from cdnjs with
   SRI, loaded only for PDFs; .docx unzipped with `DecompressionStream`), skills found with

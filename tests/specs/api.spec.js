@@ -120,9 +120,14 @@ test.describe("Accounts API", () => {
     ).toBe(200);
   });
 
-  test("TC-API-11 delete account removes login and data", async ({ request }) => {
+  test("TC-API-11 delete account needs the password, then removes login and data", async ({ request }) => {
     const a = await signupApi(request);
-    expect((await request.delete("/api/user", { headers: auth(a.token) })).status()).toBe(200);
+    expect(
+      (await request.delete("/api/user", { headers: auth(a.token), data: { password: "wrong" } })).status()
+    ).toBe(403);
+    expect(
+      (await request.delete("/api/user", { headers: auth(a.token), data: { password: PASSWORD } })).status()
+    ).toBe(200);
     expect(
       (await request.post("/api/login", { data: { email: a.email, password: PASSWORD } })).status()
     ).toBe(401);

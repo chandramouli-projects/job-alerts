@@ -13,23 +13,41 @@ function closeSheet() {
   $("sheet").classList.remove("open");
   $("scrim").classList.remove("open");
 }
-let askDone = null;
-function ask(title, text, yes = "OK", red = false) {
+let askDone = null,
+  askPw = false;
+// ask(title, text, yes, red): true / false. With { password: true } it also asks for the password
+// and gives back the typed password (or false), for things like deleting the account.
+function ask(title, text, yes = "OK", red = false, { password = false } = {}) {
   return new Promise(res => {
     $("askTitle").textContent = title;
     $("askText").textContent = text;
     $("askYes").textContent = yes;
     $("askYes").className = "btn" + (red ? " red" : "");
+    askPw = password;
+    $("askPwBox").hidden = !password;
+    $("askPw").value = $("askErr").textContent = "";
+    syncEyes();
     askDone = v => {
       $("askModal").hidden = true;
       askDone = null;
+      $("askPw").value = "";
       res(v);
     };
     $("askModal").hidden = false;
-    setTimeout(() => $("askYes").focus(), 30);
+    setTimeout(() => (password ? $("askPw") : $("askYes")).focus(), 30);
   });
 }
-$("askYes").onclick = () => askDone?.(true);
+function askYes() {
+  if (!askPw) return askDone?.(true);
+  const pw = $("askPw").value;
+  if (!pw) return ($("askErr").textContent = "Enter your password.");
+  askDone?.(pw);
+}
+$("askYes").onclick = askYes;
+$("askPwBox").onsubmit = e => {
+  e.preventDefault();
+  askYes();
+};
 $("askNo").onclick = () => askDone?.(false);
 $("askModal").onclick = e => {
   if (e.target === $("askModal")) askDone?.(false);
@@ -83,7 +101,7 @@ function openJob(id) {
   const facts = [
     j.exp_min != null && [CARD_ICON.exp, esc(expRange(j))],
     (j.salary || salaryChip(j)) && [CARD_ICON.pay, j.salary ? esc(j.salary) : salaryChip(j)],
-    j.type && [CARD_ICON.type, esc(j.type)],
+    j.type && ["", esc(j.type)], // no icon for the job type
     [
       JD_POSTED,
       j.manual

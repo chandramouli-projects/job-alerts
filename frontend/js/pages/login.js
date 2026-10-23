@@ -103,6 +103,11 @@ function logout() {
     clearTimeout(saveT);
     api("logout", {}).catch(() => {});
     LS.del("uv.token");
+    // the server keeps everything, so nothing personal stays in this browser (a shared computer)
+    if (session) {
+      LS.del("uv.user." + session.email);
+      LS.del("uv.gh." + session.email);
+    }
   }
   LS.del("uv.session");
   session = null;

@@ -200,7 +200,7 @@ test("TC-PUSH-05 'Turn on' sends a test alert; unsubscribe and deleting the acco
   expect(received.filter(x => x.path === "/push/t1")).toEqual([]);
   const d2 = await device("t2");
   await subscribe(request, a, d2);
-  await request.delete("/api/user", { headers: auth });
+  await request.delete("/api/user", { headers: auth, data: { password: "Test@1234" } });
   received = [];
   await run(request, JOBS);
   expect(received.filter(x => x.path === "/push/t2")).toEqual([]);
