@@ -2,7 +2,7 @@
 Run the portal from this computer, for any device on the same Wi-Fi:
   node backend/server/server.mjs            ->  http://<this computer's IP>:8080
   node backend/server/server.mjs 3000       ->  port 3000
-Serves frontend/, answers /search with backend/worker/worker.js (live search), and keeps accounts
+Serves the React app's build (frontend/dist: run `npm run build` in frontend/ first), answers /search with backend/worker/worker.js (live search), and keeps accounts
 in the database (database/app.db, tables in database/schema.sql) so the same login works on every
 device and browser.
 Keys come from .env (RAPIDAPI_KEY and/or ADZUNA_APP_ID + ADZUNA_APP_KEY) and are read again on
@@ -20,10 +20,12 @@ import { openDatabase } from "./database.mjs";
 import { createMailSync } from "./mail-sync.mjs";
 
 const ROOT = fileURLToPath(new URL("../..", import.meta.url));
-// FRONTEND_DIR=frontend-react/dist serves the React app instead (build it first: npm run build there);
-// the jobs list always comes from frontend/data, where the bot writes it
-const FRONTEND = process.env.FRONTEND_DIR ? resolve(ROOT, process.env.FRONTEND_DIR) : join(ROOT, "frontend");
-const DATA_DIR = join(ROOT, "frontend");
+// the built React app (FRONTEND_DIR can point at another build); the jobs list always comes from
+// frontend/public/data, where the bot writes it, so a new jobs list shows without building again
+const FRONTEND = process.env.FRONTEND_DIR
+  ? resolve(ROOT, process.env.FRONTEND_DIR)
+  : join(ROOT, "frontend", "dist");
+const DATA_DIR = join(ROOT, "frontend", "public");
 // DB_FILE / ENV_FILE let the automated tests use their own database and no API keys
 const DB_FILE = process.env.DB_FILE || join(ROOT, "database", "app.db");
 const PORT = +(process.argv[2] || process.env.PORT || 8080);

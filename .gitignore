@@ -22,4 +22,4 @@ tests/reports-*.txt
 node_modules/
 .wrangler/
 tests/.tmp*
-frontend-react/dist/
+frontend/dist/

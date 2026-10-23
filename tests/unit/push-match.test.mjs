@@ -9,13 +9,13 @@ import { ROLES, SENIOR, JUNIOR, hasWord, fits } from "../../backend/push/match.j
 const app = {};
 vm.createContext(app);
 vm.runInContext(
-  readFileSync(new URL("../../frontend/js/core/constants.js", import.meta.url), "utf8").replace(
-    /const PREVIEW\s*=.*$/m,
-    ""
-  ) + "\n;globalThis.out={ROLES,SENIOR:String(SENIOR),JUNIOR:String(JUNIOR)}",
+  readFileSync(new URL("../../frontend/src/core/constants.js", import.meta.url), "utf8")
+    .replace(/^export /gm, "") // the app's file is a module; run it here as a plain script
+    .replace(/const PREVIEW\s*=.*$/m, "") +
+    "\n;globalThis.out={ROLES,SENIOR:String(SENIOR),JUNIOR:String(JUNIOR)}",
   app
 );
-const helpers = readFileSync(new URL("../../frontend/js/core/helpers.js", import.meta.url), "utf8");
+const helpers = readFileSync(new URL("../../frontend/src/core/helpers.js", import.meta.url), "utf8");
 
 test("same role words and senior / junior rules as the app", () => {
   assert.deepEqual(JSON.parse(JSON.stringify(ROLES)), JSON.parse(JSON.stringify(app.out.ROLES)));

@@ -5,7 +5,7 @@ for a static portal, and sends matching ones to Telegram.
 
 ## How it fits together
 - `.github/workflows/jobs.yml`: runs 6x a day (7 AM–10 PM IST) and on "Run workflow" (optional
-  `query` input becomes `SEARCH_QUERY`). After the run, the bot commits `frontend/data/jobs.json` and
+  `query` input becomes `SEARCH_QUERY`). After the run, the bot commits `frontend/public/data/jobs.json` and
   `database/state.json` as "New jobs <date>". Expect these commits, so `git pull` before pushing.
 - `backend/collector/fetch_jobs.py`: one script, no framework. Sources (each skipped if its key is missing):
   - JSearch (RapidAPI): free plan is ~200 calls/month, so **one call per run**, rotating through
@@ -22,19 +22,29 @@ for a static portal, and sends matching ones to Telegram.
   and block scraping (Naukri answers 406). Don't scrape them.
 - `backend/collector/config.json`: `search_roles` feeds the portal; `alerts` decides only what goes to Telegram
   (`telegram_enabled` is currently false).
-- The portal (`frontend/`, served by Cloudflare Pages at udyogam-vetuku.pages.dev; `wrangler.toml` sets
-  the folder), no build step and no framework. It loads `data/jobs.json`;
-  profile, saved jobs and applications live in the browser's localStorage (or the local server).
-  - `frontend/index.html`: only the HTML of each screen (login, onboarding, app frame, pop-ups), then
-    `<link>`s and `<script>`s in a fixed order.
-  - `frontend/css/` and `frontend/js/` are split by kind: `base/` (css) or `core/` (js: constants,
-    helpers, state, router, app), `services/` (js: data and logic, e.g. job-store, matching,
-    mail-tracking), `components/` (parts used on many screens: header, job-card, filters,
-    job-details, applications…) and `pages/` (one file per screen: login, forgot-password,
-    onboarding, jobs, saved, my-jobs, profile). New code goes in the folder for its kind, in the
-    file for its screen or part; a new file must also be added to `index.html` in the right order.
-  - Scripts are plain (not modules) and share one global scope, so load order matters:
-    `core/constants` first, `core/app.js` (calls `boot()`) last. CSS order matters too (`base/` first).
+- The portal (`frontend/`): a React 18 app built with Vite (`npm run build` -> `frontend/dist`).
+  Cloudflare Pages builds it on every push (dashboard build command
+  `cd frontend && npm ci && npm run build`, Node from `.node-version`; `wrangler.toml` sets
+  `frontend/dist`) and serves it at udyogam-vetuku.pages.dev. It loads `data/jobs.json` (the bot writes
+  `frontend/public/data/jobs.json`); profile, saved jobs and applications live on the server (or the
+  browser's localStorage when there is none). Moved from plain JS to React on 2026-10-23 with the same
+  look, ids, classes and data-* attributes, because the browser tests find things by them.
+  - `frontend/src/`: `main.jsx` (imports the styles in order, base first, then `App.jsx`), `core/`
+    (constants, helpers, state, nav, app, pwa), `services/` (data and logic: job-store, matching,
+    mail-tracking…), `components/` (parts used on many screens) and `pages/` (one per screen), and
+    `styles/` (`base/`, `components/`, `pages/` CSS; a new CSS file must be imported in `main.jsx`).
+    Logic lives in `name.js` and the React part of the same thing in `Name.jsx` (e.g.
+    `components/applications.js` + `components/Applications.jsx`). New code goes in the folder for its
+    kind, in the file for its screen or part.
+  - Shared state (`core/state.js`): one object `S` (`S.U` the person, `S.data` jobs.json, `S.F`
+    filters, `S.view`, `S.screen`, `S.sheet`…). Change `S`, then call `refresh()`; every component that
+    calls `useStore()` draws again. Local UI-only state can be `useState`. `saveUser()` saves `S.U`.
+  - Screens (`core/nav.js`): `showAuth`, `startOnboarding`, `openShell`, `go(view)`, `openJob(id)`,
+    `openSheet(kind, props)`, `closeSheet`, `openForgot`, `logout`. The side panel draws the kind a
+    feature registered with `registerSheet(kind, …)` (`components/Sheet.jsx`); the Are-you-sure pop-up
+    is `await ask(…)` (`components/Ask.jsx`), toasts are `toast(text, kind, { act })` (helpers).
+  - `src/test-hooks.js` keeps the old global names (`U`, `F`, `data`, `saveUser`, `render`…) on
+    `window` because the browser tests use them.
   - Smart features (all from data we already have, no API calls):
     `services/job-insights.js` (possible-scam warning from fee / WhatsApp-only / no-interview signs,
     with negations like "no registration fee" ignored; "Posted today" / "Old posting" 30+ days /
@@ -46,7 +56,7 @@ for a static portal, and sends matching ones to Telegram.
     Shortlisted / Interview), `core/pwa.js` + `sw.js` + `manifest.webmanifest` (install as an app;
     service worker is network-first and never caches `/api/` or `/search`).
     Duplicate jobs (same title + company = same id) are merged into one card with every apply link:
-    `merge_duplicate` in `fetch_jobs.py` and `mergeDuplicate` in `js/services/job-store.js` (keep the
+    `merge_duplicate` in `fetch_jobs.py` and `mergeDuplicate` in `src/services/job-store.js` (keep the
     same rules); the collector also sets `reposted` when a known job is posted again 7+ days later.
   - Notifications: `services/notifications.js` makes notes from data the app already has (application
     updates from email, new jobs that fit from the bot's jobs.json, saved-search matches, a reminder
@@ -65,19 +75,16 @@ for a static portal, and sends matching ones to Telegram.
     Keys: `VAPID_PUBLIC_KEY` in wrangler.toml; `VAPID_PRIVATE_JWK` and `NOTIFY_SECRET` are Cloudflare
     Pages secrets (values in `.env`), `NOTIFY_SECRET` also a GitHub secret. Logout unsubscribes the
     device. iPhone gets them only after "Add to Home Screen". Tests: `specs/push.cloudflare.js`.
-  - Button clicks after login: each screen file registers its own with `onAppClick((d, t, e) => …)`
-    (from `helpers.js`); `d` is the clicked button's `data-*`.
   - Matching (`services/matching.js`): roles and skills match whole words with `hasWord()` ("java"
     is not in "javascript", "react" is in "reactjs"). `taste()` learns from saved / applied (+) and
     hidden (−) jobs; it only changes the "Best fit" order, never the match %. Links on the page go
     through `safeUrl()` (http/https only); `cleanJob()` drops jobs with no such link.
-  - URLs: `js/router.js` gives every screen its own link (`/login`, `/signup`, `/forgot-password`,
-    `/setup`, `/jobs`, `/saved`, `/my-jobs`, `/profile`, `/job?id=…`). It wraps the screen functions
-    (`showAuth`, `go`, `openJob`, `closeSheet`, `openForgot`…) instead of editing them; a new screen
-    needs an entry in `ROUTE_OF_VIEW`. Routes stay one level deep so relative `css/` `js/` links
-    work. The host must answer unknown links with `index.html`: Cloudflare Pages does (no
-    `404.html` in `frontend/`, or it stops), `backend/server/server.mjs` does for links without an extension;
-    GitHub Pages doesn't, so a refresh on `/jobs` there is a 404.
+  - URLs: `core/nav.js` gives every screen its own link (`/login`, `/signup`, `/forgot-password`,
+    `/setup`, `/jobs`, `/saved`, `/my-jobs`, `/profile`, `/job?id=…`) from inside the screen
+    functions; a new screen needs an entry in `ROUTE_OF_VIEW`. Routes stay one level deep so the
+    relative `assets/` links (Vite `base: "./"`) work. The host must answer unknown links with
+    `index.html`: Cloudflare Pages does (no `404.html` in `frontend/public/`, or it stops),
+    `backend/server/server.mjs` does for links without an extension.
 - Accounts on the live site: `functions/api/[[path]].js` (Cloudflare Pages Functions, deployed with
   the site on every push) answers the same `/api/*` calls and messages as `backend/server/server.mjs`,
   with a D1 database (binding `DB` in `wrangler.toml`, tables in `database/cloudflare.sql`, made on first
@@ -98,14 +105,14 @@ for a static portal, and sends matching ones to Telegram.
   The app calls it on search submit and for the user's own roles when it opens; a search shows
   every match, not just "Jobs for me".
   A known role is also searched by any of its words: the app sends `any=` (the role's words from
-  `ROLES`, `roleWords()` in js/services/job-store.js), the Worker asks Adzuna `what_or` and keeps only
+  `ROLES`, `roleWords()` in src/services/job-store.js), the Worker asks Adzuna `what_or` and keeps only
   titles with one of them (also for the typed search), because "QA Testing" as one search needs both
   words and finds a fraction of the jobs. The bot does the same for the roles people picked
   (`/api/stats/roles` returns each role's words).
   Every search also fetches related jobs: `RELATED` (job families → related titles) gives up to 2
   extra Adzuna `title_only` calls; a role not in `RELATED` uses its main words inside the Adzuna
   category of the exact results. Those jobs carry `related: true`; the app (`liveSearch` in
-  `js/job-store.js`) tags them with the search, and `feed()` in `js/filters.js` shows them after the
+  `src/services/job-store.js`) tags them with the search, and `feed()` in `src/components/filters.js` shows them after the
   exact matches with a "Related" badge. Up to 3 Adzuna calls per new search, cached 12h.
   After changing `worker.js`, it must be pasted into Cloudflare again (and the local server restarted).
 - Adzuna free limits are 25/min, 250/day, 1,000/week, 2,500/month, shared by the Action
@@ -114,7 +121,8 @@ for a static portal, and sends matching ones to Telegram.
 
 ## Running locally
 - Portal server: `node backend/server/server.mjs [port]` (default 8080, binds 0.0.0.0 for the LAN). It serves
-  `frontend/`, answers `/search` with `backend/worker/worker.js`, reads `.env` on every search, and points `live_api` at
+  the built app `frontend/dist` (run `npm run build` in `frontend/` first; `FRONTEND_DIR` can point at
+  another build) and `/data/` from `frontend/public/data`, answers `/search` with `backend/worker/worker.js`, reads `.env` on every search, and points `live_api` at
   itself. It also has `/api/*` accounts (signup, login, user GET/PUT/DELETE, password, logout) with
   scrypt hashes and session tokens in the SQLite database `database/app.db` (gitignored; tables in
   `database/schema.sql`). `backend/server/database.mjs` loads the tables into the same
@@ -143,7 +151,7 @@ for a static portal, and sends matching ones to Telegram.
   `U.profile.resumeFile`. Tests: `tests/specs/resume.spec.js`.
 - `pip install requests`, copy `.env.example` to `.env`, then `python backend/collector/fetch_jobs.py`.
   The script reads `.env` itself. `.env` is gitignored, so never commit it.
-- A local run spends JSearch quota, moves `turn` forward, and rewrites `frontend/data/jobs.json` and
+- A local run spends JSearch quota, moves `turn` forward, and rewrites `frontend/public/data/jobs.json` and
   `database/state.json`. Don't commit those files after a local run; let the bot own them.
 
 ## Application status from Gmail
@@ -165,7 +173,7 @@ for a static portal, and sends matching ones to Telegram.
 - `backend/server/mail-sync.mjs` runs it every 15 min (and on `POST /api/mail/sync`, "Check now"), matches by
   company + title to the user's applications, else adds a `mail-<hash>` application. Results live in
   `db.mail[account]`, NOT in the user profile, because the app PUTs the whole profile on every save.
-  `GET /api/mail` returns them only to that account; `frontend/js/services/mail-tracking.js` merges them in.
+  `GET /api/mail` returns them only to that account; `frontend/src/services/mail-tracking.js` merges them in.
   A status only moves forward; "Not selected" can follow anything but an offer.
 - Stages: applied → viewed → shortlisted → interview → offer, or rejected ("Not selected"). The user
   wants a tracker: statuses come from email, not set by hand. The Follow up button was removed on request.
@@ -173,5 +181,8 @@ for a static portal, and sends matching ones to Telegram.
 
 ## Style
 - The user reads Telugu/English; the README and UI text are plain, simple English for a non-developer.
-- Keep it dependency-light (only `requests`). The portal is split per screen (see above): put new
-  code in the file for its screen, or a new clearly named file, not back into `index.html`.
+- Keep it dependency-light: `requests` for Python; the portal's only packages are react, react-dom,
+  vite and @vitejs/plugin-react. The portal is split per screen (see above): put new code in the file
+  for its screen, or a new clearly named file.
+- While editing the portal: `npm run dev` in `frontend/` (http://localhost:5173, sends /api, /search,
+  /data to the local server on 8080). The browser tests build it first by themselves.

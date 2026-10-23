@@ -1,0 +1,34 @@
+/* Entry point: the styles (order matters: base first), then the React app. */
+import "./styles/base/base.css";
+import "./styles/pages/loading.css";
+import "./styles/components/header.css";
+import "./styles/components/password-field.css";
+import "./styles/pages/login.css";
+import "./styles/pages/login-background.css";
+import "./styles/pages/forgot-password.css";
+import "./styles/pages/onboarding.css";
+import "./styles/base/layout.css";
+import "./styles/base/components.css";
+import "./styles/components/job-card.css";
+import "./styles/components/job-insights.css";
+import "./styles/pages/jobs.css";
+import "./styles/components/filters.css";
+import "./styles/components/saved-searches.css";
+import "./styles/components/job-details.css";
+import "./styles/pages/my-jobs.css";
+import "./styles/components/applications.css";
+import "./styles/components/card-size.css";
+import "./styles/components/progress.css";
+import "./styles/pages/profile.css";
+import "./styles/components/resume-upload.css";
+import "./styles/components/rail.css";
+import "./styles/components/notifications.css";
+import "./styles/components/mail-connect.css";
+import "./styles/components/hidden-jobs.css";
+import "./styles/components/tooltip.css";
+import { createRoot } from "react-dom/client";
+import { App } from "./App.jsx";
+import "./core/pwa.js";
+import "./test-hooks.js";
+
+createRoot(document.getElementById("root")).render(<App />);

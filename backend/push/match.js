@@ -1,7 +1,7 @@
 /*
 "Does this job fit this person?" for alerts sent while the app is closed (functions/api, push/run).
-A copy of the rules in frontend/js/services/matching.js (role words, experience, city), which the
-app uses when it is open. ROLES, SENIOR and JUNIOR are copies of frontend/js/core/constants.js;
+A copy of the rules in frontend/src/services/matching.js (role words, experience, city), which the
+app uses when it is open. ROLES, SENIOR and JUNIOR are copies of frontend/src/core/constants.js;
 tests/unit/push-match.test.mjs fails when the two drift apart, so change both together.
 */
 export const ROLES = {

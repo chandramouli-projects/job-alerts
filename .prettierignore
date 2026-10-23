@@ -1,5 +1,6 @@
 # Written by the job collector (GitHub Actions) or by the app: not hand-written code
-frontend/data/
+frontend/public/data/
+frontend/dist/
 database/
 data/
 # Installed packages and test output

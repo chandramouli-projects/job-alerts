@@ -21,7 +21,8 @@ export default defineConfig({
   use: { ...base.use, baseURL: `http://127.0.0.1:${PORT}` },
   projects: [base.projects[0]],
   webServer: {
-    command: `node start-cloudflare.mjs ${PORT}`,
+    // builds the React app (frontend/dist) first, so the tests always check the current code
+    command: `npm --prefix ../frontend run build && node start-cloudflare.mjs ${PORT}`,
     url: `http://127.0.0.1:${PORT}/api/ping`,
     reuseExistingServer: false,
     timeout: 120_000,

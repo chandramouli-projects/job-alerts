@@ -42,7 +42,7 @@ bindings.push(
 );
 const child = spawn(
   process.execPath,
-  [bin, "pages", "dev", "frontend", "--port", port, "--persist-to", state, ...bindings],
+  [bin, "pages", "dev", "frontend/dist", "--port", port, "--persist-to", state, ...bindings],
   { cwd: root, stdio: "inherit" }
 );
 for (const sig of ["SIGINT", "SIGTERM"])

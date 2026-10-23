@@ -1,7 +1,8 @@
 # Cloudflare Pages settings for the website (https://udyogam-vetuku.pages.dev).
-# Cloudflare reads this on every deploy: the site is the frontend/ folder, with no build step.
+# Cloudflare reads this on every deploy. The site is the React app in frontend/, built by Cloudflare
+# with the build command set in the dashboard: cd frontend && npm ci && npm run build
 name = "udyogam-vetuku"
-pages_build_output_dir = "./frontend"
+pages_build_output_dir = "./frontend/dist"
 compatibility_date = "2025-01-01"
 
 # Accounts database for functions/api (D1, Cloudflare's free SQLite). Tables: database/cloudflare.sql

@@ -1,6 +1,6 @@
 """
 Collect recent jobs from all over India for the roles in config.json,
-save them for the portal (frontend/data/jobs.json) and send only the ones that fit
+save them for the portal (frontend/public/data/jobs.json) and send only the ones that fit
 my alert filters to Telegram.
 
 Sources (each one is skipped if its key is missing):
@@ -40,7 +40,7 @@ STATE = (
     if (ROOT / "database" / "state.json").exists()
     else {}
 )  # what each source answered, saved in database/state.json for troubleshooting
-JOBS_FILE = ROOT / "frontend" / "data" / "jobs.json"
+JOBS_FILE = ROOT / "frontend" / "public" / "data" / "jobs.json"  # the React app copies public/ into the site
 STATE_FILE = ROOT / "database" / "state.json"
 
 SENIOR_WORDS = r"\b(senior|sr\.?|lead|principal|staff|architect|manager|head|director|vp)\b"

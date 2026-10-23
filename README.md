@@ -78,8 +78,12 @@ Backend jobs; Nurse also finds Nursing and GNM jobs). They show after the exact 
 When `backend/worker/worker.js` changes, paste it into the Worker again (step 3) and **Deploy**.
 
 ### Run it from your computer (phone and laptop on the same Wi-Fi)
-Needs Node.js. Put your keys in a `.env` file (copy `.env.example`), then run
-`node backend/server/server.mjs`. It prints the link to open, like `http://192.168.1.50:8080`.
+Needs Node.js. Put your keys in a `.env` file (copy `.env.example`). The website is a React app, so
+build it once (and again after changing it): `cd frontend`, `npm install`, `npm run build`. Then, in the
+project folder, run `node backend/server/server.mjs`. It prints the link to open, like
+`http://192.168.1.50:8080`.
+While changing the website, `npm run dev` in `frontend/` shows each change at once on
+http://localhost:5173 (keep `node backend/server/server.mjs` running too, for accounts and search).
 This includes live search, and accounts are kept on your computer (database `database/app.db`), so the
 same login works on every phone and browser. The link works only while the command is running.
 
@@ -121,19 +125,18 @@ The app is unverified by Google, so people see "Google hasn't verified this app"
 
 ```
 job-alerts/
-├── frontend/                 The website (Cloudflare Pages serves this folder)
-│   ├── index.html            HTML of every screen; loads the css/ and js/ files below in order
-│   ├── assets/               logo
-│   ├── data/jobs.json        the job list (written by the collector, read by the website)
-│   ├── css/
-│   │   ├── base/             colors, fonts, buttons, page frame, shared pieces
-│   │   ├── components/       parts used on many screens (header, job card, filters, job details…)
-│   │   └── pages/            one file per screen (login, forgot-password, onboarding, jobs, my-jobs, profile…)
-│   └── js/
-│       ├── core/             constants, helpers, state, router (URLs), app (start-up, loaded last)
-│       ├── services/         data and logic: job list + live search, matching, Gmail statuses, backup
-│       ├── components/       shared parts (header, job card, filters, job details, applications…)
-│       └── pages/            one file per screen
+├── frontend/                 The website: a React app (Vite). Cloudflare Pages builds it on every push
+│   ├── index.html            the page; React draws every screen into it
+│   ├── public/               copied as it is: logo, app icon, sw.js (offline), manifest
+│   │   └── data/jobs.json    the job list (written by the collector, read by the website)
+│   ├── src/
+│   │   ├── main.jsx          start: loads the styles, then the app (App.jsx)
+│   │   ├── core/             constants, helpers, state (the shared data), nav (screens + URLs), app (start-up)
+│   │   ├── services/         data and logic: job list + live search, matching, Gmail statuses, backup
+│   │   ├── components/       shared parts (header, job card, filters, job details, applications…)
+│   │   ├── pages/            one file per screen (Login, Onboarding, Jobs, Saved, MyJobs, Profile…)
+│   │   └── styles/           the CSS: base/ (colors, fonts, buttons), components/, pages/
+│   └── dist/                 the built website (made by npm run build, never in git)
 ├── backend/
 │   ├── server/               server.mjs (accounts API + serves the website on your Wi-Fi),
 │   │                         database.mjs (reads/writes the database), mail-sync.mjs (Gmail statuses)
