@@ -1,13 +1,13 @@
 {
- "turn": 21,
+ "turn": 22,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-23T06:12:16+00:00",
-  "fetched": 507,
-  "new": 99,
-  "alerts": 99,
+  "at": "2026-10-23T12:44:59+00:00",
+  "fetched": 623,
+  "new": 215,
+  "alerts": 215,
   "jsearch": {
-   "role": "Java Developer OR Python Developer OR Node.js Developer OR .NET Developer OR Backend Developer jobs in India",
+   "role": "Data Analyst OR Data Scientist OR Data Engineer OR Business Analyst jobs in India",
    "tried": [
     "/search-v2:200"
    ],
@@ -15,11 +15,11 @@
    "results": 10
   },
   "jooble": {
-   "PHP Developer": 30,
-   "Android Developer": 30,
-   "iOS Developer": 30,
-   "Flutter Developer": 30,
-   "Data Analyst": 30
+   "Data Scientist": 30,
+   "Data Engineer": 30,
+   "Machine Learning Engineer": 30,
+   "DevOps Engineer": 30,
+   "Cloud Engineer": 23
   },
   "company_boards": {
    "ok": [
@@ -31,37 +31,37 @@
     "CRED:0",
     "Meesho:1",
     "Zeta:0",
-    "Sarvam AI:0",
+    "Sarvam AI:1",
     "Freshworks:0",
     "Visa:0",
-    "Bosch:12",
-    "ServiceNow:8",
+    "Bosch:8",
+    "ServiceNow:11",
     "NVIDIA:5",
-    "Salesforce:22",
+    "Salesforce:20",
     "Adobe:0",
-    "Intel:0",
-    "Mastercard:15",
-    "PwC:4",
+    "Intel:2",
+    "Mastercard:10",
+    "PwC:8",
     "MongoDB:19",
     "Okta:7",
     "Twilio:4",
     "Zscaler:8",
     "Coinbase:0",
     "Airbnb:3",
-    "Pure Storage:3",
+    "Pure Storage:1",
     "Commvault:0",
     "FamPay:0",
-    "Citi:32",
-    "State Street:17",
+    "Citi:39",
+    "State Street:21",
     "Autodesk:4",
-    "FIS:3",
-    "Applied Materials:7",
+    "FIS:5",
+    "Applied Materials:4",
     "Workday:1",
-    "HP:3",
-    "Micron:1",
-    "PayPal:4",
-    "Pfizer:1",
-    "KLA:0"
+    "HP:4",
+    "Micron:0",
+    "PayPal:3",
+    "Pfizer:0",
+    "KLA:1"
    ],
    "failed": [
     "Accenture:429 Client Error: Too Many Requests for url: https://accentu"
