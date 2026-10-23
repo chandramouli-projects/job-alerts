@@ -44,13 +44,14 @@ Repo → **Settings** → **Secrets and variables** → **Actions** → **New re
 | `ADZUNA_APP_KEY` | (optional) |
 | `JOOBLE_KEY` | (optional) |
 
-### 5. Turn on the portal page
-Repo → **Settings** → **Pages** → Source: **Deploy from a branch** → Branch: `main`, folder: `/docs` → **Save**.
-Your portal link appears there after a minute (like `https://yourname.github.io/job-alerts/`).
-Open it on your phone and use **Add to Home screen**.
-
-> Note: GitHub Pages on a free account needs the repo to be **Public**. If you want the repo private,
-> keep it private and just use the Telegram alerts, or upgrade to GitHub Pro.
+### 5. Turn on the portal page (Cloudflare Pages, free)
+1. https://dash.cloudflare.com → **Workers & Pages** → **Create** → **Pages** → **Connect to Git** →
+   pick this repo.
+2. **Framework preset:** None. **Build command:** `cd frontend && npm ci && npm run build`.
+   Leave **Root directory** empty; the output folder (`frontend/dist`) comes from `wrangler.toml`.
+3. **Save and Deploy**. Your portal link appears after a few minutes (like `https://your-name.pages.dev`).
+   Every push, including the bot's new jobs, builds it again by itself.
+4. Open it on your phone and use **Add to Home screen**.
 
 ### 6. Run it the first time
 Repo → **Actions** → **Find my jobs** → **Run workflow**. In 1–2 minutes the first jobs reach Telegram.
@@ -103,7 +104,7 @@ straight on LinkedIn or Naukri show up too.
 4. Restart `node backend/server/server.mjs`. To see what it finds without changing anything: `python backend/mail/track_mail.py`.
 
 Only the account in `TRACK_ACCOUNT` (or `GMAIL_ADDRESS`) sees these statuses. Works only with the
-local server, not on GitHub Pages. To stop it, delete the App password in your Google account.
+local server (on the live site, use Connect Gmail below). To stop it, delete the App password in your Google account.
 
 **On the live site, for everyone:** each person presses **Connect Gmail** on My jobs. One-time setup by
 the site owner:

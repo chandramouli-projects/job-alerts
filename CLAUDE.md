@@ -130,7 +130,7 @@ for a static portal, and sends matching ones to Telegram.
   (full rewrite in one transaction; columns named `other` keep unknown fields as JSON, so nothing is
   lost). It uses Node's built-in `node:sqlite` (no install). The old `data/users.json` is imported
   once and moved to `database/backups/`. Tests use `DB_FILE` for their own database. The app checks `api/ping`.
-  If the server answers, accounts live there; if not (GitHub Pages), they stay in the browser's
+  If the server answers, accounts live there; if not (a host with no /api), they stay in the browser's
   localStorage, which is per browser and per address.
 - Forgot password (modal on the login page): `/api/forgot` makes a 6-digit PIN that the app **shows
   on screen**, because there is no email service. `/api/reset` takes PIN + new password (10 min,
