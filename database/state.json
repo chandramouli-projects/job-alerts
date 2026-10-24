@@ -1,47 +1,43 @@
 {
- "turn": 23,
+ "turn": 24,
  "hello_sent": true,
  "last_run": {
-  "at": "2026-10-23T17:56:13+00:00",
-  "fetched": 592,
-  "new": 161,
-  "alerts": 161,
+  "at": "2026-10-24T06:07:54+00:00",
+  "fetched": 428,
+  "new": 131,
+  "alerts": 131,
   "jsearch": {
-   "role": "DevOps Engineer OR Cloud Engineer OR Support Engineer OR Cyber Security jobs in India",
+   "role": "Android Developer OR Flutter Developer OR UI UX Designer OR Salesforce OR SAP Consultant jobs in India",
    "tried": [
     "/search-v2:200"
    ],
    "path": "/search-v2",
-   "results": 10
+   "results": 0,
+   "note": "{\"status\": \"OK\", \"request_id\": \"14c1cdbd-1d9a-42a6-8892-c1fb7fd877fb\", \"parameters\": {\"query\": \"Android Developer OR Flutter Developer OR UI UX Designer OR Salesforce OR SAP Consultant jobs in India\", \"num_pages\": 1, \"date_posted\": \"3days\", \"country\": \"in\", \"language\": \"en\"}}"
   },
   "jooble": {
-   "QA Engineer": 30,
-   "Automation Tester": 6,
-   "UI UX Designer": 18,
-   "Business Analyst": 30,
-   "Salesforce Developer": 30
+   "SAP Consultant": 0,
+   "Support Engineer": 30,
+   "Network Engineer": 30,
+   "Cyber Security Analyst": 19,
+   "Product Manager": 30
   },
   "company_boards": {
    "ok": [
-    "Databricks:19",
+    "Databricks:22",
     "Stripe:9",
     "Rubrik:1",
     "Groww:0",
     "Druva:1",
     "CRED:0",
-    "Meesho:0",
     "Zeta:0",
     "Sarvam AI:1",
     "Freshworks:0",
     "Visa:0",
     "Bosch:8",
     "ServiceNow:10",
-    "NVIDIA:5",
-    "Salesforce:20",
-    "Adobe:0",
-    "Intel:2",
-    "Mastercard:11",
-    "PwC:4",
+    "Accenture:2",
+    "Salesforce:18",
     "MongoDB:19",
     "Okta:7",
     "Twilio:4",
@@ -50,21 +46,26 @@
     "Airbnb:3",
     "Pure Storage:1",
     "Commvault:0",
-    "FamPay:0",
-    "Citi:36",
-    "State Street:23",
-    "Autodesk:4",
-    "FIS:7",
-    "Applied Materials:4",
-    "Workday:1",
-    "HP:3",
-    "Micron:0",
-    "PayPal:3",
-    "Pfizer:0",
-    "KLA:1"
+    "FamPay:0"
    ],
    "failed": [
-    "Accenture:429 Client Error: Too Many Requests for url: https://accentu"
+    "Meesho:HTTPSConnectionPool(host='api.lever.co', port=443): Read tim",
+    "NVIDIA:Expecting value: line 1 column 1 (char 0)",
+    "Adobe:Expecting value: line 1 column 1 (char 0)",
+    "Intel:Expecting value: line 1 column 1 (char 0)",
+    "Mastercard:500 Server Error: Internal Server Error for url: https://mas",
+    "PwC:500 Server Error: Internal Server Error for url: https://pwc",
+    "Citi:Expecting value: line 1 column 1 (char 0)",
+    "State Street:Expecting value: line 1 column 1 (char 0)",
+    "Autodesk:Expecting value: line 1 column 1 (char 0)",
+    "FIS:Expecting value: line 1 column 1 (char 0)",
+    "Applied Materials:500 Server Error: Internal Server Error for url: https://ama",
+    "Workday:Expecting value: line 1 column 1 (char 0)",
+    "HP:Expecting value: line 1 column 1 (char 0)",
+    "Micron:500 Server Error: Internal Server Error for url: https://mic",
+    "PayPal:500 Server Error: Internal Server Error for url: https://pay",
+    "Pfizer:500 Server Error: Internal Server Error for url: https://pfi",
+    "KLA:500 Server Error: Internal Server Error for url: https://kla"
    ]
   }
  },
